@@ -15,14 +15,18 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payment_type_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('shopper_id');
             $table->dateTime('date');
             $table->string('locality', 64);
-            $table->decimal('total_value', 10, 2);
+            $table->decimal('total_value', 10, 2)
+                ->nullable();
+            $table->integer('number_installments');
             $table->enum('status', ['E', 'D', 'PM', 'PP'])
                 ->comment('E->enable - D->disable - PM->pag realizado - PP->pag pendente');
             $table->timestamps();
             $table->foreign('payment_type_id')->references('id')->on('payment_types');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('shopper_id')->references('id')->on('shoppers');
         });
     }
 

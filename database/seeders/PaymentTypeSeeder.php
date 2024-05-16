@@ -17,6 +17,7 @@ class PaymentTypeSeeder extends Seeder
             'description' => 'Débito',
             'processing_day' => null,
             'payment_day' => null,
+            'installment_enable' => 0,
             'style' => '',
             'status' => 'E',
         ]);
@@ -25,6 +26,7 @@ class PaymentTypeSeeder extends Seeder
             'description' => 'Credito Nubank',
             'processing_day' => 12,
             'payment_day' => 19,
+            'installment_enable' => 1,
             'style' => '',
             'status' => 'E',
         ]);
@@ -33,6 +35,7 @@ class PaymentTypeSeeder extends Seeder
             'description' => 'Credito Santander',
             'processing_day' => 12,
             'payment_day' => 19,
+            'installment_enable' => 1,
             'style' => '',
             'status' => 'E',
         ]);
@@ -41,6 +44,7 @@ class PaymentTypeSeeder extends Seeder
             'description' => 'Boleto',
             'processing_day' => null,
             'payment_day' => null,
+            'installment_enable' => 0,
             'style' => '',
             'status' => 'E',
         ]);
@@ -49,6 +53,7 @@ class PaymentTypeSeeder extends Seeder
             'description' => 'Pix',
             'processing_day' => null,
             'payment_day' => null,
+            'installment_enable' => 0,
             'style' => '',
             'status' => 'E',
         ]);

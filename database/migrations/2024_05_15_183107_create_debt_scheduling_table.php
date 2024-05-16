@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payment_type_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('shopper_id');
             $table->integer('launch_day');
             $table->date('date_start');
             $table->date('date_end');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('payment_type_id')->references('id')->on('payment_types');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('shopper_id')->references('id')->on('shoppers');
         });
     }
 

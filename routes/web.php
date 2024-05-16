@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Site\DebtController;
+use App\Http\Controllers\ControlFinance\DebtController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +27,12 @@ Route::get(
 
 Route::get(
     '/divida', [DebtController::class, 'index']
-    )->name('get.divida');
+    )->name('debt.get');
+
+Route::post(
+    '/divida', [DebtController::class, 'postDebt']
+    )->name('debt.post');
+
+Route::post(
+    '/divida/parcelada', [DebtController::class, 'postInstallmentDebt']
+    )->name('installmentDebt.post');

@@ -11,18 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_types', function (Blueprint $table) {
+        Schema::create('shoppers', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 48);
-            $table->integer('processing_day')
-                ->nullable();
-            $table->integer('payment_day')
-                ->nullable();
+            $table->string('name', 48);
             $table->longText('style')
                 ->nullable();
-
-            $table->boolean('installment_enable')
-                ->comment('parcela habilitada (0-1)');
             $table->enum('status', ['E', 'D'])
                 ->comment('E->enable - D->disable');
             $table->timestamps();
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_types');
+        Schema::dropIfExists('shoppers');
     }
 };
