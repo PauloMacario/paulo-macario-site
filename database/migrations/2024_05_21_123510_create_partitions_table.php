@@ -11,18 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('partitions', function (Blueprint $table) {
             $table->id();
 
-            $table->string('description', 48);
+            $table->unsignedBigInteger('shopper_id');
 
-            $table->longText('style')
-                ->nullable();
+            $table->unsignedBigInteger('installment_id');
+
+            $table->decimal('value', 10, 2);
 
             $table->enum('status', ['E', 'D'])
                 ->comment('E->enable - D->disable');
-                
+
             $table->timestamps();
+            
+            $table->foreign('shopper_id')->references('id')->on('shoppers');
+
+            $table->foreign('installment_id')->references('id')->on('installments');
         });
     }
 
@@ -31,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('partitions');
     }
 };

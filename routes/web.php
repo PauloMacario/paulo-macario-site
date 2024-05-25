@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ControlFinance\DebtController;
+use App\Http\Controllers\ControlFinance\InstallmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,14 @@ Route::get(
     '/home', [HomeController::class, 'index']
     )->name('home');
 
+    
 Route::get(
-    '/divida', [DebtController::class, 'index']
+    '/divida', [DebtController::class, 'newDebt']
     )->name('debt.get');
+
+Route::get(
+    '/dividas', [DebtController::class, 'getAllDebts']
+    )->name('debtAll.get');
 
 Route::post(
     '/divida', [DebtController::class, 'postDebt']
@@ -36,3 +42,13 @@ Route::post(
 Route::post(
     '/divida/parcelada', [DebtController::class, 'postInstallmentDebt']
     )->name('installmentDebt.post');
+
+
+
+Route::get(
+    '/parcelas', [InstallmentController::class, 'getAllInstallments']
+    )->name('installmentAll.get');
+
+Route::post(
+    '/parcelas/mes', [InstallmentController::class, 'getAllInstallments']
+    )->name('installmentAllMonth.post');

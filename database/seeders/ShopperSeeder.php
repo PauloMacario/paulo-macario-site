@@ -24,11 +24,5 @@ class ShopperSeeder extends Seeder
             'style' => '',
             'status' => 'E',
         ]);
-
-        DB::table('shoppers')->insert([
-            'name' => 'Heitor',
-            'style' => '',
-            'status' => 'E',
-        ]);
     }
 }

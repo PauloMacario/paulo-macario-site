@@ -14,19 +14,32 @@ return new class extends Migration
         Schema::create('debt_scheduling', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('payment_type_id');
+
             $table->unsignedBigInteger('category_id');
+
             $table->unsignedBigInteger('shopper_id');
+
             $table->integer('launch_day');
+
             $table->date('date_start');
+
             $table->date('date_end');
+
             $table->string('locality', 64);
+
             $table->decimal('value', 10, 2);
-            $table->dateTime('last_run');
+            
+            $table->date('last_run');
+
             $table->enum('status', ['E', 'D'])
                 ->comment('E->enable - D->disable');
+
             $table->timestamps();
+            
             $table->foreign('payment_type_id')->references('id')->on('payment_types');
+
             $table->foreign('category_id')->references('id')->on('categories');
+
             $table->foreign('shopper_id')->references('id')->on('shoppers');
         });
     }

@@ -63,8 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Control</b>FINANCE',
+    //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/controFinance.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -316,23 +317,44 @@ return [
             'can' => 'manage-blog',
         ], */
         [
+            'text' => 'Home',
+            'url' => 'home',
+            'icon' => 'far fa-fw fa-home',
+        ],
+        [
+            'text' => 'Dívidas',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Compras do mês',
+                    'url' => 'dividas',
+                ],
+                [
+                    'text' => 'Parcelas do mês',
+                    'url' => 'parcelas',
+                ],
+            ],
+        ],
+        [
             'text' => 'Nova dívida',
             'url' => 'divida',
             'icon' => 'far fa-fw fa-file',
-            /* 'label' => 4,
-            'label_color' => 'success', */
         ],
-        /* ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        /*
+        ['header' => 'account_settings'],
         [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
+            'label' => 4,
+            'label_color' => 'success',
         ],
+
+        */
+
+
+
+        /*
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',

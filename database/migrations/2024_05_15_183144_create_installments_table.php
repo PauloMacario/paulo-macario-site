@@ -13,13 +13,20 @@ return new class extends Migration
     {
         Schema::create('installments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('debt_id');            
+
+            $table->unsignedBigInteger('debt_id');
+
             $table->integer('installment_number');
+
             $table->date('due_date');
+
             $table->decimal('value', 10, 2);
+
             $table->enum('status', ['E', 'D', 'PM', 'PP'])
                 ->comment('E->enable - D->disable - PM->pag realizado - PP->pag pendente');
+
             $table->timestamps();
+            
             $table->foreign('debt_id')->references('id')->on('debts');
         });
     }

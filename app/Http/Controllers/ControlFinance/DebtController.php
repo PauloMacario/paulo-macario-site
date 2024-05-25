@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
+use App\Models\ControlFinance\Debt;
+use App\Models\ControlFinance\Installment;
+use Illuminate\Support\Carbon;
 use Rules\ControlFinance\Debt\SaveDebt;
 use Rules\ControlFinance\Debt\SaveDebtInstallments;
-
-
 
 class DebtController extends Controller
 {
@@ -29,7 +30,7 @@ class DebtController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function newDebt()
     {
         $data = [];
         $data['categories'] = Category::all();
@@ -63,5 +64,18 @@ class DebtController extends Controller
         $dataDebt = $request->except('_token');
 
         // fazer fluxo de salvar dívida com parcelamento
+    }
+
+    public function getAllDebts()
+    {
+        $month = Carbon::now()->format("Y-m");
+
+        $data = [];
+        $data['debts'] = Debt::whereBetween('date', [$month.'-01', $month.'-31'])
+            ->get();
+        
+        $data['total'] = 0;
+        
+        return view('control-finance.debt.all-debts', $data);
     }
 }

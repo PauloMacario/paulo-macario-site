@@ -5,12 +5,12 @@ namespace App\Models\ControlFinance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Shopper extends Model
+class Installment extends Model
 {
     use HasFactory;
 
-    public function debts()
+    public function debt()
     {
-        return $this->hasMany(Debt::class);
+        return $this->belongsTo(Debt::class);
     }
 }

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('shoppers', function (Blueprint $table) {
             $table->id();
+
             $table->string('name', 48);
+            
             $table->longText('style')
                 ->nullable();
+
             $table->enum('status', ['E', 'D'])
                 ->comment('E->enable - D->disable');
+                
             $table->timestamps();
         });
     }

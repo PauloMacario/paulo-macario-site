@@ -13,18 +13,24 @@ return new class extends Migration
     {
         Schema::create('payment_types', function (Blueprint $table) {
             $table->id();
+
             $table->string('description', 48);
+
             $table->integer('processing_day')
                 ->nullable();
+
             $table->integer('payment_day')
-                ->nullable();
-            $table->longText('style')
                 ->nullable();
 
             $table->boolean('installment_enable')
                 ->comment('parcela habilitada (0-1)');
+
+            $table->longText('style')
+                ->nullable();
+
             $table->enum('status', ['E', 'D'])
                 ->comment('E->enable - D->disable');
+                
             $table->timestamps();
         });
     }

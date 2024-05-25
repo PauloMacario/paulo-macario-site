@@ -16,4 +16,9 @@ class Category extends Model
             get: fn (string $value) => json_decode($value),
         );
     }
+
+    public function debts()
+    {
+        return $this->hasMany(Debt::class);
+    }
 }

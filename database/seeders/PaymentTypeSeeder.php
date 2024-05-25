@@ -14,7 +14,7 @@ class PaymentTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('payment_types')->insert([
-            'description' => 'Débito',
+            'description' => 'débito',
             'processing_day' => null,
             'payment_day' => null,
             'installment_enable' => 0,
@@ -23,7 +23,7 @@ class PaymentTypeSeeder extends Seeder
         ]);
 
         DB::table('payment_types')->insert([
-            'description' => 'Credito Nubank',
+            'description' => 'crédito nubank',
             'processing_day' => 12,
             'payment_day' => 19,
             'installment_enable' => 1,
@@ -32,7 +32,7 @@ class PaymentTypeSeeder extends Seeder
         ]);
 
         DB::table('payment_types')->insert([
-            'description' => 'Credito Santander',
+            'description' => 'crédito santander',
             'processing_day' => 12,
             'payment_day' => 19,
             'installment_enable' => 1,
@@ -41,7 +41,7 @@ class PaymentTypeSeeder extends Seeder
         ]);
 
         DB::table('payment_types')->insert([
-            'description' => 'Boleto',
+            'description' => 'boleto',
             'processing_day' => null,
             'payment_day' => null,
             'installment_enable' => 0,
@@ -50,7 +50,25 @@ class PaymentTypeSeeder extends Seeder
         ]);
 
         DB::table('payment_types')->insert([
-            'description' => 'Pix',
+            'description' => 'pix',
+            'processing_day' => null,
+            'payment_day' => null,
+            'installment_enable' => 0,
+            'style' => '',
+            'status' => 'E',
+        ]);
+
+        DB::table('payment_types')->insert([
+            'description' => 'financiamento apto',
+            'processing_day' => 19,
+            'payment_day' => 19,
+            'installment_enable' => 1,
+            'style' => '',
+            'status' => 'E',
+        ]);
+
+        DB::table('payment_types')->insert([
+            'description' => 'dinheiro',
             'processing_day' => null,
             'payment_day' => null,
             'installment_enable' => 0,
