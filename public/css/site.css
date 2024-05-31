@@ -14,13 +14,7 @@
 */
 
 #menu {
-    width: 300px;
-    height: 100vh;
-    padding: 0 15px 0 15px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9997;
+    height: 90vh;
     background-color: #040b14;
     color: #fff;
 }
@@ -33,12 +27,13 @@ h1 {
 .pofile {
     width: 100%;
     height: 225px;
+    padding: 15px;
 }
 
 #profile-img {
     width: 130px;
     height: 130px;
-    margin: 15px auto;
+    margin: auto;
     display: block;
     border-radius: 50%;
     border: 10px solid #01375d;
@@ -96,8 +91,8 @@ nav > ul > li{
 */
 
 #front {
-    width: 100%;
-    height: 100vh;
+    width: 100vw;
+    height: 100%;
     background: url('./../img/background.jpg');
     background-size: cover;
 }
@@ -129,12 +124,8 @@ main {
 
 #footer {
     padding: 30px 15px 8px 15px;
-    width: 300px;
-    height: 80px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 9999;
+    height: 10vh;
+    background-color: #040b14;
     color: #fff;
     border-top: solid 1px #7474743d;
 }
