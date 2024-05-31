@@ -9,6 +9,17 @@ class Debt extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'payment_type_id',
+        'category_id',
+        'shopper_id',
+        'date',
+        'locality',
+        'total_value',
+        'number_installments',
+        'status'
+    ];
+
     public function installments()
     {
         return $this->hasMany(Installment::class);

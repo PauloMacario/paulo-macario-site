@@ -9,9 +9,7 @@
             <h1>Home</h1>
         </div>
         <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active">Home</li>
-            </ol>
+            @include('components.btn-ligth')
         </div>
     </div>
 </div>

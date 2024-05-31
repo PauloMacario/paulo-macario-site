@@ -8,10 +8,8 @@ use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
 use App\Models\ControlFinance\Debt;
-use App\Models\ControlFinance\Installment;
 use Illuminate\Support\Carbon;
-use Rules\ControlFinance\Debt\SaveDebt;
-use Rules\ControlFinance\Debt\SaveDebtInstallments;
+use Rules\ControlFinance\Debt\Create;
 
 class DebtController extends Controller
 {
@@ -42,38 +40,48 @@ class DebtController extends Controller
 
     public function postDebt(Request $request)
     {
+        
         $dataDebt = $request->except('_token');
-        $existsInstallments = (array_key_exists('numberInstallments', $dataDebt));
+             
+        $saveDebt = (new Create())->execute($dataDebt);
 
-        if ($existsInstallments) {
-
-            dd(new SaveDebtInstallments());
-
-            // Fazer fluxo do cálculo das parcelas
-            // retornar view de confirmação/edição
+        if ($saveDebt) {
+            $request->session()->flash('success', 'Compra adicionada!');
+            return redirect()->route('debtAll_get');
         }
 
-        dd(new SaveDebt());
-
-        // salvar dívida s/ parcelas
-        //retornar success ou error
+        $request->session()->flash('error', 'Occoreu um erro!');
+        return redirect()->route('debtAll_get');
     }
 
     public function postInstallmentDebt(Request $request)
     {
-        $dataDebt = $request->except('_token');
+        /* $dataDebt = $request->except('_token'); */
 
         // fazer fluxo de salvar dívida com parcelamento
     }
 
-    public function getAllDebts()
+    public function getAllDebts(Request $request)
     {
-        $month = Carbon::now()->format("Y-m");
-
         $data = [];
-        $data['debts'] = Debt::whereBetween('date', [$month.'-01', $month.'-31'])
+
+        $year = Carbon::now()->format("Y");
+        $month = Carbon::now()->format("m");
+
+        if ($request['month']) {
+            $month = $request->month;
+            $year = $request->year;
+            $data['yearMonthRef'] = "{$month}/{$year}";
+        }
+      
+        $data['debts'] = Debt::whereYear('date', $year)
+            ->whereMonth('date', $month)
+            ->orderBy('date', 'DESC')
             ->get();
         
+        $data['year'] = $year;
+        $data['month'] = $month;
+
         $data['total'] = 0;
         
         return view('control-finance.debt.all-debts', $data);

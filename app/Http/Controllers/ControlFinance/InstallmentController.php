@@ -32,9 +32,10 @@ class InstallmentController extends Controller
 
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
 
-        if ($request['mes']) {
-            $month = $request['mes'];
-            $data['yearMonthRef'] = $request['mes'] . "/{$year}";
+        if ($request['month']) {
+            $month = $request->month;
+            $year = $request->year;
+            $data['yearMonthRef'] = "{$month}/{$year}";
         }
 
         $data['installments'] = Installment::whereYear('due_date', $year)

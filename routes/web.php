@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ControlFinance\DebtController;
 use App\Http\Controllers\ControlFinance\InstallmentController;
+use App\Http\Controllers\ControlFinance\ParameterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,26 +30,35 @@ Route::get(
     
 Route::get(
     '/divida', [DebtController::class, 'newDebt']
-    )->name('debt.get');
+    )->name('debt_get');
+
+Route::post(
+        '/divida', [DebtController::class, 'postDebt']
+        )->name('debt_post');
 
 Route::get(
     '/dividas', [DebtController::class, 'getAllDebts']
-    )->name('debtAll.get');
+    )->name('debtAll_get');
 
 Route::post(
-    '/divida', [DebtController::class, 'postDebt']
-    )->name('debt.post');
+    '/dividas/mes', [DebtController::class, 'getAllDebts']
+    )->name('debtAllMonth_post');
+
 
 Route::post(
     '/divida/parcelada', [DebtController::class, 'postInstallmentDebt']
-    )->name('installmentDebt.post');
+    )->name('installmentAllMonth_post');
 
 
 
 Route::get(
     '/parcelas', [InstallmentController::class, 'getAllInstallments']
-    )->name('installmentAll.get');
+    )->name('installmentAll_get');
 
 Route::post(
     '/parcelas/mes', [InstallmentController::class, 'getAllInstallments']
-    )->name('installmentAllMonth.post');
+    )->name('installmentAllMonth_post');
+
+Route::post(
+    '/parametro', [ParameterController::class, 'postParam']
+    )->name('parameter_post');

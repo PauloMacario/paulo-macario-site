@@ -22,19 +22,18 @@
     <div class="row mt-3">
         <div class="col-12">
             <div class="card">
-                <div class="card card-primary mb-0">
+                <div class="card card-olive mb-0">
                     <div class="card-header">
                         <h5 class="card-title">Parcelas do mês:<strong class="ml-2">{{ $yearMonthRef }}</strong></h5>
                     </div>
                     <div class="card-body">
 
-                        <form action="{{ route('installmentAllMonth.post') }}" method="POST">
+                        <form action="{{ route('installmentAllMonth_post') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                                                      
-                                        <select class="form-control" name="mes" id="">
+                                <div class="col-xs-12 col-md-2">
+                                    <div class="form-group">                                                                      
+                                        <select class="form-control" name="month" id="">
                                             <option value="01">Jan</option>
                                             <option value="02">Fev</option>
                                             <option value="03">Mar</option>
@@ -49,11 +48,27 @@
                                             <option value="12">Dez</option>
                                         </select>
                                     </div>
-
                                 </div>
-                                <div class="col-6">            
+                                <div class="col-xs-12 col-md-2">
+                                    <div class="form-group">                                                                      
+                                        <select class="form-control" name="year" id="">
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-2">            
                                     <div class="form-group">
-                                        <button class="btn btn-primary">
+                                        <button class="btn bg-olive">
                                             Buscar por mês
                                         </button>
                                     </div>
