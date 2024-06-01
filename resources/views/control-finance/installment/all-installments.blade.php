@@ -95,8 +95,18 @@
                                         (
                                             {{ $installment->number_installment }}/{{ $installment->debt->number_installments }} 
                                         )                                                                         
-                                    </td>                                 
-                                    <td>R$ {{ formatMoneyBR($installment->value) }}</td>
+                                    </td> 
+                                    
+                                    @if ($installment->partitions->count() > 0)
+                                        <td>
+                                            @foreach ($installment->partitions as $partition)
+                                                {{ $partition->shopper->name}} - R$ {{ formatMoneyBR($partition->value) }}
+                                            @endforeach
+                                        </td>                                                
+                                    @else
+                                        <td>R$ {{ formatMoneyBR($installment->value) }}</td>
+                                    @endif
+                                    
                                 </tr>
                             @endforeach
                         </table>

@@ -43,10 +43,17 @@ class ConcreteBuilder implements DebtBuilder
         $startDueDate = $this->generateDatesToInstallments();
 
         for ($i = 1 ; $i <= $this->data['debt']['number_installments'] ; $i++) {
+            
+            $dueDate = $startDueDate->format('Y-m-d');
+
+            if ($i > 1) {
+                $dueDate = $startDueDate->addMonths($i - 1)->format('Y-m-d');
+            }
+
             $fields = [
                 'debt_id' => null,
                 'number_installment' => $i,
-                'due_date' => $startDueDate,
+                'due_date' => $dueDate,
                 'value' => $valueInstallment,
                 'status' => "E"
             ];  

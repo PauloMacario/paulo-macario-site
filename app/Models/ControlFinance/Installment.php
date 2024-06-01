@@ -21,4 +21,9 @@ class Installment extends Model
     {
         return $this->belongsTo(Debt::class);
     }
+
+    public function partitions()
+    {
+        return $this->hasMany(Partition::class);
+    }
 }

@@ -19,13 +19,18 @@
     color: #fff;
 }
 
+.box-1{
+    margin:0px;
+    padding: 0px;
+}
+
 h1 {
     font-size: 1.5rem ;
     text-align: center;
 }
 
 .pofile {
-    width: 100%;
+    width: 100vw;
     height: 225px;
     padding: 15px;
 }

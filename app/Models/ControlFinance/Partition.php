@@ -15,4 +15,14 @@ class Partition extends Model
         'value',
         'status'
     ];
+
+    public function installment()
+    {
+        return $this->belongsTo(Installment::class);
+    }
+
+    public function shopper()
+    {
+        return $this->belongsTo(Shopper::class);
+    }
 }

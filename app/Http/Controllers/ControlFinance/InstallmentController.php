@@ -40,6 +40,7 @@ class InstallmentController extends Controller
 
         $data['installments'] = Installment::whereYear('due_date', $year)
             ->whereMonth('due_date', $month)
+            ->with('debt','partitions')
             ->get();
 
         $data['total'] = 0;
