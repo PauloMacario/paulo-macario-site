@@ -1,5 +1,31 @@
 @extends('adminlte::page')
 
+@push('css')
+    <style>
+        .font-10 {
+            font-size: 10px;
+        }
+        .font-12 {
+            font-size: 12px;
+        }
+        .font-14 {
+            font-size: 14px;
+        }
+        .font-16 {
+            font-size:16px;
+        }
+        .font-18 {
+            font-size: 18px;
+        }
+        .font-20 {
+            font-size: 20px;
+        }
+        .font-22 {
+            font-size: 22px;
+        }
+    </style>
+@endpush
+
 @section('title', 'Parcelas')
 
 @section('content_header')
@@ -76,48 +102,38 @@
                             </div>
                         </form>
 
-                        <table class="table table-sm table-striped">
-                            <tr>
-                                <th class="text-center" width="60%">Descrição</th> 
-                                <th width="20%">Parc.</th>  
-                                <th width="20%">Valor</th>
-                            </tr>
+                        <table class="table table-sm table-borderless{{-- table-bordered --}}">
 
                             @foreach ( $installments as $installment )
-                                @php
-                                    $total += $installment->value
-                                @endphp
                                 <tr>
-                                    <td>
-                                        {{ $installment->debt->locality }} 
-                                    </td>  
-                                    <td>
-                                        (
-                                            {{ $installment->number_installment }}/{{ $installment->debt->number_installments }} 
-                                        )                                                                         
-                                    </td> 
-                                    
-                                    @if ($installment->partitions->count() > 0)
-                                        <td>
-                                            @foreach ($installment->partitions as $partition)
-                                                {{ $partition->shopper->name}} - R$ {{ formatMoneyBR($partition->value) }}
-                                            @endforeach
-                                        </td>                                                
-                                    @else
-                                        <td>R$ {{ formatMoneyBR($installment->value) }}</td>
-                                    @endif
-                                    
+                                    <td colspan="2" class="font-italic text-left font-12" width="70%">{{ $installment->debt->paymentType->description }}</td>
+                                    <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($installment->due_date) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="font-weight-bold text-left font-14">{{ $installment->debt->locality }}</td>
+                                    <td class="font-weight-bold text-center font-14">R$ {{ formatMoneyBR($installment->value) }}</td>
+                                </tr>
+                                @if ($installment->partitions->count() > 0)
+                                    @foreach ( $installment->partitions as $partition)
+                                        <tr>
+                                            <td class="font-italic text-left font-12">{{ $partition->shopper->name }}</td>
+                                            <td class="font-italic text-left font-12">R$ {{ formatMoneyBR($partition->value) }}</td>
+                                            @if ($loop->first) 
+                                                <td class="font-weight-bold text-center font-12">({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="2" class="font-italic text-left font-12">{{ $installment->debt->shopper->name }}</td>
+                                        <td class="font-weight-bold text-center font-12">({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</td>
+                                    </tr>
+                                @endif
+                                <tr>
+                                    <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
                                 </tr>
                             @endforeach
-                        </table>
-                       
-                        {{-- <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-4">
-                
-                            </div>
-                        </div> --}}
-
-                        
+                            </table>
                     </div>
                     <div class="card-footer">
                         <table class="table table-sm table-striped">

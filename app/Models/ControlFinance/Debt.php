@@ -34,4 +34,9 @@ class Debt extends Model
     {
         return $this->belongsTo(Shopper::class);
     }
+
+    public function paymentType()
+    {
+        return $this->belongsTo(PaymentType::class);
+    }
 }

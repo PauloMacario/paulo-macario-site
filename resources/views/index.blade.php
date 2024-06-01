@@ -10,7 +10,7 @@
     <title>Paulo M.</title>
   </head>
   <body>
-    <div class="row"  id="front">
+    <div class="row ml-0"  id="front">
         <div class="col-xs-12 col-md-4 col-lg-3 box-1">
             <header id="menu">
                 <div class="pofile">
