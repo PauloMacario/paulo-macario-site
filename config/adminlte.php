@@ -320,26 +320,28 @@ return [
         [
             'text' => 'Home',
             'url' => 'home',
-            'icon' => 'far fa-fw fa-home',
+            'icon' => 'fas fa-home',
         ],
         [
             'text' => 'Dívidas',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'fas fa-comment-dollar',
             'submenu' => [
                 [
-                    'text' => 'Compras do mês',
-                    'url' => 'dividas',
-                ],
-                [
-                    'text' => 'Parcelas do mês',
-                    'url' => 'parcelas',
-                ],
+                    'text' => 'Nova dívida',
+                    'url' => 'divida',
+                    'icon' => 'fas fa-plus-circle',
+                ],               
             ],
         ],
         [
-            'text' => 'Nova dívida',
-            'url' => 'divida',
-            'icon' => 'far fa-fw fa-file',
+            'text' => 'Compras do mês',
+            'url' => 'dividas',
+            'icon' => 'fas fa-wallet',
+        ],
+        [
+            'text' => 'Parcelas do mês',
+            'url' => 'parcelas',
+            'icon' => 'fas fa-credit-card',
         ],
         /*
         ['header' => 'account_settings'],

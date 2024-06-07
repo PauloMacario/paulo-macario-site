@@ -11,6 +11,7 @@ class Installment extends Model
 
     protected $fillable = [
         'debt_id',
+        'shopper_id',
         'number_installment',
         'due_date',
         'value',
@@ -22,8 +23,8 @@ class Installment extends Model
         return $this->belongsTo(Debt::class);
     }
 
-    public function partitions()
+    public function shopper()
     {
-        return $this->hasMany(Partition::class);
+        return $this->belongsTo(Shopper::class);
     }
 }

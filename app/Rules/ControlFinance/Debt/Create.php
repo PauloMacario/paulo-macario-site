@@ -18,7 +18,7 @@ class Create
         $buildDebt = $director->buildDebt($dataDebt);
         
         $parts = $buildDebt->listParts();
-        
+       
         $debt = Debt::create($parts['debt']);
 
         $this->createInstallments($parts, $debt->id);
@@ -32,21 +32,6 @@ class Create
             $intallment['debt_id'] = $debtId;
             
             $inst = Installment::create($intallment);
-
-            if (Arr::exists($parts, 'partitions')) {
-                $this->createPartitions($parts, $inst);
-            }
-        }
-    }
-
-    public function createPartitions($parts, $installment)
-    {
-        foreach ($parts['partitions'] as $shopper) {
-
-            $partition = $shopper[$installment->number_installment];            
-            $partition['installment_id'] = $installment->id;
-
-            Partition::create($partition);
         }
     }
 }

@@ -17,6 +17,7 @@ class Debt extends Model
         'locality',
         'total_value',
         'number_installments',
+        'prorated_debt',
         'status'
     ];
 

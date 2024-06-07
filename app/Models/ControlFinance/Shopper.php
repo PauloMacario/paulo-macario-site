@@ -13,4 +13,9 @@ class Shopper extends Model
     {
         return $this->hasMany(Debt::class);
     }
+
+    public function installments()
+    {
+        return $this->hasMany(Installment::class);
+    }
 }

@@ -40,6 +40,7 @@ class DebtController extends Controller
 
     public function postDebt(Request $request)
     {
+        dd($request->all());
         
         $dataDebt = $request->except('_token');
              

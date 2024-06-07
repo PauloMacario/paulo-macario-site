@@ -2,7 +2,7 @@
 
 namespace Rules\ControlFinance\Debt;
 
-use Illuminate\Support\Arr;
+
 
 class Director
 {
@@ -17,10 +17,6 @@ class Director
     {
         $this->debtBuilder->buildDebt($dataDebt);
         $this->debtBuilder->buildInstalments();
-
-        if (Arr::exists($dataDebt, 'checkrateio')) {
-            $this->debtBuilder->buildPartitions();
-        }
 
         return $this->debtBuilder->getDebt();
     }

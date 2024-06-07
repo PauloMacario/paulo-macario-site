@@ -5,6 +5,7 @@ namespace Rules\ControlFinance\Debt;
 use App\Models\ControlFinance\PaymentType;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class ConcreteBuilder implements DebtBuilder
 {
@@ -27,6 +28,7 @@ class ConcreteBuilder implements DebtBuilder
         $this->data = $data;
 
         $this->data['debt']['number_installments'] = $this->data['debt']['number_installments'] ?? 1;
+        $this->data['debt']['prorated_debt'] = 0;
         $this->data['debt']['date'] = $this->convertDate($this->data['debt']['date']);
         $this->data['debt']['total_value'] = $this->convertMoney($this->data['debt']['total_value']);
         $this->data['debt']['status'] = "E";
@@ -38,7 +40,13 @@ class ConcreteBuilder implements DebtBuilder
     {
         $this->data['installments'] = [];
 
-        $valueInstallment = $this->calculateInstallmentOrPartition($this->data['debt']['total_value'], $this->data['debt']['number_installments']);
+        $numberInstForCalculate = $this->data['debt']['number_installments'];
+
+        if (Arr::exists($this->data, 'checkrateio')) {
+            $numberInstForCalculate = count($this->data['checkrateio']) * $this->data['debt']['number_installments'];
+        }
+
+        $valueInstallment = $this->calculateInstallmentValue($this->data['debt']['total_value'], $numberInstForCalculate);
 
         $startDueDate = $this->generateDatesToInstallments();
 
@@ -50,44 +58,44 @@ class ConcreteBuilder implements DebtBuilder
                 $dueDate = $startDueDate->addMonths($i - 1)->format('Y-m-d');
             }
 
-            $fields = [
-                'debt_id' => null,
-                'number_installment' => $i,
-                'due_date' => $dueDate,
-                'value' => $valueInstallment,
-                'status' => "E"
-            ];  
-            
-            $this->data['installments'][] = $fields;
+            if (Arr::exists($this->data, 'checkrateio')) {
+
+                $this->data['debt']['prorated_debt'] = 1;
+
+                foreach ($this->data['checkrateio'] as $key => $shopper) {
+                   
+                    $fields = [
+                        'debt_id' => null,
+                        'shopper_id' => $key,
+                        'number_installment' => $i,
+                        'due_date' => $dueDate,
+                        'value' => $valueInstallment,
+                        'status' => "E"
+                    ];
+
+                    $this->data['installments'][] = $fields;
+                }
+            } else {
+                $fields = [
+                    'debt_id' => null,
+                    'shopper_id' => $this->data['debt']['shopper_id'],
+                    'number_installment' => $i,
+                    'due_date' => $dueDate,
+                    'value' => $valueInstallment,
+                    'status' => "E"
+                ];  
+                
+                $this->data['installments'][] = $fields;
+            }
+
         }
 
         $this->debt->parts['installments'] = $this->data['installments'];
     }
 
-    public function buildPartitions()
-    {
-        foreach ($this->debt->parts['installments'] as $installment) {
-
-            $valuePartition = $this->calculateInstallmentOrPartition($installment['value'], count($this->data['checkrateio']));
-           
-            foreach ($this->data['checkrateio'] as $shopper => $s) {
-                $fields[$shopper][$installment['number_installment']] = [
-                    "shopper_id" => $shopper,
-                    "installment_id" => null,
-                    "value" => $valuePartition,
-                    "status" => "E"
-                ];
-
-                $this->data['partitions'] = $fields;
-            }
-        }
-
-        $this->debt->parts['partitions'] = $this->data['partitions'];
-    }
-
     public function convertDate($date)
     {
-        return Carbon::createFromFormat('d/m/Y', $date);
+        return Carbon::createFromFormat('Y-m-d', $date);
     }
 
     public function convertMoney($value)
@@ -99,7 +107,7 @@ class ConcreteBuilder implements DebtBuilder
         return $valueConvert;
     }
 
-    public function calculateInstallmentOrPartition($value, $numberInst)
+    public function calculateInstallmentValue($value, $numberInst)
     {
         return number_format($value / $numberInst, 2, '.', '');
     }
