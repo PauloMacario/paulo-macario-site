@@ -39,20 +39,18 @@ class DebtController extends Controller
     }
 
     public function postDebt(Request $request)
-    {
-        dd($request->all());
-        
+    {        
         $dataDebt = $request->except('_token');
              
         $saveDebt = (new Create())->execute($dataDebt);
 
         if ($saveDebt) {
             $request->session()->flash('success', 'Compra adicionada!');
-            return redirect()->route('debtAll_get');
+            return redirect()->route('debt_get');
         }
 
         $request->session()->flash('error', 'Occoreu um erro!');
-        return redirect()->route('debtAll_get');
+        return redirect()->route('debt_get');
     }
 
     public function postInstallmentDebt(Request $request)

@@ -12,10 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
+       /*  $this->call([
             PaymentTypeSeeder::class,
             CategorySeeder::class,
             ShopperSeeder::class,
-        ]);
+        ]); */
     }
 }

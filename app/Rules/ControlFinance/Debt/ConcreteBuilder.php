@@ -55,12 +55,13 @@ class ConcreteBuilder implements DebtBuilder
             $dueDate = $startDueDate->format('Y-m-d');
 
             if ($i > 1) {
-                $dueDate = $startDueDate->addMonths($i - 1)->format('Y-m-d');
-            }
+                $dueDate = $startDueDate->addMonth()->format('Y-m-d');
 
+            }
+          
             if (Arr::exists($this->data, 'checkrateio')) {
 
-                $this->data['debt']['prorated_debt'] = 1;
+                $this->debt->parts['debt']['prorated_debt'] = 1;
 
                 foreach ($this->data['checkrateio'] as $key => $shopper) {
                    
@@ -91,6 +92,10 @@ class ConcreteBuilder implements DebtBuilder
         }
 
         $this->debt->parts['installments'] = $this->data['installments'];
+
+       /*  dd(
+            $this->debt->parts
+        ); */
     }
 
     public function convertDate($date)

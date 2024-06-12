@@ -8,9 +8,9 @@ use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
 use App\Models\ControlFinance\Installment;
-use App\Models\ControlFinance\Debt;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
+use Rules\ControlFinance\Installment\UpdateInstallment;
 
 
 class InstallmentController extends Controller
@@ -51,10 +51,6 @@ class InstallmentController extends Controller
             $installments->where('shopper_id', $shopId);
         }
 
-
-        //dd($installments);
-
-
         if ($payTypeId = $request['payment_type_id']) {
             $installments->whereHas('debt', function (Builder $query) use ($payTypeId) {                
                 $query->where('payment_type_id', $payTypeId);
@@ -72,45 +68,27 @@ class InstallmentController extends Controller
         
         return view('control-finance.installment.all-installments', $data);
     }
+
+    public function getDetailInstallment($id)
+    {
+        $data = [];
+
+        $data['categories'] = Category::all();
+        $data['shoppers'] = Shopper::all();
+
+        $data['installment'] = Installment::find($id);
+
+        return view('control-finance.installment.detail-installments', $data);
+    }
+
+    public function postUpdateInstallment(Request $request)
+    {
+        $updateIsntallment = new UpdateInstallment();
+        $response = $updateIsntallment->execute($request->except('_token'));
+       
+        $request->session()->flash($response['status'], $response['msg']);
+
+        return redirect()->back();
+
+    }
 }
-/* 
-
-$query = Installment::join('debts', 'debts.id', '=', 'installments.debt_id')
-            ->join('shoppers', 'shoppers.id', '=', 'debts.shopper_id')
-            ->join('payment_types', 'payment_types.id', '=', 'debts.payment_type_id')
-            ->join('categories', 'categories.id', '=', 'debts.category_id')
-            ->select(
-                'installments.id AS int_id',
-                'installments.number_installment AS int_number',
-                'installments.due_date AS int_due_date',
-                'installments.value AS inst_val',
-                'installments.status AS inst_status',
-                'debts.id AS debt_id',
-                'debts.category_id AS debt_category ',
-                'debts.payment_type_id AS debt_pay',
-                'debts.shopper_id AS debt_Shop',
-                'debts.date AS debt_date',
-                'debts.locality AS debt_local',
-                'debts.total_value AS debt_total',
-                'debts.number_installments AS debt_number',
-                'debts.status AS debt_status',
-                'shoppers.name AS shop_name',
-                'payment_types.description AS pay_desc',
-                'payment_types.processing_day AS pay_proccess',
-                'payment_types.payment_day AS pay_payment',
-                'categories.description AS categ_desc'
-                )
-            ->whereYear('due_date', $year)
-            ->whereMonth('due_date', $month);
-
-        if ($shopId = $request['shopper_id']) {
-            $query->where('debts.shopper_id', $shopId);
-        }
-
-        if ($payTypeId = $request['payment_type_id']) {
-            $query->where('debts.payment_type_id', $payTypeId);
-        }
-        
-dd($query->count());
-        $installments = $query->get();
-         */

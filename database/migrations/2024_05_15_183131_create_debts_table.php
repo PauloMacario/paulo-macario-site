@@ -26,6 +26,9 @@ return new class extends Migration
 
             $table->decimal('total_value', 10, 2);
 
+            $table->boolean('prorated_debt')
+                ->default(0);
+
             $table->integer('number_installments');
 
             $table->enum('status', ['E', 'D', 'PM', 'PP'])

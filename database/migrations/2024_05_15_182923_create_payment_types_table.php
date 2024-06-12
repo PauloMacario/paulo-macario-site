@@ -23,9 +23,13 @@ return new class extends Migration
                 ->nullable();
 
             $table->boolean('installment_enable')
+                ->default(0)
                 ->comment('parcela habilitada (0-1)');
 
             $table->longText('style')
+                ->nullable();
+
+            $table->longText('icon')
                 ->nullable();
 
             $table->enum('status', ['E', 'D'])

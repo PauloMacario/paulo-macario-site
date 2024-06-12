@@ -18,6 +18,9 @@ return new class extends Migration
 
             $table->longText('style')
                 ->nullable();
+            
+            $table->longText('icon')
+                ->nullable();
 
             $table->enum('status', ['E', 'D'])
                 ->comment('E->enable - D->disable');

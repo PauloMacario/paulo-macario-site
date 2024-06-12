@@ -3,6 +3,7 @@
 @section('title', 'TITLEXXXXX')
 
 @section('content_header')
+@include('components.alerts')
 {{-- <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">

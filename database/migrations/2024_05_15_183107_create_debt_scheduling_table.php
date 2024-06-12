@@ -27,7 +27,10 @@ return new class extends Migration
 
             $table->string('locality', 64);
 
-            $table->decimal('value', 10, 2);
+            $table->decimal('total_value', 10, 2);
+
+            $table->boolean('prorated_debt')
+                ->default(0);
             
             $table->date('last_run');
 

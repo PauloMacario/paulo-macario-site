@@ -1,0 +1,168 @@
+@extends('adminlte::page')
+
+@section('title', 'TITLEXXXXX')
+
+@section('content_header')
+@include('components.alerts')
+
+@stop
+
+@section('content')
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card card-olive mb-0">
+                    <div class="card-header">
+                        <h5 class="card-title">Detalhse da parcela {{ $installment->description }}</h5>
+                    </div>
+                    <div class="card-body">
+                       
+                        <form action="{{ route('updateInstallment_post') }}" method="POST" id="form">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $installment->id }}">
+                            <input type="hidden" name="debt_id" value="{{ $installment->debt_id }}">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label for="id">Loja/local</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control fields-disabled" 
+                                                name="locality" 
+                                                id="locality" 
+                                                value="{{ $installment->debt->locality }}" 
+                                                disabled
+                                            >
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="id">Valor</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control fields-disabled" 
+                                                name="value" 
+                                                id="value" 
+                                                value={{ formatMoneyBR($installment->value) }}
+                                                disabled
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">    
+                                    <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="id">Comprador(a)</label>
+                                            <select 
+                                                class="form-control fields-disabled" 
+                                                name="shopper_id" 
+                                                id="shopperId" 
+                                                disabled
+                                                >
+                                                <option value="" selected>Selecione...</option>                                       
+                                                @foreach ($shoppers as $shopper)                                  
+                                                    <option value="{{ $shopper->id }}" @if($shopper->id == $installment->shopper_id) selected @endif>{{ $shopper->name }}</option>
+                                                @endforeach
+                                            </select>                                        
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="id">N° da parcela</label>
+                                            <input 
+                                                type="number" 
+                                                class="form-control fields-disabled" 
+                                                name="number_installment" 
+                                                id="field-number-installment" 
+                                                value="{{ $installment->number_installment }}" 
+                                                min="1" 
+                                                max="360"
+                                                disabled
+                                            >
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="id">Data</label>
+                                            <input 
+                                                type="date" 
+                                                class="form-control fields-disabled" 
+                                                name="due_date" 
+                                                id="date" 
+                                                value="{{ $installment->due_date }}"
+                                                disabled
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row ">
+                                    <div class="col-xs-12 col-md-9 col-lg-9 d-flex justify-content-between">
+                                        <div class="col-xs-12 col-md-6 col-lg-6 text-left p-0 m-0">
+                                            <div class="form-group">
+                                                <a class="btn bg-warning" id="btn-edit" data-edit="disabled">
+                                                    Editar
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6 col-lg-6  p-0 m-0">
+                                            <div class="form-group text-right">
+                                                <button 
+                                                    type="submit" 
+                                                    class="btn bg-olive"
+                                                    id="btn-save"
+                                                    style="opacity:0;"
+
+                                                    >
+                                                    Salvar
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                           
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop
+
+@push('js')
+    <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#value').mask('000.000,00', {reverse: true});
+
+            $('#btn-edit').on('click', function() {
+
+                var btnEdit = ($('#btn-edit').attr('data-edit'));
+
+                var acao = (btnEdit == 'disabled') ? false : true;
+
+                $('.fields-disabled').each(function(index) {
+                    $(this).attr('disabled', acao);
+                })
+
+                if (!acao) {
+                        $('#btn-save').css('opacity', '1')
+                        $('#btn-edit').attr('data-edit', 'enabled').text('Não editar')
+                } else {
+                    $('#btn-save').css('opacity', '0')
+                    $('#btn-edit').attr('data-edit', 'disabled').text('Editar')
+                }
+            })
+
+        });
+    </script>
+@endpush

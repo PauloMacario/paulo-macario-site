@@ -2,6 +2,15 @@
 
 @push('css')
     <style>
+        a {
+            color: rgb(20, 20, 20);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #3d9970;
+        }
+
         .font-10 {
             font-size: 10px;
         }
@@ -29,6 +38,7 @@
 @section('title', 'Parcelas')
 
 @section('content_header')
+@include('components.alerts')
 {{-- <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
@@ -61,13 +71,13 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse show" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('installmentAllMonth_post') }}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-2 col-lg-2">
-                                                    <div class="form-group">                                                                      
+                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                    <div class="form-group">                                                                     
                                                         <select class="form-control" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
                                                             <option value="02" @if($month == '02') selected @endif>Fev</option>
@@ -84,7 +94,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-2 col-lg-2">
+                                                <div class="col-xs-12 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
@@ -101,7 +111,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-2 col-lg-2">
+                                                <div class="col-xs-12 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                   
                                                         <select class="form-control" name="payment_type_id" id="">
                                                             <option value="">Selecione Tipo</option>
@@ -111,7 +121,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-2 col-lg-2">
+                                                <div class="col-xs-12 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                               
                                                         <select class="form-control" name="shopper_id" id="">
                                                             <option value="">Selecione comprador</option>
@@ -121,7 +131,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-2 col-lg-2">            
+                                                <div class="col-xs-12 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <button class="btn bg-olive btn-block">
                                                             Filtrar
@@ -129,7 +139,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-2 col-lg-2">            
+                                                <div class="col-xs-12 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <a href="{{ route('installmentAll_get') }}" class="btn bg-warning btn-block">
                                                             Limpar
@@ -161,8 +171,10 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="font-weight-bold text-left font-14">
-                                                {{ $installment->debt->locality }}
-                                                <span class="ml-2"> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                                <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}">
+                                                    {{ $installment->debt->locality }}
+                                                    <span class="ml-2"> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                                </a>
                                             </td>
                                             <td class="font-weight-bold text-center font-14">R$ {{ formatMoneyBR($installment->value) }}</td>
                                         </tr>

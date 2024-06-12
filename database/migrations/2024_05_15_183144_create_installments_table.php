@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('debt_id');
 
+            $table->unsignedBigInteger('shopper_id');
+
             $table->integer('installment_number');
 
             $table->date('due_date');
@@ -28,6 +30,8 @@ return new class extends Migration
             $table->timestamps();
             
             $table->foreign('debt_id')->references('id')->on('debts');
+
+            $table->foreign('shopper_id')->references('id')->on('shoppers');
         });
     }
 

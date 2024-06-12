@@ -59,6 +59,10 @@ Route::post(
     '/parcelas/mes', [InstallmentController::class, 'getAllInstallments']
     )->name('installmentAllMonth_post');
 
+Route::get(
+    '/parcelas/{id}/detalhes', [InstallmentController::class, 'getDetailInstallment']
+    )->name('detailInstallment_get');
+
 Route::post(
-    '/parametro', [ParameterController::class, 'postParam']
-    )->name('parameter_post');
+    '/editar', [InstallmentController::class, 'postUpdateInstallment']
+    )->name('updateInstallment_post');
