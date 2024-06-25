@@ -30,7 +30,7 @@
                                                 class="form-control" 
                                                 name="description" 
                                                 id="description" 
-                                                value={{ $paymentType->description }}
+                                                value="{{ $paymentType->description }}"
                                             >                                                
                                         </div>
 
