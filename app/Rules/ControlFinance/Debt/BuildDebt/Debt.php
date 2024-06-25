@@ -1,6 +1,6 @@
 <?php
 
-namespace Rules\ControlFinance\Debt;
+namespace Rules\ControlFinance\Debt\BuildDebt;
 
 class Debt
 {

@@ -9,35 +9,52 @@ use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
 use App\Models\ControlFinance\Debt;
 use Illuminate\Support\Carbon;
-use Rules\ControlFinance\Debt\Create;
-
+use Rules\ControlFinance\Debt\BuildDebt\Create;
+use Rules\ControlFinance\Debt\Update;
+use Rules\ControlFinance\Debt\Delete;
 class DebtController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function getAllDebts(Request $request)
     {
-        $this->middleware('auth');
+        $data = [];
+    
+        $year = Carbon::now()->format("Y");
+        $month = Carbon::now()->format("m");
+        
+        $data['yearMonthRef'] = Carbon::now()->format('m/Y');
+        
+        if ($request['month']) {
+            $month = $request->month;
+            $year = $request->year;
+            $data['yearMonthRef'] = "{$month}/{$year}";
+        }
+      
+        $data['debts'] = Debt::whereYear('date', $year)
+        ->whereMonth('date', $month)
+        ->orderBy('date', 'DESC')
+        ->get();
+        
+        $request->session()
+        ->put('filters', $request->all());
+        
+        $data['year'] = $year;
+        $data['month'] = $month;
+        
+        $data['total'] = 0;
+        
+        return view('control-finance.debt.all', $data);
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    
     public function newDebt()
     {
         $data = [];
         $data['categories'] = Category::all();
         $data['paymentTypes'] = PaymentType::all();
         $data['shoppers'] = Shopper::all();
-
-        return view('control-finance.debt.index', $data);
+        
+        return view('control-finance.debt.new', $data);
     }
-
+    
     public function postDebt(Request $request)
     {        
         $dataDebt = $request->except('_token');
@@ -53,36 +70,45 @@ class DebtController extends Controller
         return redirect()->route('debt_get');
     }
 
-    public function postInstallmentDebt(Request $request)
+    public function addInstallments(Request $request)
     {
-        /* $dataDebt = $request->except('_token'); */
-
-        // fazer fluxo de salvar dívida com parcelamento
+        //to do
     }
 
-    public function getAllDebts(Request $request)
+
+    public function getDetailDebt($id)
     {
         $data = [];
 
-        $year = Carbon::now()->format("Y");
-        $month = Carbon::now()->format("m");
+        $data['categories'] = Category::all();
+        $data['shoppers'] = Shopper::all();
+        $data['paymentTypes'] = PaymentType::all();
 
-        if ($request['month']) {
-            $month = $request->month;
-            $year = $request->year;
-            $data['yearMonthRef'] = "{$month}/{$year}";
-        }
-      
-        $data['debts'] = Debt::whereYear('date', $year)
-            ->whereMonth('date', $month)
-            ->orderBy('date', 'DESC')
-            ->get();
-        
-        $data['year'] = $year;
-        $data['month'] = $month;
+        $data['debt'] = Debt::find($id);
 
-        $data['total'] = 0;
-        
-        return view('control-finance.debt.all-debts', $data);
+        return view('control-finance.debt.detail', $data);
+    }
+
+    public function postUpdateDebt(Request $request)
+    {
+        $updateDebt = new Update();
+        $response = $updateDebt->execute($request->except('_token'));
+       
+        $request->session()->flash($response['status'], $response['msg']);
+        return redirect()->back();
+    }
+
+    public function postDeleteDebt(Request $request)
+    {
+        $filters = $request->session()->get('filters');
+        $request->session()->forget('filters');
+
+        $deleteDebt = new Delete();
+        $response = $deleteDebt->execute($request->id);
+       
+        $request->session()->flash($response['status'], $response['msg']);
+        return redirect()->action(
+            [DebtController::class, 'getAllDebts'], $filters
+        );
     }
 }

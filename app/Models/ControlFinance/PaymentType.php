@@ -9,6 +9,15 @@ class PaymentType extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'description',
+        'processing_day',
+        'payment_day',
+        'installment_enable',
+        'style',
+        'status'
+    ];
+
     public function debts()
     {
         return $this->hasMany(Debt::class);

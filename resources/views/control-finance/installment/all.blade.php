@@ -63,7 +63,7 @@
                         <h5 class="card-title">Parcelas do mês:<strong class="ml-2">{{ $yearMonthRef }}</strong></h5>
                     </div>
                     <div class="card-body">
-                        <dv class="row">
+                        <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
                                 <p class="text-right">
                                     <button class="btn bg-olive" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -71,10 +71,9 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse show" id="collapseExample">
+                                <div class="collapse" id="collapseExample">
                                     <div class="card card-body">
-                                        <form action="{{ route('installmentAllMonth_post') }}" method="POST">
-                                            @csrf
+                                        <form action="{{ route('installmentAllFilters_post') }}" method="GET">
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                     
@@ -153,10 +152,7 @@
                                 </div>
                             </div>
 
-                        </dv>
-                     
-
-
+                        </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
                                 <table class="table table-sm table-borderless{{-- table-bordered --}}">
@@ -181,11 +177,11 @@
                                         @if ($installment->debt->prorated_debt == 1)                                
                                             <tr>
                                                 <td colspan='2' class="font-italic text-left font-12">{{ $installment->shopper->name }}</td>
-                                                <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i> Compra rateada</td>
+                                                <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
                                             </tr> 
                                         @else
                                             <tr>
-                                                <td colspan="23" class="font-italic text-left font-12">{{ $installment->shopper->name }}</td>
+                                                <td colspan="3" class="font-italic text-left font-12">{{ $installment->shopper->name }}</td>
                                             </tr> 
                                         @endif  
                                         <tr>

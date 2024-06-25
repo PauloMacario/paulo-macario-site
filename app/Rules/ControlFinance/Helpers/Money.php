@@ -1,10 +1,8 @@
 <?php
 
-namespace Rules\ControlFinance;
+namespace Rules\ControlFinance\Helpers;
 
-use Illuminate\Support\Carbon;
-
-class Helper
+class Money
 {
     public static function convertValue($value)
     {
@@ -21,11 +19,5 @@ class Helper
         }
 
         return $value;        
-    }
-
-    public static function convertDate($date)
-    {
-        return Carbon::createFromFormat("d/m/Y", $date)
-            ->toDateString();
     }
 }

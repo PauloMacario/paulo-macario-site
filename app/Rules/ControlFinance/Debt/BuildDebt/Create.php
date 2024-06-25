@@ -1,11 +1,9 @@
 <?php
 
-namespace Rules\ControlFinance\Debt;
+namespace Rules\ControlFinance\Debt\BuildDebt;
 
 use App\Models\ControlFinance\Debt;
 use App\Models\ControlFinance\Installment;
-use App\Models\ControlFinance\Partition;
-use Illuminate\Support\Arr;
 
 class Create
 {

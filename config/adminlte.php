@@ -66,7 +66,7 @@ return [
 
     'logo' => '<b>Control</b>FINANCE',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img' => 'vendor/adminlte/dist/img/controFinance.jpg',
+    'logo_img' => 'vendor/adminlte/dist/img/controFinance_2.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -318,30 +318,29 @@ return [
             'can' => 'manage-blog',
         ], */
         [
-            'text' => 'Home',
+            'text' => 'ÍNICIO',
             'url' => 'home',
-            'icon' => 'fas fa-home',
+            'icon' => 'fas fa-home mr-2',
         ],
         [
-            'text' => 'Dívidas',
-            'icon' => 'fas fa-comment-dollar',
-            'submenu' => [
-                [
-                    'text' => 'Nova dívida',
-                    'url' => 'divida',
-                    'icon' => 'fas fa-plus-circle',
-                ],               
-            ],
-        ],
+            'text' => 'NOVA DÍVIDA',
+            'url' => 'divida',
+            'icon' => 'fas fa-plus-circle mr-2',
+        ],      
         [
-            'text' => 'Compras do mês',
+            'text' => 'COMPRAS DO MÊS',
             'url' => 'dividas',
-            'icon' => 'fas fa-wallet',
+            'icon' => 'fas fa-wallet mr-2',
         ],
         [
-            'text' => 'Parcelas do mês',
+            'text' => 'PARCELAS DO MÊS',
             'url' => 'parcelas',
-            'icon' => 'fas fa-credit-card',
+            'icon' => 'fas fa-credit-card mr-2',
+        ],
+        [
+            'text' => 'CONFIGURAÇÕES',
+            'url' => 'config',
+            'icon' => 'fas fa-sliders-h mr-2',
         ],
         /*
         ['header' => 'account_settings'],

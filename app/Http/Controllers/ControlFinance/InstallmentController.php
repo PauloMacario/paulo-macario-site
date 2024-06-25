@@ -10,31 +10,21 @@ use App\Models\ControlFinance\Shopper;
 use App\Models\ControlFinance\Installment;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use Rules\ControlFinance\Installment\UpdateInstallment;
+use Rules\ControlFinance\Installment\Update;
+use Rules\ControlFinance\Installment\Delete;
 
 
 class InstallmentController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function getAllInstallments(Request $request)
     {
+        $year = Carbon::now()->format("Y");
+        $month = Carbon::now()->format("m");
+        
         $data = [];
         $data['categories'] = Category::all();
         $data['paymentTypes'] = PaymentType::all();
         $data['shoppers'] = Shopper::all();
-
-        $year = Carbon::now()->format("Y");
-        $month = Carbon::now()->format("m");
-
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
 
         if ($request['month']) {
@@ -56,39 +46,52 @@ class InstallmentController extends Controller
                 $query->where('payment_type_id', $payTypeId);
             })->get();
         }
- 
+        
+        $request->session()
+            ->put('filters', $request->all());
+
         $data['year'] = $year;
         $data['month'] = $month;
         $data['shopperId'] = $shopId ?? 0;
         $data['payTypeId'] = $payTypeId ?? 0;
-
         $data['installments'] = $installments->get();
-
         $data['total'] = 0;
         
-        return view('control-finance.installment.all-installments', $data);
+        return view('control-finance.installment.all', $data);
     }
 
-    public function getDetailInstallment($id)
+    public function getDetailInstallment(Request $request, $id)
     {
         $data = [];
 
         $data['categories'] = Category::all();
         $data['shoppers'] = Shopper::all();
-
         $data['installment'] = Installment::find($id);
 
-        return view('control-finance.installment.detail-installments', $data);
+        return view('control-finance.installment.detail', $data);
     }
 
     public function postUpdateInstallment(Request $request)
     {
-        $updateIsntallment = new UpdateInstallment();
+        $updateIsntallment = new Update();
         $response = $updateIsntallment->execute($request->except('_token'));
        
         $request->session()->flash($response['status'], $response['msg']);
-
         return redirect()->back();
 
+    }
+
+    public function postDeleteInstallment(Request $request)
+    {
+        $filters = $request->session()->get('filters');
+        $request->session()->forget('filters');
+        
+        $deleteInstallment = new Delete();
+        $response = $deleteInstallment->execute($request->id);
+       
+        $request->session()->flash($response['status'], $response['msg']);
+        return redirect()->action(
+            [InstallmentController::class, 'getAllInstallments'], $filters
+        );
     }
 }

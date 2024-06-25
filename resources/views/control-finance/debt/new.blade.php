@@ -3,19 +3,7 @@
 @section('title', 'Divida')
 
 @section('content_header')
-{{-- <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h5>Dívidas</h5>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item active">Dívida</li>
-            </ol>
-        </div>
-    </div>
-</div> --}}
+
 @stop
 
 @section('content')
@@ -37,14 +25,9 @@
                                         <select class="form-control" name="debt[category_id]" id="categoryId" required>
                                             <option value="">Selecione...</option>
                                             @foreach ($categories as $category)
-                                                <option 
-                                                    value="{{ $category->id }}"
-                                                    @isset($category->style->color)
-                                                        style="color:{{ $category->style->color }}"
-                                                    @endisset
-                                                >
-                                                {{ $category->description }}
-                                                </option>
+                                                @if ($category->status == 'E')
+                                                    <option value="{{ $category->id }}">{{ $category->description }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -69,9 +52,11 @@
                                         <label for="id">Forma de pagamento</label>
                                         <select class="form-control" name="debt[payment_type_id]" id="paymentTypeId" autocomplete="off" required>
                                             <option value="" data-installment-enable="0" selected>Selecione...</option>                             
-                                            @foreach ($paymentTypes as $paymentType)                                  
-                                                <option value="{{ $paymentType->id }}" data-installment-enable="{{ $paymentType->installment_enable }}">{{ $paymentType->description }}</option>
-                                            @endforeach
+                                            @foreach ($paymentTypes as $paymentType)  
+                                                @if ($paymentType->status == 'E')
+                                                    <option value="{{ $paymentType->id }}" data-installment-enable="{{ $paymentType->installment_enable }}">{{ $paymentType->description }}</option>
+                                                @endif
+                                            @endforeach                                                
                                         </select>
                                     </div>
                                 </div>
@@ -89,24 +74,11 @@
                                     <div class="form-group">
                                         <label for="id">Compra rateada</label>
                                         <select class="form-control" id="compra-rateada" autocomplete="off">
-                                            <option value="" selected>Selecione...</option> 
-                                            <option value="N">Não</option>                                                                             
+                                            <option value="">Não</option>                                                                             
                                             <option value="Y">Sim</option>
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        <label for="id">Data</label>
-                                        <input type="date" class="form-control"  name="debt[date]" id="date" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row" id="row-rateio" style="display:none;">
-                                <div class="col-xs-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
+                                    <div class="form-group" id="row-rateio" style="display:none;">
                                         <label for="id">Rateada por:</label>
                                         @foreach ($shoppers as $shopper)
                                             <div class="custom-control custom-checkbox">
@@ -114,6 +86,13 @@
                                                 <label for="check-rateio-{{ $shopper->id }}" class="custom-control-label"><h5>{{ $shopper->name }}</h5></label>
                                             </div>                  
                                         @endforeach
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="id">Data</label>
+                                        <input type="date" class="form-control"  name="debt[date]" id="date" required>
                                     </div>
                                 </div>
                             </div>
