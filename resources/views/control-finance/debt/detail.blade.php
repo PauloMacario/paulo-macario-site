@@ -59,7 +59,7 @@
                                                 class="form-control fields-disabled" 
                                                 name="total_value" 
                                                 id="value" 
-                                                value={{ formatMoneyBR($debt->total_value) }}
+                                                value="{{ formatMoneyBR($debt->total_value) }}"
                                                 disabled
                                             >
                                         </div>
