@@ -24,6 +24,17 @@
                                     <div class="col-xs-6 col-md-6 col-lg-6">
 
                                         <div class="form-group">
+                                            <label for="id">Ordem exibição</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="order" 
+                                                id="order" 
+                                                value={{ $category->order }}
+                                            >                          
+                                        </div>
+
+                                        <div class="form-group">
                                             <label for="id">Descrição</label>
                                             <input 
                                                 type="text" 

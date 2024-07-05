@@ -23,6 +23,11 @@
                                     <div class="col-xs-6 col-md-6 col-lg-6">
 
                                         <div class="form-group">
+                                            <label for="id">Ordem exibição</label>
+                                            <input type="number" class="form-control"  name="order" id="order" min="0" max="999" required>
+                                        </div>                 
+
+                                        <div class="form-group">
                                             <label for="id">Descrição</label>
                                             <input 
                                                 type="text" 
@@ -32,7 +37,7 @@
                                                 placeholder="Saúde, Carro, Alimentação, etc..."
                                                 required
                                             >                          
-                                        </div>
+                                        </div>                   
 
                                         <div class="form-group">
                                             <label for="id">Style css</label>

@@ -48,8 +48,8 @@ class DebtController extends Controller
     public function newDebt()
     {
         $data = [];
-        $data['categories'] = Category::all();
-        $data['paymentTypes'] = PaymentType::all();
+        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['shoppers'] = Shopper::all();
         
         return view('control-finance.debt.new', $data);
@@ -80,10 +80,9 @@ class DebtController extends Controller
     {
         $data = [];
 
-        $data['categories'] = Category::all();
-        $data['shoppers'] = Shopper::all();
-        $data['paymentTypes'] = PaymentType::all();
-
+        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['shoppers'] = Shopper::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['debt'] = Debt::find($id);
 
         return view('control-finance.debt.detail', $data);

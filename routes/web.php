@@ -39,7 +39,7 @@ Route::middleware('auth')
         
         Route::get('/dividas', [DebtController::class, 'getAllDebts'])->name('debtAll_get');
         
-        Route::get('/dividas/mes', [DebtController::class, 'getAllDebts'])->name('debtAllMonth_post');
+        Route::post('/dividas/mes', [DebtController::class, 'getAllDebts'])->name('debtAllMonth_post');
                 
         Route::post('/divida/parcelada', [DebtController::class, 'postInstallmentDebt'])->name('installmentAllMonth_post');
 

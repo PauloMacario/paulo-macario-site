@@ -65,41 +65,38 @@
         
                                             <table class="table table-sm table-striped table-responsive">
                                                 <thead>
-                                                    <tr>
-                                                        <th class="font-18 text-center" width="10%">Número</th>
-                                                        <th class="font-18 text-center" width="70%">Nome</th>
-                                                        <th class="font-18 text-center" width="70%">Status</th>
-                                                        <th class="font-18 text-center" width="20%">Editar</th>
+                                                        <th class="font-14 text-center" width="60%">Nome</th>
+                                                        <th class="font-14 text-center" width="10%">Ordem</td>
+                                                        <th class="font-14 text-center" width="15%">Status</th>
+                                                        <th class="font-14 text-center" width="15%">Editar</th>
                                                     </tr>
                                                 </thead>
                     
                                                 <tbody>
                                                     @foreach ( $categories as $category )
                                                         <tr>
-                                                            <td class="font-18 text-center">{{ $category->id }}</td>
-                                                            <td class="font-18 text-center">
+                                                            <td class="font-14 text-center">
                                                                 <a href="">
                                                                     {{ $category->description }}
                                                                 </a>
                                                             </td>
-                                                            <td class="font-18 text-center">
+                                                            <td class="font-14 text-center">{{ $category->order }}</td>
+                                                            <td class="font-14 text-center">
                                                                 @if($category->status == 'E')
                                                                     <i class="fas fa-check-circle" style="color:#3d9970;" title="Ativado"></i>
                                                                 @else
                                                                     <i class="fas fa-ban" style="color:#bb1b1b;" title="Desativado"></i>
                                                                 @endif
                                                             </td>
-                                                            <td class="font-20 text-center">
+                                                            <td class="font-18 text-center">
                                                                 <a href="{{ route('detailCategory_get', ['id' => $category->id]) }}">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
-                                                </tbody>
-                    
-                                            </table>
-        
+                                                </tbody>                    
+                                            </table>        
                                         </div>
                                     </div>
                                 </div>
@@ -118,30 +115,30 @@
                                             <table class="table table-sm table-striped table-responsive">
                                                 <thead>
                                                     <tr>
-                                                        <th class="font-18 text-center" width="10%">Número</th>
-                                                        <th class="font-18 text-center" width="70%">Nome</th>
-                                                        <th class="font-18 text-center" width="70%">Status</th>
-                                                        <th class="font-18 text-center" width="20%">Editar</th>
+                                                        <th class="font-14 text-center" width="60%">Nome</th>
+                                                        <th class="font-14 text-center" width="10%">Ordem</th>
+                                                        <th class="font-14 text-center" width="15%">Status</th>
+                                                        <th class="font-14 text-center" width="15%">Editar</th>
                                                     </tr>
                                                 </thead>
                     
                                                 <tbody>
                                                     @foreach ( $paymentTypes as $pay )
                                                         <tr>
-                                                            <td class="font-18 text-center">{{ $pay->id }}</td>
-                                                            <td class="font-18 text-center">
+                                                            <td class="font-14 text-center">
                                                                 <a href="">
                                                                     {{ $pay->description }}
                                                                 </a>
                                                             </td>
-                                                            <td class="font-18 text-center">
+                                                            <td class="font-14 text-center">{{ $pay->order }}</td>
+                                                            <td class="font-14 text-center">
                                                                 @if($pay->status == 'E')
                                                                     <i class="fas fa-check-circle" style="color:#3d9970;" title="Ativado"></i>
                                                                 @else
                                                                     <i class="fas fa-ban" style="color:#bb1b1b;" title="Desativado"></i>
                                                                 @endif
                                                             </td>
-                                                            <td class="font-20 text-center">
+                                                            <td class="font-18 text-center">
                                                                 <a href="{{ route('detailPaymentType_get', ['id' => $pay->id]) }}">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>

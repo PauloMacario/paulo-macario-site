@@ -169,7 +169,10 @@
                                             <td colspan="2" class="font-weight-bold text-left font-14">
                                                 <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}">
                                                     {{ $installment->debt->locality }}
-                                                    <span class="ml-2"> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+
+                                                    @if ($installment->debt->number_installments > 1)
+                                                        <span class="ml-2"> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                                    @endif
                                                 </a>
                                             </td>
                                             <td class="font-weight-bold text-center font-14">R$ {{ formatMoneyBR($installment->value) }}</td>

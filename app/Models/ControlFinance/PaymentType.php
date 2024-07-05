@@ -11,6 +11,7 @@ class PaymentType extends Model
 
     protected $fillable = [
         'description',
+        'order',
         'processing_day',
         'payment_day',
         'installment_enable',
