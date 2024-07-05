@@ -30,7 +30,7 @@
                                                 class="form-control" 
                                                 name="order" 
                                                 id="order" 
-                                                value={{ $category->order }}
+                                                value={{ $paymentType->order }}
                                             >                          
                                         </div>
 
