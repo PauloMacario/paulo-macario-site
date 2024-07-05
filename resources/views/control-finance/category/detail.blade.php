@@ -41,7 +41,7 @@
                                                 class="form-control" 
                                                 name="description" 
                                                 id="description" 
-                                                value={{ $category->description }}
+                                                value="{{ $category->description }}"
                                             >                          
                                         </div>
 
