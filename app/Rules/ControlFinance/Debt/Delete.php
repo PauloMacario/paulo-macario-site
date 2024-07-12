@@ -15,7 +15,7 @@ class Delete
             return ["status" => "info" , "msg" => "Ocorreu algum erro.", "statusCode" => 400];
         }
 
-        if ($debt->installments->cont() > 0) {
+        if ($debt->installments->count() > 0) {
             foreach ($debt->installments as $installment) {
                 $installment->delete();
             }

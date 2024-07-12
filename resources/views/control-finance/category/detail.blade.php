@@ -3,7 +3,7 @@
 @section('title', 'TITLEXXXXX')
 
 @section('content_header')
-@include('components.alerts')
+@include('control-finance.components.alerts')
 
 @stop
 
@@ -50,7 +50,7 @@
                                             <textarea
                                                 class="form-control" 
                                                 name="style" 
-                                                >{{ $category->style }}</textarea>
+                                                >{{ json_encode($category->style) }}</textarea>
                                         </div>
 
                                         <div class="form-group">

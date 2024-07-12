@@ -1,23 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ControlFinance\DebtController;
-use App\Http\Controllers\ControlFinance\InstallmentController;
-use App\Http\Controllers\ControlFinance\SettingsController;
-use App\Http\Controllers\ControlFinance\CategoryController;
-use App\Http\Controllers\ControlFinance\PaymentTypeController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\ControlFinance\HomeController;
 
 Route::get('/', function () {
     return view('index');
@@ -25,15 +9,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 Route::middleware('auth')
     ->group(function() {
 
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    }
+);
+
+include_once 'controlfinance/category.php';
+include_once 'controlfinance/debt.php';
+include_once 'controlfinance/installment.php';
+include_once 'controlfinance/paymenttype.php';
+include_once 'controlfinance/settings.php';
+include_once 'controlfinance/shopper.php';
+
+
+
+
+
+
+
+
+/* 
+Route::middleware('auth')
+    ->group(function() {
+
+        Route::get('/home', [HomeController::class, 'index'])->name('home'); */
         
         /* ###########   Rotas de comras ############*/ 
             
-        Route::get('/divida', [DebtController::class, 'newDebt'])->name('debt_get');
+       /*  Route::get('/divida', [DebtController::class, 'newDebt'])->name('debt_get');
 
         Route::post('/divida', [DebtController::class, 'postDebt'])->name('debt_post');
         
@@ -48,11 +54,11 @@ Route::middleware('auth')
         Route::post('divida/editar', [DebtController::class, 'postUpdateDebt'])->name('updateDebt_post'); 
         
         Route::post('divida/delete', [DebtController::class, 'postDeleteDebt'])->name('deleteDebt_post'); 
-    
+     */
         
         /* ###########   Rotas de parcelas ############*/
 
-        Route::get('/parcelas', [InstallmentController::class, 'getAllInstallments'])->name('installmentAll_get');
+       /*  Route::get('/parcelas', [InstallmentController::class, 'getAllInstallments'])->name('installmentAll_get');
         
         Route::get('/parcelas/filtros', [InstallmentController::class, 'getAllInstallments'])->name('installmentAllFilters_post');
         
@@ -61,33 +67,33 @@ Route::middleware('auth')
         Route::post('parcela/editar', [InstallmentController::class, 'postUpdateInstallment'])->name('updateInstallment_post'); 
         
         Route::post('parcela/delete', [InstallmentController::class, 'postDeleteInstallment'])->name('deleteInstallment_post'); 
-    
+     */
         /* ###########   Rotas de configurações ############*/
 
-        Route::get('/config', [SettingsController::class, 'getAllSettings'])->name('settingAll_get');
+       // Route::get('/config', [SettingsController::class, 'getAllSettings'])->name('settingAll_get');
     
         /* ###########   Rotas de categorias ############*/
 
-        Route::get('/categoria', [CategoryController::class, 'newCategory'])->name('category_get');
+       /*  Route::get('/categoria', [CategoryController::class, 'newCategory'])->name('category_get');
 
         Route::post('/categoria', [CategoryController::class, 'postCategory'])->name('category_post');
 
         Route::get('/categoria/{id}/detalhes', [CategoryController::class, 'getDetailCategory'])->name('detailCategory_get');
 
-        Route::post('categoria/editar', [CategoryController::class, 'postUpdateCategory'])->name('updateCategory_post'); 
+        Route::post('categoria/editar', [CategoryController::class, 'postUpdateCategory'])->name('updateCategory_post');  */
 
         /* ###########   Rotas de formas pagamentos ############*/
 
-        Route::get('/pagamento', [PaymentTypeController::class, 'newPaymentType'])->name('paymentType_get');
+       /*  Route::get('/pagamento', [PaymentTypeController::class, 'newPaymentType'])->name('paymentType_get');
 
         Route::post('/pagamento', [PaymentTypeController::class, 'postPaymentType'])->name('paymentType_post');
 
         Route::get('/pagamento/{id}/detalhes', [PaymentTypeController::class, 'getDetailPaymentType'])->name('detailPaymentType_get');
 
         Route::post('pagamento/editar', [PaymentTypeController::class, 'postUpdatePaymentType'])->name('updatePaymentType_post'); 
- 
-    }
-);
+  */
+/*     }
+); */
 
     
 

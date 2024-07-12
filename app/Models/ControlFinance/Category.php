@@ -17,6 +17,14 @@ class Category extends Model
         'status'
     ];
 
+    protected function style(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => json_decode($value),
+            
+        );
+    }
+
     public function debts()
     {
         return $this->hasMany(Debt::class);

@@ -3,7 +3,7 @@
 @section('title', 'TITLEXXXXX')
 
 @section('content_header')
-@include('components.alerts')
+@include('control-finance.components.alerts')
 
 @stop
 
@@ -78,7 +78,13 @@
                                                 disabled
                                                 >                                      
                                                 @foreach ($categories as $category)                                  
-                                                    <option value="{{ $category->id }}" @if($category->id == $debt->category_id) selected @endif>{{ $category->description }}</option>
+                                                    <option value="{{ $category->id }}" 
+                                                        @if($category->id == $debt->category_id) selected @endif
+                                                        @if(isset($category->style->color))
+                                                            style="color:{{ $category->style->color }};"    
+                                                        @endif
+                                                    >
+                                                    {{ $category->description }}</option>
                                                 @endforeach
                                             </select>                                        
                                         </div>

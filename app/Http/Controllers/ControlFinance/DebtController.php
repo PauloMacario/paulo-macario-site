@@ -14,7 +14,7 @@ use Rules\ControlFinance\Debt\Update;
 use Rules\ControlFinance\Debt\Delete;
 class DebtController extends Controller
 {
-    public function getAllDebts(Request $request)
+   /*  public function getAllDebts(Request $request)
     {
         $data = [];
     
@@ -43,9 +43,9 @@ class DebtController extends Controller
         $data['total'] = 0;
         
         return view('control-finance.debt.all', $data);
-    }
+    } */
     
-    public function newDebt()
+    /* public function newDebt()
     {
         $data = [];
         $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
@@ -53,9 +53,9 @@ class DebtController extends Controller
         $data['shoppers'] = Shopper::all();
         
         return view('control-finance.debt.new', $data);
-    }
+    } */
     
-    public function postDebt(Request $request)
+   /*  public function postDebt(Request $request)
     {        
         $dataDebt = $request->except('_token');
              
@@ -68,15 +68,15 @@ class DebtController extends Controller
 
         $request->session()->flash('error', 'Occoreu um erro!');
         return redirect()->route('debt_get');
-    }
+    } */
 
-    public function addInstallments(Request $request)
+  /*   public function addInstallments(Request $request)
     {
         //to do
-    }
+    } */
 
 
-    public function getDetailDebt($id)
+   /*  public function getDetailDebt($id)
     {
         $data = [];
 
@@ -86,18 +86,18 @@ class DebtController extends Controller
         $data['debt'] = Debt::find($id);
 
         return view('control-finance.debt.detail', $data);
-    }
+    } */
 
-    public function postUpdateDebt(Request $request)
+   /*  public function postUpdateDebt(Request $request)
     {
         $updateDebt = new Update();
         $response = $updateDebt->execute($request->except('_token'));
        
         $request->session()->flash($response['status'], $response['msg']);
         return redirect()->back();
-    }
+    } */
 
-    public function postDeleteDebt(Request $request)
+   /*  public function postDeleteDebt(Request $request)
     {
         $filters = $request->session()->get('filters');
         $request->session()->forget('filters');
@@ -109,5 +109,5 @@ class DebtController extends Controller
         return redirect()->action(
             [DebtController::class, 'getAllDebts'], $filters
         );
-    }
+    } */
 }

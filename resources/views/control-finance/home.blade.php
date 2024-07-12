@@ -9,7 +9,7 @@
             <h1>Acesso rápido</h1>
         </div>
         <div class="col-sm-6">
-            @include('components.btn-ligth')
+            
         </div>
     </div>
 </div>
@@ -77,4 +77,59 @@
             </div>
         </div>
     </div>
+
+    @if($grafico)
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas 
+                            id="donutChart" 
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 392px;" 
+                            width="490" 
+                            height="312" 
+                            class="chartjs-render-monitor">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif   {{--  {{ dd( json_encode($grafico['labels']) ) }} --}}
 @stop
+
+
+@push('js')
+    <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
+
+    <script>
+        $(function () {
+            
+          //-------------
+          //- DONUT CHART -
+          //-------------
+          // Get context with jQuery - using jQuery's .get() method.
+          var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+          var donutData        = {
+            labels: {!! $labels !!},
+            datasets: [
+              {
+                data: {!! $data !!},
+                backgroundColor : {!! $backgroundColor !!},
+              }
+            ]
+          }
+          var donutOptions     = {
+            maintainAspectRatio : false,
+            responsive : true,
+          }
+          //Create pie or douhnut chart
+          // You can switch between pie and douhnut using the method below.
+          new Chart(donutChartCanvas, {
+            type: 'doughnut',
+            data: donutData,
+            options: donutOptions
+          })
+        })
+      </script>
+   
+@endpush

@@ -16,7 +16,7 @@ use Rules\ControlFinance\Installment\Delete;
 
 class InstallmentController extends Controller
 {
-    public function getAllInstallments(Request $request)
+   /*  public function getAllInstallments(Request $request)
     {
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");
@@ -58,9 +58,9 @@ class InstallmentController extends Controller
         $data['total'] = 0;
         
         return view('control-finance.installment.all', $data);
-    }
+    } */
 
-    public function getDetailInstallment(Request $request, $id)
+   /*  public function getDetailInstallment(Request $request, $id)
     {
         $data = [];
 
@@ -69,9 +69,9 @@ class InstallmentController extends Controller
         $data['installment'] = Installment::find($id);
 
         return view('control-finance.installment.detail', $data);
-    }
+    } */
 
-    public function postUpdateInstallment(Request $request)
+   /*  public function postUpdateInstallment(Request $request)
     {
         $updateIsntallment = new Update();
         $response = $updateIsntallment->execute($request->except('_token'));
@@ -79,9 +79,9 @@ class InstallmentController extends Controller
         $request->session()->flash($response['status'], $response['msg']);
         return redirect()->back();
 
-    }
+    } */
 
-    public function postDeleteInstallment(Request $request)
+   /*  public function postDeleteInstallment(Request $request)
     {
         $filters = $request->session()->get('filters');
         $request->session()->forget('filters');
@@ -93,5 +93,5 @@ class InstallmentController extends Controller
         return redirect()->action(
             [InstallmentController::class, 'getAllInstallments'], $filters
         );
-    }
+    } */
 }

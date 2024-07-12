@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class PaymentTypeController extends Controller
 {
-    public function newPaymentType()
+    /* public function newPaymentType()
     {
         return view('control-finance.payment-type.new');
     }
@@ -40,5 +40,5 @@ class PaymentTypeController extends Controller
         $request->session()->flash($response['status'], $response['msg']);
 
         return redirect()->back();
-    }
+    } */
 }

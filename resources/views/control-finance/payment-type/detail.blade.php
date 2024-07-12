@@ -3,7 +3,7 @@
 @section('title', 'TITLEXXXXX')
 
 @section('content_header')
-@include('components.alerts')
+@include('control-finance.components.alerts')
 
 @stop
 

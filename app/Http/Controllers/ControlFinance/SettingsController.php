@@ -11,7 +11,6 @@ class SettingsController extends Controller
 {
     public function getAllSettings()
     {
-        $data = [];
         $data['categories'] = Category::all();
         $data['paymentTypes'] = PaymentType::all();
 

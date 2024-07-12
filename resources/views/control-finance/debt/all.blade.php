@@ -39,7 +39,7 @@
 @section('title', 'Dívidas')
 
 @section('content_header')
-    @include('components.alerts')
+    @include('control-finance.components.alerts')
 @stop
 
 @section('content')
@@ -59,10 +59,9 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse show" id="collapseExample">
+                                <div class="collapse" id="collapseExample">
                                     <div class="card card-body">
-                                        <form action="{{ route('debtAllMonth_post') }}" method="POST">
-                                            @csrf
+                                        <form action="{{ route('debtAllMonth_post') }}" method="GET">
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-2">
                                                     <div class="form-group">                                                                      
@@ -129,7 +128,14 @@
                                         $total += $debt->total_value
                                     @endphp
                                     <tr>
-                                        <td colspan="2" class="font-italic text-left font-12" width="70%">{{ $debt->paymentType->description }}</td>
+                                        <td class="font-italic text-left font-12" width="35%">{{ $debt->paymentType->description }}</td>
+                                        <td class="font-italic text-center font-12" width="35%" 
+                                            @if(isset($debt->category->style->color))
+                                                style="color:{{ $debt->category->style->color }};"    
+                                            @endif
+                                        >
+                                            {{ $debt->category->description }}
+                                        </td>
                                         <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
                                     </tr>
                                     <tr>

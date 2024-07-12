@@ -38,20 +38,7 @@
 @section('title', 'Parcelas')
 
 @section('content_header')
-@include('components.alerts')
-{{-- <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h5>TITLEXXXXX</h5>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Home</a></li>
-                <li class="breadcrumb-item active">TITLEXXXXX</li>
-            </ol>
-        </div>
-    </div>
-</div> --}}
+    @include('control-finance.components.alerts')
 @stop
 
 @section('content')
@@ -162,7 +149,14 @@
                                             $total += $installment->value
                                         @endphp
                                         <tr>
-                                            <td colspan="2" class="font-italic text-left font-12" width="70%">{{ $installment->debt->paymentType->description }}</td>
+                                            <td colspan="2" class="font-italic text-left font-12" width="35%">{{ $installment->debt->paymentType->description }}</td>
+                                            <td colspan="2" class="font-italic text-center font-12" width="35%"
+                                                @if(isset($installment->debt->category->style->color))
+                                                    style="color:{{ $installment->debt->category->style->color }};"    
+                                                @endif
+                                            >
+                                                {{ $installment->debt->category->description }}
+                                            </td>
                                             <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($installment->due_date) }}</td>
                                         </tr>
                                         <tr>

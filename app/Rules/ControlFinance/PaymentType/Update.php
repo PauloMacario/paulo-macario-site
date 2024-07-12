@@ -8,13 +8,13 @@ class Update
 {
     public function execute($request)
     {
-        $PaymentType = PaymentType::find($request->id);
+        $paymentType = PaymentType::find($request->id);
 
-        if (!$PaymentType) {
+        if (!$paymentType) {
             return ["status" => "info" , "msg" => "Ocorreu algum erro.", "statusCode" => 400];
         }
 
-        $PaymentType->update(
+        $paymentType->update(
             $request->except(['id','_token'])
         );
 

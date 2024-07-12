@@ -9,6 +9,13 @@ class Shopper extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'order',
+        'style',
+        'status'
+    ];
+
     public function debts()
     {
         return $this->hasMany(Debt::class);
