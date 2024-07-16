@@ -149,8 +149,8 @@
                                             $total += $installment->value
                                         @endphp
                                         <tr>
-                                            <td colspan="2" class="font-italic text-left font-12" width="35%">{{ $installment->debt->paymentType->description }}</td>
-                                            <td colspan="2" class="font-italic text-center font-12" width="35%"
+                                            <td class="font-italic text-left font-12" width="35%">{{ $installment->debt->paymentType->description }}</td>
+                                            <td class="font-italic text-center font-12" width="35%"
                                                 @if(isset($installment->debt->category->style->color))
                                                     style="color:{{ $installment->debt->category->style->color }};"    
                                                 @endif
