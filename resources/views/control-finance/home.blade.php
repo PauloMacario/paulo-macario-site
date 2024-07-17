@@ -132,7 +132,7 @@
         $(document).ready(function () {
 
           
-            console.log('window.location.protocol.indexOf('https')' + window.location.protocol.indexOf('https'))
+            console.log(window.location.protocol.indexOf('https'))
 
             if (window.location.protocol.indexOf('https') < 0){
                 
