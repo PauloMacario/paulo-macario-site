@@ -134,7 +134,7 @@
           
             console.log(window.location.protocol.indexOf('https'))
 
-            if (window.location.protocol.indexOf('https') < 0){
+            if (window.location.protocol.indexOf('https') <= 0){
                 
                 var el = document.createElement('meta')
                 el.setAttribute('http-equiv', 'Content-Security-Policy')
