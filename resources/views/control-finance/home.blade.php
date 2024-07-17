@@ -132,7 +132,7 @@
         $(document).ready(function () {
          
             $.ajax({
-                url : "{{ route("grafico_categorias_get") }}",
+                url : "{{ asset('/grafico/categorias') }}",
                 type : 'get',
             beforeSend : function(){
                 /* $("#resultado").html("ENVIANDO..."); */
@@ -148,7 +148,7 @@
             });
 
             $.ajax({
-                url : "{{ route("grafico_categorias_debts_sum_values_get") }}",
+                url : "{{ asset('/grafico/categorias-divida-valor') }}",
                 type : 'get',
             beforeSend : function(){
                 /* $("#resultado").html("ENVIANDO..."); */
