@@ -30,7 +30,7 @@ class ShowAllDebtController extends Controller
         ->get();
         
         $request->session()
-        ->put('filters', $request->all());
+            ->put('filters', $request->all());
         
         $data['year'] = $year;
         $data['month'] = $month;

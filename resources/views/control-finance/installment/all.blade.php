@@ -32,6 +32,10 @@
         .font-22 {
             font-size: 22px;
         }
+        .value-paid {
+            color: #b4b4b4;
+            text-decoration: line-through;
+        }
     </style>
 @endpush
 
@@ -117,6 +121,21 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                    <div class="form-group">
+                                                        <select 
+                                                            class="form-control" 
+                                                            name="status" 
+                                                            id="status" 
+                                                        >
+                                                            <option value="T" selected>Todos status</option>           
+                                                            <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
+                                                            <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
+                                                            <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
+                                                            <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
+                                                    </select>                
+                                                    </div>
+                                                </div>
                                                 <div class="col-xs-12 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <button class="btn bg-olive btn-block">
@@ -169,7 +188,12 @@
                                                     @endif
                                                 </a>
                                             </td>
-                                            <td class="font-weight-bold text-center font-14">R$ {{ formatMoneyBR($installment->value) }}</td>
+                                            <td class="font-weight-bold text-center font-14 @if($installment->status == 'PM') value-paid @endif">
+                                                R$ {{ formatMoneyBR($installment->value) }}
+                                                @if($installment->status == 'PM')                                              
+                                                    <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
+                                                @endif                                            
+                                            </td>
                                         </tr>
                                         @if ($installment->debt->prorated_debt == 1)                                
                                             <tr>

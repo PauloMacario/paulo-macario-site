@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'TITLEXXXXX')
+@section('title', 'Forma Pagamento')
 
 @section('content_header')
 @include('control-finance.components.alerts')

@@ -20,7 +20,8 @@ class Update
                 "due_date" => $data['due_date'],
                 "number_installment" => $data['number_installment'],
                 "shopper_id" => $data['shopper_id'],
-                "value" => Money::convertValue($data['value'])
+                "value" => Money::convertValue($data['value']),
+                "status" =>  $data['status']
             ]
         );
             

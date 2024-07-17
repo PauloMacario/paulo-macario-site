@@ -6,66 +6,86 @@ use App\Http\Controllers\Controller;
 use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\Debt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
+    {   
+
+        return view('control-finance.home');
+    }
+
+    public function graphicPerCategories()
     {
         $categories = Category::where('status', 'E')->get();
 
         $data = [];
         
-        $data['grafico'] = false;
-
-        if ($categories->count() > 0) {
-            $grafico = $this->graphData($categories);
-            $data['grafico'] = true;
-            $data['labels'] = $grafico['labels'];
-            $data['data'] = $grafico['data'];
-            $data['backgroundColor'] = $grafico['backgroundColor'];
+        foreach ($categories as $key => $category) {
+            $data['labels'][$key] = $category->description;
+            $data['data'][$key] = $this->getAmountDebtsByCategory($category->id);
+            $data['backgroundColor'][$key] = (isset($category->style->color)) ? $category->style->color : '#cdcdcd';
         }
 
-        return view('control-finance.home', $data);
+        return $data;
+    }
+
+    public function graphicPerCategoriesDebtsSumValues()
+    {
+        $categories = Category::where('status', 'E')->get();
+
+        $data['graficoValue'] = false;
+
+        if ($categories->count() > 0) {
+            $graficoValue = $this->graphValueData($categories);      
+            
+            return $graficoValue;
+        }
+
+        return false;
+    }
+    
+    protected function getAmountDebtsByCategory($categoryId)
+    {
+        $debts = Debt::where('category_id', $categoryId)->get();
+
+        return $debts->count();
     }
 
     protected function graphData($categories)
     {
         $data = [];
 
-        $labels = "[";
-        $data = "[";
-        $backgroundColor = "[";
-
-        foreach ($categories as $category) {
-            $labels .= "'{$category->description}',";
-            $data .= "'{$this->getAmountDebtsByCategory($category->id)}',";
-
-            if (isset($category->style->color)) {
-                $backgroundColor .= "'{$category->style->color}',";            
-            } else {
-                $backgroundColor .= "'#b5b5b5',";            
-            }              
+        foreach ($categories as $key => $category) {
+            $data['labels'][$key] = $category->description;
+            $data['data'][$key] = $this->getAmountDebtsByCategory($category->id);
+            $data['backgroundColor'][$key] = (isset($category->style->color)) ? $category->style->color : '#cdcdcd';
         }
 
-        $labels = substr($labels,0,-1);
-        $data = substr($data,0,-1);
-        $backgroundColor = substr($backgroundColor,0,-1);
-
-        $labels .= "]";
-        $data .= "]";
-        $backgroundColor .= "]";
-
-        $grafico['labels'] = $labels;
-        $grafico['data'] = $data;
-        $grafico['backgroundColor'] = $backgroundColor;
-
-        return $grafico;
+        return $data;
     }
 
-    protected function getAmountDebtsByCategory($categoryId)
+    protected function graphValueData($categories)
     {
-        $debts = Debt::where('category_id', $categoryId)->get();
+        foreach ($categories as $key => $category) {
+            
+            $data['labels'][$key] = $category->description;
 
-        return $debts->count();
+            $data['backgroundColor'][$key] = (isset($category->style->color)) ? $category->style->color : '#cdcdcd';
+        }
+
+        foreach ($categories as $key => $category) {
+
+            $debtsSum = DB::select(
+                "
+                SELECT SUM(total_value) AS TOTAL FROM control_finance.debts WHERE category_id = {$category->id}
+                "
+            );            
+
+            $data['data'][$key] = ($debtsSum[0]->TOTAL) ?? 0;
+        }
+       
+        return $data;
     }
 }

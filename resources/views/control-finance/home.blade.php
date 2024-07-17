@@ -78,23 +78,54 @@
         </div>
     </div>
 
-    @if($grafico)
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas 
-                            id="donutChart" 
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 392px;" 
-                            width="490" 
-                            height="312" 
-                            class="chartjs-render-monitor">
-                        </canvas>
-                    </div>
+    <div class="row">            
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas 
+                        id="donutChart" 
+                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 392px;" 
+                        width="490" 
+                        height="312" 
+                        class="chartjs-render-monitor">
+                    </canvas>
+                </div>
+            </div>
+        </div>      
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas 
+                        id="barChart" 
+                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 410px;" 
+                        width="512" 
+                        height="312" 
+                        class="chartjs-render-monitor">
+                    </canvas>
                 </div>
             </div>
         </div>
-    @endif   {{--  {{ dd( json_encode($grafico['labels']) ) }} --}}
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Features adn Bugs</h1>
+                    <ul class="list-group">
+                       <li class="list-group-item">Compra recorrente mensal</li>
+                       <li class="list-group-item">flag parcela paga</li>
+                       <li class="list-group-item">flag conta paga e se todas parcelas pagas paga conta</li>
+                       <li class="list-group-item">Detalhes da compra lista parcelas(add ou remove parcela)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+   {{--  {{ dd(
+        $grafico,
+        $graficoValue
+    ) }} --}}
 @stop
 
 
@@ -102,34 +133,114 @@
     <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
 
     <script>
-        $(function () {
+        $(document).ready(function () {
+         
+            $.ajax({
+                url : "{{ route("grafico_categorias_get") }}",
+                type : 'get',
+            beforeSend : function(){
+                /* $("#resultado").html("ENVIANDO..."); */
+            }
+            })
+            .done(function(resultado){
+                graphicPerCategories(resultado)
+            })
+            .fail(function(jqXHR, textStatus, msg){
+                alert('errorrrrrr');
+            });
+
+            $.ajax({
+                url : "{{ route("grafico_categorias_debts_sum_values_get") }}",
+                type : 'get',
+            beforeSend : function(){
+                /* $("#resultado").html("ENVIANDO..."); */
+            }
+            })
+            .done(function(resultado){
+                graphicPerCategoriesDebtsSumValues(resultado)
+            })
+            .fail(function(jqXHR, textStatus, msg){
+                alert('errorrrrrr');
+            });
+      
+        });
+
+        function graphicPerCategories(resultado){      
             
-          //-------------
-          //- DONUT CHART -
-          //-------------
-          // Get context with jQuery - using jQuery's .get() method.
-          var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-          var donutData        = {
-            labels: {!! $labels !!},
-            datasets: [
-              {
-                data: {!! $data !!},
-                backgroundColor : {!! $backgroundColor !!},
-              }
-            ]
-          }
-          var donutOptions     = {
-            maintainAspectRatio : false,
-            responsive : true,
-          }
-          //Create pie or douhnut chart
-          // You can switch between pie and douhnut using the method below.
-          new Chart(donutChartCanvas, {
-            type: 'doughnut',
-            data: donutData,
-            options: donutOptions
-          })
-        })
-      </script>
-   
+            var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+            var donutData = {
+                labels: resultado.labels,
+                datasets: [
+                    {
+                        data: resultado.data,
+                        backgroundColor : resultado.backgroundColor
+                    }
+                ]
+            }
+
+            var donutOptions = {
+                maintainAspectRatio : false,
+                responsive : true,
+            }
+        
+            new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+        }
+  
+
+
+        function graphicPerCategoriesDebtsSumValues(resultado){
+           console.log(resultado)
+            var areaChartData = {
+                labels  : resultado.labels,
+                datasets: [
+                    {   
+                        label: 'Por valores',         
+                        data: resultado.data,
+                        backgroundColor: resultado.backgroundColor,            
+                    }
+                ]
+            }
+    
+            var areaChartOptions = {
+                maintainAspectRatio : false,
+                responsive : true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                    gridLines : {
+                        display : false,
+                    }
+                    }],
+                    yAxes: [{
+                    gridLines : {
+                        display : false,
+                    }
+                    }]
+                }
+            }
+
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = areaChartData
+            var temp0 = areaChartData.datasets
+                
+            var barChartOptions = {
+                responsive              : true,
+                maintainAspectRatio     : false,
+                datasetFill             : true
+            }
+  
+            new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+        }
+    </script>   
 @endpush

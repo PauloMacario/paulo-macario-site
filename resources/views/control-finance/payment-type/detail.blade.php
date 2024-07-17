@@ -1,10 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'TITLEXXXXX')
+@section('title', 'Detalhes')
 
 @section('content_header')
-@include('control-finance.components.alerts')
-
+    @include('control-finance.components.alerts')
 @stop
 
 @section('content')

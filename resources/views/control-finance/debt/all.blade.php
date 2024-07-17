@@ -32,6 +32,10 @@
         .font-22 {
             font-size: 22px;
         }
+        .value-paid {
+            color: #b4b4b4;
+            text-decoration: line-through;
+        }
     </style>
 @endpush
 
@@ -138,7 +142,7 @@
                                         </td>
                                         <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
                                     </tr>
-                                    <tr>
+                                    <tr >
                                         <td colspan="2" class="font-weight-bold text-left font-14">
                                             <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
                                                 {{ $debt->locality }}
@@ -149,16 +153,21 @@
                                                 </span>
                                             </a>
                                         </td>
-                                        <td class="font-weight-bold text-center font-14">R$ {{ formatMoneyBR($debt->total_value) }}</td>
+                                        <td class="font-weight-bold text-center font-14 @if($debt->status == 'PM') value-paid @endif">
+                                            R$ {{ formatMoneyBR($debt->total_value) }}
+                                            @if($debt->status == 'PM')                                              
+                                                <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
+                                            @endif
+                                        </td>
                                     </tr>
                                     @if ($debt->prorated_debt == 1)                                
                                         <tr>
-                                            <td colspan='2' class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
+                                            <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
                                             <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
                                         </tr> 
                                     @else
                                         <tr>
-                                            <td colspan="3" class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
+                                            <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>                                           
                                         </tr> 
                                     @endif  
                                         <tr>

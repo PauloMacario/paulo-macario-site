@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'TITLEXXXXX')
+@section('title', 'Detalhes')
 
 @section('content_header')
 @include('control-finance.components.alerts')
@@ -40,7 +40,7 @@
                                 <input type="hidden" name="debt_id" value="{{ $installment->debt_id }}">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-xs-12 col-md-6 col-lg-6">
+                                        <div class="col-xs-12 col-md-4 col-lg-4">
                                             <div class="form-group">
                                                 <label for="id">Loja/local</label>
                                                 <input 
@@ -51,6 +51,22 @@
                                                     value="{{ $installment->debt->locality }}" 
                                                     disabled
                                                 >
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2 col-lg-2">
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
+                                                <select 
+                                                    class="form-control fields-disabled" 
+                                                    name="status" 
+                                                    id="status" 
+                                                    disabled
+                                                >                
+                                                    <option value="E">Habilitado</option>
+                                                    <option value="D">Desabilitado</option>
+                                                    <option value="PM">Pagamento feito</option>
+                                                    <option value="PP">Pendente pagamento</option>
+                                            </select>                
                                             </div>
                                         </div>
         

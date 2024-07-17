@@ -43,12 +43,19 @@ class ShowAllInstallmentsController extends Controller
                 $query->where('payment_type_id', $payTypeId);
             })->get();
         }
+
+        if ($status = $request['status']) {
+            if ($status != 'T') {
+                $installments->where('status', $status);
+            }
+        }
         
         $request->session()
             ->put('filters', $request->all());
 
         $data['year'] = $year;
         $data['month'] = $month;
+        $data['status'] = $request->status;
         $data['shopperId'] = $shopId ?? 0;
         $data['payTypeId'] = $payTypeId ?? 0;
         $data['installments'] = $installments->get();

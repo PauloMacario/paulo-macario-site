@@ -23,6 +23,7 @@ include_once 'controlfinance/installment.php';
 include_once 'controlfinance/paymenttype.php';
 include_once 'controlfinance/settings.php';
 include_once 'controlfinance/shopper.php';
+include_once 'controlfinance/charts.php';
 
 
 
