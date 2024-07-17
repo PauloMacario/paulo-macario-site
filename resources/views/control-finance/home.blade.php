@@ -122,10 +122,6 @@
             </div>
         </div>
     </div>
-   {{--  {{ dd(
-        $grafico,
-        $graficoValue
-    ) }} --}}
 @stop
 
 
@@ -146,7 +142,9 @@
                 graphicPerCategories(resultado)
             })
             .fail(function(jqXHR, textStatus, msg){
-                alert('errorrrrrr');
+                console.log(msg);
+                console.log(textStatus);
+                console.log(jqXHR);
             });
 
             $.ajax({
@@ -160,7 +158,9 @@
                 graphicPerCategoriesDebtsSumValues(resultado)
             })
             .fail(function(jqXHR, textStatus, msg){
-                alert('errorrrrrr');
+                console.log(msg);
+                console.log(textStatus);
+                console.log(jqXHR);
             });
       
         });
