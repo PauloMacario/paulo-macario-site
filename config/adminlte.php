@@ -338,6 +338,11 @@ return [
             'icon' => 'fas fa-credit-card mr-2',
         ],
         [
+            'text' => 'PAGAMENTOS',
+            'url' => 'pagamento',
+            'icon' => 'fas fa-stamp mr-2',
+        ],
+        [
             'text' => 'CONFIGURAÇÕES',
             'url' => 'config',
             'icon' => 'fas fa-sliders-h mr-2',

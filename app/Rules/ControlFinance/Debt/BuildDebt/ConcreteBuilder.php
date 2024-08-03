@@ -92,10 +92,6 @@ class ConcreteBuilder implements DebtBuilder
         }
 
         $this->debt->parts['installments'] = $this->data['installments'];
-
-       /*  dd(
-            $this->debt->parts
-        ); */
     }
 
     public function convertDate($date)
@@ -119,33 +115,26 @@ class ConcreteBuilder implements DebtBuilder
 
     public function generateDatesToInstallments()
     {
-        $date = $this->data['debt']['date'];
+        $dateDebt = $this->data['debt']['date'];
 
         $paymenttypeId = $this->data['debt']['payment_type_id'];
         
         $paymentType = PaymentType::where('id', $paymenttypeId)
             ->where('installment_enable', 1)
-            ->first();
+            ->first();       
 
         if ($paymentType == null) {
-            return $date;
+            return $dateDebt;
         }
+       
+        $payDate = Carbon::createFromFormat('Y-m-d', $paymentType->next_payment);
+      
+        if ($dateDebt >= $paymentType->next_processing) {
+            $nextPayment = Carbon::createFromFormat('Y-m-d', $paymentType->next_payment);
+            $payDate = $nextPayment->addMonth();
+        } 
 
-        $yearMonth = $date->format('Y-m');
-
-        $payDay = $paymentType->payment_day;
-
-        $processingDay = $paymentType->processing_day;
-
-        $payDate = Carbon::createFromFormat('Y-m-d H:i:s', $yearMonth . '-' . $payDay . ' 00:00:00');
-
-        $processingDate = Carbon::createFromFormat('Y-m-d H:i:s', $yearMonth . '-' . $processingDay . ' 00:00:00');
-
-        if ($date->timestamp < $processingDate->timestamp) {
-            return $payDate;
-        }
-
-        return $payDate->addMonth();
+        return $payDate;
     }
 
     public function getDebt()

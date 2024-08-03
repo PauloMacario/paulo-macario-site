@@ -159,14 +159,22 @@
                             </div>
 
                         </div>
+
                         <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
-                                <table class="table table-sm table-borderless{{-- table-bordered --}}">
-        
-                                    @foreach ( $installments as $installment )
-                                        @php
-                                            $total += $installment->value
-                                        @endphp
+                                <table class="table table-sm table-striped">
+                                    <tr>
+                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>        
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-10 col-lg-8">
+                                <table class="table table-sm table-borderless">        
+                                    @foreach ( $installments as $installment )    
                                         <tr>
                                             <td class="font-italic text-left font-12" width="35%">{{ $installment->debt->paymentType->description }}</td>
                                             <td class="font-italic text-center font-12" width="35%"
@@ -218,8 +226,8 @@
                             <div class="col-xs-12 col-md-10 col-lg-8">
                                 <table class="table table-sm table-striped">
                                     <tr>
-                                        <th colspan="4"><h4 class="text-center">TOTAL:</h4></th>
-                                        <th><h4>R$ {{ formatMoneyBR($total) }}</h4></th>
+                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
                                     </tr>
                                 </table>
                             </div>

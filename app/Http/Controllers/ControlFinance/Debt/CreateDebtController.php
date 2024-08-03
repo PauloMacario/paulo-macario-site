@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\ControlFinance\Debt;
 
 use App\Http\Controllers\Controller;
-use Rules\ControlFinance\Debt\BuildDebt\Create;
+//use Rules\ControlFinance\Debt\BuildDebt\Create;
+use Rules\ControlFinance\Debt\Create;
 use Illuminate\Http\Request;
 
 class CreateDebtController extends Controller

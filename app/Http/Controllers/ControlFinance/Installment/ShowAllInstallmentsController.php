@@ -59,8 +59,23 @@ class ShowAllInstallmentsController extends Controller
         $data['shopperId'] = $shopId ?? 0;
         $data['payTypeId'] = $payTypeId ?? 0;
         $data['installments'] = $installments->get();
-        $data['total'] = 0;
+        $data['total'] = $this->getTotalValue($data['installments']);
         
         return view('control-finance.installment.all', $data);
+    }
+
+    public function getTotalValue($installments)
+    {
+        $total = 0.0;
+
+        if (! $installments->count()) {
+            return $total;
+        }
+        
+        foreach ($installments as $installment) {
+            $total += $installment->value;
+        }
+
+        return $total;
     }
 }

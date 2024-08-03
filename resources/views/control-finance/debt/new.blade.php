@@ -22,7 +22,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Categoria</label>
-                                        <select class="form-control" name="debt[category_id]" id="categoryId" required>
+                                        <select class="form-control" name="category_id" id="categoryId" required>
                                             <option value="">Selecione...</option>
                                             @foreach ($categories as $category)
                                                 @if ($category->status == 'E')
@@ -36,7 +36,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Comprador(a)</label>
-                                        <select class="form-control" name="debt[shopper_id]" id="shopperId" required>
+                                        <select class="form-control" name="shopper_id" id="shopper_id" required>
                                             <option value="" selected>Selecione...</option>                                       
                                             @foreach ($shoppers as $shopper)                                  
                                                 <option value="{{ $shopper->id }}" >{{ $shopper->name }}</option>
@@ -50,7 +50,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Forma de pagamento</label>
-                                        <select class="form-control" name="debt[payment_type_id]" id="paymentTypeId" autocomplete="off" required>
+                                        <select class="form-control" name="payment_type_id" id="payment_type_id" autocomplete="off" required>
                                             <option value="" data-installment-enable="0" selected>Selecione...</option>                             
                                             @foreach ($paymentTypes as $paymentType)  
                                                 @if ($paymentType->status == 'E')
@@ -64,7 +64,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Parcelas</label>
-                                        <input type="number" class="form-control"  name="debt[number_installments]" id="field-number-installments" autocomplete="off" required>
+                                        <input type="number" class="form-control"  name="number_installments" id="field-number-installments" autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Data</label>
-                                        <input type="date" class="form-control"  name="debt[date]" id="date" required>
+                                        <input type="date" class="form-control"  name="date" id="date" required>
                                     </div>
                                 </div>
                             </div>
@@ -101,14 +101,14 @@
                                 <div class="col-xs-12 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="id">Loja/local</label>
-                                        <input type="text" class="form-control"  name="debt[locality]" id="locality" required value="loja teste">
+                                        <input type="text" class="form-control"  name="locality" id="locality" required value="loja teste">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-md-6 col-lg-2">
                                     <div class="form-group">
                                         <label for="id">Valor total</label>
-                                        <input type="text" class="form-control"  name="debt[total_value]" id="totalValue" required value="500">
+                                        <input type="text" class="form-control"  name="total_value" id="totalValue" required value="500">
                                     </div>
                                 </div>
                             </div>                    
@@ -158,8 +158,8 @@
             
             checkFieldNumberInstallments();
 
-            $('#paymentTypeId').on('change', function() {
-                console.log('2- ' + $('#paymentTypeId option:selected').attr('data-installment-enable'));
+            $('#payment_type_id').on('change', function() {
+                console.log('2- ' + $('#payment_type_id option:selected').attr('data-installment-enable'));
                 checkFieldNumberInstallments();
             });
             
@@ -168,27 +168,35 @@
             });
 
             function checkFieldNumberInstallments()
-            {
-                console.log('3- ' + $('#paymentTypeId option:selected').attr('data-installment-enable'));
-                var installmentEnable = $('#paymentTypeId option:selected').attr('data-installment-enable');               
+            {               
+                var installmentEnable = $('#payment_type_id option:selected').attr('data-installment-enable');               
 
                 if (installmentEnable == 0 || installmentEnable == '') {
-
-                    console.log('disabled installment-> ' + installmentEnable)
 
                     $('#field-number-installments')
                         .attr('disabled', true)
                         .attr('required', false)
                         .val('')
                         .attr('placeholder','');
-                } else {
 
-                    console.log('enabled installment-> ' + installmentEnable)
+                    $('#compra-rateada')
+                        .attr('disabled', true)
+                        .val('');
+
+                    $('#row-rateio').css('display', 'none');
+
+                    $('.checkrateio').each(function(i) {
+                        $(this).attr('disabled', true).prop('checked', false);
+                    });
+                } else {
 
                     $('#field-number-installments')
                         .attr('disabled', false)
                         .attr('required', true)
                         .attr('placeholder','Selecione o n° de parcelas');
+
+                    $('#compra-rateada')
+                        .attr('disabled', false);
                 }                
             }
 

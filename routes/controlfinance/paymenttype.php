@@ -11,22 +11,22 @@ use App\Http\Controllers\ControlFinance\PaymentType\{
 Route::middleware('auth')
     ->group(function() {
 
-        Route::get('/pagamento',
+        Route::get('/tipo-pagamento',
             NewPaymentTypeController::class
         )
         ->name('paymentType_get');
 
-        Route::post('/pagamento',
+        Route::post('/tipo-pagamento',
             CreatePaymentTypeController::class
         )
         ->name('paymentType_post');
 
-        Route::get('/pagamento/{id}/detalhes',
+        Route::get('/tipo-pagamento/{id}/detalhes',
             ShowPaymentTypeController::class
         )
         ->name('detailPaymentType_get');
 
-        Route::post('pagamento/editar',
+        Route::post('tipo-pagamento/editar',
             UpdatePaymentTypeController::class
         )
         ->name('updatePaymentType_post'); 

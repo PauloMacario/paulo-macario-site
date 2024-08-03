@@ -16,7 +16,10 @@ class PaymentType extends Model
         'payment_day',
         'installment_enable',
         'style',
-        'status'
+        'status',
+        'previous_processing',
+        'next_processing',
+        'next_payment'
     ];
 
     public function debts()

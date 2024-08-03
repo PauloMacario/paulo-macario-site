@@ -40,24 +40,19 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="id">Dia de processamento</label>
+                                            <label for="id">Proxíma data de processamento</label>
                                             <input 
-                                                type="number" 
+                                                type="date" 
                                                 class="form-control " 
-                                                name="processing_day"
-                                                min="1" 
-                                                max="27"
-                                                
+                                                name="next_processing"                                               
                                             >
                                         </div>
                                         <div class="form-group">
-                                            <label for="id">Dia de pagamento</label>
+                                            <label for="id">Proxíma data de pagamento</label>
                                             <input 
-                                                type="number" 
+                                                type="date" 
                                                 class="form-control " 
-                                                name="payment_day" 
-                                                min="1" 
-                                                max="27"
+                                                name="next_payment"
                                             >
                                         </div>
 

@@ -45,26 +45,22 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="id">Dia de processamento</label>
+                                            <label for="id">Proxíma data de processamento</label>
                                             <input 
-                                                type="number" 
+                                                type="date" 
                                                 class="form-control " 
-                                                name="processing_day" 
-                                                value="{{ $paymentType->processing_day }}" 
-                                                min="1" 
-                                                max="27"
+                                                name="next_processing" 
+                                                value="{{ $paymentType->next_processing }}"
                                                 
                                             >
                                         </div>
                                         <div class="form-group">
-                                            <label for="id">Dia de pagamento</label>
+                                            <label for="id">Proxíma data de pagamento</label>
                                             <input 
-                                                type="number" 
+                                                type="date" 
                                                 class="form-control " 
-                                                name="payment_day" 
-                                                value="{{ $paymentType->payment_day }}" 
-                                                min="1" 
-                                                max="27"
+                                                name="next_payment" 
+                                                value="{{ $paymentType->next_payment }}"
                                             >
                                         </div>
 

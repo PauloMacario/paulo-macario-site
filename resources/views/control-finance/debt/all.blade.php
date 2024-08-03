@@ -124,55 +124,64 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-10 col-lg-8">
+                                <table class="table table-sm table-striped">
+                                    <tr>
+                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>          
+
                         <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
                                 <table class="table table-sm table-borderless ">        
                                     @foreach ( $debts as $debt  )
-                                    @php
-                                        $total += $debt->total_value
-                                    @endphp
-                                    <tr>
-                                        <td class="font-italic text-left font-12" width="35%">{{ $debt->paymentType->description }}</td>
-                                        <td class="font-italic text-center font-12" width="35%" 
-                                            @if(isset($debt->category->style->color))
-                                                style="color:{{ $debt->category->style->color }};"    
-                                            @endif
-                                        >
-                                            {{ $debt->category->description }}
-                                        </td>
-                                        <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
-                                    </tr>
-                                    <tr >
-                                        <td colspan="2" class="font-weight-bold text-left font-14">
-                                            <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
-                                                {{ $debt->locality }}
-                                                <span class="ml-2">
-                                                    @if ($debt->number_installments > 1)
-                                                        em {{ $debt->number_installments }} x
-                                                    @endif
-                                                </span>
-                                            </a>
-                                        </td>
-                                        <td class="font-weight-bold text-center font-14 @if($debt->status == 'PM') value-paid @endif">
-                                            R$ {{ formatMoneyBR($debt->total_value) }}
-                                            @if($debt->status == 'PM')                                              
-                                                <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @if ($debt->prorated_debt == 1)                                
                                         <tr>
-                                            <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
-                                            <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
-                                        </tr> 
-                                    @else
-                                        <tr>
-                                            <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>                                           
-                                        </tr> 
-                                    @endif  
-                                        <tr>
-                                            <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
+                                            <td class="font-italic text-left font-12" width="35%">{{ $debt->paymentType->description }}</td>
+                                            <td class="font-italic text-center font-12" width="35%" 
+                                                @if(isset($debt->category->style->color))
+                                                    style="color:{{ $debt->category->style->color }};"    
+                                                @endif
+                                            >
+                                                {{ $debt->category->description }}
+                                            </td>
+                                            <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
                                         </tr>
+                                        <tr >
+                                            <td colspan="2" class="font-weight-bold text-left font-14">
+                                                <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
+                                                    {{ $debt->locality }}
+                                                    <span class="ml-2">
+                                                        @if ($debt->number_installments > 1)
+                                                            em {{ $debt->number_installments }} x
+                                                        @endif
+                                                    </span>
+                                                </a>
+                                            </td>
+                                            <td class="font-weight-bold text-center font-14 @if($debt->status == 'PM') value-paid @endif">
+                                                R$ {{ formatMoneyBR($debt->total_value) }}
+                                                @if($debt->status == 'PM')                                              
+                                                    <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @if ($debt->prorated_debt == 1)                                
+                                            <tr>
+                                                <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
+                                                <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
+                                            </tr> 
+                                        @else
+                                            <tr>
+                                                <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>                                           
+                                            </tr> 
+                                        @endif  
+                                            <tr>
+                                                <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
+                                            </tr>
                                     @endforeach
                                 </table>
                             </div>
@@ -183,8 +192,8 @@
                             <div class="col-xs-12 col-md-10 col-lg-8">
                                 <table class="table table-sm table-striped">
                                     <tr>
-                                        <th colspan="4"><h4 class="text-center">TOTAL:</h4></th>
-                                        <th><h4>R$ {{ formatMoneyBR($total) }}</h4></th>
+                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
                                     </tr>
                                 </table>
                             </div>

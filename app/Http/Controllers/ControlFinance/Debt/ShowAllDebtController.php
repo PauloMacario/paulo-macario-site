@@ -35,8 +35,23 @@ class ShowAllDebtController extends Controller
         $data['year'] = $year;
         $data['month'] = $month;
         
-        $data['total'] = 0;
+        $data['total'] = $this->getTotalValue($data['debts']);
         
         return view('control-finance.debt.all', $data);
+    }
+
+    public function getTotalValue($debts)
+    {
+        $total = 0.0;
+
+        if (! $debts->count()) {
+            return $total;
+        }
+        
+        foreach ($debts as $debt) {
+            $total += $debt->total_value;
+        }
+
+        return $total;
     }
 }
