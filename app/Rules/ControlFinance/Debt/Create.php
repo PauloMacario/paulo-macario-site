@@ -19,7 +19,7 @@ class Create
             return $createInCash->execute($dataDebt);
         }
 
-        if ($dataDebt['date'] >= $paymentType->previous_processing && $dataDebt['date'] <= $paymentType->next_processing) {            
+        if ($dataDebt['date'] >= $paymentType->previous_processing && $dataDebt['date'] = $paymentType->next_processing) {            
             $createInCurrentMonth = new CreateWithInstallmentsInCurrentMonth($dataDebt);
 
             return $createInCurrentMonth->execute($dataDebt);

@@ -114,8 +114,7 @@
                     <h1>Features adn Bugs</h1>
                     <ul class="list-group">
                        <li class="list-group-item">Compra recorrente mensal</li>
-                       <li class="list-group-item">flag parcela paga</li>
-                       <li class="list-group-item">flag conta paga e se todas parcelas pagas paga conta</li>
+                       <li class="list-group-item">Se todas parcelas pagas pagar divida</li>
                        <li class="list-group-item">Detalhes da compra lista parcelas(add ou remove parcela)</li>
                     </ul>
                 </div>

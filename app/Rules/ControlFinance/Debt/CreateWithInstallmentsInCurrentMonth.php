@@ -26,7 +26,7 @@ class CreateWithInstallmentsInCurrentMonth
 
         $this->debt = Debt::create($this->data);
 
-        $startDate = Carbon::createFromFormat('Y-m-d', substr($this->debt->date, 0, -2) . $this->debt->paymentType->payment_day);
+        $startDate = Carbon::createFromFormat('Y-m-d', $this->debt->paymentType->next_payment);
       
         $installmentStructure = new InstallmentStructure($this->debt, $this->data);
         $installments = $installmentStructure->execute($startDate);
