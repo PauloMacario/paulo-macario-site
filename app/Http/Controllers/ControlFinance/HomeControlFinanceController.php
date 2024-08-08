@@ -8,11 +8,10 @@ use App\Models\ControlFinance\Debt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class HomeControlFinanceController extends Controller
 {
     public function index()
-    {   
-
+    {
         return view('control-finance.home');
     }
 

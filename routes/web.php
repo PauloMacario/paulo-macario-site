@@ -1,30 +1,35 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ControlFinance\HomeController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('index');
 });
 
-Auth::routes();
-
 Route::middleware('auth')
     ->group(function() {
 
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+        Route::get(
+            '/home', 
+            [HomeController::class, 'index']
+        )
+        ->name('home');
     }
 );
 
-include_once 'controlfinance/category.php';
-include_once 'controlfinance/debt.php';
-include_once 'controlfinance/installment.php';
-include_once 'controlfinance/paymenttype.php';
-include_once 'controlfinance/settings.php';
-include_once 'controlfinance/shopper.php';
-include_once 'controlfinance/charts.php';
-include_once 'controlfinance/payment.php';
+Auth::routes();
+
+
+include_once 'controlFinance/home.php';
+include_once 'controlFinance/category.php';
+include_once 'controlFinance/debt.php';
+include_once 'controlFinance/installment.php';
+include_once 'controlFinance/paymenttype.php';
+include_once 'controlFinance/settings.php';
+include_once 'controlFinance/shopper.php';
+include_once 'controlFinance/charts.php';
+include_once 'controlFinance/payment.php';
 
 
 

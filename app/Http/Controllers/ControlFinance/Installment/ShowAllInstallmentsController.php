@@ -45,7 +45,7 @@ class ShowAllInstallmentsController extends Controller
         }
 
         if ($status = $request['status']) {
-            if ($status != 'T') {
+            if ($status != '') {
                 $installments->where('status', $status);
             }
         }

@@ -64,9 +64,9 @@ return [
     |
     */
 
-    'logo' => '<b>Control</b>FINANCE',
+    'logo' => '<b>YODA</b>',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img' => 'vendor/adminlte/dist/img/controFinance_2.jpg',
+    'logo_img' => 'vendor/adminlte/dist/img/yoda.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -295,9 +295,17 @@ return [
     |
     */
 
-    'menu' => [
+    /* 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Menu Base examples
+    |--------------------------------------------------------------------------
+    |
+    
+      'menu' => [
         // Navbar items:
-     /*    [
+        [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
@@ -316,52 +324,25 @@ return [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
-        ], */
-        [
-            'text' => 'ÍNICIO',
-            'url' => 'home',
-            'icon' => 'fas fa-home mr-2',
         ],
         [
-            'text' => 'NOVA DÍVIDA',
-            'url' => 'divida',
-            'icon' => 'fas fa-plus-circle mr-2',
-        ],      
-        [
-            'text' => 'COMPRAS DO MÊS',
-            'url' => 'dividas',
-            'icon' => 'fas fa-wallet mr-2',
+            'text' => 'pages',
+            'url' => 'admin/pages',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'success',
         ],
-        [
-            'text' => 'PARCELAS DO MÊS',
-            'url' => 'parcelas',
-            'icon' => 'fas fa-credit-card mr-2',
-        ],
-        [
-            'text' => 'PAGAMENTOS',
-            'url' => 'pagamento',
-            'icon' => 'fas fa-stamp mr-2',
-        ],
-        [
-            'text' => 'CONFIGURAÇÕES',
-            'url' => 'config',
-            'icon' => 'fas fa-sliders-h mr-2',
-        ],
-        /*
         ['header' => 'account_settings'],
+        [
+            'text' => 'profile',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
         [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
-            'label' => 4,
-            'label_color' => 'success',
         ],
-
-        */
-
-
-
-        /*
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
@@ -415,8 +396,85 @@ return [
             'text' => 'information',
             'icon_color' => 'cyan',
             'url' => '#',
-        ], */
+        ],
     ],
+
+
+    -------------------------------------------------------------
+     */
+    'menu' => [
+        [
+            'text' => 'CONTROL FINANCE',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'ÍNICIO',
+                    'url' => 'controlfinance/home',
+                    'icon' => 'fas fa-home mr-2',
+                ],
+                [
+                    'text' => 'NOVA DÍVIDA',
+                    'url' => 'divida',
+                    'icon' => 'fas fa-plus-circle mr-2',
+                ],      
+                [
+                    'text' => 'COMPRAS DO MÊS',
+                    'url' => 'dividas',
+                    'icon' => 'fas fa-wallet mr-2',
+                ],
+                [
+                    'text' => 'PARCELAS DO MÊS',
+                    'url' => 'parcelas',
+                    'icon' => 'fas fa-credit-card mr-2',
+                ],
+                [
+                    'text' => 'PAGAMENTOS',
+                    'url' => 'pagamento',
+                    'icon' => 'fas fa-stamp mr-2',
+                ],
+                [
+                    'text' => 'CONFIGURAÇÕES',
+                    'url' => 'config',
+                    'icon' => 'fas fa-sliders-h mr-2',
+                ],
+            ],
+        ],
+    ],
+
+
+  /*   'menu' => [
+        [
+            'text' => 'ÍNICIO',
+            'url' => 'home',
+            'icon' => 'fas fa-home mr-2',
+        ],
+        [
+            'text' => 'NOVA DÍVIDA',
+            'url' => 'divida',
+            'icon' => 'fas fa-plus-circle mr-2',
+        ],      
+        [
+            'text' => 'COMPRAS DO MÊS',
+            'url' => 'dividas',
+            'icon' => 'fas fa-wallet mr-2',
+        ],
+        [
+            'text' => 'PARCELAS DO MÊS',
+            'url' => 'parcelas',
+            'icon' => 'fas fa-credit-card mr-2',
+        ],
+        [
+            'text' => 'PAGAMENTOS',
+            'url' => 'pagamento',
+            'icon' => 'fas fa-stamp mr-2',
+        ],
+        [
+            'text' => 'CONFIGURAÇÕES',
+            'url' => 'config',
+            'icon' => 'fas fa-sliders-h mr-2',
+        ],
+      
+    ], */
 
     /*
     |--------------------------------------------------------------------------

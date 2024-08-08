@@ -63,11 +63,11 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse show" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('debtAllMonth_post') }}" method="GET">
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-2">
+                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
@@ -85,7 +85,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-2">
+                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
@@ -102,7 +102,52 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">            
+                                                <div class="col-xs-12 col-md-4">
+                                                    <div class="form-group">                                                                   
+                                                        <select class="form-control" name="category_id" id="">
+                                                            <option value="">Selecione Categoria</option>
+                                                            @foreach ( $categories as $category )
+                                                                <option value="{{ $category->id }}" @if($category->id  == $categoryId) selected @endif>{{ $category->description }}</option>                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-4">
+                                                    <div class="form-group">                                                                   
+                                                        <select class="form-control" name="payment_type_id" id="">
+                                                            <option value="">Selecione Tipo</option>
+                                                            @foreach ( $paymentTypes as $payType )
+                                                                <option value="{{ $payType->id }}" @if($payType->id  == $payTypeId) selected @endif>{{ $payType->description }}</option>                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-4">
+                                                    <div class="form-group">                                                               
+                                                        <select class="form-control" name="shopper_id" id="">
+                                                            <option value="">Selecione comprador</option>
+                                                            @foreach ( $shoppers as $shopper )
+                                                                <option value="{{ $shopper->id }}" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <select 
+                                                            class="form-control" 
+                                                            name="status" 
+                                                            id="status" 
+                                                        >
+                                                            <option value="" selected>Todos status</option>           
+                                                            <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
+                                                            <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
+                                                            <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
+                                                            <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
+                                                    </select>                
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-4">            
                                                     <div class="form-group">
                                                         <button class="btn bg-olive btn-block">
                                                             Filtrar
@@ -110,7 +155,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">            
+                                                <div class="col-xs-12 col-md-4">            
                                                     <div class="form-group">
                                                         <a href="{{ route('debtAll_get') }}" class="btn bg-warning btn-block">
                                                             Limpar
@@ -135,69 +180,78 @@
                                 </table>
                             </div>
                         </div>          
-
+                        @if ($debts->count() > 0)
+                            <div class="row">
+                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                    <table class="table table-sm table-borderless ">        
+                                        @foreach ( $debts as $debt  )
+                                            <tr>
+                                                <td class="font-italic text-left font-12" width="35%">{{ $debt->paymentType->description }}</td>
+                                                <td class="font-italic text-center font-12" width="35%" 
+                                                    @if(isset($debt->category->style->color))
+                                                        style="color:{{ $debt->category->style->color }};"    
+                                                    @endif
+                                                >
+                                                    {{ $debt->category->description }}
+                                                </td>
+                                                <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
+                                            </tr>
+                                            <tr >
+                                                <td colspan="2" class="font-weight-bold text-left font-14">
+                                                    <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
+                                                        {{ $debt->locality }}
+                                                        <span class="ml-2">
+                                                            @if ($debt->number_installments > 1)
+                                                                em {{ $debt->number_installments }} x
+                                                            @endif
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                                <td class="font-weight-bold text-center font-14 @if($debt->status == 'PM') value-paid @endif">
+                                                    R$ {{ formatMoneyBR($debt->total_value) }}
+                                                    @if($debt->status == 'PM')                                              
+                                                        <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @if ($debt->prorated_debt == 1)                                
+                                                <tr>
+                                                    <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
+                                                    <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
+                                                </tr> 
+                                            @else
+                                                <tr>
+                                                    <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>                                           
+                                                </tr> 
+                                            @endif  
+                                                <tr>
+                                                    <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
+                                                </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+                        @else
                         <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
-                                <table class="table table-sm table-borderless ">        
-                                    @foreach ( $debts as $debt  )
-                                        <tr>
-                                            <td class="font-italic text-left font-12" width="35%">{{ $debt->paymentType->description }}</td>
-                                            <td class="font-italic text-center font-12" width="35%" 
-                                                @if(isset($debt->category->style->color))
-                                                    style="color:{{ $debt->category->style->color }};"    
-                                                @endif
-                                            >
-                                                {{ $debt->category->description }}
-                                            </td>
-                                            <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
-                                        </tr>
-                                        <tr >
-                                            <td colspan="2" class="font-weight-bold text-left font-14">
-                                                <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
-                                                    {{ $debt->locality }}
-                                                    <span class="ml-2">
-                                                        @if ($debt->number_installments > 1)
-                                                            em {{ $debt->number_installments }} x
-                                                        @endif
-                                                    </span>
-                                                </a>
-                                            </td>
-                                            <td class="font-weight-bold text-center font-14 @if($debt->status == 'PM') value-paid @endif">
-                                                R$ {{ formatMoneyBR($debt->total_value) }}
-                                                @if($debt->status == 'PM')                                              
-                                                    <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        @if ($debt->prorated_debt == 1)                                
-                                            <tr>
-                                                <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>
-                                                <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
-                                            </tr> 
-                                        @else
-                                            <tr>
-                                                <td class="font-italic text-left font-12">{{ $debt->shopper->name }}</td>                                           
-                                            </tr> 
-                                        @endif  
-                                            <tr>
-                                                <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
-                                            </tr>
-                                    @endforeach
-                                </table>
+                                <h4 class="text-center">Nada encontrado :( </h4>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="card-footer">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
-                                <table class="table table-sm table-striped">
-                                    <tr>
-                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
-                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
-                                    </tr>
-                                </table>
+                        @if ($debts->count() > 0)
+                            <div class="row">
+                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                    <table class="table table-sm table-striped">
+                                        <tr>
+                                            <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                            <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                        </div>                                                  
+                        @endif                        
                     </div>
                 </div>
             </div>

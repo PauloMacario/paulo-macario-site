@@ -62,7 +62,7 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse show" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('installmentAllFilters_post') }}" method="GET">
                                             <div class="row">
@@ -128,7 +128,7 @@
                                                             name="status" 
                                                             id="status" 
                                                         >
-                                                            <option value="T" selected>Todos status</option>           
+                                                            <option value="" selected>Todos status</option>           
                                                             <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
                                                             <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
