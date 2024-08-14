@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('tp:remove-folha-mestre')->dailyAt('00:00');
+        $schedule->command('control-finance:payment-type-update-upcoming-dates')->dailyAt('00:00');
     }
 
     /**
