@@ -28,12 +28,18 @@ class PaymentTypeUpdateUpcomingDates extends Command
     public function handle()
     {
         logger()->info("INICIANDO->payment-type-update-upcoming-dates");
+        $this->alert('INICIANDO->payment-type-update-upcoming-dates');
 
         $paymentTypes = PaymentType::where('installment_enable', '=', 1)->get();
 
         foreach ($paymentTypes as $payType) {
-
+            $this->info('-----------------------------------------------------------------------------------------------');
+                
             if (! $payType->next_processing) {
+                $this->info('###########################################################');
+                $this->info('##     Não atualiza: '. $payType->description);          
+                $this->info('###########################################################');
+                $this->info('-----------------------------------------------------------------------------------------------');
                 continue;
             }
 
@@ -57,20 +63,30 @@ class PaymentTypeUpdateUpcomingDates extends Command
 
             $payType->update($update);
 
+            $this->info('###########################################################');
+            $this->info('Datas atualizadas: '. $payType->description);
+            $this->info('(next_processing): '. $updateNextProcessing);
+            $this->info('(next_payment): '. $updateNextPayment);
+            $this->info('###########################################################');
+            $this->info('-----------------------------------------------------------------------------------------------');      
+
             logger()->info("Datas de processamento atualizadas: {$payType->description}");
+            logger()->info('(next_processing): '. $updateNextProcessing);
+            logger()->info('(next_payment): '. $updateNextPayment);
         }
+        $this->alert('FINALIZANDO->payment-type-update-upcoming-dates');
     }
 
     private function mustUpdate($nextProcessing)
     {
         $now = Carbon::now();
 
-        logger()->info("DATA/HORARIO: {$now->format('Y-m-d H:i:s')}");
+        logger()->info("DATA/HORARIO: {$now->format('Y-m-d H:i:s')}"); 
 
-        if ($now >= $nextProcessing) {
+        if ($now >= $nextProcessing) {            
             return true;
         }
-
+        
         return false;
     }
 }
