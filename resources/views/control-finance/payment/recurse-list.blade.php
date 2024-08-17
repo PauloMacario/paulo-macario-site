@@ -15,31 +15,37 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <a href="#{{-- {{ route('debt_get') }} --}}">
-                                <div class="info-box bg-olive">
-                                    <span class="info-box-icon">
-                                        <i class="fas fa-wallet"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="">Pagamentos de compras</span>
-                                    </div>                            
+                        <a href="#{{-- {{ route('debt_get') }} --}}">
+                            <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
+                                <div class="card-header text-center">
+                                    <div class="info-box-icon">
+                                        <span>
+                                            <i class="fas fa-wallet fa-2x"></i>
+                                        </span>
+                                    </div>         
                                 </div>
-                            </a>
-                        </div>
+                                <div class="card-body">
+                                <h5 class="card-title text-center p-3"> <span class="">Pagamentos de compras</span></h5>
+                              
+                                </div>
+                            </div>
+                        </a>
 
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <a href="{{ route('paymentAllInstallments_get') }}">
-                                <div class="info-box bg-navy">
-                                    <span class="info-box-icon">
-                                        <i class="fas fa-credit-card mr-2 "></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="">Pagamentos de parcelas</span>
-                                    </div>                            
+                        <a href="{{ route('paymentAllInstallments_get') }}">
+                            <div class="card bg-navy mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
+                                <div class="card-header text-center">
+                                    <div class="info-box-icon">
+                                        <span>
+                                            <i class="fas fa-credit-card fa-2x"></i>
+                                        </span>
+                                    </div>         
                                 </div>
-                            </a>
-                        </div>
+                                <div class="card-body">
+                                <h5 class="card-title text-center p-3"><span class="">Pagamentos de parcelas</span></h5>
+                              
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

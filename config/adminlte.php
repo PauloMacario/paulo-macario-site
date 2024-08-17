@@ -433,6 +433,11 @@ return [
                     'icon' => 'fas fa-stamp mr-2',
                 ],
                 [
+                    'text' => 'RELATÓRIOS',
+                    'url' => 'relatorios',
+                    'icon' => 'far fa-file-pdf mr-2',
+                ],
+                [
                     'text' => 'CONFIGURAÇÕES',
                     'url' => 'config',
                     'icon' => 'fas fa-sliders-h mr-2',
