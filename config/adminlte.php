@@ -404,10 +404,10 @@ return [
      */
     'menu' => [
         [
-            'text' => 'CONTROL FINANCE',
+          /*   'text' => 'CONTROL FINANCE',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
-                [
+                [ */
                     'text' => 'ÍNICIO',
                     'url' => 'controlfinance/home',
                     'icon' => 'fas fa-home mr-2',
@@ -442,8 +442,8 @@ return [
                     'url' => 'config',
                     'icon' => 'fas fa-sliders-h mr-2',
                 ],
-            ],
-        ],
+        /*    ],
+        ],*/
     ],
 
 

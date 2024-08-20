@@ -89,7 +89,7 @@ class ReportInstallmentsByShopper
                     'shoppers.name'
                 )
                 ->get();
-
+            $data[$key]['paymentTypeId'] = $paymentTypeId;
             $data[$key]['paymentType'] = Str::title($reportData[0]->description);
             $data[$key]['reports'] = $reportData;
 
@@ -103,7 +103,6 @@ class ReportInstallmentsByShopper
            
                 
         }
-
         return $report;
     }
 }

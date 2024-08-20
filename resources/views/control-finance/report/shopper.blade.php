@@ -112,7 +112,7 @@
                         </div>
                        
                         @if(count($reports) > 0)
-                            <div class="col-8">
+                            <div class="col-8 mt-5">
                                 <form action="{{ route('pdfReportShopperGenerate_post') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="shopper_id" value="{{ $shopperId }}">
@@ -121,34 +121,31 @@
                                     <table class="table table-sm table-bordered">
                                         <tbody>
     
-                                            <tr>
-                                                <th class="text-center">TIPO DE PAGAMENTO</th>
-                                                <th class="text-center">QUANTIDADE DE PARCELAS</th>
-                                                <th class="text-center">SELECIONAR P/ GERAR</h3></th>
+                                            <tr >
+                                                <th rowspan="2" class="text-center">TIPO DE PAGAMENTO</th>
+                                                <th rowspan="2" class="text-center">QUANTIDADE DE PARCELAS</th>
+                                                <th class="text-center">SELECIONAR P/ GERAR></th>
                                             </tr>
-                                            
-                                            @foreach ($reports as $report)                                           
-                                                @foreach ($report as $item)
-                                               
-                                                    @if($loop->first)
-                                                        <tr>
-                                                            <td class="text-center" >{{ $report[0]->description }} </td>
-                                                            <td class="text-center">{{ $report->count() }} parcela(s) encontrada(s)</td>
-                                                            <td class="text-center">
-                                                                <input type="checkbox" name="payment_type_id[{{ $item->payment_type_id }}]" id="">
-                                                            </td>
-                                                        </tr>
-                                                    @endif
-                                                                    
-                                                @endforeach
-                                                <tr class="bg-olive">
+
+                                            <tr >                                               
+                                            <th class="text-center"><i>Todos</i>  <input type="checkbox" name="all-payment-types" id="all-payment-types" class="ml-2"></th>
+                                            </tr>
+                                            @foreach ($reports['data'] as $item)                                                                                                                                  
+                                                <tr>
+                                                    <td class="text-center" >{{ $item['paymentType'] }} </td>
+                                                    <td class="text-center">{{ $item['reports']->count() }} parcela(s) encontrada(s)</td>
+                                                    <td class="text-center">
+                                                        <input type="checkbox" name="payment_type_id[{{ $item['paymentTypeId'] }}]" id="" class="item-payment-type">
+                                                    </td>
+                                                </tr>                                                    
+                                                {{-- <tr class="bg-olive">
                                                     <th colspan="3"></th>
-                                                </tr>
+                                                </tr> --}}
                                             @endforeach
                                         </tbody>
                                     </table>
 
-                                    <button class="btn bg-olive" type="submit">Gerar PDF</button>
+                                    <button class="btn bg-purple" type="submit">Gerar PDF</button>
 
                                 </form>
                             </div>
@@ -190,6 +187,20 @@
                     })
                 }
             })
+
+              
+            var allPaymentTypes = $("#all-payment-types");
+
+                allPaymentTypes.click(function () {
+
+                if ( $(this).is(':checked') ){
+                    $('input:checkbox').prop("checked", true);
+
+                }else{
+                    $('input:checkbox').prop("checked", false);
+                    
+                }
+            });
         });
     </script>
 @endpush
