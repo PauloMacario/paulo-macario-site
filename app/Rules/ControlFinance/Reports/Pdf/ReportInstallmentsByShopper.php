@@ -4,7 +4,7 @@ namespace Rules\ControlFinance\Reports\Pdf;
 
 use App\Models\ControlFinance\Installment;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class ReportInstallmentsByShopper
@@ -34,7 +34,8 @@ class ReportInstallmentsByShopper
     {
         $installments = Installment::where('shopper_id', $this->dataSearch->shopper_id)
             ->whereYear('due_date', $this->dataSearch->year)
-            ->whereMonth('due_date', $this->dataSearch->month);
+            ->whereMonth('due_date', $this->dataSearch->month)
+            ->get();
     
         return $installments;           
            
@@ -42,25 +43,39 @@ class ReportInstallmentsByShopper
 
     public function searchDataReport()
     {
-        $paymentTypes = Installment::join('debts', 'debts.id', '=','installments.debt_id')
+        $query = Installment::join('debts', 'debts.id', '=','installments.debt_id')
             ->join('payment_types', 'payment_types.id', '=', 'debts.payment_type_id')        
+            ->select('payment_types.id')
             ->where('installments.shopper_id', $this->dataSearch->shopper_id)
             ->whereYear('installments.due_date', $this->dataSearch->year)
-            ->whereMonth('installments.due_date', $this->dataSearch->month)
-            ->select('payment_types.id')
-            ->distinct()
+            ->whereMonth('installments.due_date', $this->dataSearch->month);
+           
+            
+            
+        if($this->dataSearch->payment_type_id) {
+            $query->where('debts.payment_type_id', $this->dataSearch->payment_type_id);
+        }
+
+        $paymentTypes = $query->distinct()
             ->pluck('payment_types.id');
 
-      return $paymentTypes;
+        return $paymentTypes;
 
     }
 
     public function generateDataReport($paymentTypes)
     {
-        $reportData = [];
+        $report = [];
 
-        foreach ($paymentTypes as $paymentTypeId) {
-            $reportData[$paymentTypeId] = Installment::join('debts', 'debts.id', '=','installments.debt_id')
+        $data = [];
+
+        $qtdPaymentTypes = count($paymentTypes);
+
+        foreach ($paymentTypes as $key => $paymentTypeId) {
+
+            $loop = $key + 1;
+
+            $reportData = Installment::join('debts', 'debts.id', '=','installments.debt_id')
                 ->join('payment_types', 'payment_types.id', '=', 'debts.payment_type_id')        
                 ->join('shoppers', 'shoppers.id', '=','installments.shopper_id')        
                 ->where('installments.shopper_id', $this->dataSearch->shopper_id)
@@ -74,8 +89,21 @@ class ReportInstallmentsByShopper
                     'shoppers.name'
                 )
                 ->get();
+
+            $data[$key]['paymentType'] = Str::title($reportData[0]->description);
+            $data[$key]['reports'] = $reportData;
+
+            if ($loop == $qtdPaymentTypes) {
+
+                $report['shopperName'] = Str::title($data[$key]['reports'][0]->name);
+                $report['dateRef'] = carbon::createFromFormat('Y-m', $this->dataSearch->year.'-'.$this->dataSearch->month)->format('m/Y');
+                $report['data'] = $data;
+            }
+
+           
+                
         }
 
-        return $reportData;
+        return $report;
     }
 }

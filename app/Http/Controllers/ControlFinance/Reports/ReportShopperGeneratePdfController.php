@@ -23,48 +23,5 @@ class ReportShopperGeneratePdfController extends Controller
 
         $pdf = PDF::loadView('control-finance.report.pdf.installment-by-shopper', $data);
         return $pdf->stream('control-finance.report.pdf.installment-by-shopper', $data);
-
-        
-
-        dd($data['reports']);
-
-       /*  $year = Carbon::now()->format("Y");
-        $month = Carbon::now()->format("m");
-        
-        $data = [];
-        $data['actionFieldDisable'] = 1;
-
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = Shopper::all();
-        $data['yearMonthRef'] = Carbon::now()->format('m/Y');
-        $data['reports'] = collect([]);
-
-        if ($request['month']) {
-            $month = $request->month;
-            $year = $request->year;
-            $data['yearMonthRef'] = "{$month}/{$year}";
-        }
-
-        if ($shopId = $request->shopper_id) {
-
-            $data['actionFieldDisable'] = 0;
-
-            $reportsPdf = new ReportInstallmentsByShopper($request);
-            $data['reports'] = $reportsPdf->getDataReport(); 
-        }
-
-      
-
-        $request->session()
-            ->put('filters', $request->all());
-
-        $data['year'] = $year;
-        $data['month'] = $month;        
-        $data['shopperId'] = $shopId ?? 0;
-        $data['payTypeId'] = $payTypeId ?? 0; */
-
-        
-
-        return view('control-finance.report.shopper', $data);
     }
 }

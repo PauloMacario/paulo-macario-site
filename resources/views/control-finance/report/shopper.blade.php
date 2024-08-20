@@ -48,7 +48,7 @@
                                             <select class="form-control field-disabled" name="payment_type_id" id="" disabled>
                                                 <option value="">Selecione Tipo</option>
                                                 @foreach ( $paymentTypes as $payType )
-                                                    <option value="{{ $payType->id }}" @if($payType->id  == $payTypeId) selected @endif>{{ $payType->description }}</option>                                                
+                                                    <option value="{{ $payType->id }}" @if($payType->id  == $paymentTypeId) selected @endif>{{ $payType->description }}</option>                                                
                                                 @endforeach
                                             </select>
                                         </div>
