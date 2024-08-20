@@ -93,23 +93,32 @@
             color:#6b6b6b;
         }
 
+        
         .font-total-item {
-            font-size: 16px;
+            font-size: 12px;
             font-style: italic;
             color:#3d3d3d;
+            font-weight:bold;
         }
 
         .font-total-footer {
-            font-size: 16px;
+            font-size: 12px;
             font-style: italic;
             color:#b10d0d;
             font-weight:bold;
         }
 
         .font-header {
-            font-size: 16px;
+            font-size: 12px;
             font-style: italic;
             color:#022994;
+            font-weight:bold;
+        }
+
+        .font-item-title {
+            font-size: 12px;
+            font-style: italic;
+            color:#494949;
             font-weight:bold;
         }
         
@@ -141,7 +150,7 @@
 
             <table class="table-items mb-15">                           
                 <tr>
-                    <td colspan="4" class=" pl-4">{{ $data['paymentType'] }}</td>
+                    <td colspan="4" class="font-item-title pl-4">{{ $data['paymentType'] }}</td>
                 </tr>
                 @foreach($data['reports'] as $report)    
                 
