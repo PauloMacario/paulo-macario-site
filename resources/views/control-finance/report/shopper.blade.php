@@ -138,15 +138,13 @@
                                                         <input type="checkbox" name="payment_type_id[{{ $item['paymentTypeId'] }}]" id="" class="item-payment-type">
                                                     </td>
                                                 </tr>                                                    
-                                                {{-- <tr class="bg-olive">
-                                                    <th colspan="3"></th>
-                                                </tr> --}}
                                             @endforeach
                                         </tbody>
                                     </table>
-
-                                    <button class="btn bg-purple" type="submit">Gerar PDF</button>
-
+                                    <div class="">
+                                        <button class="btn bg-purple mr-5" type="submit">Gerar PDF</button>
+                                         <input type="checkbox" name="download" id="download"> Baixar PDF
+                                    </div>
                                 </form>
                             </div>
                         @endif

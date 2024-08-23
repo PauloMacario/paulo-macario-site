@@ -7,7 +7,7 @@ use App\Models\ControlFinance\Installment;
 use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
-
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 

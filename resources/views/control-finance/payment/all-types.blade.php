@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card card-olive mb-0">
                     <div class="card-header">
-                        <h5 class="card-title">Pagamentos{{-- <strong class="ml-2">{{ $yearMonthRef }}</strong> --}}</h5>
+                        <h5 class="card-title">Pagamentos por tipo{{-- <strong class="ml-2">{{ $yearMonthRef }}</strong> --}}</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -31,10 +31,12 @@
                                 </p>
                                 <div class="collapse show" id="collapseExample">
                                     <div class="card card-body">
-                                        <form action="" method="GET">
+                                        <form action="{{ route('paymentAllPaymentTypesSearch_post') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="status" value="PP">
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">                                                                      
+                                                <div class="col-xs-12 col-md-3">
+                                                    <div class="form-group">                                           
                                                         <select class="form-control" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
                                                             <option value="02" @if($month == '02') selected @endif>Fev</option>
@@ -51,7 +53,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-xs-12 col-md-3">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
@@ -69,47 +71,55 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">                                                                   
-                                                        <select class="form-control" name="category_id" id="">
-                                                            <option value="0">Selecione Categoria</option>
-                                                            @foreach ( $categories as $category )
-                                                                <option value="{{ $category->id }}" @if($category->id  == $categoryId) selected @endif>{{ $category->description }}</option>                                                
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">                                                                   
-                                                        <select class="form-control" name="payment_type_id" id="">
-                                                            <option value="0">Selecione Tipo</option>
-                                                            @foreach ( $paymentTypes as $payType )
-                                                                <option value="{{ $payType->id }}" @if($payType->id  == $payTypeId) selected @endif>{{ $payType->description }}</option>                                                
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                               
                                                         <select class="form-control" name="shopper_id" id="">
-                                                            <option value="0">Selecione comprador</option>
+                                                            <option value="">Selecione comprador</option>
                                                             @foreach ( $shoppers as $shopper )
-                                                                <option value="{{ $shopper->id }}" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                <option value="{{ $shopper->id }}" 
+                                                                    @if(isset($shopper_id) && $shopper->id  == $shopper_id) 
+                                                                        selected 
+                                                                    @endif>
+                                                                    {{ $shopper->name }}
+                                                                </option>                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div class="row">                                             
+                                                <div class="col-xs-12 col-md-5">
+                                                    <div class="form-group">                                                                   
+                                                        <select class="form-control" name="payment_type_id" id="">
+                                                            <option value="">Selecione Tipo</option>
+                                                            @foreach ( $paymentTypes as $payType )
+                                                                <option value="{{ $payType->id }}" 
+                                                                @if(isset($payment_type_id) && $payType->id  == $payment_type_id) 
+                                                                    selected 
+                                                                @endif>
+                                                                {{ $payType->description }}
+                                                            </option>                                                
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="status" id="status" >
-                                                            <option value="0" selected>Todos status</option>           
-                                                            <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
-                                                            <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
-                                                            <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
-                                                            <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
-                                                    </select>                
+                                                <div class="col-xs-12 col-md-5">
+                                                    <div class="form-group">                                                                   
+                                                        <select class="form-control" name="category_id" id="">
+                                                            <option value="">Selecione Categoria</option>
+                                                            @foreach ( $categories as $category )
+                                                                <option value="{{ $category->id }}" 
+                                                                    @if(isset($category_id) && $category->id == $category_id) 
+                                                                        selected 
+                                                                    @endif>
+                                                                    {{ $category->description }}
+                                                                </option>                                                
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">            
+                                                </div>                                               
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-5">            
                                                     <div class="form-group">
                                                         <button class="btn bg-olive btn-block">
                                                             Filtrar
@@ -117,9 +127,9 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">            
+                                                <div class="col-xs-12 col-md-5">            
                                                     <div class="form-group">
-                                                        <a href="{{ route('paymentAllInstallments_get') }}" class="btn bg-warning btn-block">
+                                                        <a href="{{ route('paymentAllPaymentTypesSearch_get') }}" class="btn bg-warning btn-block">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
@@ -135,42 +145,34 @@
                             <div class="col-xs-12 col-md-8 col-lg-8">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-bordered mb-3"> 
-                                        <tr>
-                                            <th class="text-center" >Descrição da Parcela</th>
-                                            <th colspan="2" class="text-center" >Status</th>                                              
-                                            <th class="text-center" >Salvar</th>                                          
-                                        </tr>
-                                       
-                                        @foreach ( $installments as $installment )       
-                                            <form action="{{ route('paymentPayOneInstallment_post') }}" method="POST" id="form-{{ $installment->id }}">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $installment->id }}">
+
+                                        <form action="">
+                                            @csrf
+                                            <tr>
+                                                <th class="text-center" >Tipo de pagamento</th>
+                                                <th colspan="2" class="text-center" >Pagar</th>                                                                                        
+                                            </tr>
+                                           
+                                            @foreach ( $paymentData as $payment) 
                                                 <tr>
+                                                    <td class="text-center">{{ $payment['description'] }}</td>   
                                                     <td class="text-center">
-                                                        <span><strong>Parcela</strong>{{ $installment->debt->locality }} - 
-                                                            ({{ $installment->number_installment }}/
-                                                            {{ $installment->debt->number_installments }})
-                                                        </span>
-                                                        <span><strong> - Valor: R$ </strong>{{ formatMoneyBR($installment->value) }}</span><br>
-                                                        <span>{{ $installment->debt->shopper->name }}</span><br>
-                                                    
-                                                    </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">                                                    
-                                                        Pagar<input class="ml-3" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
-                                                    </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">  
-                                                        <input class="mr-3" type="radio" name="status" value="PP" @if($installment->status == 'PP') checked @endif>Pend.
-                                                    </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">  
-                                                        <button class="btn btn-xs bg-olive btn-save" id="{{ $installment->id }}">Salvar</button>
-                                                    </td>
-                                                </tr>     
-                                            </form>
-                                        @endforeach
+                                                        <input type="checkbox" name="payment-{{ $payment['id'] }}" id="payment-{{ $payment['id'] }}"> 
+                                                    </td>                                                        
+                                                </tr>
+    
+                                                @foreach($payment['data'] as $installment)                                           
+                                                   <input type="hidden" name="installment" class="installment-{{ $payment['id'] }}" value="{{ $installment->id }}">
+                                                @endforeach
+                                            @endforeach
+                                        </form>
                                     </table>
-                                    {{ $installments->links() }}  
                                 </div>
-                            </div>                               
+                            </div>   
+                            <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
+                                <button class="btn bg-olive" id="pay">Pagar selecionados</button>
+                                <button class="btn btn-warning" id="pendent">Selecionados como pendente</button>
+                            </div>                            
                         </div>
                     </div>
                     <div class="card-footer">
@@ -190,18 +192,55 @@
 <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.btn-save').on('click', function(event){
+            $('#pay').on('click', function(event){
                 event.preventDefault();
 
-                var id = $(this).attr("id");
+                var checked = $("input:checked")
 
-                var form = $('#form-'+id);
+                var paymentTypeSelected = []
+
+                var linhasSelected = []
+
+                var installmentsSelected = []
+
+                if (checked.length > 0) {
+                    checked.each(function(i){
+                        var paymentName = this.name;
+                        var arrPayment = paymentName.split('-')
+                        paymentTypeSelected.push(arrPayment[1])  
+                        
+                        linhasSelected.push($(this).parent().parent())
+                    })
+                }
+
+            
+                paymentTypeSelected.forEach(element => {
+                    
+                    $('.installment-'+element).each(function(i){                       
+                        installmentsSelected.push(this.value)
+                    })
+
+                });
+
+                console.log(
+                    
+                    linhasSelected
+                   
+                )
+
 
                 $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize(),
+                    type: 'POST',
+                    url: "http://127.0.0.1:8000/pagamento/tipo",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {
+                        "installments": installmentsSelected
+                        },
                     success: function (data) {
+
+                        linhasSelected.forEach(function (i) {
+                            i.remove()
+                        })
 
                         var title = data.title;
                         var icon = data.icon;

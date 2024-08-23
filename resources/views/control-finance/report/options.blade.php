@@ -48,7 +48,7 @@
                                 </div>
                             </a>
     
-                            <a href="#{{-- {{ route('paymentAllInstallments_get') }} --}}">
+                          {{--   <a href="#">
                                 <div class="card bg-navy mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
                                     <div class="card-header text-center">
                                         <div class="info-box-icon">
@@ -62,15 +62,15 @@
                                   
                                     </div>
                                 </div>
-                            </a>
+                            </a> --}}
                             <div class="separete"></div>
                         </div>
 
-                        <div class="col-12">
+                   {{--      <div class="col-12">
                             <h4>Relatório em formato EXCEL</h4>
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <a href="#{{-- {{ route('debt_get') }} --}}">
+                        </div> --}}
+                       {{--  <div class="row d-flex justify-content-center">
+                            <a href="#">
                                 <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
                                     <div class="card-header text-center">
                                         <div class="info-box-icon">
@@ -86,7 +86,7 @@
                                 </div>
                             </a>
     
-                            <a href="#{{-- {{ route('paymentAllInstallments_get') }} --}}">
+                            <a href="#">
                                 <div class="card bg-navy mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
                                     <div class="card-header text-center">
                                         <div class="info-box-icon">
@@ -102,7 +102,7 @@
                                 </div>
                             </a>
                             <div class="separete"></div>
-                        </div>
+                        </div> --}}
 
 
                     </div>

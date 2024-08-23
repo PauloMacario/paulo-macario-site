@@ -23,7 +23,7 @@ Route::middleware('auth')
         ->name('pdfReportShopper_get');
 
         Route::post(
-            '/relatorio/comprador/busca', 
+            '/relatorio/comprador', 
             ReportShopperController::class
         )
         ->name('pdfReportShopper_post');

@@ -6,6 +6,8 @@ use App\Http\Controllers\ControlFinance\Payment\{
     ShowAllPayInstallmentsController,
     PayOneInstallmentController,
     PayLotInstallmentsController,
+    ShowAllPayTypesController,
+    saveAllPayTypesController
 };
 
 Route::middleware('auth')
@@ -34,4 +36,25 @@ Route::middleware('auth')
             PayLotInstallmentsController::class
         )
         ->name('paymentPayLotInstallmentsController_post');
+
+        Route::get(
+            '/pagamento/tipo', 
+            ShowAllPayTypesController::class
+        )
+        ->name('paymentAllPaymentTypesSearch_get');
+
+        Route::post(
+            '/pagamento/tipo/busca', 
+            ShowAllPayTypesController::class
+        )
+        ->name('paymentAllPaymentTypesSearch_post');
+
+        Route::post(
+            '/pagamento/tipo/', 
+            saveAllPayTypesController::class
+        )
+        ->name('paymentAllPaymentTypes_post');
     });
+
+
+    

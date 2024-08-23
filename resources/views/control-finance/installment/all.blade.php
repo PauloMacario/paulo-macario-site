@@ -176,23 +176,23 @@
                                 <table class="table table-sm table-borderless">        
                                     @foreach ( $installments as $installment )    
                                         <tr>
-                                            <td class="font-italic text-left font-12" width="35%">{{ $installment->debt->paymentType->description }}</td>
-                                            <td class="font-italic text-center font-12" width="35%"
+                                            <td class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif" width="35%">{{ $installment->debt->paymentType->description }}</td>
+                                            <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="35%"
                                                 @if(isset($installment->debt->category->style->color))
                                                     style="color:{{ $installment->debt->category->style->color }};"    
                                                 @endif
                                             >
                                                 {{ $installment->debt->category->description }}
                                             </td>
-                                            <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($installment->due_date) }}</td>
+                                            <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="30%">{{ formatDateBR($installment->due_date) }}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="font-weight-bold text-left font-14">
-                                                <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}">
+                                                <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" @if($installment->status == 'PM') value-paid @endif">
                                                     {{ $installment->debt->locality }}
 
                                                     @if ($installment->debt->number_installments > 1)
-                                                        <span class="ml-2"> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                                        <span class="ml-2  @if($installment->status == 'PM') value-paid @endif"  @if($installment->status == 'PM') value-paid @endif> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
                                                     @endif
                                                 </a>
                                             </td>
@@ -205,12 +205,12 @@
                                         </tr>
                                         @if ($installment->debt->prorated_debt == 1)                                
                                             <tr>
-                                                <td colspan='2' class="font-italic text-left font-12">{{ $installment->shopper->name }}</td>
-                                                <td class="font-weight-bold font-italic text-center text-info font-12"><i class="fas fa-users"></i>Rateio</td>
+                                                <td colspan='2' class="font-italic text-left font-12"  @if($installment->status == 'PM') value-paid @endif>{{ $installment->shopper->name }}</td>
+                                                <td class="font-weight-bold font-italic text-center text-info font-12  @if($installment->status == 'PM') value-paid @endif"><i class="fas fa-users"></i>Rateio</td>
                                             </tr> 
                                         @else
                                             <tr>
-                                                <td colspan="3" class="font-italic text-left font-12">{{ $installment->shopper->name }}</td>
+                                                <td colspan="3" class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif">{{ $installment->shopper->name }}</td>
                                             </tr> 
                                         @endif  
                                         <tr>

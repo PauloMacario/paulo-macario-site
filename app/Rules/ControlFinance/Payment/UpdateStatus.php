@@ -28,16 +28,7 @@ class UpdateStatus
             ];
         }
 
-        if ($installment->status == $data->status) {
-            return [
-                "title" => "Importante!", 
-                "icon" => "info", 
-                "msg" => "Parcela já está com status selecionado.", 
-                "statusCode" => 400
-            ];
-        }
-
-        $update = $installment->update(
+        $installment->update(
             [
                 "status" => $data->status
             ]

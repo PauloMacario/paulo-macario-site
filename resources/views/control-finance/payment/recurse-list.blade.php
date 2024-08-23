@@ -15,8 +15,8 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <a href="#{{-- {{ route('debt_get') }} --}}">
-                            <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
+                       {{--  <a href="#">
+                            <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
                                 <div class="card-header text-center">
                                     <div class="info-box-icon">
                                         <span>
@@ -25,14 +25,14 @@
                                     </div>         
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title text-center p-3"> <span class="">Pagamentos de compras</span></h5>
+                                <h5 class="card-title text-center p-3"> <span class="">Compras</span></h5>
                               
                                 </div>
                             </div>
                         </a>
-
+ --}}
                         <a href="{{ route('paymentAllInstallments_get') }}">
-                            <div class="card bg-navy mb-2 ml-2 mr-4 mt-2" style="max-width: 14rem;">
+                            <div class="card bg-navy mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
                                 <div class="card-header text-center">
                                     <div class="info-box-icon">
                                         <span>
@@ -41,7 +41,23 @@
                                     </div>         
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title text-center p-3"><span class="">Pagamentos de parcelas</span></h5>
+                                <h5 class="card-title text-center p-3"><span class="">Parcelas</span></h5>
+                              
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="{{ route('paymentAllPaymentTypesSearch_get') }}">
+                            <div class="card bg-purple mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
+                                <div class="card-header text-center">
+                                    <div class="info-box-icon">
+                                        <span>
+                                            <i class="fas fa-calendar-alt fa-2x"></i>
+                                        </span>
+                                    </div>         
+                                </div>
+                                <div class="card-body">
+                                <h5 class="card-title text-center p-3"><span class="">Tipo de pagamento</span></h5>
                               
                                 </div>
                             </div>

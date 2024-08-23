@@ -8,6 +8,7 @@ use App\Models\ControlFinance\Shopper;
 use Rules\ControlFinance\Reports\Pdf\ReportInstallmentsByShopper;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use PDF;
 
 class ReportShopperGeneratePdfController extends Controller
@@ -25,10 +26,19 @@ class ReportShopperGeneratePdfController extends Controller
 
         $reportsPdf = new ReportInstallmentsByShopper($request);
         $data['reports'] = $reportsPdf->generateDataReport($request['payment_type_id']); 
-
-        //return view('control-finance.report.pdf.installment-by-shopper', $data);
+        
+        
 
         $pdf = PDF::loadView('control-finance.report.pdf.installment-by-shopper', $data);
+
+        if (isset($request->download)) {
+
+            $nameArquivo = Str::snake($data['reports']['shopperName']);
+            $date = Str::replace('/', '_', $data['reports']['dateRef']);
+
+            return $pdf->download("{$nameArquivo}_{$date}'.pdf");
+        }
+
         return $pdf->stream('control-finance.report.pdf.installment-by-shopper', $data);
     }
 }
