@@ -146,7 +146,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-sm table-bordered mb-3"> 
 
-                                        <form action="">
+                                        <form action="{{ route('paymentAllPaymentTypes_post') }}" method="POST" id="form">
                                             @csrf
                                             <tr>
                                                 <th class="text-center" >Tipo de pagamento</th>
@@ -203,6 +203,8 @@
 
                 var installmentsSelected = []
 
+                var form = $('#form');
+
                 if (checked.length > 0) {
                     checked.each(function(i){
                         var paymentName = this.name;
@@ -222,16 +224,9 @@
 
                 });
 
-                console.log(
-                    
-                    linhasSelected
-                   
-                )
-
-
                 $.ajax({
-                    type: 'POST',
-                    url: "http://127.0.0.1:8000/pagamento/tipo",
+                    type: form.attr('method'),
+                    url: form.attr('action'),
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     data: {
                         "installments": installmentsSelected

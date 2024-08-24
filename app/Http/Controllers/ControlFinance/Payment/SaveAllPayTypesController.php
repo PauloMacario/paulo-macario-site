@@ -10,10 +10,6 @@ class SaveAllPayTypesController extends Controller
 {
     public function __invoke(Request $request)
     {
-        logger()->info('SaveAllPayTypesController');
-
-        logger()->info('SaveAllPayTypesController-> ' . json_encode($request->all()));
-
         $data = new \stdClass();
 
         $dataResponse = [];
@@ -28,8 +24,6 @@ class SaveAllPayTypesController extends Controller
 
             array_push($dataResponse, $response);
         }
-
-        logger()->info('SaveAllPayTypesController -> Sucesso');
 
         $response = [
             "title" => "Sucesso :)",
