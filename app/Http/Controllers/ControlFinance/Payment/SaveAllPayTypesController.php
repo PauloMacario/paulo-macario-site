@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use Rules\ControlFinance\Payment\UpdateStatus;
 use Illuminate\Http\Request;
 
-class saveAllPayTypesController extends Controller
+class SaveAllPayTypesController extends Controller
 {
     public function __invoke(Request $request)
     {
+        logger()->info('SaveAllPayTypesController');
+
+        logger()->info('SaveAllPayTypesController-> ' . json_encode($request->all()));
+
         $data = new \stdClass();
 
         $dataResponse = [];
@@ -24,6 +28,8 @@ class saveAllPayTypesController extends Controller
 
             array_push($dataResponse, $response);
         }
+
+        logger()->info('SaveAllPayTypesController -> Sucesso');
 
         $response = [
             "title" => "Sucesso :)",
