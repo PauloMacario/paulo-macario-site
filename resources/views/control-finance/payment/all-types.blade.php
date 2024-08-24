@@ -141,39 +141,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-8 col-lg-8">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-bordered mb-3"> 
+                        @if (!empty($paymentData))
+                            <div class="row">
+                                <div class="col-xs-12 col-md-8 col-lg-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered mb-3"> 
 
-                                        <form action="{{ route('paymentAllPaymentTypes_post') }}" method="POST" id="form">
-                                            @csrf
-                                            <tr>
-                                                <th class="text-center" >Tipo de pagamento</th>
-                                                <th colspan="2" class="text-center" >Pagar</th>                                                                                        
-                                            </tr>
-                                           
-                                            @foreach ( $paymentData as $payment) 
+                                            <form action="{{ route('paymentAllPaymentTypes_post') }}" method="POST" id="form">
+                                                @csrf
                                                 <tr>
-                                                    <td class="text-center">{{ $payment['description'] }}</td>   
-                                                    <td class="text-center">
-                                                        <input type="checkbox" name="payment-{{ $payment['id'] }}" id="payment-{{ $payment['id'] }}"> 
-                                                    </td>                                                        
+                                                    <th class="text-center" >Tipo de pagamento</th>
+                                                    <th colspan="2" class="text-center" >Pagar</th>                                                                                        
                                                 </tr>
-    
-                                                @foreach($payment['data'] as $installment)                                           
-                                                   <input type="hidden" name="installment" class="installment-{{ $payment['id'] }}" value="{{ $installment->id }}">
+                                            
+                                                @foreach ( $paymentData as $payment) 
+                                                    <tr>
+                                                        <td class="text-center">{{ $payment['description'] }}</td>   
+                                                        <td class="text-center">
+                                                            <input type="checkbox" name="payment-{{ $payment['id'] }}" id="payment-{{ $payment['id'] }}"> 
+                                                        </td>                                                        
+                                                    </tr>
+        
+                                                    @foreach($payment['data'] as $installment)                                           
+                                                    <input type="hidden" name="installment" class="installment-{{ $payment['id'] }}" value="{{ $installment->id }}">
+                                                    @endforeach
                                                 @endforeach
-                                            @endforeach
-                                        </form>
-                                    </table>
+                                            </form>
+                                        </table>
+                                    </div>
+                                </div>   
+                                <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
+                                    <button class="btn bg-olive" id="pay">Pagar selecionados</button>
+                                    <button class="btn btn-warning" id="pendent">Selecionados como pendente</button>
+                                </div>                            
+                            </div>
+                        @else
+                            <div class="row">
+                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                    @include('control-finance.components.results-empty')
                                 </div>
-                            </div>   
-                            <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
-                                <button class="btn bg-olive" id="pay">Pagar selecionados</button>
-                                <button class="btn btn-warning" id="pendent">Selecionados como pendente</button>
-                            </div>                            
-                        </div>
+                            </div>
+                        @endif                      
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -189,7 +197,8 @@
 @stop
 
 @push('js')
-<script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/yoda.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#pay').on('click', function(event){
@@ -224,44 +233,52 @@
 
                 });
 
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    data: {
-                        "installments": installmentsSelected
+                if (installmentsSelected.length == 0) {
+
+                    Swal.fire({
+                        title: "Deu ruim!",
+                        text: "Nada foi selecionado" ,
+                        icon: "info",
+                        confirmButtonText: 'Fechar'
+                    }) 
+                }
+                else {
+
+                    $.ajax({
+                        type: form.attr('method'),
+                        url: form.attr('action'),
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: {
+                            "installments": installmentsSelected
+                            },
+                        success: function (data) {
+    
+                            linhasSelected.forEach(function (i) {
+                                i.remove()
+                            })
+    
+                            let title = "Dizer, eu vou!";
+                            let text = "QUE A FORÇA ESTEJA COM VOCÊ";
+                            let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                            getYodaSwal(linkImg, title, text)
                         },
-                    success: function (data) {
+                        error: function (data) {
+    
+                            let title = data.responseJSON.title;
+                            let icon = data.responseJSON.icon;
+                            let msg = data.responseJSON.msg;
+    
+                            Swal.fire({
+                                title: title,
+                                text: msg,
+                                icon: icon,
+                                confirmButtonText: 'Fechar'
+                                }) 
+                        },
+                    });
+                }
 
-                        linhasSelected.forEach(function (i) {
-                            i.remove()
-                        })
-
-                        var title = data.title;
-                        var icon = data.icon;
-                        var msg = data.msg;
-
-                        Swal.fire({
-                            title: title,
-                            text: msg,
-                            icon: icon,
-                            confirmButtonText: 'Fechar'
-                            });
-                    },
-                    error: function (data) {
-
-                        var title = data.responseJSON.title;
-                        var icon = data.responseJSON.icon;
-                        var msg = data.responseJSON.msg;
-
-                        Swal.fire({
-                            title: title,
-                            text: msg,
-                            icon: icon,
-                            confirmButtonText: 'Fechar'
-                            }) 
-                    },
-                });
             })
         });
     </script>

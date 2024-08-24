@@ -132,7 +132,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-md-8 col-lg-8">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-bordered mb-3"> 
                                         <tr>
@@ -187,7 +187,8 @@
 @stop
 
 @push('js')
-<script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/yoda.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.btn-save').on('click', function(event){
@@ -203,16 +204,11 @@
                     data: form.serialize(),
                     success: function (data) {
 
-                        var title = data.title;
-                        var icon = data.icon;
-                        var msg = data.msg;
+                        let title = "Dizer, eu vou!";
+                        let text = "QUE A FORÇA ESTEJA COM VOCÊ";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
 
-                        Swal.fire({
-                            title: title,
-                            text: msg,
-                            icon: icon,
-                            confirmButtonText: 'Fechar'
-                            });
+                        getYodaSwal(linkImg, title, text)
                     },
                     error: function (data) {
 
