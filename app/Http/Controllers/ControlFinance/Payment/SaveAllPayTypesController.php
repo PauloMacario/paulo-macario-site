@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Rules\ControlFinance\Payment\UpdateStatus;
 use Illuminate\Http\Request;
 
-class saveAllPayTypesController extends Controller
+class SaveAllPayTypesController extends Controller
 {
     public function __invoke(Request $request)
     {

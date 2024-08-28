@@ -7,7 +7,7 @@ use App\Http\Controllers\ControlFinance\Payment\{
     PayOneInstallmentController,
     PayLotInstallmentsController,
     ShowAllPayTypesController,
-    saveAllPayTypesController
+    SaveAllPayTypesController
 };
 
 Route::middleware('auth')
@@ -51,7 +51,7 @@ Route::middleware('auth')
 
         Route::post(
             '/pagamento/tipo/', 
-            saveAllPayTypesController::class
+            SaveAllPayTypesController::class
         )
         ->name('paymentAllPaymentTypes_post');
     });

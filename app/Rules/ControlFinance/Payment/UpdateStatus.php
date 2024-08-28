@@ -11,6 +11,7 @@ class UpdateStatus
         $installment = Installment::find($data->id);
 
         if (! $installment) {
+            
             return [
                 "title" => "Algo deu errado :(", 
                 "icon" => "error" , 
@@ -20,6 +21,7 @@ class UpdateStatus
         }
 
         if (!isset($data->status)) {
+            
             return [
                 "title" => "Algo deu errado :(", 
                 "icon" => "error" , 
@@ -34,7 +36,6 @@ class UpdateStatus
             ]
         );
 
-       
         return [
             "title" => "Sucesso :)", 
             "icon" => "success" , 
