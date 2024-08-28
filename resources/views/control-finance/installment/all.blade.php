@@ -55,9 +55,9 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
+                            <div class="col-sm-12 col-md-10 col-lg-8">
                                 <p class="text-right">
-                                    <button class="btn bg-olive" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <button class="btn bg-olive btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                       filtros
                                       <i class="fas fa-filter"></i>
                                     </button>
@@ -66,9 +66,9 @@
                                     <div class="card card-body">
                                         <form action="{{ route('installmentAllFilters_post') }}" method="GET">
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                     
-                                                        <select class="form-control" name="month" id="">
+                                                        <select class="form-control form-control-sm" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
                                                             <option value="02" @if($month == '02') selected @endif>Fev</option>
                                                             <option value="03" @if($month == '03') selected @endif>Mar</option>
@@ -84,9 +84,9 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                      
-                                                        <select class="form-control" name="year" id="">
+                                                        <select class="form-control form-control-sm" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
                                                             <option value="2021" @if($year == '2021') selected @endif>2021</option>
                                                             <option value="2022" @if($year == '2022') selected @endif>2022</option>
@@ -101,34 +101,34 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                   
-                                                        <select class="form-control" name="payment_type_id" id="">
-                                                            <option value="">Selecione Tipo</option>
+                                                        <select class="form-control form-control-sm" name="payment_type_id" id="">
+                                                            <option value="">Tipos</option>
                                                             @foreach ( $paymentTypes as $payType )
                                                                 <option value="{{ $payType->id }}" @if($payType->id  == $payTypeId) selected @endif>{{ $payType->description }}</option>                                                
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                               
-                                                        <select class="form-control" name="shopper_id" id="">
-                                                            <option value="">Selecione comprador</option>
+                                                        <select class="form-control form-control-sm" name="shopper_id" id="">
+                                                            <option value="">Compradores</option>
                                                             @foreach ( $shoppers as $shopper )
                                                                 <option value="{{ $shopper->id }}" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">
+                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <select 
-                                                            class="form-control" 
+                                                            class="form-control form-control-sm" 
                                                             name="status" 
                                                             id="status" 
                                                         >
-                                                            <option value="" selected>Todos status</option>           
+                                                            <option value="" selected>Status</option>           
                                                             <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
                                                             <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
@@ -136,17 +136,17 @@
                                                     </select>                
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">            
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <button class="btn bg-olive btn-block">
+                                                        <button class="btn bg-olive btn-block btn-sm">
                                                             Filtrar
                                                             <i class="fas fa-search"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3 col-lg-3">            
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <a href="{{ route('installmentAll_get') }}" class="btn bg-warning btn-block">
+                                                        <a href="{{ route('installmentAll_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
@@ -157,81 +157,71 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
-                                <table class="table table-sm table-striped">
-                                    <tr>
-                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
-                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>        
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
-                                <table class="table table-sm table-borderless">        
-                                    @foreach ( $installments as $installment )    
+                                <div class="card card-body">
+                                    <table class="table table-sm table-striped mb-2">
                                         <tr>
-                                            <td class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif" width="35%">{{ $installment->debt->paymentType->description }}</td>
-                                            <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="35%"
-                                                @if(isset($installment->debt->category->style->color))
-                                                    style="color:{{ $installment->debt->category->style->color }};"    
-                                                @endif
-                                            >
-                                                {{ $installment->debt->category->description }}
-                                            </td>
-                                            <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="30%">{{ formatDateBR($installment->due_date) }}</td>
+                                            <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                            <th class="text-center"><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
                                         </tr>
-                                        <tr>
-                                            <td colspan="2" class="font-weight-bold text-left font-14">
-                                                <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" @if($installment->status == 'PM') value-paid @endif">
-                                                    {{ $installment->debt->locality }}
-
-                                                    @if ($installment->debt->number_installments > 1)
-                                                        <span class="ml-2  @if($installment->status == 'PM') value-paid @endif"  @if($installment->status == 'PM') value-paid @endif> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                    </table>
+                                    <table class="table table-sm table-borderless">        
+                                        @foreach ( $installments as $installment )    
+                                            <tr>
+                                                <td class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif" width="35%">{{ $installment->debt->paymentType->description }}</td>
+                                                <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="35%"
+                                                    @if(isset($installment->debt->category->style->color))
+                                                        style="color:{{ $installment->debt->category->style->color }};"    
                                                     @endif
-                                                </a>
-                                            </td>
-                                            <td class="font-weight-bold text-center font-14 @if($installment->status == 'PM') value-paid @endif">
-                                                R$ {{ formatMoneyBR($installment->value) }}
-                                                @if($installment->status == 'PM')                                              
-                                                    <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
-                                                @endif                                            
-                                            </td>
-                                        </tr>
-                                        @if ($installment->debt->prorated_debt == 1)                                
+                                                >
+                                                    {{ $installment->debt->category->description }}
+                                                </td>
+                                                <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="30%">{{ formatDateBR($installment->due_date) }}</td>
+                                            </tr>
                                             <tr>
-                                                <td colspan='2' class="font-italic text-left font-12"  @if($installment->status == 'PM') value-paid @endif>{{ $installment->shopper->name }}</td>
-                                                <td class="font-weight-bold font-italic text-center text-info font-12  @if($installment->status == 'PM') value-paid @endif"><i class="fas fa-users"></i>Rateio</td>
-                                            </tr> 
-                                        @else
+                                                <td colspan="2" class="font-weight-bold text-left font-14">
+                                                    <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" @if($installment->status == 'PM') value-paid @endif">
+                                                        {{ $installment->debt->locality }}
+    
+                                                        @if ($installment->debt->number_installments > 1)
+                                                            <span class="ml-2  @if($installment->status == 'PM') value-paid @endif"  @if($installment->status == 'PM') value-paid @endif> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                                        @endif
+                                                    </a>
+                                                </td>
+                                                <td class="font-weight-bold text-center font-14 @if($installment->status == 'PM') value-paid @endif">
+                                                    R$ {{ formatMoneyBR($installment->value) }}
+                                                    @if($installment->status == 'PM')                                              
+                                                        <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
+                                                    @endif                                            
+                                                </td>
+                                            </tr>
+                                            @if ($installment->debt->prorated_debt == 1)                                
+                                                <tr>
+                                                    <td colspan='2' class="font-italic text-left font-12"  @if($installment->status == 'PM') value-paid @endif>{{ $installment->shopper->name }}</td>
+                                                    <td class="font-weight-bold font-italic text-center text-info font-12  @if($installment->status == 'PM') value-paid @endif"><i class="fas fa-users"></i>Rateio</td>
+                                                </tr> 
+                                            @else
+                                                <tr>
+                                                    <td colspan="3" class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif">{{ $installment->shopper->name }}</td>
+                                                </tr> 
+                                            @endif  
                                             <tr>
-                                                <td colspan="3" class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif">{{ $installment->shopper->name }}</td>
-                                            </tr> 
-                                        @endif  
+                                                <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
+                                            </tr>
+                                        @endforeach
+                                    </table>                                   
+                                    <table class="table table-sm table-striped mt-2">
                                         <tr>
-                                            <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
+                                            <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
+                                            <th><h5 class="text-center">R$ {{ formatMoneyBR($total) }}</h5></th>
                                         </tr>
-                                    @endforeach
-                                </table>
+                                    </table>                                        
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
-                                <table class="table table-sm table-striped">
-                                    <tr>
-                                        <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
-                                        <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>                                                  
                     </div>
                 </div>
             </div>

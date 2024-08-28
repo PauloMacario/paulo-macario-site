@@ -25,7 +25,7 @@
                                     </div>         
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title text-center p-3"> <span class="">Compras</span></h5>
+                                <h5 class=" text-center p-1"> <span class="">Compras</span></h5>
                               
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                     </div>         
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title text-center p-3"><span class="">Parcelas</span></h5>
+                                <h5 class=" text-center p-1"><span class="">Parcelas</span></h5>
                               
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     </div>         
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title text-center p-3"><span class="">Tipo de pagamento</span></h5>
+                                <h5 class=" text-center p-1"><span class="">Tipo de pagamento</span></h5>
                               
                                 </div>
                             </div>

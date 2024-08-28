@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ControlFinance\HomeControlFinanceController;
 
 Route::get('/', function () {
     return view('index');
@@ -12,7 +12,7 @@ Route::middleware('auth')
 
         Route::get(
             '/home', 
-            [HomeController::class, 'index']
+            [HomeControlFinanceController::class, 'index']
         )
         ->name('home');
     }
@@ -30,4 +30,4 @@ include_once 'controlFinance/settings.php';
 include_once 'controlFinance/shopper.php';
 include_once 'controlFinance/charts.php';
 include_once 'controlFinance/payment.php';
-include_once 'controlFinance/relatorio.php';
+include_once 'controlFinance/report.php';
