@@ -6,59 +6,60 @@ use App\Http\Controllers\Controller;
 use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
-use App\Models\ControlFinance\Installment;
+use Rules\ControlFinance\Installment\InstallmentsByFilters;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ShowAllInstallmentsController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $year = Carbon::now()->format("Y");
-        $month = Carbon::now()->format("m");
-        
         $data = [];
         $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['shoppers'] = Shopper::all();
-        $data['yearMonthRef'] = Carbon::now()->format('m/Y');
-
-        if ($request['month']) {
-            $month = $request->month;
-            $year = $request->year;
-            $data['yearMonthRef'] = "{$month}/{$year}";
-        }
-
-        $installments = Installment::whereYear('due_date', $year)
-            ->whereMonth('due_date', $month)
-            ->with('debt');
-
-        if ($shopId = $request['shopper_id']) {
-            $installments->where('shopper_id', $shopId);
-        }
-
-        if ($payTypeId = $request['payment_type_id']) {
-            $installments->whereHas('debt', function (Builder $query) use ($payTypeId) {                
-                $query->where('payment_type_id', $payTypeId);
-            })->get();
-        }
-
-        if ($status = $request['status']) {
-            if ($status != '') {
-                $installments->where('status', $status);
-            }
-        }
         
+        $year = Carbon::now()->format("Y");
+        $month = Carbon::now()->format("m");
+        $yearMonthRef = '';
+
+        if ($request->year) {
+            $year = $request->year;
+            $yearMonthRef = "/{$year}";
+        }
+
+        if ($request->year && !$request->month) {
+            $month = null;
+        }
+
+        if ($request->year && $request->month) {
+            $year = $request->year;
+            $month = $request->month;
+
+            $yearMonthRef = '/'.$month . $yearMonthRef;
+        }
+
+        if (!$request->year && !$request->month) {
+            $request['year'] = $year;
+            $request['month'] = $month;
+        }
+
+        
+
+        $installmentsByFilters = new InstallmentsByFilters($request->all());
+        $installments = $installmentsByFilters->search();
+              
         $request->session()
             ->put('filters', $request->all());
 
         $data['year'] = $year;
         $data['month'] = $month;
+        $data['yearMonthRef'] = $yearMonthRef;
         $data['status'] = $request->status;
-        $data['shopperId'] = $shopId ?? 0;
-        $data['payTypeId'] = $payTypeId ?? 0;
-        $data['installments'] = $installments->get();
+        $data['shopperId'] = $request['shopper_id'] ?? 0;
+        $data['payTypeId'] =  $request['payment_type_id'] ?? 0;
+        $data['categoryId'] =  $request['category_id'] ?? 0;
+        $data['installments'] = $installments;
         $data['total'] = $this->getTotalValue($data['installments']);
         
         return view('control-finance.installment.all', $data);

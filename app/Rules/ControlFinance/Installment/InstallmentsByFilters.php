@@ -17,8 +17,11 @@ class InstallmentsByFilters
     public function search()
     {
         $installments = Installment::whereYear('due_date', $this->filters->year)
-            ->whereMonth('due_date',  $this->filters->month)
             ->with('debt');
+
+        if (isset($this->filters->shopper_id)) {
+            $installments->whereMonth('due_date',  $this->filters->month);
+        }
 
         if (isset($this->filters->shopper_id)) {
             $installments->where('shopper_id', $this->filters->shopper_id);
