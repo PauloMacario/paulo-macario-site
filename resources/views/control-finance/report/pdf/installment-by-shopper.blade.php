@@ -22,7 +22,8 @@
         }
 
         .table-header, .table-items, .table-footer {
-            border: 1px solid #b4b4b4;
+            border: 2px solid #6d6d6d;
+            background-color: #bdbdbd3f;
         }
 
         .text-center {text-align: center;}
@@ -102,16 +103,16 @@
         }
 
         .font-total-footer {
-            font-size: 12px;
+            font-size: 14px;
             font-style: italic;
-            color:#b10d0d;
+            color:#000000;
             font-weight:bold;
         }
 
         .font-header {
-            font-size: 12px;
+            font-size: 14px;
             font-style: italic;
-            color:#022994;
+            color:#000000;
             font-weight:bold;
         }
 
@@ -148,18 +149,18 @@
                 $totalItem = 0.0;
             @endphp
 
-            <table class="table-items mb-15">                           
-                <tr>
-                    <td colspan="4" class="font-item-title pl-4">{{ $data['paymentType'] }}</td>
+            <table class="mb-15" style="border: 1px solid {{ getStyle($data['style'], 'color')}};">                           
+                <tr >
+                    <td colspan="4" class="font-item-title pl-4" style="color:{{ getStyle($data['style'], 'color')}};">{{ $data['paymentType'] }}</td>
                 </tr>
                 @foreach($data['reports'] as $report)    
-                
+               
                     @php
                         $totalItem += $report->value; 
                                          
                     @endphp
 
-                    <tr>
+                    <tr >
                         <td class="font-item pl-15" width="20%">{{ formatDateBR($report->date) }}</td>
                         <td colspan="2" class="font-item" width="50%"> <span class="">{{ $report->locality }}</span> <span class="">({{ $report->number_installment }}/{{ $report->number_installments }})</td>
                         <td class="font-item" width="30%">R$ {{ formatMoneyBR($report->value) }}</td>
@@ -191,6 +192,7 @@
     
 </body>
 </html>
+
 
 
 

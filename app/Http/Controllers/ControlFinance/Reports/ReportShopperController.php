@@ -37,9 +37,7 @@ class ReportShopperController extends Controller
             $reportsPdf = new ReportInstallmentsByShopper($request);
             $data['reports'] = $reportsPdf->getDataReport(); 
         }
-
-      
-
+        
         $request->session()
             ->put('filters', $request->all());
 

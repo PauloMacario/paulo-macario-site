@@ -3,6 +3,7 @@
 namespace Rules\ControlFinance\Reports\Pdf;
 
 use App\Models\ControlFinance\Installment;
+use App\Models\ControlFinance\PaymentType;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -89,8 +90,12 @@ class ReportInstallmentsByShopper
                     'shoppers.name'
                 )
                 ->get();
+            
+            $paymentType = PaymentType::where('id', $paymentTypeId)->select('style')->first();
+            
             $data[$key]['paymentTypeId'] = $paymentTypeId;
             $data[$key]['paymentType'] = Str::title($reportData[0]->description);
+            $data[$key]['style'] = $paymentType->style;
             $data[$key]['reports'] = $reportData;
 
             if ($loop == $qtdPaymentTypes) {
@@ -98,10 +103,7 @@ class ReportInstallmentsByShopper
                 $report['shopperName'] = Str::title($data[$key]['reports'][0]->name);
                 $report['dateRef'] = carbon::createFromFormat('Y-m', $this->dataSearch->year.'-'.$this->dataSearch->month)->format('m/Y');
                 $report['data'] = $data;
-            }
-
-           
-                
+            }                
         }
         return $report;
     }

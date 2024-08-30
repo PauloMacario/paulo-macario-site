@@ -4,15 +4,21 @@
 
 @push('css')
 
-   {{--  <style>
-        .separete {
+<style>
+   
+    .bold {
+        font-weight: bold;
+    }
+
+    /* .separete {
             width: 100%;
             height: 15px;
             border-radius: 50px;
             background-color:#3d997044;
             margin: 10px 0px 50px 0px; 
-        }
-    </style> --}}
+        } */
+        
+    </style> 
 @endpush
 
 @section('content_header')
@@ -130,9 +136,9 @@
                                             <tr >                                               
                                             <th class="text-center"><i>Todos</i>  <input type="checkbox" name="all-payment-types" id="all-payment-types" class="ml-2"></th>
                                             </tr>
-                                            @foreach ($reports['data'] as $item)                                                                                                                                  
-                                                <tr>
-                                                    <td class="text-center" >{{ $item['paymentType'] }} </td>
+                                            @foreach ($reports['data'] as $item)   
+                                                <tr style="color:{{ getStyle($item['style'], 'color')}};">
+                                                    <td class="text-center bold" >{{ $item['paymentType'] }} </td>
                                                     <td class="text-center">{{ $item['reports']->count() }} parcela(s) encontrada(s)</td>
                                                     <td class="text-center">
                                                         <input type="checkbox" name="payment_type_id[{{ $item['paymentTypeId'] }}]" id="" class="item-payment-type">
@@ -192,10 +198,10 @@
                 allPaymentTypes.click(function () {
 
                 if ( $(this).is(':checked') ){
-                    $('input:checkbox').prop("checked", true);
+                    $('.item-payment-type').prop("checked", true);
 
                 }else{
-                    $('input:checkbox').prop("checked", false);
+                    $('.item-payment-type').prop("checked", false);
                     
                 }
             });
