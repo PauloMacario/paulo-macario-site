@@ -11,7 +11,7 @@ class Shopper extends Model
     protected $fillable = [
         'name',
         'order',
-        'style',
+        'color',
         'status'
     ];
 

@@ -41,20 +41,34 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">                                                               
-                                            <select class="form-control" name="shopper_id" id="shopper_id">
+                                            <select class="form-control form-control-sm" name="shopper_id" id="shopper_id">
                                                 <option value="">Selecione comprador</option>
                                                 @foreach ( $shoppers as $shopper )
-                                                    <option value="{{ $shopper->id }}" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                    <option value="{{ $shopper->id }}" 
+                                                        @if($shopper->id  == $shopperId) 
+                                                            selected 
+                                                        @endif
+                                                            style="color:{{ $shopper->color }};"
+                                                        >
+                                                        {{ $shopper->name }}
+                                                    </option>                                                
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">                                                                   
-                                            <select class="form-control field-disabled" name="payment_type_id" id="" disabled>
+                                            <select class="form-control form-control-sm field-disabled" name="payment_type_id" id="" disabled>
                                                 <option value="">Selecione Tipo</option>
                                                 @foreach ( $paymentTypes as $payType )
-                                                    <option value="{{ $payType->id }}" @if($payType->id  == $paymentTypeId) selected @endif>{{ $payType->description }}</option>                                                
+                                                    <option value="{{ $payType->id }}" 
+                                                        @if($payType->id  == $paymentTypeId) 
+                                                            selected 
+                                                        @endif
+                                                            style="color:{{ $payType->color }};"
+                                                        >
+                                                        {{ $payType->description }}
+                                                    </option>                                                
                                                 @endforeach
                                             </select>
                                         </div>
@@ -63,7 +77,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-2">
                                         <div class="form-group">                                                                      
-                                            <select class="form-control field-disabled" name="month" id="" disabled>
+                                            <select class="form-control form-control-sm field-disabled" name="month" id="" disabled>
                                                 <option value="01" @if($month == '01') selected @endif>Jan</option>
                                                 <option value="02" @if($month == '02') selected @endif>Fev</option>
                                                 <option value="03" @if($month == '03') selected @endif>Mar</option>
@@ -81,7 +95,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-2">
                                         <div class="form-group">                                                                      
-                                            <select class="form-control field-disabled" name="year" id="" disabled>
+                                            <select class="form-control form-control-sm field-disabled" name="year" id="" disabled>
                                                 <option value="2020" @if($year == '2020') selected @endif>2020</option>
                                                 <option value="2021" @if($year == '2021') selected @endif>2021</option>
                                                 <option value="2022" @if($year == '2022') selected @endif>2022</option>
@@ -99,7 +113,7 @@
                                
                                     <div class="col-xs-12 col-md-2">            
                                         <div class="form-group ">
-                                            <button class="btn bg-olive btn-block field-disabled" disabled>
+                                            <button class="btn bg-olive btn-block field-disabled btn-sm" disabled>
                                                 Buscar
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -107,7 +121,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-2">            
                                         <div class="form-group">
-                                            <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block" >
+                                            <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block btn-sm" >
                                                 Limpar
                                                 <i class="fas fa-broom"></i>
                                             </a>
@@ -136,8 +150,8 @@
                                             <tr >                                               
                                             <th class="text-center"><i>Todos</i>  <input type="checkbox" name="all-payment-types" id="all-payment-types" class="ml-2"></th>
                                             </tr>
-                                            @foreach ($reports['data'] as $item)   
-                                                <tr style="color:{{ getStyle($item['style'], 'color')}};">
+                                            @foreach ($reports['data'] as $item)
+                                                <tr style="color:{{ $item['color']}};">
                                                     <td class="text-center bold" >{{ $item['paymentType'] }} </td>
                                                     <td class="text-center">{{ $item['reports']->count() }} parcela(s) encontrada(s)</td>
                                                     <td class="text-center">
@@ -148,7 +162,7 @@
                                         </tbody>
                                     </table>
                                     <div class="">
-                                        <button class="btn bg-purple mr-5" type="submit">Gerar PDF</button>
+                                        <button class="btn bg-purple btn-sm mr-5" type="submit">Gerar PDF</button>
                                          <input type="checkbox" name="download" id="download"> Baixar PDF
                                     </div>
                                 </form>

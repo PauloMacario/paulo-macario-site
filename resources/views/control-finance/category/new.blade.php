@@ -24,14 +24,14 @@
 
                                         <div class="form-group">
                                             <label for="id">Ordem exibição</label>
-                                            <input type="number" class="form-control"  name="order" id="order" min="0" max="999" required>
+                                            <input type="number" class="form-control form-control-sm"  name="order" id="order" min="0" max="999" required>
                                         </div>                 
 
                                         <div class="form-group">
                                             <label for="id">Descrição</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="description" 
                                                 id="description"
                                                 placeholder="Saúde, Carro, Alimentação, etc..."
@@ -40,17 +40,18 @@
                                         </div>                   
 
                                         <div class="form-group">
-                                            <label for="id">Style css</label>
-                                            <textarea
-                                                class="form-control" 
-                                                name="style" 
-                                                ></textarea>
+                                            <label for="id">Cor</label>
+                                            <input 
+                                                type="color" 
+                                                class="form-control form-control-sm " 
+                                                name="color"                                               
+                                            >
                                         </div>
 
                                         <div class="form-group">
                                             <label for="id">Status</label>
                                             <select 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="status" 
                                                 id="status"
                                                 required
@@ -70,13 +71,13 @@
                                             <div class="form-group d-flex justify-content-between">
                                                 <button 
                                                     type="submit" 
-                                                    class="btn bg-olive"
+                                                    class="btn bg-olive btn-sm"
                                                     id="btn-save"
                                                     >
                                                     Salvar
                                                     <i class="fas fa-save"></i>
                                                 </button>
-                                                <a href="{{ route('settingAll_get') }}" class="btn bg-warning" id="btn-edit">
+                                                <a href="{{ route('settingAll_get') }}" class="btn bg-warning btn-sm" id="btn-edit">
                                                     Voltar
                                                     <i class="fas fa-arrow-left"></i>
                                                 </a>

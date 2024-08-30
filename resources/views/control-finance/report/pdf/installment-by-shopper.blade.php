@@ -149,9 +149,9 @@
                 $totalItem = 0.0;
             @endphp
 
-            <table class="mb-15" style="border: 1px solid {{ getStyle($data['style'], 'color')}};">                           
+            <table class="mb-15" style="border: 1px solid {{ $data['color'] }};">                           
                 <tr >
-                    <td colspan="4" class="font-item-title pl-4" style="color:{{ getStyle($data['style'], 'color')}};">{{ $data['paymentType'] }}</td>
+                    <td colspan="4" class="font-item-title pl-4" style="color:{{ $data['color'] }};">{{ $data['paymentType'] }}</td>
                 </tr>
                 @foreach($data['reports'] as $report)    
                

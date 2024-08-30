@@ -76,7 +76,7 @@
                                                     @foreach ( $categories as $category )
                                                         <tr>
                                                             <td class="font-14 text-center">
-                                                                <a href="">
+                                                                <a href="" style="color:{{ $category->color }};">
                                                                     {{ $category->description }}
                                                                 </a>
                                                             </td>
@@ -126,7 +126,7 @@
                                                     @foreach ( $paymentTypes as $pay )
                                                         <tr>
                                                             <td class="font-14 text-center">
-                                                                <a href="">
+                                                                <a href="" style="color:{{ $pay->color }};">
                                                                     {{ $pay->description }}
                                                                 </a>
                                                             </td>
@@ -179,7 +179,7 @@
                                                     @foreach ( $shoppers as $shopper )
                                                         <tr>
                                                             <td class="font-14 text-center">
-                                                                <a href="">
+                                                                <a href="" style="color:{{ $shopper->color }};">
                                                                     {{ $shopper->name }}
                                                                 </a>
                                                             </td>

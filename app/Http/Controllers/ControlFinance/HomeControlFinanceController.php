@@ -24,7 +24,7 @@ class HomeControlFinanceController extends Controller
         foreach ($categories as $key => $category) {
             $data['labels'][$key] = $category->description;
             $data['data'][$key] = $this->getAmountDebtsByCategory($category->id);
-            $data['backgroundColor'][$key] = (isset($category->style->color)) ? $category->style->color : '#cdcdcd';
+            $data['backgroundColor'][$key] = (isset($category->color)) ? $category->color : '#cdcdcd';
         }
 
         return $data;
@@ -59,7 +59,7 @@ class HomeControlFinanceController extends Controller
         foreach ($categories as $key => $category) {
             $data['labels'][$key] = $category->description;
             $data['data'][$key] = $this->getAmountDebtsByCategory($category->id);
-            $data['backgroundColor'][$key] = (isset($category->style->color)) ? $category->style->color : '#cdcdcd';
+            $data['backgroundColor'][$key] = (isset($category->color)) ? $category->color : '#cdcdcd';
         }
 
         return $data;
@@ -71,7 +71,7 @@ class HomeControlFinanceController extends Controller
             
             $data['labels'][$key] = $category->description;
 
-            $data['backgroundColor'][$key] = (isset($category->style->color)) ? $category->style->color : '#cdcdcd';
+            $data['backgroundColor'][$key] = (isset($category->color)) ? $category->color : '#cdcdcd';
         }
 
         foreach ($categories as $key => $category) {

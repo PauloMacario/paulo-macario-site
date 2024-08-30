@@ -1,5 +1,21 @@
 @extends('adminlte::page')
 
+@push('css')
+
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
+
+    <style>
+        .bold {
+            font-weight: bold
+        }
+
+        option {
+            font-weight: bold
+        }
+    </style>
+
+@endpush
+
 @section('title', 'Divida')
 
 @section('content_header')
@@ -22,11 +38,15 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Categoria</label>
-                                        <select class="form-control" name="category_id" id="categoryId" required>
+                                        <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
                                             <option value="">Selecione...</option>
                                             @foreach ($categories as $category)
                                                 @if ($category->status == 'E')
-                                                    <option value="{{ $category->id }}">{{ $category->description }}</option>
+                                                    <option value="{{ $category->id }}"
+                                                        style="color:{{ $category->color }};"
+                                                    >
+                                                        {{ $category->description }}
+                                                    </option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -36,10 +56,14 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Comprador(a)</label>
-                                        <select class="form-control" name="shopper_id" id="shopper_id" required>
+                                        <select class="form-control form-control-sm" name="shopper_id" id="shopper_id" required>
                                             <option value="" selected>Selecione...</option>                                       
                                             @foreach ($shoppers as $shopper)                                  
-                                                <option value="{{ $shopper->id }}" >{{ $shopper->name }}</option>
+                                                <option value="{{ $shopper->id }}" 
+                                                    style="color:{{ $shopper->color }};"
+                                                >
+                                                {{ $shopper->name }}
+                                            </option>
                                             @endforeach
                                         </select>                                        
                                     </div>
@@ -50,11 +74,15 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Forma de pagamento</label>
-                                        <select class="form-control" name="payment_type_id" id="payment_type_id" autocomplete="off" required>
+                                        <select class="form-control form-control-sm" name="payment_type_id" id="payment_type_id" autocomplete="off" required>
                                             <option value="" data-installment-enable="0" selected>Selecione...</option>                             
                                             @foreach ($paymentTypes as $paymentType)  
                                                 @if ($paymentType->status == 'E')
-                                                    <option value="{{ $paymentType->id }}" data-installment-enable="{{ $paymentType->installment_enable }}">{{ $paymentType->description }}</option>
+                                                    <option value="{{ $paymentType->id }}" data-installment-enable="{{ $paymentType->installment_enable }}"
+                                                        style="color:{{ $paymentType->color }};"
+                                                        >
+                                                    {{ $paymentType->description }}
+                                                </option>
                                                 @endif
                                             @endforeach                                                
                                         </select>
@@ -64,7 +92,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Parcelas</label>
-                                        <input type="number" class="form-control"  name="number_installments" id="field-number-installments" autocomplete="off" required>
+                                        <input type="number" class="form-control form-control-sm"  name="number_installments" id="field-number-installments" autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +101,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Compra rateada</label>
-                                        <select class="form-control" id="compra-rateada" autocomplete="off">
+                                        <select class="form-control form-control-sm" id="compra-rateada" autocomplete="off">
                                             <option value="">Não</option>                                                                             
                                             <option value="Y">Sim</option>
                                         </select>
@@ -92,7 +120,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Data</label>
-                                        <input type="date" class="form-control"  name="date" id="date" required>
+                                        <input type="date" class="form-control form-control-sm"  name="date" id="date" required>
                                     </div>
                                 </div>
                             </div>
@@ -101,14 +129,14 @@
                                 <div class="col-xs-12 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="id">Loja/local</label>
-                                        <input type="text" class="form-control"  name="locality" id="locality" required value="loja teste">
+                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required value="loja teste">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-md-6 col-lg-2">
                                     <div class="form-group">
                                         <label for="id">Valor total</label>
-                                        <input type="text" class="form-control"  name="total_value" id="totalValue" required value="500">
+                                        <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required value="500">
                                     </div>
                                 </div>
                             </div>                    
@@ -118,7 +146,7 @@
                                 <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
                                     <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
                                         <div class="form-group">
-                                            <a href="{{ route('debt_get') }}" class="btn bg-warning ">
+                                            <a href="{{ route('debt_get') }}" class="btn bg-warning btn-sm">
                                                 Limpar
                                                 <i class="fas fa-broom"></i>
                                             </a>
@@ -126,7 +154,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
                                         <div class="form-group">
-                                            <button type="submit" class="btn bg-olive ">
+                                            <button type="submit" class="btn bg-olive btn-sm">
                                                 Salvar
                                                 <i class="fas fa-save"></i>
                                             </button>

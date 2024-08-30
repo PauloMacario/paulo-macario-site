@@ -28,15 +28,3 @@ if ( ! function_exists('formatDateBR')) {
         return Carbon::parse($date)->format('d/m/Y');
     }
 }
-
-if ( ! function_exists('getStyle')) {
-    function getStyle($style, $key)
-    {
-        $style = json_decode($style, true);
-
-        $fluent = new Fluent($style);
-
-        return $fluent->$key;
-
-    }
-}

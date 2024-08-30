@@ -45,7 +45,7 @@
                                                 <label for="id">Loja/local</label>
                                                 <input 
                                                     type="text" 
-                                                    class="form-control fields-disabled" 
+                                                    class="form-control form-control-sm fields-disabled" 
                                                     name="locality" 
                                                     id="locality" 
                                                     value="{{ $installment->debt->locality }}" 
@@ -57,7 +57,7 @@
                                             <div class="form-group">
                                                 <label for="status">Status</label>
                                                 <select 
-                                                    class="form-control fields-disabled" 
+                                                    class="form-control form-control-sm fields-disabled" 
                                                     name="status" 
                                                     id="status" 
                                                     disabled
@@ -75,7 +75,7 @@
                                                 <label for="id">Valor</label>
                                                 <input 
                                                     type="text" 
-                                                    class="form-control fields-disabled" 
+                                                    class="form-control form-control-sm fields-disabled" 
                                                     name="value" 
                                                     id="value" 
                                                     value={{ formatMoneyBR($installment->value) }}
@@ -90,13 +90,18 @@
                                             <div class="form-group">
                                                 <label for="id">Comprador(a)</label>
                                                 <select 
-                                                    class="form-control fields-disabled" 
+                                                    class="form-control form-control-sm fields-disabled" 
                                                     name="shopper_id" 
                                                     id="shopperId" 
                                                     disabled
                                                     >                                    
                                                     @foreach ($shoppers as $shopper)                                  
-                                                        <option value="{{ $shopper->id }}" @if($shopper->id == $installment->shopper_id) selected @endif>{{ $shopper->name }}</option>
+                                                        <option value="{{ $shopper->id }}" 
+                                                            @if($shopper->id == $installment->shopper_id) 
+                                                                selected 
+                                                            @endif
+                                                                style="color:{{ $shopper->color }};"
+                                                            >{{ $shopper->name }}</option>
                                                     @endforeach
                                                 </select>                                        
                                             </div>
@@ -107,7 +112,7 @@
                                                 <label for="id">N° da parcela</label>
                                                 <input 
                                                     type="number" 
-                                                    class="form-control fields-disabled" 
+                                                    class="form-control form-control-sm fields-disabled" 
                                                     name="number_installment" 
                                                     id="field-number-installment" 
                                                     value="{{ $installment->number_installment }}" 
@@ -123,7 +128,7 @@
                                                 <label for="id">Data</label>
                                                 <input 
                                                     type="date" 
-                                                    class="form-control fields-disabled" 
+                                                    class="form-control form-control-sm fields-disabled" 
                                                     name="due_date" 
                                                     id="date" 
                                                     value="{{ $installment->due_date }}"
@@ -138,13 +143,13 @@
                                         <div class="col-xs-12 col-md-9 col-lg-9">
                                             <div class="col-xs-12 col-md-12 col-lg-12 text-left p-0 m-0">
                                                 <div class="form-group d-flex justify-content-between">
-                                                    <a class="btn bg-warning" id="btn-edit" data-edit="disabled">
+                                                    <a class="btn bg-warning btn-sm" id="btn-edit" data-edit="disabled">
                                                         Editar
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </a>
                                                     <button 
                                                         type="submit" 
-                                                        class="btn bg-olive"
+                                                        class="btn bg-olive btn-sm"
                                                         id="btn-save"
                                                         style="opacity:0;"
 

@@ -36,6 +36,7 @@ class GetInstallmetsByFilters
             if (! array_key_exists($paymentType->id, $data)) {
                 $data[$paymentType->id]['id'] = $paymentType->id;
                 $data[$paymentType->id]['description'] = $paymentType->description;
+                $data[$paymentType->id]['color'] = $paymentType->color;
                 $data[$paymentType->id]['data'][] = $installment;
 
                 continue;

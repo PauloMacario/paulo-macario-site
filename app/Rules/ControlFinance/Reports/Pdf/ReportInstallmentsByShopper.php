@@ -91,11 +91,11 @@ class ReportInstallmentsByShopper
                 )
                 ->get();
             
-            $paymentType = PaymentType::where('id', $paymentTypeId)->select('style')->first();
+            $paymentType = PaymentType::where('id', $paymentTypeId)->select('color')->first();
             
             $data[$key]['paymentTypeId'] = $paymentTypeId;
             $data[$key]['paymentType'] = Str::title($reportData[0]->description);
-            $data[$key]['style'] = $paymentType->style;
+            $data[$key]['color'] = $paymentType->color;
             $data[$key]['reports'] = $reportData;
 
             if ($loop == $qtdPaymentTypes) {

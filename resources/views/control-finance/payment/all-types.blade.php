@@ -4,6 +4,12 @@
 
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
 
+    <style>
+        .bold {
+            font-weight: bold
+        }
+    </style>
+
 @endpush
 
 @section('title', 'Pagamentos')
@@ -24,7 +30,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-10 col-lg-8">
                                 <p class="text-right">
-                                    <button class="btn bg-olive" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <button class="btn bg-olive btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                       filtros
                                       <i class="fas fa-filter"></i>
                                     </button>
@@ -37,7 +43,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-3">
                                                     <div class="form-group">                                           
-                                                        <select class="form-control" name="month" id="">
+                                                        <select class="form-control form-control-sm" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
                                                             <option value="02" @if($month == '02') selected @endif>Fev</option>
                                                             <option value="03" @if($month == '03') selected @endif>Mar</option>
@@ -55,7 +61,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-3">
                                                     <div class="form-group">                                                                      
-                                                        <select class="form-control" name="year" id="">
+                                                        <select class="form-control form-control-sm" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
                                                             <option value="2021" @if($year == '2021') selected @endif>2021</option>
                                                             <option value="2022" @if($year == '2022') selected @endif>2022</option>
@@ -72,13 +78,15 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                               
-                                                        <select class="form-control" name="shopper_id" id="">
+                                                        <select class="form-control form-control-sm" name="shopper_id" id="">
                                                             <option value="">Selecione comprador</option>
                                                             @foreach ( $shoppers as $shopper )
                                                                 <option value="{{ $shopper->id }}" 
                                                                     @if(isset($shopper_id) && $shopper->id  == $shopper_id) 
                                                                         selected 
-                                                                    @endif>
+                                                                    @endif
+                                                                        style="color:{{ $shopper->color }};"
+                                                                    >
                                                                     {{ $shopper->name }}
                                                                 </option>                                                
                                                             @endforeach
@@ -89,13 +97,15 @@
                                             <div class="row">                                             
                                                 <div class="col-xs-12 col-md-5">
                                                     <div class="form-group">                                                                   
-                                                        <select class="form-control" name="payment_type_id" id="">
+                                                        <select class="form-control form-control-sm" name="payment_type_id" id="">
                                                             <option value="">Selecione Tipo</option>
                                                             @foreach ( $paymentTypes as $payType )
                                                                 <option value="{{ $payType->id }}" 
                                                                 @if(isset($payment_type_id) && $payType->id  == $payment_type_id) 
                                                                     selected 
-                                                                @endif>
+                                                                @endif
+                                                                    style="color:{{ $payType->color }};"
+                                                                >
                                                                 {{ $payType->description }}
                                                             </option>                                                
                                                             @endforeach
@@ -104,13 +114,15 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-5">
                                                     <div class="form-group">                                                                   
-                                                        <select class="form-control" name="category_id" id="">
+                                                        <select class="form-control form-control-sm" name="category_id" id="">
                                                             <option value="">Selecione Categoria</option>
                                                             @foreach ( $categories as $category )
                                                                 <option value="{{ $category->id }}" 
                                                                     @if(isset($category_id) && $category->id == $category_id) 
                                                                         selected 
-                                                                    @endif>
+                                                                    @endif
+                                                                        style="color:{{ $category->color }};"
+                                                                    >
                                                                     {{ $category->description }}
                                                                 </option>                                                
                                                             @endforeach
@@ -121,7 +133,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-5">            
                                                     <div class="form-group">
-                                                        <button class="btn bg-olive btn-block">
+                                                        <button class="btn bg-olive btn-block btn-sm">
                                                             Filtrar
                                                             <i class="fas fa-search"></i>
                                                         </button>
@@ -129,7 +141,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-5">            
                                                     <div class="form-group">
-                                                        <a href="{{ route('paymentAllPaymentTypesSearch_get') }}" class="btn bg-warning btn-block">
+                                                        <a href="{{ route('paymentAllPaymentTypesSearch_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
@@ -154,16 +166,16 @@
                                                     <th colspan="2" class="text-center" >Pagar</th>                                                                                        
                                                 </tr>
                                             
-                                                @foreach ( $paymentData as $payment) 
-                                                    <tr>
-                                                        <td class="text-center">{{ $payment['description'] }}</td>   
+                                                @foreach ( $paymentData as $payment)
+                                                    <tr class="bold">
+                                                        <td class="text-center" style="color:{{ $payment['color'] }};">{{ $payment['description'] }}</td>   
                                                         <td class="text-center">
                                                             <input type="checkbox" name="payment-{{ $payment['id'] }}" id="payment-{{ $payment['id'] }}"> 
                                                         </td>                                                        
                                                     </tr>
         
                                                     @foreach($payment['data'] as $installment)                                           
-                                                    <input type="hidden" name="installment" class="installment-{{ $payment['id'] }}" value="{{ $installment->id }}">
+                                                        <input type="hidden" name="installment" class="installment-{{ $payment['id'] }}" value="{{ $installment->id }}">
                                                     @endforeach
                                                 @endforeach
                                             </form>
@@ -171,8 +183,12 @@
                                     </div>
                                 </div>   
                                 <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
-                                    <button class="btn bg-olive" id="pay">Pagar selecionados</button>
-                                    <button class="btn btn-warning" id="pendent">Selecionados como pendente</button>
+                                    <button class="btn bg-olivebtn-sm" id="pay">
+                                        Pagar selecionados
+                                    </button>
+                                    <button class="btn btn-warning btn-sm" id="pendent">
+                                        Selecionados como pendente
+                                    </button>
                                 </div>                            
                             </div>
                         @else

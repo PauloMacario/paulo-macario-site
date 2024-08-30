@@ -26,7 +26,7 @@
                                             <label for="id">Ordem exibição</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="order" 
                                                 id="order" 
                                                 value={{ $paymentType->order }}
@@ -37,7 +37,7 @@
                                             <label for="id">Forma de pagamento</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="description" 
                                                 id="description" 
                                                 value="{{ $paymentType->description }}"
@@ -48,7 +48,7 @@
                                             <label for="id">Proxíma data de processamento</label>
                                             <input 
                                                 type="date" 
-                                                class="form-control " 
+                                                class="form-control form-control-sm " 
                                                 name="next_processing" 
                                                 value="{{ $paymentType->next_processing }}"
                                                 
@@ -58,7 +58,7 @@
                                             <label for="id">Proxíma data de pagamento</label>
                                             <input 
                                                 type="date" 
-                                                class="form-control " 
+                                                class="form-control form-control-sm " 
                                                 name="next_payment" 
                                                 value="{{ $paymentType->next_payment }}"
                                             >
@@ -67,7 +67,7 @@
                                         <div class="form-group">
                                             <label for="id">Parcelamento ativado?</label>
                                             <select 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="installment_enable" 
                                                 >
                                                 <option value="0" @if($paymentType->installment_enable  == '0') selected @endif>Desativado</option>
@@ -75,20 +75,19 @@
                                             </select>                                        
                                         </div>
 
-
                                         <div class="form-group">
-                                            <label for="id">Style css</label>
-                                            <textarea
-                                                class="form-control" 
-                                                name="style" 
-                                                id="value" 
-                                                >{{ $paymentType->style }}</textarea>
+                                            <label for="id">Cor</label>
+                                            <input 
+                                                type="color" 
+                                                class="form-control form-control-sm " 
+                                                name="color" value="{{ $paymentType->color }}"                                               
+                                            >
                                         </div>
 
                                         <div class="form-group">
                                             <label for="id">Status</label>
                                             <select 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="status" 
                                                 id="status"
                                                 >
@@ -107,13 +106,13 @@
                                             <div class="form-group d-flex justify-content-between">
                                                 <button 
                                                     type="submit" 
-                                                    class="btn bg-olive"
+                                                    class="btn bg-olive btn-sm"
                                                     id="btn-save"
                                                     >
                                                     Atualizar
                                                     <i class="fas fa-save"></i>
                                                 </button>
-                                                <a href="{{ route('settingAll_get') }}" class="btn bg-warning" id="btn-edit">
+                                                <a href="{{ route('settingAll_get') }}" class="btn bg-warning btn-sm" id="btn-edit">
                                                     Voltar
                                                     <i class="fas fa-arrow-left"></i>
                                                 </a>

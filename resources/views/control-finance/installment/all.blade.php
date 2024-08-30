@@ -106,7 +106,7 @@
                                                         <select class="form-control form-control-sm" name="payment_type_id" id="">
                                                             <option value="">Tipos</option>
                                                             @foreach ( $paymentTypes as $payType )
-                                                                <option value="{{ $payType->id }}" @if($payType->id  == $payTypeId) selected @endif>{{ $payType->description }}</option>                                                
+                                                                <option value="{{ $payType->id }}" style="color:{{ $payType->color }};" @if($payType->id  == $payTypeId) selected @endif>{{ $payType->description }}</option>                                                
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -116,7 +116,7 @@
                                                         <select class="form-control form-control-sm" name="shopper_id" id="">
                                                             <option value="">Compradores</option>
                                                             @foreach ( $shoppers as $shopper )
-                                                                <option value="{{ $shopper->id }}" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -171,27 +171,62 @@
                                     <table class="table table-sm table-borderless">        
                                         @foreach ( $installments as $installment )    
                                             <tr>
-                                                <td class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif" width="35%">{{ $installment->debt->paymentType->description }}</td>
-                                                <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="35%"
-                                                    @if(isset($installment->debt->category->style->color))
-                                                        style="color:{{ $installment->debt->category->style->color }};"    
+                                                <td class="font-italic text-left font-12  
+                                                    @if($installment->status == 'PM') 
+                                                        value-paid 
+                                                    @endif" 
+                                                    width="35%"
+                                                    @if(isset($installment->debt->paymentType->color))
+                                                        style="color:{{ $installment->debt->paymentType->color }};"    
                                                     @endif
-                                                >
+                                                    >
+                                                    {{ $installment->debt->paymentType->description }}
+                                                </td>
+                                                <td class="font-italic text-center font-12  
+                                                    @if($installment->status == 'PM') 
+                                                        value-paid 
+                                                    @endif" 
+                                                    width="35%"
+                                                    @if(isset($installment->debt->category->color))
+                                                        style="color:{{ $installment->debt->category->color }};"    
+                                                    @endif
+                                                    >
                                                     {{ $installment->debt->category->description }}
                                                 </td>
-                                                <td class="font-italic text-center font-12  @if($installment->status == 'PM') value-paid @endif" width="30%">{{ formatDateBR($installment->due_date) }}</td>
+                                                <td class="font-italic text-center font-12  
+                                                    @if($installment->status == 'PM') 
+                                                        value-paid 
+                                                    @endif" 
+                                                    width="30%"
+                                                    >
+                                                    {{ formatDateBR($installment->due_date) }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="font-weight-bold text-left font-14">
-                                                    <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" @if($installment->status == 'PM') value-paid @endif">
+                                                    <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
+                                                        @if($installment->status == 'PM') 
+                                                            value-paid 
+                                                        @endif"
+                                                        >
                                                         {{ $installment->debt->locality }}
     
                                                         @if ($installment->debt->number_installments > 1)
-                                                            <span class="ml-2  @if($installment->status == 'PM') value-paid @endif"  @if($installment->status == 'PM') value-paid @endif> ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})</span>
+                                                            <span class="ml-2  
+                                                                @if($installment->status == 'PM') 
+                                                                    value-paid 
+                                                                @endif"
+                                                                > 
+                                                                ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                            </span>
                                                         @endif
                                                     </a>
                                                 </td>
-                                                <td class="font-weight-bold text-center font-14 @if($installment->status == 'PM') value-paid @endif">
+                                                <td class="font-weight-bold text-center font-14 
+                                                    @if($installment->status == 'PM') 
+                                                        value-paid 
+                                                    @endif"
+                                                    >
                                                     R$ {{ formatMoneyBR($installment->value) }}
                                                     @if($installment->status == 'PM')                                              
                                                         <img src="{{ asset('./img/paid_red.png') }}" alt="" width="20px" height="20px">
@@ -200,14 +235,32 @@
                                             </tr>
                                             @if ($installment->debt->prorated_debt == 1)                                
                                                 <tr>
-                                                    <td colspan='2' class="font-italic text-left font-12"  @if($installment->status == 'PM') value-paid @endif>{{ $installment->shopper->name }}</td>
-                                                    <td class="font-weight-bold font-italic text-center text-info font-12  @if($installment->status == 'PM') value-paid @endif"><i class="fas fa-users"></i>Rateio <br>
+                                                    <td colspan='2' class="font-italic text-left font-12  
+                                                        @if($installment->status == 'PM') 
+                                                            value-paid 
+                                                        @endif"
+                                                            style="color:{{ $installment->shopper->color }};"
+                                                        >{{ $installment->shopper->name }}
+                                                    </td>
+                                                    <td class="font-weight-bold font-italic text-center text-info font-12  
+                                                        @if($installment->status == 'PM') 
+                                                            value-paid 
+                                                        @endif"
+                                                        >
+                                                        <i class="fas fa-users"></i>Rateio <br>
                                                         (R$ {{ $installment->debt->total_value }})
                                                     </td>
                                                 </tr> 
                                             @else
                                                 <tr>
-                                                    <td colspan="3" class="font-italic text-left font-12  @if($installment->status == 'PM') value-paid @endif">{{ $installment->shopper->name }}</td>
+                                                    <td colspan="3" class="font-italic text-left font-12  
+                                                        @if($installment->status == 'PM') 
+                                                            value-paid 
+                                                        @endif"
+                                                            style="color:{{ $installment->shopper->color }};"
+                                                        >
+                                                        {{ $installment->shopper->name }}
+                                                    </td>
                                                 </tr> 
                                             @endif  
                                             <tr>

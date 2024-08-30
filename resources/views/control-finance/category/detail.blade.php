@@ -27,7 +27,7 @@
                                             <label for="id">Ordem exibição</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="order" 
                                                 id="order" 
                                                 value={{ $category->order }}
@@ -38,7 +38,7 @@
                                             <label for="id">Descrição</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="description" 
                                                 id="description" 
                                                 value="{{ $category->description }}"
@@ -46,17 +46,18 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="id">Style css</label>
-                                            <textarea
-                                                class="form-control" 
-                                                name="style" 
-                                                >{{ json_encode($category->style) }}</textarea>
+                                            <label for="id">Cor</label>
+                                            <input 
+                                                type="color" 
+                                                class="form-control form-control-sm " 
+                                                name="color" value="{{ $category->color }}"                                               
+                                            >
                                         </div>
-
+                                        
                                         <div class="form-group">
                                             <label for="id">Status</label>
                                             <select 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="status" 
                                                 id="status"
                                                 >
