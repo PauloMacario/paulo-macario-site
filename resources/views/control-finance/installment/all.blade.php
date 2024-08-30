@@ -201,7 +201,9 @@
                                             @if ($installment->debt->prorated_debt == 1)                                
                                                 <tr>
                                                     <td colspan='2' class="font-italic text-left font-12"  @if($installment->status == 'PM') value-paid @endif>{{ $installment->shopper->name }}</td>
-                                                    <td class="font-weight-bold font-italic text-center text-info font-12  @if($installment->status == 'PM') value-paid @endif"><i class="fas fa-users"></i>Rateio</td>
+                                                    <td class="font-weight-bold font-italic text-center text-info font-12  @if($installment->status == 'PM') value-paid @endif"><i class="fas fa-users"></i>Rateio <br>
+                                                        (R$ {{ $installment->debt->total_value }})
+                                                    </td>
                                                 </tr> 
                                             @else
                                                 <tr>
