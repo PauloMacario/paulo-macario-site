@@ -19,7 +19,7 @@ class InstallmentsByFilters
         $installments = Installment::whereYear('due_date', $this->filters->year)
             ->with('debt');
 
-        if (isset($this->filters->shopper_id)) {
+        if (isset($this->filters->month)) {
             $installments->whereMonth('due_date',  $this->filters->month);
         }
 
