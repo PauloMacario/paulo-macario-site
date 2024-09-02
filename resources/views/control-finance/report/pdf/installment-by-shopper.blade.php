@@ -154,14 +154,14 @@
                     <td colspan="4" class="font-item-title pl-4" style="color:{{ $data['color'] }};">{{ $data['paymentType'] }}</td>
                 </tr>
                 @foreach($data['reports'] as $report)    
-               
+                {{ dd($report) }}
                     @php
                         $totalItem += $report->value; 
                                          
                     @endphp
 
                     <tr >
-                        <td class="font-item pl-15" width="20%">{{ formatDateBR($report->date) }}</td>
+                        <td class="font-item pl-15" width="20%">{{ formatDateBR($report->due_date) }}</td>
                         <td colspan="2" class="font-item" width="50%"> <span class="">{{ $report->locality }}</span> <span class="">({{ $report->number_installment }}/{{ $report->number_installments }})</td>
                         <td class="font-item" width="30%">R$ {{ formatMoneyBR($report->value) }}</td>
                     </tr>
