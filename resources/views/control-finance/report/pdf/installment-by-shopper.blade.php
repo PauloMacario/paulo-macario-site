@@ -154,7 +154,7 @@
                     <td colspan="4" class="font-item-title pl-4" style="color:{{ $data['color'] }};">{{ $data['paymentType'] }}</td>
                 </tr>
                 @foreach($data['reports'] as $report)    
-                {{ dd($report) }}
+                
                     @php
                         $totalItem += $report->value; 
                                          
