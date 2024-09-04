@@ -14,6 +14,10 @@ class ShowAllInstallmentsController extends Controller
 {
     public function __invoke(Request $request)
     {
+        if (! $request->status) {
+            $request['status'] = "PP";
+        }
+
         $data = [];
         $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
@@ -44,8 +48,6 @@ class ShowAllInstallmentsController extends Controller
             $request['month'] = $month;
         }
 
-        
-
         $installmentsByFilters = new InstallmentsByFilters($request->all());
         $installments = $installmentsByFilters->search();
               
@@ -60,28 +62,40 @@ class ShowAllInstallmentsController extends Controller
         $data['payTypeId'] =  $request['payment_type_id'];
         $data['categoryId'] =  $request['category_id'];
         $data['installments'] = $installments;
-        $data['total'] = $this->getTotalValue($installments, $request->status);
+        
+        $totalValue = $this->getTotalValue($installments, $request->status);
        
+        $data['total'] = $totalValue['total'];
+        $data['calculation'] = $totalValue['calculation'];
+      
         return view('control-finance.installment.all', $data);
     }
 
     public function getTotalValue($installments, $status)
     {
         $total = 0.0;
-
+        $calculation = '';
         if (! $installments->count()) {
             return $total;
         }
         
         foreach ($installments as $installment) {
-            
+
             if ($status && $installment->status == $status) {
+                $calculation .= (string)$installment->value .'#';
                 $total += $installment->value;
-            } else if(! $status && $installment->status == "PP"){
+            } else if(! $status && $installment->status == "PP"){               
+                $calculation .= (string)$installment->value.'#';
                 $total += $installment->value;
             }            
         }
 
-        return $total;
+        $calculation .= '#' . (string)$total;
+
+        $totalValue['total'] = $total; 
+
+        $totalValue['calculation'] = explode('#', $calculation); 
+
+        return $totalValue;
     }
 }

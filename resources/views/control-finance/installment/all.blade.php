@@ -176,8 +176,8 @@
                                     <div class="card card-body">
                                         <table class="table table-sm table-striped mb-2">
                                             <tr>
-                                                <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
-                                                <th class="text-center"><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
+                                                <th colspan="4"><h5 class="text-center">{{ $installments->count() }} parcelas</h5></th>
+                                                <th class="text-center"><h5>TOTAL: R$ {{ formatMoneyBR($total) }}</h5></th>
                                             </tr>
                                         </table>
                                         <table class="table table-sm table-borderless">        
@@ -282,8 +282,17 @@
                                         </table>                                   
                                         <table class="table table-sm table-striped mt-2">
                                             <tr>
-                                                <th colspan="4"><h5 class="text-center">TOTAL:</h5></th>
-                                                <th><h5 class="text-center">R$ {{ formatMoneyBR($total) }}</h5></th>
+
+
+                                              {{--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    Launch demo modal
+                                                  </button> --}}
+
+
+                                                <th colspan="4" class="text-center">
+                                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#calculoModal">Cálculo</button>
+                                                </th>
+                                                <th><h5 class="text-center">TOTAL: R$ {{ formatMoneyBR($total) }}</h5></th>
                                             </tr>
                                         </table>                                        
                                     </div>
@@ -301,6 +310,39 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="calculoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @foreach ($calculation as $calc)
+
+                        @if($calc == "")                       
+                            <hr>                            
+                        @else
+                            @if($loop->last)
+                                <p class="text-center font-weight-bold font-16 font-italic  mb-0">Total: R$ {{ formatMoneyBR($calc) }}</p>
+                            @else
+                                <p class="text-center font-14 font-italic  mb-0">R$ {{ formatMoneyBR($calc) }}</p>
+                            @endif
+                            
+                        @endif
+
+                    @endforeach
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @push('js')

@@ -62,10 +62,10 @@
                                                     id="status" 
                                                     disabled
                                                 >                
-                                                    <option value="E">Habilitado</option>
-                                                    <option value="D">Desabilitado</option>
-                                                    <option value="PM">Pagamento feito</option>
-                                                    <option value="PP">Pendente pagamento</option>
+                                                    <option value="E" @if($installment->status == "E") selected @endif>Habilitado</option>
+                                                    <option value="D" @if($installment->status == "D") selected @endif>Desabilitado</option>
+                                                    <option value="PM" @if($installment->status == "PM") selected @endif>Pagamento feito</option>
+                                                    <option value="PP" @if($installment->status == "PP") selected @endif>Pendente pagamento</option>
                                             </select>                
                                             </div>
                                         </div>
