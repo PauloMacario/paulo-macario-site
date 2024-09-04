@@ -16,8 +16,7 @@ class ShowAllPayTypesController extends Controller
     
         $request['month'] = ($request->month) ? $request->month : Carbon::now()->format("m");
         $request['year'] = ($request->year) ? $request->year : Carbon::now()->format("Y");
-        $request['status'] = ($request->status) ? $request->status : 'PP';
-
+        
                         
         $dataFilters = SearchFilters::get();
 

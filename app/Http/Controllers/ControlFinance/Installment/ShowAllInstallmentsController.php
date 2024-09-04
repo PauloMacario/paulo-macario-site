@@ -56,16 +56,16 @@ class ShowAllInstallmentsController extends Controller
         $data['month'] = $month;
         $data['yearMonthRef'] = $yearMonthRef;
         $data['status'] = $request->status;
-        $data['shopperId'] = $request['shopper_id'] ?? 0;
-        $data['payTypeId'] =  $request['payment_type_id'] ?? 0;
-        $data['categoryId'] =  $request['category_id'] ?? 0;
+        $data['shopperId'] = $request['shopper_id'];
+        $data['payTypeId'] =  $request['payment_type_id'];
+        $data['categoryId'] =  $request['category_id'];
         $data['installments'] = $installments;
-        $data['total'] = $this->getTotalValue($data['installments']);
-        
+        $data['total'] = $this->getTotalValue($installments, $request->status);
+       
         return view('control-finance.installment.all', $data);
     }
 
-    public function getTotalValue($installments)
+    public function getTotalValue($installments, $status)
     {
         $total = 0.0;
 
@@ -74,7 +74,12 @@ class ShowAllInstallmentsController extends Controller
         }
         
         foreach ($installments as $installment) {
-            $total += $installment->value;
+            
+            if ($status && $installment->status == $status) {
+                $total += $installment->value;
+            } else if(! $status && $installment->status == "PP"){
+                $total += $installment->value;
+            }            
         }
 
         return $total;

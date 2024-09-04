@@ -39,7 +39,6 @@
                                     <div class="card card-body">
                                         <form action="{{ route('paymentAllPaymentTypesSearch_post') }}" method="POST">
                                             @csrf
-                                            <input type="hidden" name="status" value="PP">
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-3">
                                                     <div class="form-group">                                           
@@ -183,7 +182,7 @@
                                     </div>
                                 </div>   
                                 <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
-                                    <button class="btn bg-olivebtn-sm" id="pay">
+                                    <button class="btn bg-olive btn-sm" id="pay">
                                         Pagar selecionados
                                     </button>
                                     <button class="btn btn-warning btn-sm" id="pendent">

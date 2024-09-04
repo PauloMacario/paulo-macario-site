@@ -15,6 +15,10 @@ class GetInstallmetsByFilters
     public function __construct($fiters)
     {
         $this->filters = (object)$fiters;
+
+        if (isset($fiters['status'])) {
+            $this->filters = ['PP', 'E', 'D'];
+        }
     }
 
 

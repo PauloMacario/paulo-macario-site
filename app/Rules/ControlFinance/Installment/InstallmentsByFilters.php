@@ -46,7 +46,11 @@ class InstallmentsByFilters
         }
     
         if (isset($this->filters->status) && $this->filters->status != '') {
-           $installments->where('status', $this->filters->status);          
+            if (is_array($this->filters->status)) {
+                $installments->whereIn('status', $this->filters->status);          
+            } else {
+                $installments->where('status', $this->filters->status);        
+            }
         }
 
         return $installments->get();
