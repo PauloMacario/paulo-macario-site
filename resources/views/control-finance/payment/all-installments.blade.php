@@ -122,9 +122,7 @@
                                                 <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">
                                                         <select class="form-control form-control-sm" name="status" id="status" >
-                                                            <option value="0" selected>Todos status</option>           
-                                                            <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
-                                                            <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
+                                                            <option value="0" selected>Todos status</option>
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
                                                     </select>                

@@ -22,35 +22,35 @@
                                 <div class="row">
                                     <div class="col-xs-6 col-md-6 col-lg-6">
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Ordem exibição</label>
-                                            <input type="number" class="form-control"  name="order" id="order" min="0" max="999" required>
+                                            <input type="number" class="form-control form-control-sm"  name="order" id="order" min="0" max="999" required>
                                         </div>           
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Nome</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="name" 
                                                 id="name"
                                                 required
                                             >                                                
                                         </div>
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Cor</label>
                                             <input 
                                                 type="color" 
-                                                class="form-control " 
+                                                class="form-control form-control-sm " 
                                                 name="color"                                               
                                             >
                                         </div>
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Status</label>
                                             <select 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="status" 
                                                 id="status"
                                                 required
@@ -67,7 +67,7 @@
                                 <div class="row ">
                                     <div class="col-xs-12 col-md-9 col-lg-9">
                                         <div class="col-xs-12 col-md-12 col-lg-12 text-left p-0 m-0">
-                                            <div class="form-group form-group-sm d-flex justify-content-between">
+                                            <div class="form-group  d-flex justify-content-between">
                                                 <button 
                                                     type="submit" 
                                                     class="btn bg-olive btn-sm"

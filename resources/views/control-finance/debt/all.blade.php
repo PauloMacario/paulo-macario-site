@@ -139,9 +139,7 @@
                                                             name="status" 
                                                             id="status" 
                                                         >
-                                                            <option value="" selected>Status</option>           
-                                                            <option value="E" @if($status  == 'E') selected @endif>Habilitado</option>
-                                                            <option value="D" @if($status  == 'D') selected @endif>Desabilitado</option>
+                                                            <option value="" selected>Status</option>
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
                                                     </select>                

@@ -23,41 +23,41 @@
                                 <div class="row">
                                     <div class="col-xs-6 col-md-6 col-lg-6">
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Ordem exibição</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="order" 
                                                 id="order" 
                                                 value={{ $shopper->order }}
                                             >                          
                                         </div>
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Forma de pagamento</label>
                                             <input 
                                                 type="text" 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="name" 
                                                 id="name" 
                                                 value="{{ $shopper->name }}"
                                             >                                                
                                         </div>
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Cor</label>
                                             <input 
                                                 type="color" 
-                                                class="form-control " 
+                                                class="form-control form-control-sm " 
                                                 name="color" value="{{ $shopper->color }}"                                               
                                             >
                                         </div>
 
-                                        <div class="form-group form-group-sm">
+                                        <div class="form-group ">
                                             <label for="id">Status</label>
                                             <select 
-                                                class="form-control" 
+                                                class="form-control form-control-sm" 
                                                 name="status" 
                                                 id="status"
                                                 >
@@ -73,7 +73,7 @@
                                 <div class="row ">
                                     <div class="col-xs-12 col-md-9 col-lg-9">
                                         <div class="col-xs-12 col-md-12 col-lg-12 text-left p-0 m-0">
-                                            <div class="form-group form-group-sm d-flex justify-content-between">
+                                            <div class="form-group  d-flex justify-content-between">
                                                 <button 
                                                     type="submit" 
                                                     class="btn bg-olive btn-sm"

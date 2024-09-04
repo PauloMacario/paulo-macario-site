@@ -76,7 +76,9 @@ class ShowAllInstallmentsController extends Controller
         $total = 0.0;
         $calculation = '';
         if (! $installments->count()) {
-            return $total;
+            $totalValue['total'] = $total;
+            $totalValue['calculation'] = [];
+            return $totalValue;
         }
         
         foreach ($installments as $installment) {

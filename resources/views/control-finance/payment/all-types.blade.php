@@ -162,13 +162,22 @@
                                                 @csrf
                                                 <tr>
                                                     <th class="text-center" >Tipo de pagamento</th>
+                                                    <th class="text-center" >Qtd itens</th>     
                                                     <th colspan="2" class="text-center" >Pagar</th>                                                                                        
                                                 </tr>
-                                            
                                                 @foreach ( $paymentData as $payment)
+
+                                                    @php
+                                                        $count = count($payment['data']);
+                                                    @endphp
+
                                                     <tr class="bold">
                                                         <td class="text-center" style="color:{{ $payment['color'] }};">{{ $payment['description'] }}</td>   
                                                         <td class="text-center">
+                                                            {{ $count }}
+                                                        </td>                  
+                                                        <td class="text-center">
+
                                                             <input type="checkbox" name="payment-{{ $payment['id'] }}" id="payment-{{ $payment['id'] }}"> 
                                                         </td>                                                        
                                                     </tr>
