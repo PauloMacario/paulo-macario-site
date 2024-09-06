@@ -9,6 +9,7 @@ use App\Http\Controllers\ControlFinance\Installment\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
         Route::get('/parcelas',
@@ -26,12 +27,12 @@ Route::middleware('auth')
         )
         ->name('detailInstallment_get');
         
-        Route::post('parcela/editar',
+        Route::post('/parcela/editar',
             UpdateInstallmentController::class,
         )
         ->name('updateInstallment_post'); 
         
-        Route::post('parcela/delete',
+        Route::post('/parcela/delete',
             DeleteInstallmentController::class,
         )
         ->name('deleteInstallment_post'); 

@@ -404,82 +404,58 @@ return [
      */
     'menu' => [
         [
-          /*   'text' => 'CONTROL FINANCE',
+            'text' => 'CONTROL FINANCE',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
-                [ */
-                    'text' => 'ÍNICIO',
+                [
+                    'text' => 'Ínicio',
                     'url' => 'controlfinance/home',
-                    'icon' => 'fas fa-home mr-2',
+                    'icon' => 'fas fa-home ml-4 mr-2',
                 ],
                 [
-                    'text' => 'NOVA DÍVIDA',
-                    'url' => 'divida',
-                    'icon' => 'fas fa-plus-circle mr-2',
+                    'text' => 'Nova dívida',
+                    'url' => 'controlfinance/divida',
+                    'icon' => 'fas fa-plus-circle ml-4 mr-2',
                 ],      
                 [
-                    'text' => 'COMPRAS DO MÊS',
-                    'url' => 'dividas',
-                    'icon' => 'fas fa-wallet mr-2',
+                    'text' => 'Compras do mês',
+                    'url' => 'controlfinance/dividas',
+                    'icon' => 'fas fa-wallet ml-4 mr-2',
                 ],
                 [
-                    'text' => 'PARCELAS DO MÊS',
-                    'url' => 'parcelas',
-                    'icon' => 'fas fa-credit-card mr-2',
+                    'text' => 'Parcelas do mês',
+                    'url' => 'controlfinance/parcelas',
+                    'icon' => 'fas fa-credit-card ml-4 mr-2',
                 ],
                 [
-                    'text' => 'PAGAMENTOS',
-                    'url' => 'pagamento',
-                    'icon' => 'fas fa-stamp mr-2',
+                    'text' => 'Pagamentos',
+                    'url' => 'controlfinance/pagamento',
+                    'icon' => 'fas fa-stamp ml-4 mr-2',
                 ],
                 [
-                    'text' => 'RELATÓRIOS',
-                    'url' => 'relatorios',
-                    'icon' => 'far fa-file-pdf mr-2',
+                    'text' => 'Relatórios',
+                    'url' => 'controlfinance/relatorios',
+                    'icon' => 'far fa-file-pdf ml-4 mr-2',
                 ],
                 [
-                    'text' => 'CONFIGURAÇÕES',
-                    'url' => 'config',
-                    'icon' => 'fas fa-sliders-h mr-2',
-                ],
-        /*    ],
-        ],*/
+                    'text' => 'Configurações',
+                    'url' => 'controlfinance/config',
+                    'icon' => 'fas fa-sliders-h ml-4 mr-2',
+                ],               
+            ],
+        ],
+        [
+            'text' => 'APP INVEST',
+            'icon' => 'fas fa-file-invoice-dollar',
+            'submenu' => [
+                [
+                    'text' => 'Ínicio',
+                    'url' => 'appinvest/home',
+                    'icon' => 'fas fa-home ml-4 mr-2',
+                ],            
+            ],
+        ],
     ],
-
-
-  /*   'menu' => [
-        [
-            'text' => 'ÍNICIO',
-            'url' => 'home',
-            'icon' => 'fas fa-home mr-2',
-        ],
-        [
-            'text' => 'NOVA DÍVIDA',
-            'url' => 'divida',
-            'icon' => 'fas fa-plus-circle mr-2',
-        ],      
-        [
-            'text' => 'COMPRAS DO MÊS',
-            'url' => 'dividas',
-            'icon' => 'fas fa-wallet mr-2',
-        ],
-        [
-            'text' => 'PARCELAS DO MÊS',
-            'url' => 'parcelas',
-            'icon' => 'fas fa-credit-card mr-2',
-        ],
-        [
-            'text' => 'PAGAMENTOS',
-            'url' => 'pagamento',
-            'icon' => 'fas fa-stamp mr-2',
-        ],
-        [
-            'text' => 'CONFIGURAÇÕES',
-            'url' => 'config',
-            'icon' => 'fas fa-sliders-h mr-2',
-        ],
-      
-    ], */
 
     /*
     |--------------------------------------------------------------------------

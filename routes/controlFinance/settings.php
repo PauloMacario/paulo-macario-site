@@ -7,6 +7,7 @@ use App\Http\Controllers\ControlFinance\Settings\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
         Route::get('/config',

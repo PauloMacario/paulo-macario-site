@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControlFinance\HomeControlFinanceController;
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
         Route::get(
-            '/controlfinance/home', 
+            '/home', 
             [HomeControlFinanceController::class, 'index']
         )
         ->name('controlFinanceHome');

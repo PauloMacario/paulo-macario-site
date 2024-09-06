@@ -9,6 +9,7 @@ use App\Http\Controllers\ControlFinance\Category\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
         Route::get(
@@ -30,7 +31,7 @@ Route::middleware('auth')
         ->name('detailCategory_get');
 
         Route::post(
-            'categoria/editar', 
+            '/categoria/editar', 
             UpdateCategoryController::class
         )
         ->name('updateCategory_post');  

@@ -9,6 +9,7 @@ use App\Http\Controllers\ControlFinance\PaymentType\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
         Route::get('/tipo-pagamento',
@@ -26,7 +27,7 @@ Route::middleware('auth')
         )
         ->name('detailPaymentType_get');
 
-        Route::post('tipo-pagamento/editar',
+        Route::post('/tipo-pagamento/editar',
             UpdatePaymentTypeController::class
         )
         ->name('updatePaymentType_post'); 

@@ -11,6 +11,7 @@ use App\Http\Controllers\ControlFinance\Debt\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
             
         Route::get('/divida',
@@ -38,12 +39,12 @@ Route::middleware('auth')
         )
         ->name('detailDebt_get');
         
-        Route::post('divida/editar',
+        Route::post('/divida/editar',
             UpdateDebtController::class
         )
         ->name('updateDebt_post'); 
         
-        Route::post('divida/delete',
+        Route::post('/divida/delete',
             DeleteDebtController::class
         )
         ->name('deleteDebt_post'); 

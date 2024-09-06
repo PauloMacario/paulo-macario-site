@@ -9,6 +9,7 @@ use App\Http\Controllers\ControlFinance\Shopper\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
          Route::get('/comprador',
@@ -26,7 +27,7 @@ Route::middleware('auth')
         )
         ->name('detailShopper_get');
 
-        Route::post('comprador/editar',
+        Route::post('/comprador/editar',
             UpdateShopperController::class
         )
         ->name('updateShopper_post'); 

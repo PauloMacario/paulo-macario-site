@@ -11,6 +11,7 @@ use App\Http\Controllers\ControlFinance\Payment\{
 };
 
 Route::middleware('auth')
+    ->prefix('controlfinance')
     ->group(function() {
 
         Route::get(
