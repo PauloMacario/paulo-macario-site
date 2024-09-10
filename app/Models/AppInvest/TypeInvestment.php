@@ -5,19 +5,18 @@ namespace App\Models\AppInvest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Negotiation extends Model
+class TypeInvestment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'investment_id',
-        'date date',
-        'type_negotiation', 
-        'value'
+        'name',
+        'color',
+        'order'
     ];
 
-    public function investment()
+    public function investiments()
     {
-        return $this->belongsTo(Investment::class);
+        return $this->hasMany(Investment::class);
     }
 }

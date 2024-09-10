@@ -14,7 +14,7 @@
                     <h5 class="card-title">Pagamentos</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row d-flex justify-content-around">
                        {{--  <a href="#">
                             <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
                                 <div class="card-header text-center">

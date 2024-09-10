@@ -1,35 +1,75 @@
 @extends('adminlte::page')
 
-@section('title', 'App Invest')
+@section('title', 'Home')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1>Acesso rápido</h1>
-        </div>
-        <div class="col-sm-6">
-            
-        </div>
-    </div>
-</div>
 @stop
 
 @section('content')
-    <div class="row">
+
+    <div class="row mt-3">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <a href="{{ route('debt_get') }}">
-                                <div class="info-box bg-olive">
-                                    <span class="info-box-icon">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </span>
-                                    <div class="info-box-content">
-                                        <span class="">ssssss</span>
-                                    </div>                            
+            <div class="card bg-olive">
+                <div class="card card-lightblue mb-0">
+                    <div class="card-header">
+                        <h5 class="card-title">Ínicio</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row  mt-3 mb-3">
+                            <div class="col-12">
+                                <h4 class="text-center" style="color:#3c8dbc;">Gráficos</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">            
+                            <div class="col-12 col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas 
+                                            id="donutChart" 
+                                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 392px;" 
+                                            width="490" 
+                                            height="312" 
+                                            class="chartjs-render-monitor">
+                                        </canvas>
+                                    </div>
+                                </div>
+                            </div>      
+                            <div class="col-12 col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas 
+                                            id="barChart" 
+                                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 410px;" 
+                                            width="512" 
+                                            height="312" 
+                                            class="chartjs-render-monitor">
+                                        </canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row  mt-3 mb-3">
+                            <div class="col-12">
+                                <h4 class="text-center" style="color:#3c8dbc;">Acesso Rápido</h4>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-around">
+                            <a href="{{-- {{ route('debt_get') }} --}}">
+                                <div class="card bg-primary mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
+                                    <div class="card-header text-center">
+                                        <div class="info-box-icon">
+                                            <span>
+                                                <i class="fas fa-plus-circle  fa-2x"></i>
+                                            </span>
+                                        </div>         
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="text-center p-1"><span class="">xxxxx</span></h5>
+                                
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -38,13 +78,8 @@
             </div>
         </div>
     </div>
+
 @stop
-
-
 @push('js')
-    <script>
-        $(document).ready(function () {
-
-        })
-    </script>   
+  
 @endpush

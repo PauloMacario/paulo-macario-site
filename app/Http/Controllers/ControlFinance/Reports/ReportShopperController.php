@@ -23,6 +23,7 @@ class ReportShopperController extends Controller
         $data['shoppers'] = Shopper::all();
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
         $data['reports'] = collect([]);
+        $data['view'] = false;
 
         if ($request['month']) {
             $month = $request->month;

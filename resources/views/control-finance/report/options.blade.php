@@ -31,7 +31,7 @@
                         <div class="col-12">
                             <h4>Relatório em formato PDF</h4>
                         </div>
-                        <div class="row d-flex justify-content-center">
+                        <div class="row d-flex justify-content-around">
 
                             <a href="{{ route('pdfReportShopper_get') }}">
                                 <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">

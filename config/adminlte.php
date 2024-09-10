@@ -405,7 +405,7 @@ return [
     'menu' => [
         [
             'text' => 'CONTROL FINANCE',
-            'icon' => 'fas fa-fw fa-share',
+            'icon' => 'fas fa-hand-holding-usd',
             'submenu' => [
                 [
                     'text' => 'Ínicio',
@@ -446,13 +446,18 @@ return [
         ],
         [
             'text' => 'APP INVEST',
-            'icon' => 'fas fa-file-invoice-dollar',
+            'icon' => 'fas fa-piggy-bank',
             'submenu' => [
                 [
                     'text' => 'Ínicio',
                     'url' => 'appinvest/home',
                     'icon' => 'fas fa-home ml-4 mr-2',
-                ],            
+                ],
+                [
+                    'text' => 'Negociações',
+                    'url' => 'appinvest/negociacoes',
+                    'icon' => 'fas fa-file-invoice-dollar ml-4 mr-2',
+                ],         
             ],
         ],
     ],

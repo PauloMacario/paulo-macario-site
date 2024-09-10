@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ControlFinance\HomeControlFinanceController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('index');
@@ -12,7 +12,7 @@ Route::middleware('auth')
 
         Route::get(
             '/home', 
-            [HomeControlFinanceController::class, 'index']
+            [HomeController::class, 'index']
         )
         ->name('home');
     }
@@ -34,3 +34,4 @@ include_once 'controlFinance/report.php';
 
 /* Rota App Invest */
 include_once 'appInvest/home.php';
+include_once 'appInvest/negotiation.php';

@@ -180,7 +180,7 @@
             }
          
             $.ajax({
-                url : "{{ asset('/grafico/categorias') }}",
+                url : "{{ asset('/controlfinance/grafico/categorias') }}",
                 type : 'get',
             beforeSend : function(){
                 /* $("#resultado").html("ENVIANDO..."); */
@@ -196,7 +196,7 @@
             });
 
             $.ajax({
-                url : "{{ asset('/grafico/categorias-divida-valor') }}",
+                url : "{{ asset('/controlfinance/grafico/categorias-divida-valor') }}",
                 type : 'get',
             beforeSend : function(){
                 /* $("#resultado").html("ENVIANDO..."); */

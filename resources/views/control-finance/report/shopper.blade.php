@@ -132,12 +132,13 @@
                         </div>
                        
                         @if(count($reports) > 0)
-                            <div class="col-8 mt-5">
-                                <form action="{{ route('pdfReportShopperGenerate_post') }}" method="POST">
+                            <div class="col-sm-12 col-md-10 col-lg-8 mt-5">
+                                <form action="{{ route('pdfReportShopperGenerate_post') }}" method="POST" id="form">
                                     @csrf
                                     <input type="hidden" name="shopper_id" value="{{ $shopperId }}">
                                     <input type="hidden" name="month" value="{{ $month }}">
                                     <input type="hidden" name="year" value="{{ $year }}">
+                                    <input type="hidden" name="acao" id="btn-acao" value="">
                                     <table class="table table-sm table-bordered">
                                         <tbody>
     
@@ -161,9 +162,10 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="">
-                                        <button class="btn bg-purple btn-sm mr-5" type="submit">Gerar PDF</button>
-                                         <input type="checkbox" name="download" id="download"> Baixar PDF
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn bg-info btn-sm btn-acao" data-acao="view" type="submit">Visualizar</button>
+                                        <button class="btn bg-purple btn-sm btn-acao" data-acao="generate" type="submit">Gerar PDF</button>
+                                        <button class="btn bg-olive btn-sm btn-acao" data-acao="download" type="submit">Baixar PDF</button>
                                     </div>
                                 </form>
                             </div>
@@ -219,6 +221,20 @@
                     
                 }
             });
+
+
+            $('.btn-acao').click(function (event ) {
+                
+                event.preventDefault();
+
+                var acao = $(this).data("acao");
+
+                $('#btn-acao').val(acao)
+
+                $('#form').submit()
+
+            });
+
         });
     </script>
 @endpush
