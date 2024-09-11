@@ -64,7 +64,7 @@
                                 </p>
                                 <div class="collapse show" id="collapseExample">
                                     <div class="card card-body">
-                                        <form action="{{ route('installmentAllFilters_post') }}" method="GET">
+                                        <form action="{{ route('installmentAllFilters_get') }}" method="GET">
                                             <div class="row">
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                     

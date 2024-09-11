@@ -20,7 +20,7 @@ Route::middleware('auth')
         Route::get('/parcelas/filtros',
             ShowAllInstallmentsController::class,
         )
-        ->name('installmentAllFilters_post');
+        ->name('installmentAllFilters_get');
         
         Route::get('/parcela/{id}/detalhes',
             ShowInstallmentController::class,

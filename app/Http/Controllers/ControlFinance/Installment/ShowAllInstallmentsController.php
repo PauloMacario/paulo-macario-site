@@ -19,8 +19,14 @@ class ShowAllInstallmentsController extends Controller
         }
 
         $data = [];
-        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['categories'] = Category::where('id', '>', 0)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $data['paymentTypes'] = PaymentType::where('id', '>', 0)
+            ->orderBy('order', 'asc')
+            ->get();
+            
         $data['shoppers'] = Shopper::all();
         
         $year = Carbon::now()->format("Y");
