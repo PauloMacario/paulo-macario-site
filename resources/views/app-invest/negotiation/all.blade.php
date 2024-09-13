@@ -7,7 +7,7 @@
         }
 
         a:hover {
-            color: #3d9970;
+            color: #3c8dbc;
         }
 
         .font-10 {
@@ -34,6 +34,14 @@
         .value-paid {
             color: #b4b4b4;
             text-decoration: line-through;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .color {
+            color: #3c8dbc;
         }
     </style>
 @endpush
@@ -106,7 +114,10 @@
                                                     <select class="form-control form-control-sm" name="type_investment_id" id="">
                                                         <option value="">Tipo investimento</option>
                                                         @foreach ( $typeInvestments as $typeInvestment )
-                                                            <option value="{{ $typeInvestment->id }}" style="color:{{ $typeInvestment->color }};" @if($typeInvestment->id  == $typeInvestmentId) selected @endif>{{ $typeInvestment->name }}</option>                                                
+                                                            <option value="{{ $typeInvestment->id }}" style="color:{{ $typeInvestment->color }};" 
+                                                                @if($typeInvestment->id  == $typeInvestmentId) 
+                                                                    selected 
+                                                                @endif>{{ $typeInvestment->name }} - {{ $typeInvestment->acronym }}</option>                                                
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -115,12 +126,26 @@
                                                 <div class="form-group">                                                                   
                                                     <select class="form-control form-control-sm" name="type_negotiation" id="">
                                                         <option value="">Tipo negociação</option>                                                       
-                                                        <option value="S" style="color:#eb910b;" @if(isset($typeNegotiation) && $typeNegotiation == "S") selected @endif>Venda</option>
-                                                        <option value="B" style="color:#1aba35;" @if(isset($typeNegotiation) && $typeNegotiation == "B") selected @endif>Compra</option>
+                                                        <option value="C" style="color:#00a531;" @if(isset($typeNegotiation) && $typeNegotiation == "C") selected @endif>Compra - C</option>
+                                                        <option value="V" style="color:#ca0404;" @if(isset($typeNegotiation) && $typeNegotiation == "V") selected @endif>Venda - V</option>
                                                     </select>
                                                 </div>
-                                            </div>                                         
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                            </div>
+                                            
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                                <div class="form-group">                                                                   
+                                                    <select class="form-control form-control-sm" name="per_page" id="per_page">
+                                                        <option value="">Por pag.</option>    
+                                                        <option value="5" @if($perPage == 5) selected @endif>5</option>                                                   
+                                                        <option value="10"  @if($perPage == 10) selected @endif>10</option>
+                                                        <option value="20"  @if($perPage == 25) selected @endif>25</option>
+                                                        <option value="50"  @if($perPage == 50) selected @endif>50</option>
+                                                        <option value="100"  @if($perPage == 100) selected @endif>100</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">            
                                                 <div class="form-group">
                                                     <button class="btn bg-lightblue btn-block btn-sm">
                                                         Filtrar
@@ -128,7 +153,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">            
                                                 <div class="form-group">
                                                     <a href="{{ route('negotiationAll_get') }}" class="btn bg-warning btn-block btn-sm">
                                                         Limpar
@@ -144,47 +169,61 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-12 col-md-10 col-lg-8">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="card card-body">
-                                @if($negotiations->count() > 0)                                    
-                                    <table class="table table-sm table-borderless ">        
-                                        @foreach ($negotiations as $negotiation)
-                                            <tr>
-                                                <td class="font-italic text-left font-12" width="35%">{{ $negotiation->investment->typeInvestment->name }}</td>                                               
-                                                @if($negotiation->type_negotiation == 'B')
-                                                    <td class="font-italic text-center font-12" width="35%">COMPRA</td>
-                                                @else 
-                                                    <td class="font-italic text-center font-12" width="35%">VENDA</td>
-                                                @endif                                               
-                                                <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($negotiation->date) }}</td>
+                                @if($negotiations->count() > 0) 
+
+                                    <div>
+                                        <p class="font-14 bold color">Quantidade: {{ $negotiations->count() }}</p>
+                                    </div>
+
+                                    <table class="table table-sm table-striped table-responsive-md">
+                                        <thead>
+                                            <tr class="font-12 text-center">
+                                                <th >Data</th>
+                                                <th >Tipo</th>
+                                                <th >Investimento</th>
+                                                <th >Negóco</th>
+                                                <th >Quant.</th>
+                                                <th >Valor Total</th>
+                                                
                                             </tr>
-                                            <tr >
-                                                <td colspan="2" class="font-weight-bold text-left font-14">
-                                                    <a href="#{{-- {{ route('detailDebt_get', ['id' => $debt->id]) }} --}}">
-                                                        {{ $negotiation->investment->name }}                                                       
-                                                    </a>
-                                                </td>
-                                                <td class="font-weight-bold text-center font-14">
-                                                    R$ {{ formatMoneyBR($negotiation->value) }}                                                 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" class="font-italic text-left font-12">Quantidade: {{ $negotiation->quantity }}</td>                                      
-                                                <td ></td>                                                                                             
-                                            </tr>                                                                           
-                                            <tr>
-                                                <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3c8dbc49;"></td>
-                                            </tr>
-                                        @endforeach
-                                    </table> 
-                                    <table class="table table-sm table-striped mt-2">
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($negotiations as $negotiation)
+                                                <tr class="font-12 text-center font-italic">
+                                                    <td>{{ formatDateBR($negotiation->date) }}</td>
+                                                    <td  title="{{ $negotiation->investment->typeInvestment->name }}">{{ $negotiation->investment->typeInvestment->acronym }}</td>                         
+                                                    <td class="bold">
+                                                        <a href="#">
+                                                            {{ $negotiation->investment->name }}                                                       
+                                                        </a>
+                                                    </td>
+                                                    @if($negotiation->type_negotiation == 'C')
+                                                        <td title="Compra" class=" text-center font-12 bold" style="color:#00a531" >{{ $negotiation->type_negotiation }} <i class="fas fa-shopping-basket ml-2"></i>
+                                                    @else 
+                                                        <td title="Venda" class=" text-center font-12 bold" style="color:#ca0404" >{{ $negotiation->type_negotiation }} <i class="fas fa-hand-holding-usd ml-2"></i>
+                                                    @endif              
+                                                    <td>{{ $negotiation->quantity }}</td>                                                    
+                                                    <td class="bold">R$ {{ formatMoneyBR($negotiation->value) }}</td>
+                                                    
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+
+                                    </table>
+
+                                    <table class="table table-sm  mt-2">
                                         <tr>
-                                            <th colspan="4" class="text-center">
+                                            <td colspan="2" style="background-color:#3c8dbc49;"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center">
                                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#calculoModal">Cálculo</button>
                                             </th>
                                             <th><h5 class="text-center">TOTAL: R$ {{ formatMoneyBR($total) }}</h5></th>
                                         </tr>
-                                    </table>                                  
+                                    </table>
                                 @else
                                 <div class="row">
                                     <div class="col-xs-12 col-md-10 col-lg-8">
@@ -232,5 +271,10 @@
     </div>
 @stop
 @push('js')
-  
+    <script>
+        $(document).ready(function() {
+
+        });
+
+    </script>
 @endpush

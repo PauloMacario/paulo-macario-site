@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AppInvest\Negotiation\ShowAllNegotiationsController;
+use App\Http\Controllers\AppInvest\Negotiation\{
+    ShowAllNegotiationsController,
+    NewNegotiationController,
+    CreateNegotiationController
+};
 
 Route::middleware('auth')
     ->prefix('appinvest')
@@ -16,4 +20,14 @@ Route::middleware('auth')
             ShowAllNegotiationsController::class,
         )
         ->name('negotiationAllFilters_get');
+        
+        Route::get('/negociacao',
+            NewNegotiationController::class
+        )
+        ->name('negotiationNew_get');
+
+        Route::post('/negociacao', 
+            CreateNegotiationController::class
+        )
+        ->name('negotiationCreate_post');
     });

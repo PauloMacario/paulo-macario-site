@@ -15,6 +15,10 @@ class ShowAllNegotiationsController extends Controller
         $data['year'] = $request['year'] ?? null;
         $data['month'] = $request['month'] ?? null;
 
+        $data['typeInvestmentId'] = $request['type_investment_id'] ?? null;
+        $data['typeNegotiation'] = $request['type_negotiation'] ?? null;
+        $data['perPage'] = $request['per_page'] ?? null;
+       
         $data['typeInvestments'] = TypeInvestment::where('id', '>', 0)
             ->orderBy('order', 'DESC')
             ->get();
@@ -22,8 +26,7 @@ class ShowAllNegotiationsController extends Controller
         $negotiationsByFilters = new NegotiationsByFilters($request->all());
         $negotiations = $negotiationsByFilters->search();
 
-        $data['typeInvestmentId'] = $request['type_investment_id'] ?? null;
-        $data['typeNegotiation'] = $request['type_negotiation'] ?? null;
+        
 
         $data['negotiations'] = $negotiations;
 

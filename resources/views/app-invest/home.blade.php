@@ -72,6 +72,22 @@
                                     </div>
                                 </div>
                             </a>
+
+                            <a href="{{ route('negotiationNew_get') }}">
+                                <div class="card bg-indigo mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
+                                    <div class="card-header text-center">
+                                        <div class="info-box-icon">
+                                            <span>
+                                                <i class="fas fa-plus-circle fa-2x"></i>
+                                            </span>
+                                        </div>         
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="text-center p-1"><span class="">Negociacões</span></h5>
+                                
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

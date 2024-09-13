@@ -129,7 +129,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="id">Loja/local</label>
-                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required value="loja teste">
+                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required >
                                     </div>
                                 </div>
 

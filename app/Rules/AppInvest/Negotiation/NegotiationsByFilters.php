@@ -15,7 +15,9 @@ class NegotiationsByFilters
     }
 
     public function search()
-    {     
+    {   
+        $limit = ($this->filters->per_page) ?? 100;
+
         $negotiations = Negotiation::where('id','>',0);
        
         if (isset($this->filters->month)) {
@@ -39,6 +41,8 @@ class NegotiationsByFilters
             $negotiations->where('type_negotiation', $this->filters->type_negotiation);
         }
     
-        return $negotiations->get();
+        return $negotiations
+            ->limit($limit)
+            ->get();
     }
 }

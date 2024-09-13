@@ -11,6 +11,7 @@ class TypeInvestment extends Model
 
     protected $fillable = [
         'name',
+        'acronym',
         'color',
         'order'
     ];

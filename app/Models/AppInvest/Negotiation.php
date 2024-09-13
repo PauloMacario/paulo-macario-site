@@ -11,8 +11,9 @@ class Negotiation extends Model
 
     protected $fillable = [
         'investment_id',
-        'date date',
+        'date',
         'type_negotiation', 
+        'quantity',
         'value'
     ];
 

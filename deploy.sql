@@ -4,6 +4,7 @@
 CREATE TABLE IF NOT EXISTS `control_finance`.`type_investments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
+  `acronym` VARCHAR(5) NOT NULL,
   `color` VARCHAR(7) NOT NULL,
   `order` VARCHAR(128) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
@@ -35,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `control_finance`.`negotiations` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `investment_id` INT NOT NULL,
   `date` DATE NOT NULL,
-  `type_negotiation` ENUM('B', 'S') NOT NULL COMMENT 'b-> buy | S-> sale',
+  `type_negotiation` ENUM('C', 'V') NOT NULL COMMENT 'C-> compra | V-> Venda',
   `quantity` DECIMAL(10,2) NULL DEFAULT NULL,
   `value` DECIMAL(10,2) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
@@ -48,3 +49,6 @@ CREATE TABLE IF NOT EXISTS `control_finance`.`negotiations` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+

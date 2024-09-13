@@ -457,7 +457,12 @@ return [
                     'text' => 'Negociações',
                     'url' => 'appinvest/negociacoes',
                     'icon' => 'fas fa-file-invoice-dollar ml-4 mr-2',
-                ],         
+                ], 
+                [
+                    'text' => 'Nova negociação',
+                    'url' => 'appinvest/negociacao',
+                    'icon' => 'fas fa-plus-circle ml-4 mr-2',
+                ],              
             ],
         ],
     ],
