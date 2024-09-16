@@ -14,7 +14,7 @@ use PDF;
 class ReportShopperGeneratePdfController extends Controller
 {
     public function __invoke(Request $request)
-    { 
+    {
         if ( ! isset($request['payment_type_id'])) {
             $error = ["status" => "info" , "msg" => "Não foi selecionado nenhum item para gerar o relatório.", "statusCode" => 400];
 
@@ -32,21 +32,21 @@ class ReportShopperGeneratePdfController extends Controller
             $data['view'] = true;
             $data['request'] = $request->except('_token');
 
-            return view('control-finance.report.installment-by-shopper', $data);
-           
+            return view('control-finance.report.installment-by-shopper', $data);           
         }
 
-        if ($request['acao'] == 'generate') {
+        $nameArquivo = Str::snake($data['reports']['shopperName']);
+        $date = Str::replace('/', '_', $data['reports']['dateRef']);
+
+        if ($request['acao'] == 'generate') {            
             $pdf = PDF::loadView('control-finance.report.pdf.installment-by-shopper', $data);       
-            return $pdf->stream('control-finance.report.pdf.installment-by-shopper', $data);
+            return $pdf->stream("{$nameArquivo}_{$date}.pdf", $data);
         }
 
-        if ($request['acao'] == 'download') {
-            $nameArquivo = Str::snake($data['reports']['shopperName']);
-            $date = Str::replace('/', '_', $data['reports']['dateRef']);
+        if ($request['acao'] == 'download') {          
             $pdf = PDF::loadView('control-finance.report.pdf.installment-by-shopper', $data);
 
-            return $pdf->download("{$nameArquivo}_{$date}'.pdf");
+            return $pdf->download("{$nameArquivo}_{$date}.pdf");
         }        
     }
 }

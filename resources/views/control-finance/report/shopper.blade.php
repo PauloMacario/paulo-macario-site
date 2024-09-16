@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">                                                               
-                                            <select class="form-control form-control-sm" name="shopper_id" id="shopper_id">
+                                            <select class="form-control form-control-sm btn-change" name="shopper_id" id="shopper_id">
                                                 <option value="">Selecione comprador</option>
                                                 @foreach ( $shoppers as $shopper )
                                                     <option value="{{ $shopper->id }}" 
@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">                                                                   
-                                            <select class="form-control form-control-sm field-disabled" name="payment_type_id" id="" disabled>
+                                            <select class="form-control form-control-sm btn-change field-disabled" name="payment_type_id" id="" disabled>
                                                 <option value="">Selecione Tipo</option>
                                                 @foreach ( $paymentTypes as $payType )
                                                     <option value="{{ $payType->id }}" 
@@ -77,7 +77,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-2">
                                         <div class="form-group">                                                                      
-                                            <select class="form-control form-control-sm field-disabled" name="month" id="" disabled>
+                                            <select class="form-control form-control-sm btn-change field-disabled" name="month" id="" disabled>
                                                 <option value="01" @if($month == '01') selected @endif>Jan</option>
                                                 <option value="02" @if($month == '02') selected @endif>Fev</option>
                                                 <option value="03" @if($month == '03') selected @endif>Mar</option>
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-2">
                                         <div class="form-group">                                                                      
-                                            <select class="form-control form-control-sm field-disabled" name="year" id="" disabled>
+                                            <select class="form-control form-control-sm btn-change field-disabled" name="year" id="" disabled>
                                                 <option value="2020" @if($year == '2020') selected @endif>2020</option>
                                                 <option value="2021" @if($year == '2021') selected @endif>2021</option>
                                                 <option value="2022" @if($year == '2022') selected @endif>2022</option>
@@ -132,7 +132,7 @@
                         </div>
                        
                         @if(count($reports) > 0)
-                            <div class="col-sm-12 col-md-10 col-lg-8 mt-5">
+                            <div class="col-sm-12 col-md-10 col-lg-8 mt-5" id="result-report">
                                 <form action="{{ route('pdfReportShopperGenerate_post') }}" method="POST" id="form">
                                     @csrf
                                     <input type="hidden" name="shopper_id" value="{{ $shopperId }}">
@@ -233,6 +233,10 @@
 
                 $('#form').submit()
 
+            });
+
+            $('.btn-change').on('change' , function(el) {
+                $('#result-report').css('display', 'none')
             });
 
         });
