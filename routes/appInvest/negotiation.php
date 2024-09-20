@@ -7,7 +7,7 @@ use App\Http\Controllers\AppInvest\Negotiation\{
     CreateNegotiationController
 };
 
-Route::middleware('auth')
+Route::middleware('auth', 'appInvest')
     ->prefix('appinvest')
     ->group(function() {
        

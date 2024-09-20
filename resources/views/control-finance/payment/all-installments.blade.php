@@ -3,6 +3,42 @@
 @push('css')
 
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
+<style>
+    a {
+        color: rgb(20, 20, 20);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #3d9970;
+    }
+
+    .font-10 {
+        font-size: 10px;
+    }
+    .font-12 {
+        font-size: 12px;
+    }
+    .font-14 {
+        font-size: 14px;
+    }
+    .font-16 {
+        font-size:16px;
+    }
+    .font-18 {
+        font-size: 18px;
+    }
+    .font-20 {
+        font-size: 20px;
+    }
+    .font-22 {
+        font-size: 22px;
+    }
+    .value-paid {
+        color: #b4b4b4;
+        text-decoration: line-through;
+    }
+</style>
 
 @endpush
 
@@ -152,27 +188,28 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-12 col-lg-12">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-bordered mb-3"> 
+                                
+                                    <table class="table table-sm  table-bordered table-responsive mb-3"> 
                                         <tr>
-                                            <th class="text-center" >Descrição da Parcela</th>
-                                            <th colspan="2" class="text-center" >Status</th>                                              
-                                            <th class="text-center" >Salvar</th>                                          
+                                            <th class="text-center" width="70%">Descrição da Parcela</th>
+                                            <th colspan="2" class="text-center" width="30%">Status</th>                                              
+                                            <th class="text-center" width="10%">Salvar</th>                                          
                                         </tr>
                                        
                                         @foreach ( $installments as $installment )       
                                             <form action="{{ route('paymentPayOneInstallment_post') }}" method="POST" id="form-{{ $installment->id }}">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $installment->id }}">
-                                                <tr>
+                                                <tr class="font-10">
                                                     <td class="text-center">
-                                                        <span><strong>Parcela</strong>{{ $installment->debt->locality }} - 
-                                                            ({{ $installment->number_installment }}/
-                                                            {{ $installment->debt->number_installments }})
+                                                        <span  class="mr-3">                                                           
+                                                            {{ $installment->debt->locality }} - ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
                                                         </span>
-                                                        <span><strong> - Valor: R$ </strong>{{ formatMoneyBR($installment->value) }}</span><br>
-                                                        <span>{{ $installment->debt->shopper->name }}</span><br>
-                                                    
+                                                        <span >
+                                                            <strong>Valor: R$ </strong>{{ formatMoneyBR($installment->value) }}</span><br>
+                                                        <span >
+                                                            <strong >Comprador(a) </strong>{{ $installment->shopper->name }}
+                                                        </span>                                                    
                                                     </td>
                                                     <td class="text-center vertical-middle" style="vertical-align: middle;">                                                    
                                                         Pagar<input class="ml-3" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
@@ -188,7 +225,7 @@
                                         @endforeach
                                     </table>
                                     {{ $installments->links() }}  
-                                </div>
+                                
                             </div>                               
                         </div>
                     </div>

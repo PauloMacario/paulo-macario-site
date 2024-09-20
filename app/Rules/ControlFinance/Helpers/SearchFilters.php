@@ -27,6 +27,15 @@ class SearchFilters
 
             $model = app()->make($class);
             
+            if ($key == 'shoppers') {
+
+                $shoppersIds = auth()->user()->shoppers;
+
+                $filters[$key] = $shoppersIds = auth()->user()->shoppers;
+
+                continue;            
+            }
+
             $data = $model->where('id', '>', 0)
                 ->orderBy('order', 'asc')
                 ->get();

@@ -25,6 +25,14 @@ class InstallmentsByFilters
 
         if (isset($this->filters->shopper_id)) {
             $installments->where('shopper_id', $this->filters->shopper_id);
+        } else {
+            $shoppersUser = auth()
+                ->user()
+                ->shoppers
+                ->pluck('id')
+                ->toArray();
+                
+            $installments->whereIn('shopper_id', $shoppersUser);
         }
     
         if (isset($this->filters->payment_type_id)) {

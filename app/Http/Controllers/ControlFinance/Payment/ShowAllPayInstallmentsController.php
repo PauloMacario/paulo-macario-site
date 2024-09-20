@@ -23,7 +23,7 @@ class ShowAllPayInstallmentsController extends Controller
         $data = [];
         $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = Shopper::all();
+        $data['shoppers'] = auth()->user()->shoppers;
 
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
 
@@ -39,6 +39,9 @@ class ShowAllPayInstallmentsController extends Controller
 
         if ($shopId = $request['shopper_id']) {
             $installments->where('shopper_id', $shopId);
+        } else {
+            $shoppersUser = auth()->user()->shoppers->pluck('id')->toArray();
+            $installments->whereIn('shopper_id', $shoppersUser);
         }
 
         if ($payTypeId = $request['payment_type_id']) {

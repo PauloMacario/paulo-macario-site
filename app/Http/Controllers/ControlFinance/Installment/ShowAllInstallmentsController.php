@@ -27,7 +27,7 @@ class ShowAllInstallmentsController extends Controller
             ->orderBy('order', 'asc')
             ->get();
             
-        $data['shoppers'] = Shopper::all();
+        $data['shoppers'] = auth()->user()->shoppers;
         
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");

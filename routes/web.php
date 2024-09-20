@@ -15,8 +15,15 @@ Route::middleware('auth')
             [HomeController::class, 'index']
         )
         ->name('home');
+
+        Route::get(
+            '/naoautorizado', 
+            [HomeController::class, 'block']
+        )
+        ->name('home');
     }
 );
+
 
 Auth::routes();
 

@@ -15,7 +15,7 @@ class NewDebtController extends Controller
         $data = [];
         $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
         $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = Shopper::all();
+        $data['shoppers'] = auth()->user()->shoppers;
         
         return view('control-finance.debt.new', $data);
     }

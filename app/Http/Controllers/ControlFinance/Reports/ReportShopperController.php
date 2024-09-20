@@ -20,7 +20,7 @@ class ReportShopperController extends Controller
         $data['actionFieldDisable'] = 1;
 
         $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = Shopper::all();
+        $data['shoppers'] = auth()->user()->shoppers;
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
         $data['reports'] = collect([]);
         $data['view'] = false;

@@ -14,8 +14,14 @@ class ShowInstallmentController extends Controller
     {
         $data = [];
 
-        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = Shopper::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['categories'] = Category::where('id', '>', 0)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $data['shoppers'] = auth()
+            ->user()
+            ->shoppers;
+            
         $data['installment'] = Installment::find($id);
 
         return view('control-finance.installment.detail', $data);

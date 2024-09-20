@@ -1,54 +1,33 @@
--- -----------------------------------------------------
--- Table `control_finance`.`type_investments`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `control_finance`.`type_investments` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  `acronym` VARCHAR(5) NOT NULL,
-  `color` VARCHAR(7) NOT NULL,
-  `order` VARCHAR(128) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
--- -----------------------------------------------------
--- Table `control_finance`.`investments`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `control_finance`.`investments` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `type_investment_id` INT NOT NULL,
-  `name` VARCHAR(128) NOT NULL,
-  `color` VARCHAR(7) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+CREATE TABLE IF NOT EXISTS `control_finance`.`shopper_user` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL,
+  `shopper_id` INT(11) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
   `updated_at` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_investment_type_investment1_idx` (`type_investment_id` ASC) ,
-  CONSTRAINT `fk_investment_type_investment1`
-    FOREIGN KEY (`type_investment_id`)
-    REFERENCES `control_finance`.`type_investments` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
--- -----------------------------------------------------
--- Table `control_finance`.`negotiations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `control_finance`.`negotiations` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `investment_id` INT NOT NULL,
-  `date` DATE NOT NULL,
-  `type_negotiation` ENUM('C', 'V') NOT NULL COMMENT 'C-> compra | V-> Venda',
-  `quantity` DECIMAL(10,2) NULL DEFAULT NULL,
-  `value` DECIMAL(10,2) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_negotiation_investment_idx` (`investment_id` ASC) ,
-  CONSTRAINT `fk_negotiation_investment`
-    FOREIGN KEY (`investment_id`)
-    REFERENCES `control_finance`.`investments` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  INDEX `fk_shopper_user_shoppers1_idx` (`shopper_id` ASC) VISIBLE,
+  INDEX `fk_shopper_user_users1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_shopper_user_shoppers1`
+    FOREIGN KEY (`shopper_id`)
+    REFERENCES `control_finance`.`shoppers` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_shopper_user_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `control_finance`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci
+
+/*######*/
+
+INSERT INTO `control_finance`.`shopper_user` (`id`, `users_id`, `shoppers_id`, `created_at`, `updated_at`) VALUES ('1', '1', '1', NOW(), NOW());
+INSERT INTO `control_finance`.`shopper_user` (`id`, `users_id`, `shoppers_id`, `created_at`, `updated_at`) VALUES ('2', '1', '2', NOW(), NOW());
+INSERT INTO `control_finance`.`shopper_user` (`id`, `users_id`, `shoppers_id`, `created_at`, `updated_at`) VALUES ('3', '2', '2', NOW(), NOW());
+
 
 
 

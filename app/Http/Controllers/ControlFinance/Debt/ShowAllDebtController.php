@@ -13,16 +13,24 @@ use Illuminate\Http\Request;
 class ShowAllDebtController extends Controller
 {
     public function __invoke(Request $request)
-    {
+    {      
         $data = [];
     
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");
         
         $data = [];
-        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = Shopper::all();
+        $data['categories'] = Category::where('id', '>', 0)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $data['paymentTypes'] = PaymentType::where('id', '>', 0)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $data['shoppers'] = auth()
+            ->user()
+            ->shoppers;    
 
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
         
@@ -35,9 +43,12 @@ class ShowAllDebtController extends Controller
         $debts = Debt::whereYear('date', $year)
             ->whereMonth('date', $month)
             ->with('installments');
-
+        
         if ($shopId = $request['shopper_id']) {
             $debts->where('shopper_id', $shopId);
+        } else {
+            $shoppersUser = auth()->user()->shoppers->pluck('id')->toArray();
+            $debts->whereIn('shopper_id', $shoppersUser);
         }
 
         if ($payTypeId = $request['payment_type_id']) {
@@ -54,6 +65,7 @@ class ShowAllDebtController extends Controller
             }
         }
         
+
         $request->session()
             ->put('filters', $request->all());
         

@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppInvest\HomeAppInvestController;
+use App\Http\Middleware\AppInvestModule;
 
-Route::middleware('auth')
+Route::middleware('auth', 'appInvest')
     ->prefix('appinvest')
     ->group(function() {
 
@@ -11,6 +12,7 @@ Route::middleware('auth')
             '/home', 
             HomeAppInvestController::class
         )
+        //->middleware(AppInvestModule::class)
         ->name('appInvestHome');
     }
 );

@@ -55,17 +55,21 @@
 
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="id">Comprador(a)</label>
-                                        <select class="form-control form-control-sm" name="shopper_id" id="shopper_id" required>
-                                            <option value="" selected>Selecione...</option>                                       
-                                            @foreach ($shoppers as $shopper)                                  
-                                                <option value="{{ $shopper->id }}" 
-                                                    style="color:{{ $shopper->color }};"
-                                                >
-                                                {{ $shopper->name }}
-                                            </option>
-                                            @endforeach
-                                        </select>                                        
+                                        <label for="id">Comprador(a)</label>    
+                                       
+                                        @if($shoppers->count() > 1)
+                                            <select class="form-control form-control-sm" name="shopper_id" id="shopper_id" required>                   
+                                                <option value="" >Selecione...</option>                                       
+                                                @foreach ($shoppers as $shopper)                                  
+                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};">
+                                                    {{ $shopper->name }}
+                                                    </option>
+                                                @endforeach                                            
+                                            </select>  
+                                        @else
+                                            <input type="text" class="form-control form-control-sm"  name="" id="" value="{{ $shoppers[0]->name }}" readonly>
+                                            <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
+                                        @endif                                        
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +105,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="id">Compra rateada</label>
-                                        <select class="form-control form-control-sm" id="compra-rateada" autocomplete="off">
+                                        <select class="form-control form-control-sm" @if($shoppers->count() > 1) id="compra-rateada" @else disabled @endif autocomplete="off">
                                             <option value="">Não</option>                                                                             
                                             <option value="Y">Sim</option>
                                         </select>
@@ -136,7 +140,7 @@
                                 <div class="col-xs-12 col-md-6 col-lg-2">
                                     <div class="form-group">
                                         <label for="id">Valor total</label>
-                                        <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required value="500">
+                                        <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required>
                                     </div>
                                 </div>
                             </div>                    
@@ -180,7 +184,7 @@
 
             $(':input','#form')
                 .not(':button, :submit, :reset, :hidden')
-                .val('')
+                /* .val('') */
                 .removeAttr('checked')
                 .removeAttr('selected');
             
