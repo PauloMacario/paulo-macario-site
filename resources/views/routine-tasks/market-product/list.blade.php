@@ -217,26 +217,26 @@
                                         <table class="table table table-sm">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center font-10" width="20%">Merc.</th>
-                                                    <th class="text-center font-10" width="20%">Item</th>     
-                                                    <th class="text-center font-10" width="20%">Valor</th>
-                                                    <th class="text-center font-10" width="20%">Comprar</th>
+                                                    <th class="text-center font-12" width="20%">Merc.</th>
+                                                    <th class="text-center font-12" width="20%">Item</th>     
+                                                    <th class="text-center font-12" width="20%">Valor</th>
+                                                    <th class="text-center font-12" width="20%">Comprar</th>
                                                 </tr>                                           
                                             </thead>
                                             <tbody>
                                                 @foreach ($marketsProducts as $marketProduct)
                                                     <tr style="background-color:{{ $marketProduct->market->color }}4d;">
-                                                        <td class="text-center font-10">
+                                                        <td class="text-center font-12">
                                                             @if($marketProduct->buy == 'S')
                                                                 <i class="fas fa-check-circle mr-3 text-success"></i>
                                                             @endif
                                                             {{ $marketProduct->market->name }}
                                                         </td> 
-                                                        <td class="text-center font-10">{{ $marketProduct->product->item }}</td>  
-                                                        <td class="text-center font-10">
+                                                        <td class="text-center font-12">{{ $marketProduct->product->item }}</td>  
+                                                        <td class="text-center font-12">
                                                             <input type="text" name="marketProduct[{{ $marketProduct->id }}]" class="price form-control form-control-sm" value="{{ old('price', $marketProduct->price) }}">    
                                                         </td>
-                                                        <td class="text-center font-10">
+                                                        <td class="text-center font-12">
                                                             <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm ">
                                                                 <option value="S" @if($marketProduct->buy == 'S') selected @endif>Sim</option> 
                                                                 <option value="N" @if($marketProduct->buy == 'N') selected @endif>Não</option> 
