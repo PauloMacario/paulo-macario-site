@@ -210,66 +210,70 @@
                         </div>
 
                         @if($marketsProducts->count() > 0)
-                            <form action="{{ route('create_market_products_post') }}" method="post">
-                                @csrf
-                                <div class="row  mt-3 mb-3">
-                                    <div class="col-12">
-                                        <table class="table table table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center font-12" width="20%">Merc.</th>
-                                                    <th class="text-center font-12" width="20%">Item</th>     
-                                                    <th class="text-center font-12" width="20%">Valor</th>
-                                                    <th class="text-center font-12" width="20%">Comprar</th>
-                                                </tr>                                           
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($marketsProducts as $marketProduct)
-                                                    <tr style="background-color:{{ $marketProduct->market->color }}4d;">
-                                                        <td class="text-center font-12">
-                                                            @if($marketProduct->buy == 'S')
-                                                                <i class="fas fa-check-circle mr-3 text-success"></i>
-                                                            @endif
-                                                            {{ $marketProduct->market->name }}
-                                                        </td> 
-                                                        <td class="text-center font-12">{{ $marketProduct->product->item }}</td>  
-                                                        <td class="text-center font-12">
-                                                            <input type="text" name="marketProduct[{{ $marketProduct->id }}]" class="price form-control form-control-sm" value="{{ old('price', $marketProduct->price) }}">    
-                                                        </td>
-                                                        <td class="text-center font-12">
-                                                            <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm ">
-                                                                <option value="S" @if($marketProduct->buy == 'S') selected @endif>Sim</option> 
-                                                                <option value="N" @if($marketProduct->buy == 'N') selected @endif>Não</option> 
-                                                            </select>   
-                                                        </td>
-                                                    </tr>
-                                                @endforeach 
-                                            </tbody>
-                                        </table>                                    
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 col-lg-8">
+                                    <form action="{{ route('create_market_products_post') }}" method="post">
+                                        @csrf
+                                        <div class="row  mt-3 mb-3">
+                                            <div class="col-12">
+                                                <table class="table table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center font-12" width="20%">Merc.</th>
+                                                            <th class="text-center font-12" width="20%">Item</th>     
+                                                            <th class="text-center font-12" width="20%">Valor</th>
+                                                            <th class="text-center font-12" width="20%">Comprar</th>
+                                                        </tr>                                           
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($marketsProducts as $marketProduct)
+                                                            <tr style="background-color:{{ $marketProduct->market->color }}4d;">
+                                                                <td class="text-center font-12">
+                                                                    @if($marketProduct->buy == 'S')
+                                                                        <i class="fas fa-check-circle mr-3 text-success"></i>
+                                                                    @endif
+                                                                    {{ $marketProduct->market->name }}
+                                                                </td> 
+                                                                <td class="text-center font-12">{{ $marketProduct->product->item }}</td>  
+                                                                <td class="text-center font-12">
+                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" class="price form-control form-control-sm" value="{{ old('price', $marketProduct->price) }}">    
+                                                                </td>
+                                                                <td class="text-center font-12">
+                                                                    <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm ">
+                                                                        <option value="S" @if($marketProduct->buy == 'S') selected @endif>Sim</option> 
+                                                                        <option value="N" @if($marketProduct->buy == 'N') selected @endif>Não</option> 
+                                                                    </select>   
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach 
+                                                    </tbody>
+                                                </table>                                    
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row ">
+                                            <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
+                                                <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
+                                                    <div class="form-group">
+                                                        <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
+                                                            Limpar
+                                                            <i class="fas fa-broom"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn bg-lightblue btn-sm">
+                                                            Salvar
+                                                            <i class="fas fa-save"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                         
+                                    </form> 
                                 </div>
-                                
-                                <div class="row ">
-                                    <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
-                                        <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
-                                            <div class="form-group">
-                                                <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
-                                                    Limpar
-                                                    <i class="fas fa-broom"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn bg-lightblue btn-sm">
-                                                    Salvar
-                                                    <i class="fas fa-save"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                         
-                            </form> 
+                            </div>
                         @else
                             <div class="row">
                                 <div class="col-xs-12 col-md-10 col-lg-8">
