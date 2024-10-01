@@ -92,6 +92,25 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
+        'routine_tasks' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_RT_HOST', '127.0.0.1'),
+            'port' => env('DB_RT_PORT', '3306'),
+            'database' => env('DB_RT_DATABASE', 'forge'),
+            'username' => env('DB_RT_USERNAME', 'forge'),
+            'password' => env('DB_RT_PASSWORD', ''),
+            'unix_socket' => env('DB_RT_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
     ],
 
     /*

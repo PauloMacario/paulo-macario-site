@@ -465,6 +465,27 @@ return [
                 ],              
             ],
         ],
+        [
+            'text' => 'ROUTINE TASKS',
+            'icon' => 'fas fa-tasks',
+            'submenu' => [
+                [
+                    'text' => 'Ínicio',
+                    'url' => 'routinetasks/home',
+                    'icon' => 'fas fa-home ml-4 mr-2',
+                ],
+                [
+                    'text' => 'Lista de compras',
+                    'url' => 'routinetasks/listadecompras',
+                    'icon' => 'fas fa-store ml-4 mr-2',
+                ],
+              /*   [
+                    'text' => 'Nova negociação',
+                    'url' => 'routinetasks/home',
+                    'icon' => 'fas fa-plus-circle ml-4 mr-2',
+                ],              */ 
+            ],
+        ],
     ],
 
     /*
