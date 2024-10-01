@@ -15,7 +15,7 @@ class MarketProductsController extends Controller
         $data = [];
        
         $data['marketsProducts'] = MarketProduct::where('id', '>', 0)
-            ->orderBy('product_id')
+            ->orderBy('product_id', 'market_id')
             ->get();
         
         return view('routine-tasks.market-product.list', $data);
