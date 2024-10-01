@@ -10,12 +10,10 @@ class CreateMarketProductsController extends Controller
 {  
     public function __invoke(Request $request)
     {          
-
         if (!isset($request->marketProduct)) {
             $request->session()->flash('info', 'Nenhum valor para atualizar!');
             return redirect()->back();
         }
-
 
         foreach ($request->marketProduct as $id => $price) {
             
@@ -32,8 +30,17 @@ class CreateMarketProductsController extends Controller
             }
         }
 
-       
-        /* $request->session()->flash('success', 'Atualizado!'); */
+        foreach ($request->marketProductBuy as $id => $buy) {
+                        
+            $marketProduct = MarketProduct::find($id);
+
+            if ($marketProduct && $marketProduct->buy != $buy) {
+                $marketProduct->update([
+                    'buy' => $buy
+                ]);
+            }
+        }
+
         return redirect()->back();
        
     }

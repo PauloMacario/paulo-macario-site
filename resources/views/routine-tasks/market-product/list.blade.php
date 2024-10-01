@@ -154,53 +154,129 @@
                         <h5 class="card-title">Vincular itens ao(s) mercado(s)</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('create_market_products_post') }}" method="post">
-                            @csrf
-                            <div class="row  mt-3 mb-3">
-                                <div class="col-12">
-                                    <table class="table table-md table-bordered table-striped table-responsive-md">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center font-12" width="20%">Mercado</th>
-                                                <th class="text-center font-12" width="40%">Item(s)</th>     
-                                                <th class="text-center font-12" width="40%">valores</th>                                                  
-                                            </tr>                                           
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($marketsProducts as $marketProduct)
-                                                <tr style="background-color:{{ $marketProduct->market->color }}4d;">
-                                                    <td class="text-center font-12">{{ $marketProduct->market->name }}</td> 
-                                                    <td class="text-center font-12">{{ $marketProduct->product->item }}</td>  
-                                                    <td class="text-center font-12">
-                                                        <input type="text" name="marketProduct[{{ $marketProduct->id }}]" class="price form-control form-control-sm" value="{{ old('price', $marketProduct->price) }}">    
-                                                    </td>
-                                                </tr>
-                                            @endforeach 
-                                        </tbody>
-                                    </table>                                    
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-10 col-lg-8">
+                                <p class="text-right">
+                                    <button class="btn bg-lightblue btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                      filtros
+                                      <i class="fas fa-filter"></i>
+                                    </button>
+                                </p>
+                                <div class="collapse show" id="collapseExample">
+                                    <div class="card card-body">
+                                        <form action="{{ route('list_market_products_get') }}" method="GET">
+                                            <div class="row">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="form-group">                                                                     
+                                                        <select class="form-control form-control-sm" name="filterMarket" id="">
+                                                            <option value="">Mercado</option>
+                                                            @foreach ($markets as $market)
+                                                                <option value="{{ $market->id }}" @if($filterMarket == $market->id) selected @endif>{{ $market->name }}</option>                                                                 
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="form-group">                                                                     
+                                                        <select class="form-control form-control-sm" name="filterBuy" id="">
+                                                            <option value="">Comprar?</option>
+                                                            <option value="S" @if($filterBuy == 'S') selected @endif >Sim</option>       
+                                                            <option value="N" @if($filterBuy == 'N') selected @endif >Não</option>                                                              
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <button class="btn bg-lightblue btn-block btn-sm">
+                                                            Filtrar
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <a href="{{ route('list_market_products_get') }}" class="btn bg-warning btn-block btn-sm">
+                                                            Limpar
+                                                            <i class="fas fa-broom"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row ">
-                                <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
-                                    <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
-                                        <div class="form-group">
-                                            <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
-                                                Limpar
-                                                <i class="fas fa-broom"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn bg-olive btn-sm">
-                                                Salvar
-                                                <i class="fas fa-save"></i>
-                                            </button>
-                                        </div>
+                        </div>
+
+                        @if($marketsProducts->count() > 0)
+                            <form action="{{ route('create_market_products_post') }}" method="post">
+                                @csrf
+                                <div class="row  mt-3 mb-3">
+                                    <div class="col-12">
+                                        <table class="table table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center font-10" width="20%">Merc.</th>
+                                                    <th class="text-center font-10" width="20%">Item</th>     
+                                                    <th class="text-center font-10" width="20%">Valor</th>
+                                                    <th class="text-center font-10" width="20%">Comprar</th>
+                                                </tr>                                           
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($marketsProducts as $marketProduct)
+                                                    <tr style="background-color:{{ $marketProduct->market->color }}4d;">
+                                                        <td class="text-center font-10">
+                                                            @if($marketProduct->buy == 'S')
+                                                                <i class="fas fa-check-circle mr-3 text-success"></i>
+                                                            @endif
+                                                            {{ $marketProduct->market->name }}
+                                                        </td> 
+                                                        <td class="text-center font-10">{{ $marketProduct->product->item }}</td>  
+                                                        <td class="text-center font-10">
+                                                            <input type="text" name="marketProduct[{{ $marketProduct->id }}]" class="price form-control form-control-sm" value="{{ old('price', $marketProduct->price) }}">    
+                                                        </td>
+                                                        <td class="text-center font-10">
+                                                            <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm ">
+                                                                <option value="S" @if($marketProduct->buy == 'S') selected @endif>Sim</option> 
+                                                                <option value="N" @if($marketProduct->buy == 'N') selected @endif>Não</option> 
+                                                            </select>   
+                                                        </td>
+                                                    </tr>
+                                                @endforeach 
+                                            </tbody>
+                                        </table>                                    
                                     </div>
                                 </div>
-                            </div>                                         
-                        </form>                        
+                                
+                                <div class="row ">
+                                    <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
+                                        <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
+                                            <div class="form-group">
+                                                <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
+                                                    Limpar
+                                                    <i class="fas fa-broom"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn bg-lightblue btn-sm">
+                                                    Salvar
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                         
+                            </form> 
+                        @else
+                            <div class="row">
+                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                    @include('control-finance.components.results-empty')
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

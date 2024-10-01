@@ -13,11 +13,30 @@ class MarketProductsController extends Controller
     public function __invoke(Request $request)
     {
         $data = [];
+
+        $data['filterMarket'] = null;
+        $data['filterBuy'] = null;
+
+        $data['markets'] = Market::all();
+
+        $data['marketsProducts'] = null;
        
-        $data['marketsProducts'] = MarketProduct::where('id', '>', 0)
+        $marketsProducts = MarketProduct::where('id', '>', 0)
             ->orderBy('product_id')
-            ->orderBy('market_id')
-            ->get();
+            ->orderBy('market_id');
+
+        if($request->filterMarket) {
+            $marketsProducts->where('market_id', $request->filterMarket);            
+            $data['filterMarket'] = $request->filterMarket;
+        }
+
+        if($request->filterBuy) {
+            $marketsProducts->where('buy', $request->filterBuy);
+            $data['filterBuy'] = $request->filterBuy;
+        }
+        
+
+        $data['marketsProducts'] = $marketsProducts->get();
         
         return view('routine-tasks.market-product.list', $data);
     }
