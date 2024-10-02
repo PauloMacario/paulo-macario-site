@@ -169,8 +169,8 @@
                                                     <td class="text-center">{{ $product->item }}</td>                                                    
                                                     @foreach ($markets as $market)
                                                         <td class="text-center">                                                            
-                                                            <div class="custom-control custom-checkbox">
-                                                               
+                                                            <div class="custom-control custom-checkbox">   
+                                                                <input type="checkbox"name="marketAll[{{ $market->id }}][{{ $product->id }}]" id="" style="display:none" checked>                                                            
                                                                 <input 
                                                                     class="custom-control-input custom-control-input-danger item-products-markets" 
                                                                     name="market[{{ $market->id }}][{{ $product->id }}]" 
@@ -179,8 +179,6 @@
                                                                     @if(isset($marketsProducts[$market->id]) && in_array($product->id, $marketsProducts[$market->id]))
                                                                         checked
                                                                     @endif
-
-
                                                                     >
                                                                 <label for="product-{{ $product->id }}-{{ $market->id }}" class="custom-control-label"></label>
                                                             </div>

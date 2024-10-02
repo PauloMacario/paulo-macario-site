@@ -148,15 +148,15 @@
 
     <div class="row mt-3">
         <div class="col-12">
-            <div class="card">
+            {{-- <div class="card"> --}}
                 <div class="card card-lightblue mb-0">
                     <div class="card-header">
                         <h5 class="card-title">Vincular itens ao(s) mercado(s)</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-2">
 
                         <div class="row">
-                            <div class="col-sm-12 col-md-10 col-lg-8">
+                            <div class="col-sm-12 col-md-10 col-lg-10">
                                 <p class="text-right">
                                     <button class="btn bg-lightblue btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                       filtros
@@ -211,9 +211,29 @@
 
                         @if($marketsProducts->count() > 0)
                             <div class="row">
-                                <div class="col-sm-12 col-md-10 col-lg-8">
+                                <div class="col-sm-12 col-md-10 col-lg-10">
                                     <form action="{{ route('create_market_products_post') }}" method="post">
                                         @csrf
+                                        <div class="row ">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
+                                                   {{--  <div class="form-group">
+                                                        <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
+                                                            Limpar
+                                                            <i class="fas fa-broom"></i>
+                                                        </a>
+                                                    </div> --}}
+                                                </div>
+                                                <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn bg-lightblue btn-sm">
+                                                            Salvar
+                                                            <i class="fas fa-save"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
                                         <div class="row  mt-3 mb-3">
                                             <div class="col-12">
                                                 <table class="table table table-sm">
@@ -252,14 +272,14 @@
                                         </div>
                                         
                                         <div class="row ">
-                                            <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
+                                            <div class="col-12 d-flex justify-content-between">
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
-                                                    <div class="form-group">
+                                                   {{--  <div class="form-group">
                                                         <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
                                                     <div class="form-group">
@@ -276,14 +296,14 @@
                             </div>
                         @else
                             <div class="row">
-                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                <div class="col-xs-12 col-md-10 col-lg-10">
                                     @include('control-finance.components.results-empty')
                                 </div>
                             </div>
                         @endif
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 

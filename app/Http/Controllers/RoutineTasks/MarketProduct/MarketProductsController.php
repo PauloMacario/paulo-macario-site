@@ -22,6 +22,7 @@ class MarketProductsController extends Controller
         $data['marketsProducts'] = null;
        
         $marketsProducts = MarketProduct::where('id', '>', 0)
+            ->orderBy('price')
             ->orderBy('product_id')
             ->orderBy('market_id');
 

@@ -18,22 +18,39 @@ class UpdateMarketProductsController extends Controller
             return redirect()->back();
         }
 
-        foreach ($request->market as $marketId => $products) {
+        $marketOn = [];
+        $marketOff = [];
+
+        foreach ($request->marketAll as $allId => $all) {
+           
+            foreach ($all as $id => $on) {      
+                if (array_key_exists($id, $request->market[$allId])) {
+                    $marketOn[$allId][] = $id;
+                }
+                else{
+                    $marketOff[$allId][] = $id;
+                }
+            }
+        }
+
+        foreach ($marketOff as $marketId => $productsOff) {
 
             MarketProduct::where('market_id' , $marketId)
-                ->whereNotIn('product_id', $products)
-                ->delete();
+                ->whereIn('product_id', $productsOff)
+                ->delete();           
+        }
 
-            foreach ($products as $product => $on) {
-                
-                $exists = MarketProduct::where('market_id' , $marketId)
-                    ->where('product_id', $product)
+
+        foreach ($marketOn as $marketId => $productsOn) {
+
+            foreach ($productsOn as $productId) {
+                $exist = MarketProduct::where('market_id' , $marketId)
+                    ->where('product_id', $productId)
                     ->first();
-                
-                if (! $exists) {
+                if (! $exist) {
                     MarketProduct::create([
                         'market_id' => $marketId,
-                        'product_id' =>  $product
+                        'product_id' =>  $productId
                     ]);
                 }
             }
