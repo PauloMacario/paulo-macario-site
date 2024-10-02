@@ -98,14 +98,14 @@
         .font-total-footer {
             font-size: 14px;
             font-style: italic;
-            color:#000000;
+            color:#3d3d3d;
             font-weight:bold;
         }
 
         .font-header {
             font-size: 14px;
             font-style: italic;
-            color:#000000;
+            color:#3d3d3d;
             font-weight:bold;
         }
 
@@ -217,12 +217,7 @@
                                         <div class="row ">
                                             <div class="col-12 d-flex justify-content-between">
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
-                                                   {{--  <div class="form-group">
-                                                        <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
-                                                            Limpar
-                                                            <i class="fas fa-broom"></i>
-                                                        </a>
-                                                    </div> --}}
+                                                   <span class="font-total-item">Qtd: {{ $marketsProducts->count() }}</span>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
                                                     <div class="form-group">
@@ -279,12 +274,7 @@
                                         <div class="row ">
                                             <div class="col-12 d-flex justify-content-between">
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
-                                                   {{--  <div class="form-group">
-                                                        <a href="{{ route('market_products_get') }}" class="btn bg-warning btn-sm">
-                                                            Limpar
-                                                            <i class="fas fa-broom"></i>
-                                                        </a>
-                                                    </div> --}}
+                                                    <span class="font-total-item">Qtd: {{ $marketsProducts->count() }}</span>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
                                                     <div class="form-group">
@@ -302,15 +292,15 @@
                                         <div class="col-12">
                                             <table>
                                                 <tr>
-                                                    <td class="font-italic text-center font-12 ">
-                                                        <h4>
+                                                    <td class="font-total-footer text-center">
+                                                        <span>
                                                             Total: 
-                                                        </h4>
+                                                        </span>
                                                     </td>
-                                                    <td class="font-italic text-left font-12">
-                                                        <h4>
+                                                    <td class="font-total-footer text-center">
+                                                        <span >
                                                             R$ {{ formatMoneyBR($total) }}
-                                                        </h4>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             </table>
