@@ -38,6 +38,8 @@ class MarketProductsController extends Controller
         
 
         $data['marketsProducts'] = $marketsProducts->get();
+
+        $data['total'] = 0;
         
         return view('routine-tasks.market-product.list', $data);
     }

@@ -265,8 +265,13 @@
                                                                     </select>   
                                                                 </td>
                                                             </tr>
+
+                                                            @php
+                                                                $total += $marketProduct->price
+                                                            @endphp
+
                                                         @endforeach 
-                                                    </tbody>
+                                                    </tbody>                                                   
                                                 </table>                                    
                                             </div>
                                         </div>
@@ -292,6 +297,25 @@
                                             </div>
                                         </div>                                         
                                     </form> 
+
+                                    <div class="row ">
+                                        <div class="col-12">
+                                            <table>
+                                                <tr>
+                                                    <td class="font-italic text-center font-12 ">
+                                                        <h4>
+                                                            Total: 
+                                                        </h4>
+                                                    </td>
+                                                    <td class="font-italic text-left font-12">
+                                                        <h4>
+                                                            R$ {{ formatMoneyBR($total) }}
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @else
