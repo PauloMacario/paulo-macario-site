@@ -14,6 +14,15 @@
             border-collapse: collapse;
         }
 
+        .risk {
+            text-decoration: line-through;
+            color:#6d6d6d;
+        }
+
+        .box-disabled {
+            background-color: #e9ecef;
+        }
+
         .table-header, .table-items, .table-footer {
             border: 2px solid #6d6d6d;
             background-color: #bdbdbd3f;
@@ -251,28 +260,7 @@
                                         </div> 
                                         <div class="row  mt-3 mb-3">
                                             <div class="col-12">
-                                                <table class="{{-- table table table-sm --}}">
-                                                   {{--  <thead>
-                                                        <tr>
-
-                                                            <th colspan="2">Mercado</th>
-                                                            <th colspan="2">Comprar</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Item</th>
-                                                            <th>Valor. unit</th>
-                                                            <th>Qtd</th>
-                                                            <th>Valor Total</th>
-                                                        </tr>        
-
-                                                           <th class="text-center font-12" width="20%">Merc.</th>
-                                                            <th class="text-center font-12" width="20%">Item</th>     
-                                                            <th class="text-center font-12" width="10%">Valor. unit</th>
-                                                            <th class="text-center font-12" width="10%">Qtd</th>
-                                                            <th class="text-center font-12" width="10%">Valor Total</th>
-                                                            <th class="text-center font-12" width="10%">Comprar</th>
-                                                        </tr>                                           
-                                                    </thead> --}}
+                                                <table class="">                                                  
                                                     <tbody>
                                                         @foreach ($marketsProducts as $marketProduct)
                                                     
@@ -280,22 +268,22 @@
                                                             $total += $marketProduct->total;
                                                         @endphp
 
-                                                            <tr class="font-12">
+                                                            <tr class="font-12" id="boxmkt-{{ $marketProduct->id }}">
                                                                 <td colspan="2"  style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
                                                                 <td class="text-right">
                                                                     comprar? 
                                                                 </td>
                                                                 <td >
-                                                                <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm font-10">
+                                                                <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy-{{ $marketProduct->id }}" class="form-control form-control-sm font-10">
                                                                         <option value="S"@if($marketProduct->buy == 'S') selected @endif class="font-10">S</option> 
                                                                         <option value="N"@if($marketProduct->buy == 'N') selected @endif class="font-10">N</option> 
                                                                     </select>   
                                                                 </td>
                                                             </tr>
 
-                                                            <tr class="font-10 mb-4" width="38%" >
+                                                            <tr class="font-10 mb-4" width="38%" id="box-{{ $marketProduct->id }}">
                                                                 <td class="text-center bold font-10" style="padding-top:5px;">                                                                
-                                                                    {{ $marketProduct->product->item }}
+                                                                    <input type="checkbox" name="" id="dsb-{{ $marketProduct->id }}" class="desable mr-3"><span class="" id="name-{{ $marketProduct->id }}">{{ $marketProduct->product->item }}</span>
                                                                 </td>                                                            
                                                                 <td class="text-center" width="18%" style="padding-top:5px;">
                                                                     Qtd
@@ -323,7 +311,7 @@
                                                                 </td>
                                                                 <td class="text-center" width="22%" style="padding-top:5px;">
                                                                     Valor Total
-                                                                    <input type="text" name="marketProductTotal[{{ $marketProduct->id }}]" id="total-{{ $marketProduct->id }}" class="total form-control form-control-sm font-12" value="{{ old('total', $marketProduct->total) }}">   
+                                                                    <input type="text" name="marketProductTotal[{{ $marketProduct->id }}]" id="total-{{ $marketProduct->id }}" class="total form-control form-control-sm font-12" value="{{ old('total', $marketProduct->total) }}" readonly>   
                                                                 </td>
                                                                 
                                                             </tr> 
@@ -394,12 +382,31 @@
 
 @stop
 @push('js')
+<script type="text/javascript">
+    window.onbeforeunload = function() {
+        return "Tem a certeza que quer sair da pagina?";
+    }
+</script>
     <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script>
 
         $(document).ready(function() {
             $('.price').mask('000.000,00', {reverse: true});     
-            $('.total').mask('000.000,00', {reverse: true});     
+            $('.total').mask('000.000,00', {reverse: true});    
+
+
+
+            $('.desable').on('click', function(){
+                if (! $(this).is(':checked')) {
+                    mostrarCampos(this.id)
+                }
+
+                if ($(this).is(':checked')) {
+                    ocultarCampos(this.id)
+                }
+            })
+
+
             
             $('.price').on('keyup', function() {
 
@@ -444,6 +451,36 @@
             let calcConvert = calc.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
 
             return calcConvert.replace('R$', '')
+        }
+
+        function ocultarCampos(id)
+        { 
+            let idNumber =  id.substring(4)
+
+            $('#boxmkt-'+idNumber).addClass('box-disabled')
+            $('#box-'+idNumber).addClass('box-disabled')
+            $('#name-'+idNumber).addClass('risk')
+            
+
+            $('#buy-'+idNumber).attr('disabled', true)
+            $('#qtd-'+idNumber).attr('disabled', true)
+            $('#prc-'+idNumber).attr('disabled', true)
+            $('#total-'+idNumber).attr('disabled', true)
+        }
+
+        function mostrarCampos(id)
+        { 
+            let idNumber =  id.substring(4)
+
+            $('#boxmkt-'+idNumber).removeClass('box-disabled')
+            $('#box-'+idNumber).removeClass('box-disabled')
+            $('#name-'+idNumber).removeClass('risk')
+            
+
+            $('#buy-'+idNumber).attr('disabled', false)
+            $('#qtd-'+idNumber).attr('disabled', false)
+            $('#prc-'+idNumber).attr('disabled', false)
+            $('#total-'+idNumber).attr('disabled', false)
         }
 
     </script>
