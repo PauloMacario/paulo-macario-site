@@ -10,7 +10,6 @@ class CreateMarketProductsController extends Controller
 {  
     public function __invoke(Request $request)
     {  
-       dd($request->all());
         if (!isset($request->marketProduct)) {
             $request->session()->flash('info', 'Nenhum valor para atualizar!');
             return redirect()->back();
