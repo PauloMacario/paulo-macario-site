@@ -73,3 +73,10 @@ INSERT INTO `routine_tasks`.`products` (`id`, `item`, `created_at`, `updated_at`
 INSERT INTO `routine_tasks`.`products` (`id`, `item`, `created_at`, `updated_at`) VALUES ('28', 'Pão sovado', NOW(), NOW());
 INSERT INTO `routine_tasks`.`products` (`id`, `item`, `created_at`, `updated_at`) VALUES ('29', 'Torrada', NOW(), NOW());
 INSERT INTO `routine_tasks`.`products` (`id`, `item`, `created_at`, `updated_at`) VALUES ('30', 'Detergente', NOW(), NOW());
+
+
+##################################
+
+ALTER TABLE `routine_tasks`.`market_products` 
+ADD COLUMN `quantity` INT NOT NULL DEFAULT 1 AFTER `price`,
+ADD COLUMN `total` DECIMAL(10,2) NOT NULL DEFAULT '0.00' AFTER `quantity`;

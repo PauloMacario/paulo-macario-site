@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class CreateMarketProductsController extends Controller
 {  
     public function __invoke(Request $request)
-    {          
+    {  
+       
         if (!isset($request->marketProduct)) {
             $request->session()->flash('info', 'Nenhum valor para atualizar!');
             return redirect()->back();
@@ -37,6 +38,32 @@ class CreateMarketProductsController extends Controller
             if ($marketProduct && $marketProduct->buy != $buy) {
                 $marketProduct->update([
                     'buy' => $buy
+                ]);
+            }
+        }
+
+        foreach ($request->marketProductQuantity as $id => $quantity) {
+                        
+            $marketProduct = MarketProduct::find($id);
+
+            if ($marketProduct && $marketProduct->quantity != $quantity) {
+                $marketProduct->update([
+                    'quantity' => $quantity
+                ]);
+            }
+        }
+
+        foreach ($request->marketProductTotal as $id => $total) {
+
+            $totalDB = str_replace('.','', $total);
+
+            $totalSave = str_replace(',','.', $totalDB);
+                        
+            $marketProduct = MarketProduct::find($id);
+
+            if ($marketProduct && $marketProduct->total != $totalSave) {
+                $marketProduct->update([
+                    'total' => $totalSave
                 ]);
             }
         }

@@ -39,6 +39,20 @@
         .pl-15 {padding-left: 15px;}
         .pl-30 {padding-left: 30px;}
 
+        .pt-2 {padding-top: 2px;}
+        .pt-4 {padding-top: 4px;}
+        .pt-8 {padding-top: 8px;}
+        .pt-10 {padding-top: 10px;}
+        .pt-15 {padding-top: 15px;}
+        .pt-30 {padding-top: 30px;}
+
+        .pb-2 {padding-bottom: 2px;}
+        .pb-4 {padding-bottom: 4px;}
+        .pb-8 {padding-bottom: 8px;}
+        .pb-10 {padding-bottom: 10px;}
+        .pb-15 {padding-bottom: 15px;}
+        .pb-30 {padding-bottom: 30px;}
+
         .pr-2 {padding-right: 2px;}
         .pr-4 {padding-right: 4px;}
         .pr-8 {padding-right: 8px;}
@@ -115,6 +129,9 @@
             color:#494949;
             font-weight:bold;
         }
+        .font-8 {
+            font-size: 8px;
+        }
         .font-10 {
             font-size: 10px;
         }
@@ -135,6 +152,9 @@
         }
         .font-22 {
             font-size: 22px;
+        }
+        .bold {
+            font-weight: bold;
         }
     </style>
 @endpush
@@ -231,42 +251,89 @@
                                         </div> 
                                         <div class="row  mt-3 mb-3">
                                             <div class="col-12">
-                                                <table class="table table table-sm">
-                                                    <thead>
+                                                <table class="{{-- table table table-sm --}}">
+                                                   {{--  <thead>
                                                         <tr>
-                                                            <th class="text-center font-12" width="20%">Merc.</th>
+
+                                                            <th colspan="2">Mercado</th>
+                                                            <th colspan="2">Comprar</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Valor. unit</th>
+                                                            <th>Qtd</th>
+                                                            <th>Valor Total</th>
+                                                        </tr>        
+
+                                                           <th class="text-center font-12" width="20%">Merc.</th>
                                                             <th class="text-center font-12" width="20%">Item</th>     
-                                                            <th class="text-center font-12" width="20%">Valor</th>
-                                                            <th class="text-center font-12" width="20%">Comprar</th>
+                                                            <th class="text-center font-12" width="10%">Valor. unit</th>
+                                                            <th class="text-center font-12" width="10%">Qtd</th>
+                                                            <th class="text-center font-12" width="10%">Valor Total</th>
+                                                            <th class="text-center font-12" width="10%">Comprar</th>
                                                         </tr>                                           
-                                                    </thead>
+                                                    </thead> --}}
                                                     <tbody>
                                                         @foreach ($marketsProducts as $marketProduct)
-                                                            <tr style="background-color:{{ $marketProduct->market->color }}4d;">
-                                                                <td class="text-center font-12">
-                                                                    @if($marketProduct->buy == 'S')
-                                                                        <i class="fas fa-check-circle mr-3 text-success"></i>
-                                                                    @endif
-                                                                    {{ $marketProduct->market->name }}
-                                                                </td> 
-                                                                <td class="text-center font-12">{{ $marketProduct->product->item }}</td>  
-                                                                <td class="text-center font-12">
-                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" class="price form-control form-control-sm" value="{{ old('price', $marketProduct->price) }}">    
+                                                    
+                                                            <tr class="font-12">
+                                                                <td colspan="2"  style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
+                                                                <td class="text-right">
+                                                                    comprar? 
                                                                 </td>
-                                                                <td class="text-center font-12">
-                                                                    <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm ">
-                                                                        <option value="S" @if($marketProduct->buy == 'S') selected @endif>Sim</option> 
-                                                                        <option value="N" @if($marketProduct->buy == 'N') selected @endif>Não</option> 
+                                                                <td >
+                                                                <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy" class="form-control form-control-sm font-10">
+                                                                        <option value="S"@if($marketProduct->buy == 'S') selected @endif class="font-10">S</option> 
+                                                                        <option value="N"@if($marketProduct->buy == 'N') selected @endif class="font-10">N</option> 
                                                                     </select>   
                                                                 </td>
                                                             </tr>
 
-                                                            @php
-                                                                $total += $marketProduct->price
-                                                            @endphp
-
-                                                        @endforeach 
-                                                    </tbody>                                                   
+                                                            <tr class="font-10 mb-4" width="38%" >
+                                                                <td class="text-center bold font-10" style="padding-top:5px;">                                                                
+                                                                    {{ $marketProduct->product->item }}
+                                                                </td>                                                            
+                                                                <td class="text-center" width="18%" style="padding-top:5px;">
+                                                                    Qtd
+                                                                    <select name="marketProductQuantity[{{ $marketProduct->id }}]" id="qtd-{{ $marketProduct->id }}" class=" quantity form-control form-control-sm font-10">
+                                                                        <option value="1" @if($marketProduct->quantity == '1') selected @endif >1</option> 
+                                                                        <option value="2" @if($marketProduct->quantity == '2') selected @endif >2</option> 
+                                                                        <option value="3" @if($marketProduct->quantity == '3') selected @endif >3</option> 
+                                                                        <option value="4" @if($marketProduct->quantity == '4') selected @endif >4</option> 
+                                                                        <option value="5" @if($marketProduct->quantity == '5') selected @endif >5</option> 
+                                                                        <option value="6" @if($marketProduct->quantity == '6') selected @endif >6</option> 
+                                                                        <option value="7" @if($marketProduct->quantity == '7') selected @endif >7</option> 
+                                                                        <option value="8" @if($marketProduct->quantity == '8') selected @endif >8</option> 
+                                                                        <option value="9" @if($marketProduct->quantity == '9') selected @endif >9</option> 
+                                                                        <option value="10" @if($marketProduct->quantity == '10') selected @endif >10</option> 
+                                                                        <option value="11" @if($marketProduct->quantity == '11') selected @endif >11</option> 
+                                                                        <option value="12" @if($marketProduct->quantity == '12') selected @endif >12</option> 
+                                                                        <option value="13" @if($marketProduct->quantity == '13') selected @endif >13</option> 
+                                                                        <option value="14" @if($marketProduct->quantity == '14') selected @endif >14</option> 
+                                                                        <option value="15" @if($marketProduct->quantity == '15') selected @endif >15</option>                                                                         
+                                                                    </select>   
+                                                                </td>
+                                                                <td class="text-center" width="22%" style="padding-top:5px;">
+                                                                    Valor. unit
+                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" id="prc-{{ $marketProduct->id }}"class="price form-control form-control-sm font-12" value="{{ old('price', $marketProduct->price) }}">    
+                                                                </td>
+                                                                <td class="text-center" width="22%" style="padding-top:5px;">
+                                                                    Valor Total
+                                                                    <input type="text" name="marketProductTotal[{{ $marketProduct->id }}]" id="total-{{ $marketProduct->id }}" class="total form-control form-control-sm font-12" value="{{ old('total', $marketProduct->total) }}">   
+                                                                </td>
+                                                                
+                                                            </tr> 
+                                                            <tr>
+                                                                <td colspan="4" class="pt-2"></td>
+                                                            </tr> 
+                                                            <tr>
+                                                                <td colspan="4" style="background-color:#3c8dbc;"></td>
+                                                            </tr> 
+                                                            <tr>
+                                                                <td colspan="4" class="pb-4"> </td>
+                                                            </tr>                                                     
+                                                        @endforeach                                                      
+                                                    </tbody>
                                                 </table>                                    
                                             </div>
                                         </div>
@@ -327,8 +394,53 @@
     <script>
 
         $(document).ready(function() {
-            $('.price').mask('000.000,00', {reverse: true});           
+            $('.price').mask('000.000,00', {reverse: true});     
+            $('.total').mask('000.000,00', {reverse: true});     
+            
+            $('.price').on('keyup', function() {
+
+                if (this.value.length > 3) {
+
+                    manipularCampos(this.id)
+                }               
+            })
+
+            $('.quantity').on('change', function() {
+              
+                manipularCampos(this.id)
+            })            
         });
+
+        function manipularCampos(id)
+        { 
+            let idNumber =  id.substring(4)
+
+            let quantity = $('#qtd-'+idNumber)
+            let price = $('#prc-'+idNumber)
+            let total = $('#total-'+idNumber)   
+            
+            let result = calculateTtalvalue(quantity.val(), price.val())
+
+            total.val(result)
+        }
+
+        function calculateTtalvalue(quantity, price) 
+        {
+            price = price.replace('.','').replace(',','.')
+            
+            if (price == 0) {
+               
+                let result = price.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
+
+                return result.replace('R$', '')
+            }
+           
+            let calc = quantity * price
+
+            let calcConvert = calc.toLocaleString("pt-BR", {style:"currency", currency:"BRL"})
+
+            return calcConvert.replace('R$', '')
+        }
 
     </script>
 @endpush

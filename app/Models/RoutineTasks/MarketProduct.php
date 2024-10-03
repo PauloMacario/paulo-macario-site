@@ -13,6 +13,8 @@ class MarketProduct extends RoutineTasksModel
         'market_id',
         'product_id',
         'price',
+        'quantity',
+        'total',
         'buy'
     ];
 
