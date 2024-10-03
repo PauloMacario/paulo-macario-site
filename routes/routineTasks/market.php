@@ -9,7 +9,8 @@ use App\Http\Controllers\RoutineTasks\Market\{
     UpdateMarketController
 };
 
-Route::prefix('routinetasks')
+Route::middleware('auth')
+    ->prefix('routinetasks')
     ->group(function() {
 
         Route::get(

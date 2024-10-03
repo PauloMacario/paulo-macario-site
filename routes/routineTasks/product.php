@@ -9,7 +9,8 @@ use App\Http\Controllers\RoutineTasks\Product\{
     UpdateProductController
 };
 
-Route::prefix('routinetasks')
+Route::middleware('auth')
+    ->prefix('routinetasks')
     ->group(function() {
 
         Route::get(

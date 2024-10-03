@@ -307,7 +307,7 @@
                                                                 </td>
                                                                 <td class="text-center" width="22%" style="padding-top:5px;">
                                                                     Valor. unit
-                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" id="prc-{{ $marketProduct->id }}"class="price form-control form-control-sm font-12" value="{{ old('price', $marketProduct->price) }}">    
+                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" id="prc-{{ $marketProduct->id }}"class="price form-control form-control-sm font-12" value="{{ old('price', $marketProduct->price) }}" inputmode="numeric">    
                                                                 </td>
                                                                 <td class="text-center" width="22%" style="padding-top:5px;">
                                                                     Valor Total
@@ -382,11 +382,7 @@
 
 @stop
 @push('js')
-<script type="text/javascript">
-    window.onbeforeunload = function() {
-        return "Tem a certeza que quer sair da pagina?";
-    }
-</script>
+
     <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script>
 
@@ -462,10 +458,10 @@
             $('#name-'+idNumber).addClass('risk')
             
 
-            $('#buy-'+idNumber).attr('disabled', true)
-            $('#qtd-'+idNumber).attr('disabled', true)
-            $('#prc-'+idNumber).attr('disabled', true)
-            $('#total-'+idNumber).attr('disabled', true)
+            $('#buy-'+idNumber).attr('readonly', true)
+            $('#qtd-'+idNumber).attr('readonly', true)
+            $('#prc-'+idNumber).attr('readonly', true)
+            
         }
 
         function mostrarCampos(id)
@@ -477,10 +473,9 @@
             $('#name-'+idNumber).removeClass('risk')
             
 
-            $('#buy-'+idNumber).attr('disabled', false)
-            $('#qtd-'+idNumber).attr('disabled', false)
-            $('#prc-'+idNumber).attr('disabled', false)
-            $('#total-'+idNumber).attr('disabled', false)
+            $('#buy-'+idNumber).attr('readonly', false)
+            $('#qtd-'+idNumber).attr('readonly', false)
+            $('#prc-'+idNumber).attr('readonly', false)
         }
 
     </script>

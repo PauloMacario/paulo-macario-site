@@ -8,7 +8,8 @@ use App\Http\Controllers\RoutineTasks\MarketProduct\{
     CreateMarketProductsController
 };
 
-Route::prefix('routinetasks')
+Route::middleware('auth')
+    ->prefix('routinetasks')
     ->group(function() {
 
         Route::get(
