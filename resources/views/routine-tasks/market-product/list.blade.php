@@ -276,6 +276,10 @@
                                                     <tbody>
                                                         @foreach ($marketsProducts as $marketProduct)
                                                     
+                                                        @php
+                                                            $total += $marketProduct->total;
+                                                        @endphp
+
                                                             <tr class="font-12">
                                                                 <td colspan="2"  style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
                                                                 <td class="text-right">
