@@ -15,7 +15,8 @@ class MarketProduct extends RoutineTasksModel
         'price',
         'quantity',
         'total',
-        'buy'
+        'buy',
+        'checked'
     ];
 
     public function product() 

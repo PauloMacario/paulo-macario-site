@@ -104,6 +104,16 @@
         .mb-15 {margin-bottom: 15px;}
         .mb-30 {margin-bottom: 30px;}
 
+        .w-2 {width:2%;}
+        .w-5 {width:5%;}
+        .w-10 {width:10%;}
+        .w-15 {width:15%;}
+        .w-20 {width:20%;}
+        .w-30 {width:30%;}
+        .w-40 {width:40%;}
+        .w-50 {width:50%;}
+
+
         .font-item {
             font-size: 12px;
             font-style: italic;
@@ -241,7 +251,7 @@
                         @if($marketsProducts->count() > 0)
                             <div class="row">
                                 <div class="col-sm-12 col-md-10 col-lg-10">
-                                    <form action="{{ route('create_market_products_post') }}" method="post">
+                                    <form action="{{ route('create_market_products_post') }}" method="post"  id="form">
                                         @csrf
                                         <div class="row ">
                                             <div class="col-12 d-flex justify-content-between">
@@ -266,28 +276,19 @@
                                                     
                                                         @php
                                                             $total += $marketProduct->total;
-                                                        @endphp
-
-                                                            <tr class="font-12" id="boxmkt-{{ $marketProduct->id }}">
-                                                                <td colspan="2"  style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
-                                                                <td class="text-right">
+                                                        @endphp                                                         
+                                                            <tr class="font-12 @if($marketProduct->checked) box-disabled  @endif" id="boxmkt-{{ $marketProduct->id }}">
+                                                                <td class="font-12 bold w-40" style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
+                                                                <td class="font-10 pr-2">
                                                                     comprar? 
-                                                                </td>
-                                                                <td >
-                                                                <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy-{{ $marketProduct->id }}" class="form-control form-control-sm font-10">
+                                                                    <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy-{{ $marketProduct->id }}" class="form-control form-control-sm font-10" style="@if($marketProduct->checked) pointer-events:none; touch-action:none;@endif " @if($marketProduct->checked) readonly @endif>
                                                                         <option value="S"@if($marketProduct->buy == 'S') selected @endif class="font-10">S</option> 
                                                                         <option value="N"@if($marketProduct->buy == 'N') selected @endif class="font-10">N</option> 
                                                                     </select>   
                                                                 </td>
-                                                            </tr>
-
-                                                            <tr class="font-10 mb-4" width="38%" id="box-{{ $marketProduct->id }}">
-                                                                <td class="text-center bold font-10" style="padding-top:5px;">                                                                
-                                                                    <input type="checkbox" name="" id="dsb-{{ $marketProduct->id }}" class="desable mr-3"><span class="" id="name-{{ $marketProduct->id }}">{{ $marketProduct->product->item }}</span>
-                                                                </td>                                                            
-                                                                <td class="text-center" width="18%" style="padding-top:5px;">
+                                                                <td class="font-10 w-20 pr-2">
                                                                     Qtd
-                                                                    <select name="marketProductQuantity[{{ $marketProduct->id }}]" id="qtd-{{ $marketProduct->id }}" class=" quantity form-control form-control-sm font-10">
+                                                                    <select name="marketProductQuantity[{{ $marketProduct->id }}]" id="qtd-{{ $marketProduct->id }}" class=" quantity form-control form-control-sm font-10" style="@if($marketProduct->checked) pointer-events:none; touch-action:none; @endif " @if($marketProduct->checked) readonly @endif>>
                                                                         <option value="1" @if($marketProduct->quantity == '1') selected @endif >1</option> 
                                                                         <option value="2" @if($marketProduct->quantity == '2') selected @endif >2</option> 
                                                                         <option value="3" @if($marketProduct->quantity == '3') selected @endif >3</option> 
@@ -305,15 +306,32 @@
                                                                         <option value="15" @if($marketProduct->quantity == '15') selected @endif >15</option>                                                                         
                                                                     </select>   
                                                                 </td>
-                                                                <td class="text-center" width="22%" style="padding-top:5px;">
+                                                                <td class="text-center font-10">
                                                                     Valor. unit
-                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" id="prc-{{ $marketProduct->id }}"class="price form-control form-control-sm font-12" value="{{ old('price', $marketProduct->price) }}" inputmode="numeric">    
+                                                                    <input type="text" name="marketProduct[{{ $marketProduct->id }}]" id="prc-{{ $marketProduct->id }}"class="price form-control form-control-sm font-10" @if($marketProduct->checked) readonly @endif value="{{ old('price', $marketProduct->price) }}" inputmode="numeric" required >    
                                                                 </td>
-                                                                <td class="text-center" width="22%" style="padding-top:5px;">
+                                                            </tr>
+                                                            <tr class="font-10 mb-4 @if($marketProduct->checked) box-disabled  @endif" width="38%" id="box-{{ $marketProduct->id }}">                                                               
+                                                                <td colspan="2" class="bold font-10 pt-2">                                                                
+                                                                    <input type="checkbox" name="marketProductDisabled[{{ $marketProduct->id }}]" id="dsb-{{ $marketProduct->id }}" class="desable mr-3" @if ($marketProduct->checked)  checked  @endif>
+                                                                    <span class="bold font-12 @if($marketProduct->checked) risk @endif" id="name-{{ $marketProduct->id }}">{{ $marketProduct->product->item }}</span>
+                                                                </td> 
+                                                                <td class="font-10 pt-2 pr-2">
                                                                     Valor Total
                                                                     <input type="text" name="marketProductTotal[{{ $marketProduct->id }}]" id="total-{{ $marketProduct->id }}" class="total form-control form-control-sm font-12" value="{{ old('total', $marketProduct->total) }}" readonly>   
                                                                 </td>
-                                                                
+                                                                <td class="font-10 pt-2 text-center">
+                                                                    Salvar item
+                                                                    <br>
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <div class="spinner-border" id="spi-{{ $marketProduct->id }}" role="status" style="width: 2rem; height: 2rem; display:none;">
+                                                                            <span class="sr-only">Loading...</span>
+                                                                        </div>
+                                                                        <button name="bsi-{{ $marketProduct->id }}" id="bsi-{{ $marketProduct->id }}" class="bsi btn bg-lightblue btn-sm"{{--  @if ($marketProduct->checked)  disabled  @endif --}} style="display:block;">
+                                                                            <i class="fas fa-save bsi-icon"></i>                                                                        
+                                                                        </button>
+                                                                    </div>
+                                                                </td>                           
                                                             </tr> 
                                                             <tr>
                                                                 <td colspan="4" class="pt-2"></td>
@@ -338,7 +356,7 @@
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
                                                     <div class="form-group">
                                                         <button type="submit" class="btn bg-lightblue btn-sm">
-                                                            Salvar
+                                                            Salvar todos
                                                             <i class="fas fa-save"></i>
                                                         </button>
                                                     </div>
@@ -383,12 +401,85 @@
 @stop
 @push('js')
 
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/yoda.js') }}"></script>
     <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script>
 
         $(document).ready(function() {
             $('.price').mask('000.000,00', {reverse: true});     
             $('.total').mask('000.000,00', {reverse: true});    
+
+            $('.bsi').on('click', function(event){
+                event.preventDefault();
+
+                var token = $("[name='_token']");
+                
+                var idNumber = this.id.substring(4)
+                var form = $('#form');
+                
+                var buyArr = {};
+                var qtdArr = {};
+                var prcArr = {};
+                var totalArr = {};
+                var dsbArr = {};
+
+                var buy =  $('#buy-'+idNumber).val()
+                var qtd = $('#qtd-'+idNumber).val()
+                var prc =  $('#prc-'+idNumber).val()
+                var total = $('#total-'+idNumber).val()
+                var dsb = $('#dsb-'+idNumber)
+
+                buyArr[idNumber] =  buy
+                qtdArr[idNumber] =  qtd
+                prcArr[idNumber] =  prc
+                totalArr[idNumber] = total
+
+                mainArray = {}
+
+                if (dsb.is(':checked')) {
+                    dsbArr[idNumber] = 'on'
+                    mainArray['marketProductDisabled'] = dsbArr
+                }
+              
+                mainArray['marketProductBuy'] = buyArr
+                mainArray['marketProductQuantity'] = qtdArr
+                mainArray['marketProduct'] = prcArr
+                mainArray['marketProductTotal'] = totalArr
+                
+                mainArray['_token'] = token.val()
+                mainArray['ajax'] = token.val()
+                
+                
+
+                $.ajax({
+                    url : form.attr('action'),
+                    type: form.attr('method'),
+                    data : mainArray,
+                    beforeSend : function(){
+                        $("#bsi-"+idNumber).css('display', 'none');
+                        $("#spi-"+idNumber).css('display', 'block');
+                    }
+                })
+                .done(function(msg){
+                    $("#spi-"+idNumber).css('display', 'none');
+                    $("#bsi-"+idNumber).css('display', 'block');
+                        let title = "";
+                        let text = "QUE A FORÇA ESTEJA COM VOCÊ";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                        getYodaSwal(linkImg, title, text)
+                })
+                .fail(function(jqXHR, textStatus, msg){
+                        let title = "";
+                        let text = "## (( ERROOOO !!! )) ##";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                        getYodaSwal(linkImg, title, text)
+                });
+
+            })
+
 
 
 
@@ -458,9 +549,10 @@
             $('#name-'+idNumber).addClass('risk')
             
 
-            $('#buy-'+idNumber).attr('readonly', true)
-            $('#qtd-'+idNumber).attr('readonly', true)
+            $('#buy-'+idNumber).attr('readonly', true).css('pointer-events', 'none').css('touch-action', 'none')
+            $('#qtd-'+idNumber).attr('readonly', true).css('pointer-events', 'none').css('touch-action', 'none')
             $('#prc-'+idNumber).attr('readonly', true)
+            //$('#bsi-'+idNumber).attr('disabled', true)
             
         }
 
@@ -473,9 +565,11 @@
             $('#name-'+idNumber).removeClass('risk')
             
 
-            $('#buy-'+idNumber).attr('readonly', false)
-            $('#qtd-'+idNumber).attr('readonly', false)
+            $('#buy-'+idNumber).attr('readonly', false).removeAttr( 'style' );
+            $('#qtd-'+idNumber).attr('readonly', false).removeAttr( 'style' );
             $('#prc-'+idNumber).attr('readonly', false)
+           // $('#bsi-'+idNumber).removeAttr('disabled')
+            
         }
 
     </script>

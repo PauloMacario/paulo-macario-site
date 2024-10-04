@@ -7,9 +7,11 @@ use App\Models\RoutineTasks\MarketProduct;
 use Illuminate\Http\Request;
 
 class CreateMarketProductsController extends Controller
-{  
+{
     public function __invoke(Request $request)
-    {  
+    {
+        $checked = $request->marketProductDisabled ?? [];
+
         if (!isset($request->marketProduct)) {
             $request->session()->flash('info', 'Nenhum valor para atualizar!');
             return redirect()->back();
@@ -23,9 +25,17 @@ class CreateMarketProductsController extends Controller
 
             $marketProduct = MarketProduct::find($id);
 
+            $check = (array_key_exists($id, $checked)) ? '1' : '0';
+           
             if ($marketProduct && $marketProduct->price != $priceSave) {
                 $marketProduct->update([
                     'price' => $priceSave
+                ]);
+            }
+            
+            if ($marketProduct && $marketProduct->checked != $checked) {
+                $marketProduct->update([
+                    'checked' => $check
                 ]);
             }
         }
@@ -65,6 +75,11 @@ class CreateMarketProductsController extends Controller
                     'total' => $totalSave
                 ]);
             }
+        }
+
+        if ($request->ajax) {
+
+            return response()->json(['success' => 'Atualizado']);
         }
 
         return redirect()->back();
