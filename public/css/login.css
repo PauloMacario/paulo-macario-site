@@ -1,5 +1,4 @@
 body {
-    background: url('../img/background.jpg');
-    background-size: cover;
+    background-color: rgb(228, 228, 228) !important;
     
 }

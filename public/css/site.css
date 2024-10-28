@@ -1,146 +1,229 @@
-/* ############# CSS aplicações ##################*/
+/* 
+*****************************************************************************
+*******************************   BASE SITE   ********************************
+*****************************************************************************
+*/
 
-
-
-/* ############# CSS aplicações FINAL ##################*/
-
-.message{
-    width: 100%;
-    height: 100vh;
-    color: #fff;
+* {
+    font-family: "Dosis", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 }
 
-.message > h1{
-    font-size: 40px;
+a {
+    text-decoration: none;
+}
+
+.mostrar {
+    transition: 80ms;
+    opacity: 1;
+}
+
+.esconder {
+    opacity: 0;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: rgb(34, 34, 34);
+}
+
+#menu {
+    width: 100px;
+    height: calc(100% - 60px);
+    transition: 200ms;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1039;
+    background-color: #4e4e4e;
+    padding:10px;
+}
+
+#menu:hover {
+    width: 250px;
+    transition: 400ms;
+}
+
+#menu-nav {
+    width:100%;
+    position: fixed;
+    height: 400px;
+    background-color: #4e4e4e;
+    
+}
+
+main {
+    margin-top: 60px;
+    margin-left: 100px;
+   /*  background-color: rgb(161, 11, 11); */
+}
+
+article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  font-family: "Dosis", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal; */
+}
+
+#article-main {
+    width: 100%;
+    height: 90vh;
+    background-color: rgb(228, 228, 228);
+}
+
+#article-portfolio {
+    width: 100%;
+    height: 90vh;
+    background-color: rgb(207, 207, 207);
+}
+#article-tech {
+    width: 100%;
+    height: 90vh;
+    background-color: rgb(148, 146, 146);
+}
+
+footer {
+    height: 20vh;
+    background-color: rgb(19, 20, 20);
 }
 
 /*
-    ################ menu ################
+*****************************************************************************
+***************************   ELEMENTS SITE   *******************************
+*****************************************************************************
 */
 
-#menu {
-    height: 90vh;
-    background-color: #040b14;
-    color: #fff;
+
+/****** menu left ******/
+#box-menu {
+    margin-top: 30px;
+    width: 230px;
+    position: fixed;
+    z-index: 1039;
 }
 
-.box-1{
-    margin:0px;
-    padding: 0px;
-}
-
-h1 {
-    font-size: 1.5rem ;
-    text-align: center;
-}
-
-.pofile {
+#box-menu > ul {
+    display:block;
     width: 100%;
-    height: 225px;
-    padding: 15px;
-}
-
-#profile-img {
-    width: 130px;
-    height: 130px;
-    margin: auto;
-    display: block;
-    border-radius: 50%;
-    border: 10px solid #01375d;
-}
-
-nav {
-    margin-top: 40px;
-}
-
-nav > ul{
     list-style: none;
-    display: block;
+    margin: 0px;
     padding: 0px;
 }
 
-nav > ul > li{
+#ul {
+    display:block;
+    width: 100%;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu-icon {
+    width: 80%;
+    padding: 0px 5px;
+    display: flex;
+}
+
+.menu-item {
+    transition: 100ms;
+    margin: 20px 0px 0px 31px;
+    color:#dadada;
+    padding: 10px 0px;
+}
+
+.menu-item:hover {
+    transition: 200ms;
+    color:#919090;
+}
+
+.text-menu-item {
+    margin-left:30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ancor-link-menu {
+    text-decoration: none !important;
+}
+
+#avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+   /*  background-color: #b8b7b7; */
+}
+
+
+#avatar > img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+#box-menu-nav > ul {
+    list-style: none;
+    margin:0;
     padding: 10px;
 }
 
-.link-menu {
-    color: #cacacac7;
-    text-decoration: none;
-    transition: linear 200ms;
+.ancor-link-menu-nav {
+    text-decoration: none !important;
 }
 
-.link-menu:hover {
-    color: #0f77c7;
-    text-decoration: none;
-    transition: linear 200ms;
+.menu-nav-item {
+    transition: 100ms;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    color:#dadada;
+    padding: 10px 0px;
 }
 
-.icon-menu {
-    width:45px;
-    padding: 0px 10px;
+.menu-nav-item:hover {
+    transition: 200ms;
+    color:#919090;
 }
 
-.social > a {
-    font-size: 1.5rem ;
-    color: #fff;
-    text-decoration: none;
-    padding:10px 15px;
-    margin: 5px;
-    background-color: #0f325fd0;
-    border-radius: 50%;
-    transition: linear 400ms;
-}
+/* 
+id="box-menu-nav"
+class="ancor-link-menu-nav"
+class="menu-nav-item"
+class="text-menu-nav-item">
 
-.social > a:hover {
-    background-color: #014b82;
-    transition: linear 400ms;
-}
 
-/*
-    ################ secton avatar ################
+ */
+
+/* 
+*****************************************************************************
+*******************************   MEDIA QUERY   ******************************
+*****************************************************************************
 */
 
-#front {
-    width: 100vw;
-    height: 100%;
-    background: url('./../img/background.jpg');
-    background-size: cover;
-}
+@media (max-width: 576px) { 
+    #menu {
+        display: none;
+    }
 
-#front > h1 {
-    font-size: xx-large;
-}
-
-.front-grid {
-    height: 33vh;
-    padding: 0px;
-    margin: 0px;
-}
-
-/*
-    ################ main ################
-*/
-
-main {
-    width: 100%;
-    height: 8000px;
-    background-color: rgb(255, 255, 255);
-}
-
-
-/*
-    ################ footer ################
-*/
-
-#footer {
-    padding: 30px 15px 8px 15px;
-    height: 10vh;
-    background-color: #040b14;
-    color: #fff;
-    border-top: solid 1px #7474743d;
-}
-
-#footer > p {
-    font-size: 10px;
-    margin:0px;
-}
+    #btn-bar {
+        margin: 20px;
+        color: #FFF;
+        display: flex;
+        justify-content: end;
+        cursor: pointer;
+    }
+   
+    main {       
+        margin-left: 0px;       
+    }
+ }

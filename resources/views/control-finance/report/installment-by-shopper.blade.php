@@ -119,7 +119,7 @@
     </style>
 @endpush
 
-@section('title', 'TITLEXXXXX')
+@section('title', 'Relatório')
 
 @section('content_header')
     @include('control-finance.components.alerts')

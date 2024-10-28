@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="id">Categoria</label>
+                                        <label for="categoryId">Categoria</label>
                                         <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
                                             <option value="">Selecione...</option>
                                             @foreach ($categories as $category)
@@ -55,7 +55,7 @@
 
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="id">Comprador(a)</label>    
+                                        <label for="shopper_id">Comprador(a)</label>    
                                        
                                         @if($shoppers->count() > 1)
                                             <select class="form-control form-control-sm" name="shopper_id" id="shopper_id" required>                   
@@ -77,7 +77,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="id">Forma de pagamento</label>
+                                        <label for="payment_type_id">Forma de pagamento</label>
                                         <select class="form-control form-control-sm" name="payment_type_id" id="payment_type_id" autocomplete="off" required>
                                             <option value="" data-installment-enable="0" selected>Selecione...</option>                             
                                             @foreach ($paymentTypes as $paymentType)  
@@ -95,16 +95,39 @@
 
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="id">Parcelas</label>
+                                        <label for="field-number-installments">Parcelas</label>
                                         <input type="number" class="form-control form-control-sm"  name="number_installments" id="field-number-installments" autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
+                                <div class="col-xs-12 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="date">Data</label>
+                                        <input type="date" class="form-control form-control-sm"  name="date" id="date" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-5 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="locality">Loja/local</label>
+                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required >
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="totalValue">Valor total</label>
+                                        <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required>
+                                    </div>
+                                </div>                              
+                            </div>                    
+
+                            <div class="row">
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="id">Compra rateada</label>
+                                        <label for="compra-rateada">Compra rateada</label>
                                         <select class="form-control form-control-sm" @if($shoppers->count() > 1) id="compra-rateada" @else disabled @endif autocomplete="off">
                                             <option value="">Não</option>                                                                             
                                             <option value="Y">Sim</option>
@@ -120,30 +143,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-
-                                <div class="col-xs-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        <label for="id">Data</label>
-                                        <input type="date" class="form-control form-control-sm"  name="date" id="date" required>
-                                    </div>
-                                </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6 col-lg-6">
-                                    <div class="form-group">
-                                        <label for="id">Loja/local</label>
-                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required >
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-6 col-lg-2">
-                                    <div class="form-group">
-                                        <label for="id">Valor total</label>
-                                        <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required>
-                                    </div>
-                                </div>
-                            </div>                    
                         </div>
                         <div class="card-footer">
                             <div class="row ">
