@@ -191,10 +191,10 @@
                                     </div>
                                 </div>   
                                 <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
-                                    <button class="btn bg-olive btn-sm" id="pay">
+                                    <button class="btn bg-olive btn-sm btn-action" id="PM" >
                                         Pagar selecionados
                                     </button>
-                                    <button class="btn btn-warning btn-sm" id="pendent">
+                                    <button class="btn btn-warning btn-sm btn-action" id="PP">
                                         Selecionados como pendente
                                     </button>
                                 </div>                            
@@ -225,8 +225,11 @@
     <script src="{{ asset('js/yoda.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#pay').on('click', function(event){
+            //$('#pay').on('click', function(event){
+            $('.btn-action').on('click', function(event){
                 event.preventDefault();
+
+                var status = this.id
 
                 var checked = $("input:checked")
 
@@ -267,13 +270,13 @@
                     }) 
                 }
                 else {
-
                     $.ajax({
                         type: form.attr('method'),
                         url: form.attr('action'),
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                         data: {
-                            "installments": installmentsSelected
+                            "installments": installmentsSelected,
+                             "status": this.id
                             },
                         success: function (data) {
     
@@ -302,7 +305,6 @@
                         },
                     });
                 }
-
             })
         });
     </script>

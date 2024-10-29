@@ -18,7 +18,7 @@ class SaveAllPayTypesController extends Controller
 
         foreach ($request->installments as $id) {
             $data->id = $id;
-            $data->status = 'PM';
+            $data->status = $request->status;
 
             $response = $updateStatus->execute($data);
 
