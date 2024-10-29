@@ -93,10 +93,19 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                <div class="col-xs-12 col-md-3 col-lg-2">
                                     <div class="form-group">
                                         <label for="field-number-installments">Parcelas</label>
                                         <input type="number" class="form-control form-control-sm"  name="number_installments" id="field-number-installments" autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-3 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="field-number-installments">Status</label>
+                                        <select class="form-control form-control-sm" name="status" id="status" required>                   
+                                            <option value="PP" selected>Pendente Pagamento</option>
+                                            <option value="PM" >Pago</option>  
+                                        </select>              
                                     </div>
                                 </div>
                             </div>
