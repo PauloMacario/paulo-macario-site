@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UpdateMarketProductsController extends Controller
 {  
     public function __invoke(Request $request)
-    {          
+    {
         if (!isset($request->market)) {
             MarketProduct::where('id' , '>', 0)
                 ->delete();
@@ -22,8 +22,24 @@ class UpdateMarketProductsController extends Controller
         $marketOff = [];
 
         foreach ($request->marketAll as $allId => $all) {
-           
-            foreach ($all as $id => $on) {      
+         /*   dd(
+            $request->all(),
+            '-----------------',
+            $request->marketAll,
+            '-----------------',
+            $allId,
+            '----------------',
+            $all
+
+
+           ); */
+            foreach ($all as $id => $on) {   
+               
+                if (! array_key_exists($allId, $request->market)) {
+                    $marketOff[$allId][] = $id;
+                    continue;
+                }
+                
                 if (array_key_exists($id, $request->market[$allId])) {
                     $marketOn[$allId][] = $id;
                 }

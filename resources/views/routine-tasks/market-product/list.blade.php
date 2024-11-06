@@ -278,7 +278,7 @@
                                                             $total += $marketProduct->total;
                                                         @endphp                                                         
                                                             <tr class="font-12 @if($marketProduct->checked) box-disabled  @endif" id="boxmkt-{{ $marketProduct->id }}">
-                                                                <td class="font-12 bold w-40" style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
+                                                                <td class="font-12 bold w-40 pl-2" style="color:{{ $marketProduct->market->color }}" >{{ $marketProduct->market->name }}</td>
                                                                 <td class="font-10 pr-2">
                                                                     comprar? 
                                                                     <select name="marketProductBuy[{{ $marketProduct->id }}]" id="buy-{{ $marketProduct->id }}" class="form-control form-control-sm font-10" style="@if($marketProduct->checked) pointer-events:none; touch-action:none;@endif " @if($marketProduct->checked) readonly @endif>
@@ -312,7 +312,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr class="font-10 mb-4 @if($marketProduct->checked) box-disabled  @endif" width="38%" id="box-{{ $marketProduct->id }}">                                                               
-                                                                <td colspan="2" class="bold font-10 pt-2">                                                                
+                                                                <td colspan="2" class="bold font-10 pt-2 pl-2">                                                                
                                                                     <input type="checkbox" name="marketProductDisabled[{{ $marketProduct->id }}]" id="dsb-{{ $marketProduct->id }}" class="desable mr-3" @if ($marketProduct->checked)  checked  @endif>
                                                                     <span class="bold font-12 @if($marketProduct->checked) risk @endif" id="name-{{ $marketProduct->id }}">{{ $marketProduct->product->item }}</span>
                                                                 </td> 
