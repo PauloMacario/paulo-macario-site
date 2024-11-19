@@ -5,7 +5,7 @@ namespace App\Models\AppInvest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Negotiation extends Model
+class Negotiation extends AppInvestModel
 {
     use HasFactory;
 

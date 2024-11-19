@@ -5,7 +5,7 @@ namespace App\Models\AppInvest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeInvestment extends Model
+class TypeInvestment extends AppInvestModel
 {
     use HasFactory;
 
