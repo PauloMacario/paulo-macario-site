@@ -123,13 +123,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                                    <div class="form-group">                                                               
-                                                        <select class="form-control form-control-sm" name="shopper_id" id="">
-                                                            <option value="">Compradores</option>
-                                                            @foreach ( $shoppers as $shopper )
-                                                                <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="form-group">
+                                                        @if($shoppers->count() > 1)
+                                                            <select class="form-control form-control-sm" name="shopper_id" id="">
+                                                                <option value="">Compradores</option>
+                                                                @foreach ( $shoppers as $shopper )
+                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                @endforeach
+                                                            </select>
+                                                        @else
+                                                            <input type="text" class="form-control form-control-sm"  name="" id="" value="{{ $shoppers[0]->name }}" readonly>
+                                                            <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
+                                                        @endif                       
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">
@@ -247,7 +252,11 @@
                                         </tr>
                                     </table>                                  
                                 @else
-                                    <h4 class="text-center">Nada encontrado :( </h4>                                   
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-10 col-lg-8">
+                                            @include('control-finance.components.results-empty')
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
                         </div>

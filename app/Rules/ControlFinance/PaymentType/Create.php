@@ -7,28 +7,28 @@ use Illuminate\Support\Carbon;
 
 class Create
 {
-    public function execute($request)
+    public function execute($data)
     {
-        if (isset($request->next_processing)) {
-            $nextProcessing = Carbon::createFromFormat('Y-m-d', $request->next_processing);
+        if (isset($data['next_processing'])) {
+            $nextProcessing = Carbon::createFromFormat('Y-m-d', $data['next_processing']);
             $previousProcessing = $nextProcessing->subMonth()->format('Y-m-d');
-            $request['previous_processing'] = $previousProcessing;
+            $data['previous_processing'] = $previousProcessing;
 
             $dayProcessing = $nextProcessing->format('d');
-            $request['processing_day'] = $dayProcessing;
+            $data['processing_day'] = $dayProcessing;
 
         }
 
-        if (isset($request->next_payment)) {
-            $nextPayment = Carbon::createFromFormat('Y-m-d', $request->next_payment);
+        if (isset($data['next_payment'])) {
+            $nextPayment = Carbon::createFromFormat('Y-m-d', $data['next_payment']);
             $previousPayment = $nextPayment->subMonth()->format('Y-m-d');
-            $request['previous_payment'] = $previousPayment;
+            $data['previous_payment'] = $previousPayment;
 
             $dayPayment = $nextPayment->format('d');
-            $request['payment_day'] = $dayPayment;
+            $data['payment_day'] = $dayPayment;
         }
 
-        $newPaymentType = PaymentType::create($request->except('_token'));
+        $newPaymentType = PaymentType::create($data);
 
         if (!$newPaymentType) {
             return ["status" => "info" , "msg" => "Ocorreu algum erro.", "statusCode" => 400];

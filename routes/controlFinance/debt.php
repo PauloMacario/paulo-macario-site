@@ -10,7 +10,7 @@ use App\Http\Controllers\ControlFinance\Debt\{
     DeleteDebtController
 };
 
-Route::middleware('auth')
+Route::middleware(['auth', 'shopper.exist'])
     ->prefix('controlfinance')
     ->group(function() {
             

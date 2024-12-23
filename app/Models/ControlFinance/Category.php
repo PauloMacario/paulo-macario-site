@@ -13,7 +13,8 @@ class Category extends Model
         'description',
         'order',
         'color',
-        'status'
+        'status',
+        'user_id'
     ];
    
     public function debts()

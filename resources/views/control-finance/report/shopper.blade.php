@@ -169,6 +169,12 @@
                                     </div>
                                 </form>
                             </div>
+                        @else
+                            <div class="row">
+                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                    @include('control-finance.components.results-empty')
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>

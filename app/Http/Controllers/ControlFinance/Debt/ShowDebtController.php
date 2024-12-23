@@ -15,9 +15,14 @@ class ShowDebtController extends Controller
     {
         $data = [];
 
-        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['categories'] = Category::where('user_id', auth()->user()->id)
+            ->orderBy('order', 'asc')
+            ->get();
+
         $data['shoppers'] = auth()->user()->shoppers;
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
+        $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
+            ->orderBy('order', 'asc')
+            ->get();
         $data['debt'] = Debt::find($id);
 
         return view('control-finance.debt.detail', $data);

@@ -37,24 +37,6 @@
                             <div class="row">
                                 <div class="col-xs-12 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        <label for="categoryId">Categoria</label>
-                                        <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
-                                            <option value="">Selecione...</option>
-                                            @foreach ($categories as $category)
-                                                @if ($category->status == 'E')
-                                                    <option value="{{ $category->id }}"
-                                                        style="color:{{ $category->color }};"
-                                                    >
-                                                        {{ $category->description }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-6 col-lg-4">
-                                    <div class="form-group">
                                         <label for="shopper_id">Comprador(a)</label>    
                                        
                                         @if($shoppers->count() > 1)
@@ -72,34 +54,59 @@
                                         @endif                                        
                                     </div>
                                 </div>
+
+                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="categoryId">Categoria</label>
+                                        <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
+                                            <option value="">Selecione...</option>
+                                            @foreach ($categories as $category)
+                                                @if ($category->status == 'E')
+                                                    <option value="{{ $category->id }}"
+                                                        style="color:{{ $category->color }};"
+                                                    >
+                                                        {{ $category->description }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                
+                                <div class="col-xs-12 col-md-6 col-lg-3">
                                     <div class="form-group">
-                                        <label for="payment_type_id">Forma de pagamento</label>
+                                        <label for="payment_type_id">
+                                            Forma de pagamento
+                                            <i class="fas fa-info-circle" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; cursor: pointer;"></i>
+                                            {{-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                                            </button> --}}
+                                        </label>
                                         <select class="form-control form-control-sm" name="payment_type_id" id="payment_type_id" autocomplete="off" required>
-                                            <option value="" data-installment-enable="0" selected>Selecione...</option>                             
-                                            @foreach ($paymentTypes as $paymentType)  
-                                                @if ($paymentType->status == 'E')
-                                                    <option value="{{ $paymentType->id }}" data-installment-enable="{{ $paymentType->installment_enable }}"
-                                                        style="color:{{ $paymentType->color }};"
-                                                        >
-                                                    {{ $paymentType->description }}
-                                                </option>
-                                                @endif
+                                            <option value="" data-installment-enable="0" selected>Selecione...</option>           
+                                                    
+                                            @foreach ($paymentTypes as $paymentType)                                                
+                                                <option 
+                                                    value="{{ $paymentType->id }}" 
+                                                    data-installment-enable="{{ $paymentType->installment_enable }}"
+                                                    style="color:{{ $paymentType->color }};"
+                                                    >
+                                                    {{ $paymentType->description}}
+                                                </option>                                            
                                             @endforeach                                                
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-xs-12 col-md-3 col-lg-2">
                                     <div class="form-group">
                                         <label for="field-number-installments">Parcelas</label>
                                         <input type="number" class="form-control form-control-sm"  name="number_installments" id="field-number-installments" autocomplete="off" required>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-md-3 col-lg-2">
+
+                                <div class="col-xs-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <label for="field-number-installments">Status</label>
                                         <select class="form-control form-control-sm" name="status" id="status" required>                   
@@ -181,6 +188,8 @@
             </div>
         </div>
     </div>
+
+    @include('control-finance.debt.modal-payment-info')
 @stop
 
 @push('js')

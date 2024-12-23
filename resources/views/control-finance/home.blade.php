@@ -165,7 +165,7 @@
 @push('js')
     <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
 
-    <script>
+   {{--  <script>
         $(document).ready(function () {
 
           
@@ -290,5 +290,5 @@
                 options: barChartOptions
             })
         }
-    </script>   
+    </script>    --}}
 @endpush

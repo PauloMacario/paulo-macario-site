@@ -12,8 +12,7 @@ class CreateDebtController extends Controller
     {
         $dataDebt = $request->except('_token');
              
-        $saveDebt = new Create();
-        $response = $saveDebt->execute($dataDebt);
+        $response = (new Create())->execute($dataDebt);
 
         $request->session()->flash($response['status'], $response['msg']);
         return redirect()->route('debt_get');

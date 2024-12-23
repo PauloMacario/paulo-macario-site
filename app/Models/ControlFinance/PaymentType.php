@@ -19,7 +19,8 @@ class PaymentType extends Model
         'status',
         'previous_processing',
         'next_processing',
-        'next_payment'
+        'next_payment',
+        'user_id'
     ];
 
     public function debts()

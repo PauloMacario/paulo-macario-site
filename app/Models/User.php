@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\ControlFinance\Shopper;
-use App\Models\ControlFinance\UserShopper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,8 +47,8 @@ class User extends Authenticatable
     ];
 
 
-    public function shoppers(): BelongsToMany
+    public function shoppers()
     {
-        return $this->belongsToMany(Shopper::class)/* ->using(UserShopper::class) */;
+        return $this->hasMany(Shopper::class);
     }
 }

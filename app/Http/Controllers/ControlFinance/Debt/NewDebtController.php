@@ -12,10 +12,20 @@ class NewDebtController extends Controller
 {
     public function __invoke(Request $request)
     {
+        $userId = auth()->user()->id;
+
         $data = [];
-        $data['categories'] = Category::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)->orderBy('order', 'asc')->get();
-        $data['shoppers'] = auth()->user()->shoppers;
+        $data['categories'] = Category::where('user_id', $userId)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $data['paymentTypes'] = PaymentType::where('user_id', $userId)
+            ->orderBy('order', 'asc')
+            ->get();
+
+        $data['shoppers'] = auth()
+            ->user()
+            ->shoppers;
         
         return view('control-finance.debt.new', $data);
     }

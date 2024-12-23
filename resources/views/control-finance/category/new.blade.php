@@ -47,20 +47,6 @@
                                                 name="color"                                               
                                             >
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="id">Status</label>
-                                            <select 
-                                                class="form-control form-control-sm" 
-                                                name="status" 
-                                                id="status"
-                                                required
-                                                >
-                                                <option value="D">Desativado</option>                                 
-                                                <option value="E">Ativado</option>
-                                            </select>                                        
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>

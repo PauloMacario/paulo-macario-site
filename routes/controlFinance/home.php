@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControlFinance\HomeControlFinanceController;
 
-Route::middleware('auth')
+Route::middleware(['auth', 'shopper.exist'])
     ->prefix('controlfinance')
     ->group(function() {
 

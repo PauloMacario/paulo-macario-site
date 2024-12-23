@@ -3,6 +3,7 @@
 use Illuminate\Support\Carbon;
 use App\Models\ControlFinance\PaymentType;
 use Illuminate\Support\Fluent;
+use Illuminate\Support\Str;
 
 /* if ( ! function_exists('xxxxxx')) {
     function xxxxxx()
@@ -26,5 +27,12 @@ if ( ! function_exists('formatDateBR')) {
     function formatDateBR($date)
     {
         return Carbon::parse($date)->format('d/m/Y');
+    }
+}
+
+if ( ! function_exists('getDay')) {
+    function getDay(string $date)
+    {
+        return Str::substr($date, 8, 2);
     }
 }

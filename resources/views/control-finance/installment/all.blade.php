@@ -123,14 +123,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                                    <div class="form-group">                                                               
+                                                    @if($shoppers->count() > 1)
                                                         <select class="form-control form-control-sm" name="shopper_id" id="">
                                                             <option value="">Compradores</option>
                                                             @foreach ( $shoppers as $shopper )
                                                                 <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
                                                             @endforeach
                                                         </select>
-                                                    </div>
+                                                    @else
+                                                        <input type="text" class="form-control form-control-sm"  name="" id="" value="{{ $shoppers[0]->name }}" readonly>
+                                                        <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
+                                                    @endif
                                                 </div>
                                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                                     <div class="form-group">
@@ -142,7 +145,7 @@
                                                             <option value="" selected>Status</option>                                                            
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
-                                                    </select>                
+                                                        </select>                
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            

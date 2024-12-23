@@ -8,7 +8,7 @@ use App\Http\Controllers\ControlFinance\PaymentType\{
     UpdatePaymentTypeController,
 };
 
-Route::middleware('auth')
+Route::middleware(['auth', 'shopper.exist'])
     ->prefix('controlfinance')
     ->group(function() {
 

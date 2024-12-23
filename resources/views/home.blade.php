@@ -31,7 +31,7 @@
                             </div>
                         </a>
 
-                        <a href="{{ route('appInvestHome') }}">
+                        {{-- <a href="{{ route('appInvestHome') }}">
                             <div class="card bg-lightblue mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
                                 <div class="card-header text-center">
                                     <div class="info-box-icon">
@@ -45,7 +45,7 @@
                               
                                 </div>
                             </div>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>

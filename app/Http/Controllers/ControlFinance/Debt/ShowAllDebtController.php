@@ -13,18 +13,18 @@ use Illuminate\Http\Request;
 class ShowAllDebtController extends Controller
 {
     public function __invoke(Request $request)
-    {      
+    {
         $data = [];
     
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");
         
         $data = [];
-        $data['categories'] = Category::where('id', '>', 0)
+        $data['categories'] = Category::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
 
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)
+        $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
 

@@ -8,7 +8,7 @@ use App\Http\Controllers\ControlFinance\Category\{
     UpdateCategoryController
 };
 
-Route::middleware('auth')
+Route::middleware(['auth', 'shopper.exist'])
     ->prefix('controlfinance')
     ->group(function() {
 

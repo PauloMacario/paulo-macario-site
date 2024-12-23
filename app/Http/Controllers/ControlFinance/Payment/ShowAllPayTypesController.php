@@ -22,7 +22,8 @@ class ShowAllPayTypesController extends Controller
         $data = array_merge($data, $dataFilters);
            
         $data['paymentData'] = (new GetInstallmetsByFilters($request->all()))->execute();
-       
+        $data['status'] = $request->status;
+
         $request->session()
             ->put('filters', $request->all());        
        

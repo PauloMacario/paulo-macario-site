@@ -40,7 +40,7 @@
                                         <form action="{{ route('paymentAllPaymentTypesSearch_post') }}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-3">
+                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                           
                                                         <select class="form-control form-control-sm" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
@@ -58,7 +58,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-3">
+                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control form-control-sm" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
@@ -77,24 +77,22 @@
                                                 </div>
                                                 <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                               
-                                                        <select class="form-control form-control-sm" name="shopper_id" id="">
-                                                            <option value="">Selecione comprador</option>
-                                                            @foreach ( $shoppers as $shopper )
-                                                                <option value="{{ $shopper->id }}" 
-                                                                    @if(isset($shopper_id) && $shopper->id  == $shopper_id) 
-                                                                        selected 
-                                                                    @endif
-                                                                        style="color:{{ $shopper->color }};"
-                                                                    >
-                                                                    {{ $shopper->name }}
-                                                                </option>                                                
-                                                            @endforeach
-                                                        </select>
+                                                        @if($shoppers->count() > 1)
+                                                            <select class="form-control form-control-sm" name="shopper_id" id="">
+                                                                <option value="">Compradores</option>
+                                                                @foreach ( $shoppers as $shopper )
+                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                @endforeach
+                                                            </select>
+                                                        @else
+                                                            <input type="text" class="form-control form-control-sm"  name="" id="" value="{{ $shoppers[0]->name }}" readonly>
+                                                            <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
+                                                        @endif              
                                                     </div>
                                                 </div>  
                                             </div>
                                             <div class="row">                                             
-                                                <div class="col-xs-12 col-md-5">
+                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                                   
                                                         <select class="form-control form-control-sm" name="payment_type_id" id="">
                                                             <option value="">Selecione Tipo</option>
@@ -111,7 +109,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-5">
+                                                <div class="col-xs-12 col-md-4">
                                                     <div class="form-group">                                                                   
                                                         <select class="form-control form-control-sm" name="category_id" id="">
                                                             <option value="">Selecione Categoria</option>
@@ -127,7 +125,20 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                </div>                                               
+                                                </div>  
+                                                <div class="col-xs-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <select 
+                                                            class="form-control form-control-sm" 
+                                                            name="status" 
+                                                            id="status" 
+                                                        >
+                                                            <option value="" selected>Status</option>                                                            
+                                                            <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
+                                                            <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
+                                                    </select>                
+                                                    </div>                                             
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-5">            

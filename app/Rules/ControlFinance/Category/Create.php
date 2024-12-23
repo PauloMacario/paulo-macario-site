@@ -6,9 +6,9 @@ use App\Models\ControlFinance\Category;
 
 class Create
 {
-    public function execute($request)
+    public function execute($data)
     {
-        $newCategory = Category::create($request->except('_token'));
+        $newCategory = Category::create($data);
 
         if (!$newCategory) {
             return ["status" => "info" , "msg" => "Ocorreu algum erro.", "statusCode" => 400];

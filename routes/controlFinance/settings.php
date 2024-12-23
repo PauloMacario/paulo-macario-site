@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControlFinance\Settings\{
-    ShowAllSettingsController
-  
+    ShowAllSettingsController,
+    SettingInitialController  
 };
 
 Route::middleware('auth')
@@ -14,6 +14,11 @@ Route::middleware('auth')
             ShowAllSettingsController::class
         )
         ->name('settingAll_get');    
+
+        Route::get('/config-initial',
+        SettingInitialController::class
+        )
+        ->name('settingInitial_get');    
     }
 );
 

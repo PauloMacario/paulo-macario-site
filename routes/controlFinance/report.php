@@ -7,7 +7,7 @@ use App\Http\Controllers\ControlFinance\Reports\{
     ReportShopperGeneratePdfController
 };
 
-Route::middleware('auth')
+Route::middleware(['auth', 'shopper.exist'])
     ->prefix('controlfinance')
     ->group(function() {
 

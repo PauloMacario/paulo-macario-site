@@ -139,20 +139,20 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">                                                               
-                                                        <select class="form-control form-control-sm" name="shopper_id" id="">
-                                                            <option value="0">Selecione comprador</option>
-                                                            @foreach ( $shoppers as $shopper )
-                                                                <option value="{{ $shopper->id }}" 
-                                                                    @if($shopper->id  == $shopperId) 
-                                                                        selected 
-                                                                    @endif
-                                                                        style="color:{{ $shopper->color }};"    
-                                                                    >
-                                                                    {{ $shopper->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="form-group">
+                                                        
+                                                        
+                                                        @if($shoppers->count() > 1)
+                                                            <select class="form-control form-control-sm" name="shopper_id" id="">
+                                                                <option value="">Compradores</option>
+                                                                @foreach ( $shoppers as $shopper )
+                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                @endforeach
+                                                            </select>
+                                                        @else
+                                                            <input type="text" class="form-control form-control-sm"  name="" id="" value="{{ $shoppers[0]->name }}" readonly>
+                                                            <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-md-4">
@@ -186,48 +186,57 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-12 col-lg-12">
-                                
-                                    <table class="table table-sm  table-bordered table-responsive mb-3"> 
-                                        <tr>
-                                            <th class="text-center" width="70%">Descrição da Parcela</th>
-                                            <th colspan="2" class="text-center" width="30%">Status</th>                                              
-                                            <th class="text-center" width="10%">Salvar</th>                                          
-                                        </tr>
-                                       
-                                        @foreach ( $installments as $installment )       
-                                            <form action="{{ route('paymentPayOneInstallment_post') }}" method="POST" id="form-{{ $installment->id }}">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $installment->id }}">
-                                                <tr class="font-10">
-                                                    <td class="text-center">
-                                                        <span  class="mr-3">                                                           
-                                                            {{ $installment->debt->locality }} - ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
-                                                        </span>
-                                                        <span >
-                                                            <strong>Valor: R$ </strong>{{ formatMoneyBR($installment->value) }}</span><br>
-                                                        <span >
-                                                            <strong >Comprador(a) </strong>{{ $installment->shopper->name }}
-                                                        </span>                                                    
-                                                    </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">                                                    
-                                                        Pagar<input class="ml-3" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
-                                                    </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">  
-                                                        <input class="mr-3" type="radio" name="status" value="PP" @if($installment->status == 'PP') checked @endif>Pend.
-                                                    </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">  
-                                                        <button class="btn btn-xs bg-olive btn-save" id="{{ $installment->id }}">Salvar</button>
-                                                    </td>
-                                                </tr>     
-                                            </form>
-                                        @endforeach
-                                    </table>
-                                    {{ $installments->links() }}  
-                                
-                            </div>                               
-                        </div>
+
+                        @if($installments->count() > 0)
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                    
+                                        <table class="table table-sm  table-bordered table-responsive mb-3"> 
+                                            <tr>
+                                                <th class="text-center" width="70%">Descrição da Parcela</th>
+                                                <th colspan="2" class="text-center" width="30%">Status</th>                                              
+                                                <th class="text-center" width="10%">Salvar</th>                                          
+                                            </tr>
+                                        
+                                            @foreach ( $installments as $installment )       
+                                                <form action="{{ route('paymentPayOneInstallment_post') }}" method="POST" id="form-{{ $installment->id }}">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $installment->id }}">
+                                                    <tr class="font-10">
+                                                        <td class="text-center">
+                                                            <span  class="mr-3">                                                           
+                                                                {{ $installment->debt->locality }} - ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                            </span>
+                                                            <span >
+                                                                <strong>Valor: R$ </strong>{{ formatMoneyBR($installment->value) }}</span><br>
+                                                            <span >
+                                                                <strong >Comprador(a) </strong>{{ $installment->shopper->name }}
+                                                            </span>                                                    
+                                                        </td>
+                                                        <td class="text-center vertical-middle" style="vertical-align: middle;">                                                    
+                                                            Pagar<input class="ml-3" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
+                                                        </td>
+                                                        <td class="text-center vertical-middle" style="vertical-align: middle;">  
+                                                            <input class="mr-3" type="radio" name="status" value="PP" @if($installment->status == 'PP') checked @endif>Pend.
+                                                        </td>
+                                                        <td class="text-center vertical-middle" style="vertical-align: middle;">  
+                                                            <button class="btn btn-xs bg-olive btn-save" id="{{ $installment->id }}">Salvar</button>
+                                                        </td>
+                                                    </tr>     
+                                                </form>
+                                            @endforeach
+                                        </table>
+                                        {{ $installments->links() }}  
+                                    
+                                </div>                               
+                            </div>
+                        @else 
+                            <div class="row">
+                                <div class="col-xs-12 col-md-10 col-lg-8">
+                                    @include('control-finance.components.results-empty')
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-footer">
                         <div class="row">

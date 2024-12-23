@@ -15,7 +15,8 @@ class Shopper extends Model
         'name',
         'order',
         'color',
-        'status'
+        'status',
+        'user_id'
     ];
 
     public function debts()
@@ -28,8 +29,8 @@ class Shopper extends Model
         return $this->hasMany(Installment::class);
     }
 
-    public function users(): BelongsToMany
+    public function users()
     {
-        return $this->belongsToMany(User::class)/* ->using(UserShopper::class) */;
+        return $this->belongsTo(User::class);
     }
 }

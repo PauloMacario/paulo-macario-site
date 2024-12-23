@@ -19,11 +19,11 @@ class ShowAllInstallmentsController extends Controller
         }
 
         $data = [];
-        $data['categories'] = Category::where('id', '>', 0)
+        $data['categories'] = Category::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
 
-        $data['paymentTypes'] = PaymentType::where('id', '>', 0)
+        $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
             
