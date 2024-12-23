@@ -22,8 +22,8 @@
                             <tr>
                                 <td class="text-center" style="color:{{ $paymentType->color }};">{{ $paymentType->description }}</td>
                                 <td class="text-center">
-                                    @if($paymentType->previous_processing)
-                                        {{ formatDateBR($paymentType->previous_processing) }}
+                                    @if($paymentType->next_processing)
+                                        {{ formatDateBR($paymentType->next_processing) }}
                                     @else
                                         Data da compra
                                     @endif
