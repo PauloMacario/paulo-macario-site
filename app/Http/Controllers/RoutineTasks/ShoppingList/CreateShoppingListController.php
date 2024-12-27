@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\RoutineTasks\ShoppingList;
 
 use App\Http\Controllers\Controller;
-use App\Models\RoutineTasks\Shoppinglist;
+use App\Models\RoutineTasks\ShoppingList;
 use Illuminate\Http\Request;
 
 class CreateShoppingListController extends Controller
