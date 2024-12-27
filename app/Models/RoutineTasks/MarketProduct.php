@@ -3,13 +3,13 @@
 namespace App\Models\RoutineTasks;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class MarketProduct extends RoutineTasksModel
 {
     use HasFactory;
 
     protected $fillable = [
+        'shopping_list_id',
         'market_id',
         'product_id',
         'price',
@@ -24,8 +24,13 @@ class MarketProduct extends RoutineTasksModel
         return $this->belongsTo(Product::class);
     }
 
-    public function Market() 
+    public function market() 
     {
         return $this->belongsTo(Market::class);
+    }
+
+    public function shoppinglist() 
+    {
+        return $this->belongsTo(ShoppingList::class);
     }
 }

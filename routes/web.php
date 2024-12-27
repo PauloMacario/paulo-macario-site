@@ -48,4 +48,6 @@ include_once 'appInvest/negotiation.php';
 include_once 'routineTasks/home.php';
 include_once 'routineTasks/product.php';
 include_once 'routineTasks/market.php';
-include_once 'routineTasks/marketproduct.php';
+include_once 'routineTasks/manageshoppinglists.php';
+include_once 'routineTasks/shoppinglist.php';
+include_once 'routineTasks/category.php';

@@ -20,6 +20,18 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-6 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
+                                                <option value="">Selecione...</option>
+                                                @foreach ($categories as $category)                                                    
+                                                    <option value="{{ $category->id }}"
+                                                        style="color:{{ $category->color }};"
+                                                    >
+                                                        {{ $category->description }}
+                                                    </option>                                                   
+                                                @endforeach
+                                            </select>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="id">Item</label>
@@ -43,7 +55,7 @@
                                             <div class="form-group d-flex justify-content-between">
                                                 <button 
                                                     type="submit" 
-                                                    class="btn bg-olive btn-sm"
+                                                    class="btn bg-lightblue btn-sm"
                                                     id="btn-save"
                                                     >
                                                     Salvar

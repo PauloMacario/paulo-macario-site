@@ -204,7 +204,7 @@
                                 </p>
                                 <div class="collapse show" id="collapseExample">
                                     <div class="card card-body">
-                                        <form action="{{ route('list_market_products_get') }}" method="GET">
+                                        <form action="{{ route('list_market_products_get', ['shoppingListId' => $shoppingListId]) }}" method="GET">
                                             <div class="row">
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                     
@@ -235,7 +235,7 @@
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <a href="{{ route('list_market_products_get') }}" class="btn bg-warning btn-block btn-sm">
+                                                        <a href="{{ route('list_market_products_get' , ['shoppingListId' => $shoppingListId]) }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
@@ -253,6 +253,9 @@
                                 <div class="col-sm-12 col-md-10 col-lg-10">
                                     <form action="{{ route('create_market_products_post') }}" method="post"  id="form">
                                         @csrf
+
+                                        <input type="hidden" name="shoppingListId" id="shoppingListId" value="{{ $shoppingListId }}">
+
                                         <div class="row ">
                                             <div class="col-12 d-flex justify-content-between">
                                                 <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
@@ -424,6 +427,7 @@
                 var totalArr = {};
                 var dsbArr = {};
 
+                var shoppingListId = $('#shoppingListId').val()
                 var buy =  $('#buy-'+idNumber).val()
                 var qtd = $('#qtd-'+idNumber).val()
                 var prc =  $('#prc-'+idNumber).val()
@@ -436,6 +440,8 @@
                 totalArr[idNumber] = total
 
                 mainArray = {}
+
+                mainArray['shoppingListId'] = shoppingListId
 
                 if (dsb.is(':checked')) {
                     dsbArr[idNumber] = 'on'

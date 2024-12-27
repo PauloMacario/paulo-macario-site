@@ -4,17 +4,18 @@ namespace App\Models\RoutineTasks;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Product extends RoutineTasksModel
+
+class Category extends RoutineTasksModel
 {
     use HasFactory;
 
     protected $fillable = [
-        'item',
-        'category_id'
+        'description',       
+        'color'
     ];
 
-    public function category() 
+    public function products() 
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Product::class);
     }
 }

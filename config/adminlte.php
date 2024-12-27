@@ -475,8 +475,28 @@ return [
                     'icon' => 'fas fa-home ml-4 mr-2',
                 ],
                 [
-                    'text' => 'Lista de compras',
-                    'url' => 'routinetasks/listadecompras',
+                    'text' => 'Listas',
+                    'url' => 'routinetasks/listas',
+                    'icon' => 'fas fa-store ml-4 mr-2',
+                ],
+                [
+                    'text' => 'Produtos',
+                    'url' => 'routinetasks/produtos',
+                    'icon' => 'fas fa-store ml-4 mr-2',
+                ],
+                [
+                    'text' => 'Lojas',
+                    'url' => 'routinetasks/lojas',
+                    'icon' => 'fas fa-store ml-4 mr-2',
+                ],
+                [
+                    'text' => 'Categorias',
+                    'url' => 'routinetasks/categorias',
+                    'icon' => 'fas fa-store ml-4 mr-2',
+                ],
+                [
+                    'text' => 'Gerenciar Listas',
+                    'url' => 'routinetasks/gerenciar-listas',
                     'icon' => 'fas fa-store ml-4 mr-2',
                 ],
               /*   [

@@ -151,7 +151,7 @@
                                         </a>
                                     </th>
                                     <th class="text-center">
-                                        <a href="{{ route('') }}" class="ref">
+                                        <a href="{{ route('add_remove_manage_lists_get', ['shoppingListId' => $list->id]) }}" class="ref">
                                             <i class="fas fa-shopping-bag"></i>                                            
                                         </a>
                                     </th>

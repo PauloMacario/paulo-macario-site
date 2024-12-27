@@ -14,33 +14,33 @@ Route::middleware('auth')
     ->group(function() {
 
         Route::get(
-            '/mercado', 
+            '/loja', 
             NewMarketController::class
         )
         ->name('market_get');
 
         Route::get(
-            '/mercados', 
+            '/lojas', 
             ShowAllMarketsController::class
         )
         ->name('markets_get');
 
         Route::post(
-            '/mercado', 
+            '/loja', 
             CreateMarketController::class
         )
         ->name('market_post');
 
         Route::get(
-            '/mercado/{id}/detalhes', 
+            '/loja/{id}/detalhes', 
             ShowMarketController::class
         )
         ->name('detaiMarket_get');
 
-        Route::post(
-            '/mercado/editar', 
+        /* Route::post(
+            '/loja/editar', 
             UpdateMarketController::class
         )
-        ->name('updateMarket_post');
+        ->name('updateMarket_post'); */
     }
 );

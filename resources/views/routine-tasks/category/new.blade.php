@@ -3,8 +3,7 @@
 @section('title', 'Categoria')
 
 @section('content_header')
-@include('control-finance.components.alerts')
-
+    @include('routine-tasks.components.alerts')
 @stop
 
 @section('content')
@@ -13,23 +12,23 @@
             <div class="card">
                 <div class="card card-lightblue mb-0">
                     <div class="card-header">
-                        <h5 class="card-title">Nova loja</h5>
+                        <h5 class="card-title">Nova categoria</h5>
                     </div>
                     <div class="card-body">                      
-                        <form action="{{ route('market_post') }}" method="POST" id="form">
+                        <form action="{{ route('category_task_post') }}" method="POST" id="form">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-xs-6 col-md-6 col-lg-6">
-
                                         <div class="form-group">
-                                            <label for="id">Nome</label>
+                                            <label for="id">Categoria</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control form-control-sm" 
-                                                name="name" 
-                                                id="name"
-                                                placeholder="Assai, Atacadão, Semar, etc..."
+                                                name="description" 
+                                                id="description"
+                                                placeholder="Compra mensal, etc..."
+                                                value="{{ old('description') }}"       
                                                 required
                                             >                          
                                         </div>
@@ -46,23 +45,21 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row ">
-                                    <div class="col-xs-12 col-md-9 col-lg-9">
-                                        <div class="col-xs-12 col-md-12 col-lg-12 text-left p-0 m-0">
-                                            <div class="form-group d-flex justify-content-between">
-                                                <button 
-                                                    type="submit" 
-                                                    class="btn bg-lightblue btn-sm"
-                                                    id="btn-save"
-                                                    >
-                                                    Salvar
-                                                    <i class="fas fa-save"></i>
-                                                </button>
-                                                <a href="{{ route('routineTaskHome') }}" class="btn bg-warning btn-sm" id="btn-edit">
-                                                    Voltar
-                                                    <i class="fas fa-arrow-left"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <div class="col-xs-6 col-md-6 col-lg-6">                                        
+                                        <div class="form-group d-flex justify-content-between">
+                                            <button 
+                                                type="submit" 
+                                                class="btn bg-lightblue btn-sm"
+                                                id="btn-save"
+                                                >
+                                                Salvar
+                                                <i class="fas fa-save"></i>
+                                            </button>
+                                            <a href="{{ route('category_get') }}" class="btn bg-warning btn-sm">
+                                                Voltar
+                                                <i class="fas fa-arrow-left"></i>
+                                            </a>
+                                        </div>                                       
                                     </div>
                                 </div>                           
                             </div>

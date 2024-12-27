@@ -10,14 +10,17 @@ use Illuminate\Http\Request;
 
 class MarketProductsController extends Controller
 {   
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, $shoppingListId)
     {
         $data = [];
 
         $data['filterMarket'] = null;
         $data['filterBuy'] = null;
 
-        $data['markets'] = Market::all();
+        $markets = MarketProduct::where('shopping_list_id', $shoppingListId)->pluck('market_id');
+        $markets = Market::whereIn('id', $markets)->get();
+
+        $data['markets'] = $markets;
 
         $data['marketsProducts'] = null;
        
@@ -25,9 +28,12 @@ class MarketProductsController extends Controller
             ->orderBy('price')
             ->orderBy('product_id')
             ->orderBy('market_id');
-
+       
+        $marketsProducts->where('shopping_list_id', $shoppingListId); 
+        $data['shoppingListId'] = $shoppingListId;        
+        
         if($request->filterMarket) {
-            $marketsProducts->where('market_id', $request->filterMarket);            
+            $marketsProducts->where('market_id', $request->filterMarket);
             $data['filterMarket'] = $request->filterMarket;
         }
 
@@ -40,7 +46,7 @@ class MarketProductsController extends Controller
         $data['marketsProducts'] = $marketsProducts->get();
 
         $data['total'] = 0;
-        
+       
         return view('routine-tasks.market-product.list', $data);
     }
 }
