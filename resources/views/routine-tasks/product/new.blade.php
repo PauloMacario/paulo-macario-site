@@ -40,7 +40,7 @@
                                                 class="form-control form-control-sm" 
                                                 name="item" 
                                                 id="item"
-                                                placeholder="Assai, Atacadão, Semar, etc..."
+                                                placeholder=""
                                                 value="{{ old('item') }}"       
                                                 required
                                             >                          
