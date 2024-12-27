@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\RoutineTasks\Shoppinglist;
+namespace App\Http\Controllers\RoutineTasks\ShoppingList;
 
 use App\Http\Controllers\Controller;
 use App\Models\RoutineTasks\Shoppinglist;
 use Illuminate\Http\Request;
 
-class CreateShoppinglistController extends Controller
+class CreateShoppingListController extends Controller
 {
     public function __invoke(Request $request)
     {
         $dados = $request->except('_token');
 
-        $list = Shoppinglist::create($dados);
+        $list = ShoppingList::create($dados);
 
         if ($list) {
 
