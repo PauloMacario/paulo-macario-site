@@ -21,7 +21,7 @@ Route::middleware('auth')
         
         Route::get(
             '/listas', 
-            ShowAllShoppinglistsController::class
+            ShowAllShoppingListsController::class
         )
         ->name('shopping_lists_get');
 
