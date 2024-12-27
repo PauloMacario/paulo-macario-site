@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutineTasks\ShoppingList\{
     NewShoppingListController,
-    ShowAllShoppinglistsController,
-    CreateShoppinglistController,
-    ShowShoppinglistController,
-    UpdateShoppinglistController
+    ShowAllShoppingListsController,
+    CreateShoppingListController,
+    ShowShoppingListController,
+    UpdateShoppingListController
 };
 
 Route::middleware('auth')
@@ -27,19 +27,19 @@ Route::middleware('auth')
 
         Route::post(
             '/lista', 
-            CreateShoppinglistController::class
+            CreateShoppingListController::class
         )
         ->name('shopping_list_post');
 
         Route::get(
             '/produto/{id}/detalhes', 
-            ShowShoppinglistController::class
+            ShowShoppingListController::class
         )
         ->name('detailProduct_get');
 
         Route::post(
             '/produto/editar', 
-            UpdateShoppinglistController::class
+            UpdateShoppingListController::class
         )
         ->name('updateProduct_post');
     }
