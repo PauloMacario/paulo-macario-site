@@ -81,7 +81,7 @@
                                                             <select class="form-control form-control-sm" name="shopper_id" id="">
                                                                 <option value="">Compradores</option>
                                                                 @foreach ( $shoppers as $shopper )
-                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopperId) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopper_id) selected @endif>{{ $shopper->name }}</option>                                                
                                                                 @endforeach
                                                             </select>
                                                         @else

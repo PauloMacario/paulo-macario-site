@@ -29,8 +29,6 @@ class ShowAllPayInstallmentsController extends Controller
             ->orderBy('order', 'asc')
             ->get();
             
-        $data['shoppers'] = auth()->user()->shoppers;
-
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
 
         if($request['month']) {
