@@ -81,7 +81,12 @@
                                                             <select class="form-control form-control-sm" name="shopper_id" id="">
                                                                 <option value="">Compradores</option>
                                                                 @foreach ( $shoppers as $shopper )
-                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" @if($shopper->id  == $shopper_id) selected @endif>{{ $shopper->name }}</option>                                                
+                                                                    <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};" 
+                                                                        @if(isset($shopper_id) && $shopper->id  == $shopper_id) 
+                                                                            selected 
+                                                                        @endif>
+                                                                            {{ $shopper->name }}
+                                                                    </option>                                                
                                                                 @endforeach
                                                             </select>
                                                         @else
@@ -98,13 +103,13 @@
                                                             <option value="">Selecione Tipo</option>
                                                             @foreach ( $paymentTypes as $payType )
                                                                 <option value="{{ $payType->id }}" 
-                                                                @if(isset($payment_type_id) && $payType->id  == $payment_type_id) 
-                                                                    selected 
-                                                                @endif
-                                                                    style="color:{{ $payType->color }};"
-                                                                >
-                                                                {{ $payType->description }}
-                                                            </option>                                                
+                                                                    @if(isset($payment_type_id) && $payType->id  == $payment_type_id) 
+                                                                        selected 
+                                                                    @endif
+                                                                        style="color:{{ $payType->color }};"
+                                                                    >
+                                                                    {{ $payType->description }}
+                                                                </option>                                                
                                                             @endforeach
                                                         </select>
                                                     </div>

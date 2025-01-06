@@ -28,7 +28,7 @@ class ShowAllPayTypesController extends Controller
             ->put('filters', $request->all());        
        
         $data = array_merge($data, $request->all());
-       
+        
         return view('control-finance.payment.all-types', $data);
     }
 }

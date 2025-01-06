@@ -193,7 +193,7 @@
                                     
                                         <table class="table table-sm  table-bordered table-responsive mb-3"> 
                                             <tr>
-                                                <th class="text-center" width="70%">Descrição da Parcela</th>
+                                                <th colspan="3" class="text-center" width="70%">Descrição da Parcela</th>
                                                 <th colspan="2" class="text-center" width="30%">Status</th>                                              
                                                 <th class="text-center" width="10%">Salvar</th>                                          
                                             </tr>
@@ -204,14 +204,21 @@
                                                     <input type="hidden" name="id" value="{{ $installment->id }}">
                                                     <tr class="font-10">
                                                         <td class="text-center">
+                                                           <span  class="mr-3" style="color:{{ $installment->debt->paymentType->color }};">                                                           
+                                                                <strong>
+                                                                    {{ $installment->debt->paymentType->description }}                                                                    
+                                                                </strong>
+                                                            </span>                                   
+                                                        </td>
+                                                        <td class="text-center">
                                                             <span  class="mr-3">                                                           
                                                                 {{ $installment->debt->locality }} - ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
                                                             </span>
+                                                        </td>
+                                                        <td class="text-center">
                                                             <span >
-                                                                <strong>Valor: R$ </strong>{{ formatMoneyBR($installment->value) }}</span><br>
+                                                                <strong>R$</strong>{{ formatMoneyBR($installment->value) }}</span><br>
                                                             <span >
-                                                                <strong >Comprador(a) </strong>{{ $installment->shopper->name }}
-                                                            </span>                                                    
                                                         </td>
                                                         <td class="text-center vertical-middle" style="vertical-align: middle;">                                                    
                                                             Pagar<input class="ml-3" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    

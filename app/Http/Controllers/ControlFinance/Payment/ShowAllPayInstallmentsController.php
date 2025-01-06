@@ -28,6 +28,10 @@ class ShowAllPayInstallmentsController extends Controller
         $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
+
+        $data['shoppers'] = Shopper::where('user_id', auth()->user()->id)
+            ->orderBy('order', 'asc')
+            ->get();
             
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
 
@@ -62,7 +66,7 @@ class ShowAllPayInstallmentsController extends Controller
         
         $request->session()
             ->put('filters', $request->all());
-        
+       
         $data['year'] = $year;
         $data['month'] = $month;
         $data['status'] = $request->status;
