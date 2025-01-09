@@ -189,50 +189,58 @@
                             <div class="row">
                                 <div class="col-xs-12 col-md-12 col-lg-12">
                                     
-                                        <table class="table table-sm  table-bordered table-responsive mb-3"> 
-                                            <tr>
-                                                <th colspan="3" class="text-center" width="70%">Descrição da Parcela</th>
-                                                <th colspan="2" class="text-center" width="30%">Status</th>                                              
-                                                <th class="text-center" width="10%">Salvar</th>                                          
-                                            </tr>
-                                        
-                                            @foreach ( $installments as $installment )       
-                                                <form action="{{ route('paymentPayOneInstallment_post') }}" method="POST" id="form-{{ $installment->id }}">
-                                                    @csrf
-                                                    <input type="hidden" name="id" value="{{ $installment->id }}">
-                                                    <tr class="font-10">
-                                                        <td class="text-center">
-                                                           <span  class="mr-3" style="color:{{ $installment->debt->paymentType->color }};">                                                           
-                                                                <strong>
-                                                                    {{ $installment->debt->paymentType->description }}                                                                    
-                                                                </strong>
-                                                            </span>                                   
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span  class="mr-3">                                                           
-                                                                {{ $installment->debt->locality }} - ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span >
-                                                                <strong>R$</strong>{{ formatMoneyBR($installment->value) }}</span><br>
-                                                            <span >
-                                                        </td>
-                                                        <td class="text-center vertical-middle" style="vertical-align: middle;">                                                    
-                                                            Pagar<input class="ml-3" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
-                                                        </td>
-                                                        <td class="text-center vertical-middle" style="vertical-align: middle;">  
-                                                            <input class="mr-3" type="radio" name="status" value="PP" @if($installment->status == 'PP') checked @endif>Pend.
-                                                        </td>
-                                                        <td class="text-center vertical-middle" style="vertical-align: middle;">  
-                                                            <button class="btn btn-xs bg-olive btn-save" id="{{ $installment->id }}">Salvar</button>
-                                                        </td>
-                                                    </tr>     
-                                                </form>
-                                            @endforeach
-                                        </table>
-                                        {{ $installments->links() }}  
-                                    
+                                    <table class="table table-sm  table-bordered table-responsive mb-3"> 
+                                        <tr>
+                                            <th colspan="3" class="text-center" width="50%">Descrição da Parcela</th>
+                                            <th colspan="2" class="text-center" width="40%">Status</th>                                              
+                                            <th class="text-center" width="10%">Salvar</th>                                          
+                                        </tr>
+                                        @foreach ( $installments as $installment )       
+                                            <form action="{{ route('paymentPayOneInstallment_post') }}" method="POST" id="form-{{ $installment->id }}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $installment->id }}">
+                                                <tr class="font-10">
+                                                    <td colspan="3" class="text-center">
+                                                        <span  class="mr-3" style="color:{{ $installment->debt->paymentType->color }};">                                                           
+                                                            <strong>
+                                                                {{ $installment->debt->paymentType->description }}                                                                    
+                                                            </strong>
+                                                        </span><br>
+                                                        <span  class="mr-3">                                                           
+                                                            {{ $installment->debt->locality }}
+                                                        </span>
+                                                        <br>
+                                                        <span>
+                                                            ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                        </span>
+                                                        <span >
+                                                            <strong>R${{ formatMoneyBR($installment->value) }}</strong><br>
+                                                        <span >
+                                                    </td>
+                                                    <td class="text-center vertical-middle" style="vertical-align: middle;" width="40%">                                                    
+                                                        <strong>
+                                                            Pago                                                            
+                                                        </strong>
+                                                        <br>
+                                                        <input class="" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
+                                                    </td>
+                                                    <td class="text-center vertical-middle" style="vertical-align: middle;" width="22%">  
+                                                        <strong>
+                                                            Pendente.
+                                                        </strong>
+                                                        <br>
+                                                        <input class="" type="radio" name="status" value="PP" @if($installment->status == 'PP') checked @endif>
+                                                    </td>
+                                                    <td class="text-center vertical-middle" style="vertical-align: middle;">  
+                                                        <button class="btn btn-xs bg-olive btn-save" id="{{ $installment->id }}">
+                                                            <i class="fas fa-save"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>     
+                                            </form>
+                                        @endforeach
+                                    </table>
+                                    {{ $installments->links() }}
                                 </div>                               
                             </div>
                         @else 

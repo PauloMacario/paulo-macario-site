@@ -206,7 +206,7 @@
                                     <button class="btn bg-olive btn-sm btn-action" id="PM" >
                                         Pagar selecionados
                                     </button>
-                                    <button class="btn btn-warning btn-sm btn-action" id="PP">
+                                    <button class="btn btn-warning btn-sm btn-action ml-2" id="PP">
                                         Selecionados como pendente
                                     </button>
                                 </div>                            

@@ -15,11 +15,13 @@ class ReportShopperGeneratePdfController extends Controller
 {
     public function __invoke(Request $request)
     {
-        if ( ! isset($request['payment_type_id'])) {
-            $error = ["status" => "info" , "msg" => "Não foi selecionado nenhum item para gerar o relatório.", "statusCode" => 400];
+      
 
+        if ( ! isset($request['payment_type_id'])) {
+            $error = ["status" => "error" , "msg" => "Não foi selecionado nenhum item para gerar o relatório.", "statusCode" => 400];
+            $request['payment_type_id'] = $request['payment_type_id'] ?? 0;
             $request->session()->flash($error['status'], $error['msg']);            
-            return redirect()->route('pdfReportShopper_get');
+            return redirect()->action([ReportShopperController::class], $request->all());
         }
 
         $request['payment_type_id'] = array_keys($request['payment_type_id']);

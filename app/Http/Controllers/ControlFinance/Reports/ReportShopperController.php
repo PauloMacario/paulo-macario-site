@@ -16,8 +16,7 @@ class ReportShopperController extends Controller
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");
         
-        $data = [];
-        $data['actionFieldDisable'] = 1;
+        $data = [];        
 
         $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
@@ -35,9 +34,6 @@ class ReportShopperController extends Controller
         }
 
         if ($shopId = $request->shopper_id) {
-
-            $data['actionFieldDisable'] = 0;
-
             $reportsPdf = new ReportInstallmentsByShopper($request);
             $data['reports'] = $reportsPdf->getDataReport(); 
         }
