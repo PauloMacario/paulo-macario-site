@@ -149,13 +149,13 @@
                         </div>
 
                     </div>
-                    {{-- <div class="card-footer">                    
+                    <div class="card-footer">                    
                         <div class="row">
                             <div class="col-xs-12 col-md-6 col-lg-4">
                                 
                             </div>
                         </div>                        
-                    </div>--}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
 @push('js')
     <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
 
-   {{--  <script>
+    <script>
         $(document).ready(function () {
 
           
@@ -290,5 +290,5 @@
                 options: barChartOptions
             })
         }
-    </script>    --}}
+    </script>
 @endpush

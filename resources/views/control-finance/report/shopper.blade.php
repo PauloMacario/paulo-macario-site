@@ -110,21 +110,20 @@
                                             </select>
                                         </div>
                                     </div>
-                               
-                                    <div class="col-xs-12 col-md-2">            
-                                        <div class="form-group ">
-                                            <button class="btn bg-olive btn-block field-disabled btn-sm" disabled>
-                                                Buscar
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
                                     <div class="col-xs-12 col-md-2">            
                                         <div class="form-group">
                                             <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block btn-sm" >
                                                 Limpar
                                                 <i class="fas fa-broom"></i>
                                             </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2">            
+                                        <div class="form-group ">
+                                            <button class="btn bg-olive btn-block field-disabled btn-sm" disabled>
+                                                Buscar
+                                                <i class="fas fa-search"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

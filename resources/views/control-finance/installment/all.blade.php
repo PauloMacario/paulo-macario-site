@@ -135,7 +135,7 @@
                                                         <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
                                                     @endif
                                                 </div>
-                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <select 
                                                             class="form-control form-control-sm" 
@@ -150,18 +150,18 @@
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <button class="btn bg-olive btn-block btn-sm">
-                                                            Filtrar
-                                                            <i class="fas fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
-                                                    <div class="form-group">
                                                         <a href="{{ route('installmentAll_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <button class="btn bg-olive btn-block btn-sm">
+                                                            Filtrar
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>

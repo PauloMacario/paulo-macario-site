@@ -35,7 +35,7 @@
                         <div class="card-body">
                             
                             <div class="row">
-                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="shopper_id">Comprador(a)</label>    
                                        
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="categoryId">Categoria</label>
                                         <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
@@ -76,7 +76,7 @@
 
                             <div class="row">
                                 
-                                <div class="col-xs-12 col-md-6 col-lg-3">
+                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="payment_type_id">
                                             Forma de pagamento
@@ -99,14 +99,16 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-md-3 col-lg-2">
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="field-number-installments">Parcelas</label>
                                         <input type="number" class="form-control form-control-sm"  name="number_installments" id="field-number-installments" autocomplete="off" required>
                                     </div>
-                                </div>
+                                </div>                                
+                            </div>
 
-                                <div class="col-xs-12 col-md-3 col-lg-3">
+                            <div class="row">
+                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="field-number-installments">Status</label>
                                         <select class="form-control form-control-sm" name="status" id="status" required>                   
@@ -115,24 +117,21 @@
                                         </select>              
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-12 col-md-3 col-lg-2">
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="date">Data</label>
                                         <input type="date" class="form-control form-control-sm"  name="date" id="date" required>
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-md-5 col-lg-3">
+                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="locality">Loja/local</label>
                                         <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required >
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-md-4 col-lg-3">
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="totalValue">Valor total</label>
                                         <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required>
@@ -141,7 +140,7 @@
                             </div>                    
 
                             <div class="row">
-                                <div class="col-xs-12 col-md-6 col-lg-4">
+                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="compra-rateada">Compra rateada</label>
                                         <select class="form-control form-control-sm" @if($shoppers->count() > 1) id="compra-rateada" @else disabled @endif autocomplete="off">
@@ -154,7 +153,7 @@
                                         @foreach ($shoppers as $shopper)
                                             <div class="custom-control custom-checkbox">
                                                 <input class="custom-control-input custom-control-input-danger" name="checkrateio[{{ $shopper->id }}]" type="checkbox" id="check-rateio-{{ $shopper->id }}" autocomplete="off">
-                                                <label for="check-rateio-{{ $shopper->id }}" class="custom-control-label"><h5>{{ $shopper->name }}</h5></label>
+                                                <label for="check-rateio-{{ $shopper->id }}" class="custom-control-label"><span>{{ $shopper->name }}</span></label>
                                             </div>                  
                                         @endforeach
                                     </div>
@@ -163,7 +162,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="row ">
-                                <div class="col-xs-12 col-md-12 col-lg-8 d-flex justify-content-between">
+                                <div class="col-12 col-sm-12 col-md-10 col-lg-10 d-flex justify-content-between">
                                     <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
                                         <div class="form-group">
                                             <a href="{{ route('debt_get') }}" class="btn bg-warning btn-sm">

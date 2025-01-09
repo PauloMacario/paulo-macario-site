@@ -69,7 +69,7 @@
                                     <div class="card card-body">
                                         <form action="" method="GET">
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control form-control-sm" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
@@ -87,7 +87,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control form-control-sm" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
@@ -103,11 +103,11 @@
                                                             <option value="2030" @if($year == '2030') selected @endif>2030</option>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                </div>                                               
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                   
                                                         <select class="form-control form-control-sm" name="category_id" id="">
-                                                            <option value="0">Selecione Categoria</option>
+                                                            <option value="0">Categorias</option>
                                                             @foreach ( $categories as $category )
                                                                 <option value="{{ $category->id }}" 
                                                                     @if($category->id  == $categoryId) 
@@ -121,10 +121,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                   
                                                         <select class="form-control form-control-sm" name="payment_type_id" id="">
-                                                            <option value="0">Selecione Tipo</option>
+                                                            <option value="0">Tipos</option>
                                                             @foreach ( $paymentTypes as $payType )
                                                                 <option value="{{ $payType->id }}" 
                                                                     @if($payType->id  == $payTypeId) 
@@ -138,10 +138,8 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
-                                                        
-                                                        
                                                         @if($shoppers->count() > 1)
                                                             <select class="form-control form-control-sm" name="shopper_id" id="">
                                                                 <option value="">Compradores</option>
@@ -155,7 +153,7 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <select class="form-control form-control-sm" name="status" id="status" >
                                                             <option value="0" selected>Todos status</option>
@@ -163,21 +161,21 @@
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
                                                     </select>                
                                                     </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">            
-                                                    <div class="form-group">
-                                                        <button class="btn bg-olive btn-block btn-sm">
-                                                            Filtrar
-                                                            <i class="fas fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">            
+                                                </div>                                              
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <a href="{{ route('paymentAllInstallments_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <button class="btn bg-olive btn-block btn-sm">
+                                                            Filtrar
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>

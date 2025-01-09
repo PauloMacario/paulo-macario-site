@@ -17,7 +17,9 @@ class HomeControlFinanceController extends Controller
 
     public function graphicPerCategories()
     {
-        $categories = Category::where('status', 'E')->get();
+        $categories = Category::where('user_id', auth()->user()->id)
+            ->where('status', 'E')
+            ->get();
 
         $data = [];
         
@@ -32,7 +34,9 @@ class HomeControlFinanceController extends Controller
 
     public function graphicPerCategoriesDebtsSumValues()
     {
-        $categories = Category::where('status', 'E')->get();
+        $categories = Category::where('user_id', auth()->user()->id)
+            ->where('status', 'E')
+            ->get();
 
         $data['graficoValue'] = false;
 

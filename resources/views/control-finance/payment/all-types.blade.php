@@ -40,7 +40,7 @@
                                         <form action="{{ route('paymentAllPaymentTypesSearch_post') }}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                           
                                                         <select class="form-control form-control-sm" name="month" id="">
                                                             <option value="01" @if($month == '01') selected @endif>Jan</option>
@@ -58,7 +58,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                                      
                                                         <select class="form-control form-control-sm" name="year" id="">
                                                             <option value="2020" @if($year == '2020') selected @endif>2020</option>
@@ -74,8 +74,42 @@
                                                             <option value="2030" @if($year == '2030') selected @endif>2030</option>
                                                         </select>
                                                     </div>
+                                                </div>     
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="form-group">                                                                   
+                                                        <select class="form-control form-control-sm" name="category_id" id="">
+                                                            <option value="">Categorias</option>
+                                                            @foreach ( $categories as $category )
+                                                                <option value="{{ $category->id }}" 
+                                                                    @if(isset($category_id) && $category->id == $category_id) 
+                                                                        selected 
+                                                                    @endif
+                                                                        style="color:{{ $category->color }};"
+                                                                    >
+                                                                    {{ $category->description }}
+                                                                </option>                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>                                                                           
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                                    <div class="form-group">                                                                   
+                                                        <select class="form-control form-control-sm" name="payment_type_id" id="">
+                                                            <option value="">Tipos</option>
+                                                            @foreach ( $paymentTypes as $payType )
+                                                                <option value="{{ $payType->id }}" 
+                                                                    @if(isset($payment_type_id) && $payType->id  == $payment_type_id) 
+                                                                        selected 
+                                                                    @endif
+                                                                        style="color:{{ $payType->color }};"
+                                                                    >
+                                                                    {{ $payType->description }}
+                                                                </option>                                                
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">                                                               
                                                         @if($shoppers->count() > 1)
                                                             <select class="form-control form-control-sm" name="shopper_id" id="">
@@ -95,43 +129,7 @@
                                                         @endif              
                                                     </div>
                                                 </div>  
-                                            </div>
-                                            <div class="row">                                             
-                                                <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">                                                                   
-                                                        <select class="form-control form-control-sm" name="payment_type_id" id="">
-                                                            <option value="">Selecione Tipo</option>
-                                                            @foreach ( $paymentTypes as $payType )
-                                                                <option value="{{ $payType->id }}" 
-                                                                    @if(isset($payment_type_id) && $payType->id  == $payment_type_id) 
-                                                                        selected 
-                                                                    @endif
-                                                                        style="color:{{ $payType->color }};"
-                                                                    >
-                                                                    {{ $payType->description }}
-                                                                </option>                                                
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-md-4">
-                                                    <div class="form-group">                                                                   
-                                                        <select class="form-control form-control-sm" name="category_id" id="">
-                                                            <option value="">Selecione Categoria</option>
-                                                            @foreach ( $categories as $category )
-                                                                <option value="{{ $category->id }}" 
-                                                                    @if(isset($category_id) && $category->id == $category_id) 
-                                                                        selected 
-                                                                    @endif
-                                                                        style="color:{{ $category->color }};"
-                                                                    >
-                                                                    {{ $category->description }}
-                                                                </option>                                                
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>  
-                                                <div class="col-xs-12 col-md-4">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <select 
                                                             class="form-control form-control-sm" 
@@ -144,9 +142,7 @@
                                                     </select>                
                                                     </div>                                             
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-12 col-md-5">            
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <button class="btn bg-olive btn-block btn-sm">
                                                             Filtrar
@@ -154,7 +150,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-md-5">            
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <a href="{{ route('paymentAllPaymentTypesSearch_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar

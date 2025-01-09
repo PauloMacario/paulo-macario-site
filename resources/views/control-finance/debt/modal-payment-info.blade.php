@@ -8,7 +8,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <table class="table table-sm table-striped">
+                <table class="table table-sm table-striped table-responsive">
                     <thead>
                         <tr>
                             <th class="text-center">Tipo</th>
