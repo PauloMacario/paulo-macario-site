@@ -36,6 +36,9 @@
             color: #b4b4b4;
             text-decoration: line-through;
         }
+        #balance {
+            background-color:#fff;
+        }
     </style>
 @endpush
 
@@ -177,8 +180,15 @@
                                     <div class="card card-body">
                                         <table class="table table-sm table-striped mb-2">
                                             <tr>
-                                                <th colspan="4"><h5 class="text-center">{{ $installments->count() }} parcelas</h5></th>
-                                                <th class="text-center"><h5>TOTAL: R$ {{ formatMoneyBR($total) }}</h5></th>
+                                                <td colspan=2 class="text-center">
+                                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#calculoModal">Cálculo</button>
+                                                </td>                                                
+                                                <td class="text-center">
+                                                    {{ $installments->count() }} parcelas
+                                                </td>                                                
+                                                <td class="text-center">
+                                                    TOTAL: R$ {{ formatMoneyBR($total) }}
+                                                </td>
                                             </tr>
                                         </table>
                                         <table class="table table-sm table-borderless">        
@@ -277,23 +287,29 @@
                                                     </tr> 
                                                 @endif  
                                                 <tr>
-                                                    <td colspan="3" {{-- class="bg-teal" --}} style="background-color:#3d997054;"></td>
+                                                    <td colspan="3" style="background-color:#3d997054;"></td>
                                                 </tr>
                                             @endforeach
                                         </table>                                   
-                                        <table class="table table-sm table-striped mt-2">
+                                        <table class="table table-sm mt-2" style="background-color:rgba(0, 0, 0, .05);">
                                             <tr>
-
-
-                                              {{--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                    Launch demo modal
-                                                  </button> --}}
-
-
-                                                <th colspan="4" class="text-center">
+                                                <td colspan=2 class="text-center">
                                                     <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#calculoModal">Cálculo</button>
-                                                </th>
-                                                <th><h5 class="text-center">TOTAL: R$ {{ formatMoneyBR($total) }}</h5></th>
+                                                </td>                                                
+                                                <td class="text-center">
+                                                    {{ $installments->count() }} parcelas
+                                                </td>                                                
+                                                <td class="text-center">
+                                                    TOTAL: R$ {{ formatMoneyBR($total) }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan=2>
+                                                    <input type="text" class="form-control form-control-sm text-center" name="income" id="income" placeholder="Renda">
+                                                </td>
+                                                <td colspan=2>
+                                                    <input type="text" class="form-control form-control-sm text-center" name="balance" id="balance" placeholder="Sobra" disabled>
+                                                </td>                                                                                              
                                             </tr>
                                         </table>                                        
                                     </div>
@@ -328,7 +344,7 @@
                             <hr>                            
                         @else
                             @if($loop->last)
-                                <p class="text-center font-weight-bold font-16 font-italic  mb-0">Total: R$ {{ formatMoneyBR($calc) }}</p>
+                                <p class="text-center font-weight-bold font-16 font-italic  mb-0">Total: R$ <span id="totalValue">{{ formatMoneyBR($calc) }}</span></p>
                             @else
                                 <p class="text-center font-14 font-italic  mb-0">R$ {{ formatMoneyBR($calc) }}</p>
                             @endif
@@ -347,10 +363,42 @@
 @stop
 
 @push('js')
-    <script src=""></script>
+    <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function() {
+            $('#income').mask('000.000,00', {reverse: true}); 
+            $('#balance').mask('000.000,00', {reverse: true}); 
 
+            $('#income').on('focus blur keyup', function() {
+                
+                let incomeVal = $(this).val()
+                
+                if (incomeVal.length > 3) {
+                                       
+                    var totalValue = $('#totalValue').text()
+
+                    incomeVal = incomeVal.replace('.', '')
+                    incomeVal = incomeVal.replace(',', '.')
+    
+                    totalValue = totalValue.replace('.', '')
+                    totalValue = totalValue.replace(',', '.') 
+
+                    var result = incomeVal - totalValue 
+
+                    var resultFinal = result.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+
+                    $('#balance').val(resultFinal)
+
+
+                    if (result < 0) {
+                        console.log('<0')
+                        $('#balance').css("color", 'red').css("font-weight", 'bold')
+                    } else {
+                        console.log('>0')
+                        $('#balance').css("color", 'blue').css("font-weight", 'bold')
+                    }
+                }
+            })
         });
     </script>
 @endpush
