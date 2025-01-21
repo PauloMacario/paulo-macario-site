@@ -46,13 +46,27 @@ class GetInstallmetsByFilters
                 $data[$paymentType->id]['data'][] = $installment;
 
                 continue;
-            }
-
-           
+            }           
         }
 
+        $data = $this->getTotalValue($data);
+        
         sort($data);
         
+        return $data;
+    }
+
+    public function getTotalValue($data)
+    {
+        foreach ($data as $key => $tipos) {
+           
+            $data[$key]['totalValue'] = 0;
+            
+            foreach ($tipos['data'] as $item) {
+                $data[$key]['totalValue'] += $item->value;                
+            }           
+        }
+
         return $data;
     }
 }

@@ -132,6 +132,7 @@
     
                                             <tr >
                                                 <th rowspan="2" class="text-center">TIPO DE PAGAMENTO</th>
+                                                <th rowspan="2" class="text-center">TOTAL</th>
                                                 <th rowspan="2" class="text-center">QUANTIDADE DE PARCELAS</th>
                                                 <th class="text-center">SELECIONAR P/ GERAR></th>
                                             </tr>
@@ -142,6 +143,7 @@
                                             @foreach ($reports['data'] as $item)
                                                 <tr style="color:{{ $item['color']}};">
                                                     <td class="text-center bold" >{{ $item['paymentType'] }} </td>
+                                                    <td class="text-center bold" >R$ {{ formatMoneyBR($item['totalValue']) }} </td>
                                                     <td class="text-center">{{ $item['reports']->count() }} parcela(s) encontrada(s)</td>
                                                     <td class="text-center">
                                                         <input type="checkbox" name="payment_type_id[{{ $item['paymentTypeId'] }}]" id="" class="item-payment-type">

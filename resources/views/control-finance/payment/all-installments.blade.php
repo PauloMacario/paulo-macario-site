@@ -58,14 +58,14 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
+                            <div class="col-xs-12 col-md-6 col-lg-6">
                                 <p class="text-right">
                                     <button class="btn bg-olive btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                       filtros
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse show" id="collapseExample">
+                                <div class="collapse" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="" method="GET">
                                             <div class="row">
@@ -187,7 +187,7 @@
 
                         @if($installments->count() > 0)
                             <div class="row">
-                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                <div class="col-xs-12 col-md-6 col-lg-6">
                                     
                                     <table class="table table-sm  table-bordered table-responsive mb-3"> 
                                         <tr>
@@ -217,16 +217,16 @@
                                                             <strong>R${{ formatMoneyBR($installment->value) }}</strong><br>
                                                         <span >
                                                     </td>
-                                                    <td class="text-center vertical-middle" style="vertical-align: middle;" width="40%">                                                    
-                                                        <strong>
+                                                    <td class="text-center vertical-middle" style="vertical-align: middle;" width="20%">                                                    
+                                                        <strong class="text-olive">
                                                             Pago                                                            
                                                         </strong>
                                                         <br>
                                                         <input class="" type="radio" name="status" value="PM" @if($installment->status == 'PM') checked @endif>                                                    
                                                     </td>
                                                     <td class="text-center vertical-middle" style="vertical-align: middle;" width="22%">  
-                                                        <strong>
-                                                            Pendente.
+                                                        <strong class="text-danger">
+                                                            Pend..
                                                         </strong>
                                                         <br>
                                                         <input class="" type="radio" name="status" value="PP" @if($installment->status == 'PP') checked @endif>

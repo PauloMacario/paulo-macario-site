@@ -84,8 +84,14 @@ class ReportInstallmentsByShopper
                 ->whereYear('installments.due_date', $this->dataSearch->year)
                 ->whereMonth('installments.due_date', $this->dataSearch->month)
                 ->select(
-                    'debts.locality','debts.number_installments', 'debts.date', 'debts.payment_type_id',
-                    'installments.number_installment', 'installments.due_date', 'installments.value', 'installments.shopper_id',
+                    'debts.locality',
+                    'debts.number_installments', 
+                    'debts.date', 
+                    'debts.payment_type_id',
+                    'installments.number_installment', 
+                    'installments.due_date', 
+                    'installments.value', 
+                    'installments.shopper_id', 
                     'payment_types.description',
                     'shoppers.name'
                 )
@@ -97,6 +103,7 @@ class ReportInstallmentsByShopper
             $data[$key]['paymentType'] = Str::title($reportData[0]->description);
             $data[$key]['color'] = $paymentType->color;
             $data[$key]['reports'] = $reportData;
+            $data[$key]['totalValue'] = $this->getTotalValue($reportData);
 
             if ($loop == $qtdPaymentTypes) {
 
@@ -105,6 +112,19 @@ class ReportInstallmentsByShopper
                 $report['data'] = $data;
             }                
         }
+
         return $report;
+    }
+
+    public function getTotalValue($reportData)
+    {
+        $totalValue = 0;
+
+        foreach ($reportData as $item) {
+            $totalValue += $item->value;
+           
+        }
+
+        return $totalValue;
     }
 }

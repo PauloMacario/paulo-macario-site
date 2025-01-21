@@ -56,14 +56,14 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-12 col-md-10 col-lg-8">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
                                 <p class="text-right">
                                     <button class="btn bg-olive btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                       filtros
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse show" id="collapseExample">
+                                <div class="collapse" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('debtAllMonth_post') }}" method="GET">
                                             <div class="row">
@@ -144,7 +144,6 @@
                                                             name="status" 
                                                             id="status" 
                                                         >
-                                                            <option value="" selected>Status</option>
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
                                                     </select>                
@@ -173,8 +172,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
-                                <div class="card card-body">
+                            <div class="col-xs-12 col-md-6 col-lg-6">                              
                                 @if ($debts->count() > 0)
                                     <table class="table table-sm table-striped mb-2">
                                         <tr>
@@ -257,7 +255,7 @@
                                             @include('control-finance.components.results-empty')
                                         </div>
                                     </div>
-                                @endif
+                                @endif                           
                             </div>
                         </div>
                     </div>

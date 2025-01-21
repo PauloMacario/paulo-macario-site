@@ -44,8 +44,8 @@ class ReportShopperController extends Controller
         $data['year'] = $year;
         $data['month'] = $month;        
         $data['shopperId'] = $shopId ?? 0;
-        $data['paymentTypeId'] = $request->payment_type_id ?? 0;        
-
+        $data['paymentTypeId'] = $request->payment_type_id ?? 0;    
+        
         return view('control-finance.report.shopper', $data);
     }
 }

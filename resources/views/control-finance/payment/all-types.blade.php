@@ -35,7 +35,7 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse show" id="collapseExample">
+                                <div class="collapse" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('paymentAllPaymentTypesSearch_post') }}" method="POST">
                                             @csrf
@@ -135,8 +135,7 @@
                                                             class="form-control form-control-sm" 
                                                             name="status" 
                                                             id="status" 
-                                                        >
-                                                            <option value="" selected>Status</option>                                                            
+                                                        >                                                   
                                                             <option value="PM" @if($status  == 'PM') selected @endif>Pagamento feito</option>
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
                                                     </select>                
@@ -174,8 +173,9 @@
                                                 @csrf
                                                 <tr>
                                                     <th class="text-center" >Tipo de pagamento</th>
+                                                    <th class="text-center" >Total</th>
                                                     <th class="text-center" >Qtd itens</th>     
-                                                    <th colspan="2" class="text-center" >Pagar</th>                                                                                        
+                                                    <th colspan="2" class="text-center" >Selecionar</th>                                                                                        
                                                 </tr>
                                                 @foreach ( $paymentData as $payment)
 
@@ -185,6 +185,7 @@
 
                                                     <tr class="bold">
                                                         <td class="text-center" style="color:{{ $payment['color'] }};">{{ $payment['description'] }}</td>   
+                                                        <td class="text-center" >R$ {{ formatMoneyBR($payment['totalValue']) }}</td>   
                                                         <td class="text-center">
                                                             {{ $count }}
                                                         </td>                  
@@ -207,7 +208,7 @@
                                         Pagar selecionados
                                     </button>
                                     <button class="btn btn-warning btn-sm btn-action ml-2" id="PP">
-                                        Selecionados como pendente
+                                        Pagamento pendente
                                     </button>
                                 </div>                            
                             </div>
@@ -275,8 +276,8 @@
                 if (installmentsSelected.length == 0) {
 
                     Swal.fire({
-                        title: "Deu ruim!",
-                        text: "Nada foi selecionado" ,
+                        title: "Opa!",
+                        text: "Você não selecionou nenhum item da lista." ,
                         icon: "info",
                         confirmButtonText: 'Fechar'
                     }) 
@@ -296,7 +297,7 @@
                                 i.remove()
                             })
     
-                            let title = "Dizer, eu vou!";
+                            let title = "Ok!";
                             let text = "QUE A FORÇA ESTEJA COM VOCÊ";
                             let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
 

@@ -68,7 +68,7 @@
                                   <i class="fas fa-filter"></i>
                                 </button>
                             </p>
-                            <div class="collapse show" id="collapseExample">
+                            <div class="collapse" id="collapseExample">
                                 <div class="card card-body">
                                     <form action="{{ route('negotiationAllFilters_get') }}" method="GET">
                                         <div class="row">
