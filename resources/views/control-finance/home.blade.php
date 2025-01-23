@@ -112,16 +112,24 @@
                                 </div>
                             </a>                      
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        <div class="row  mt-3 mb-3">
-                            <div class="col-12">
-                                <h4 class="text-center" style="color:#3d9970;">Gráficos</h4>
-                            </div>
-                        </div>
-
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card bg-olive">
+                <div class="card card-olive mb-0">
+                    <div class="card-header">
+                        <h5 class="card-title">Gráficos</h5>
+                    </div>
+                    <div class="card-body">
                         <div class="row">            
                             <div class="col-12 col-md-6">
                                 <div class="card">
+                                    <p class="text-center mt-2"  style="color:#3d9970;">Categoria / Quantidade</p>
                                     <div class="card-body">
                                         <canvas 
                                             id="donutChart" 
@@ -135,6 +143,7 @@
                             </div>      
                             <div class="col-12 col-md-6">
                                 <div class="card">
+                                    <p class="text-center mt-2"  style="color:#3d9970;">Categoria / Valores</p>
                                     <div class="card-body">
                                         <canvas 
                                             id="barChart" 
@@ -147,20 +156,11 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="card-footer">                    
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-4">
-                                
-                            </div>
-                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @stop
 @push('js')
     <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
@@ -190,9 +190,7 @@
                 graphicPerCategories(resultado)
             })
             .fail(function(jqXHR, textStatus, msg){
-                console.log(msg);
-                console.log(textStatus);
-                console.log(jqXHR);
+               
             });
 
             $.ajax({
@@ -206,9 +204,7 @@
                 graphicPerCategoriesDebtsSumValues(resultado)
             })
             .fail(function(jqXHR, textStatus, msg){
-                console.log(msg);
-                console.log(textStatus);
-                console.log(jqXHR);
+               
             });
       
         });
@@ -247,7 +243,7 @@
                 labels  : resultado.labels,
                 datasets: [
                     {   
-                        label: 'Por valores',         
+                        label: '',         
                         data: resultado.data,
                         backgroundColor: resultado.backgroundColor,            
                     }

@@ -9,6 +9,10 @@ class PaymentType extends Model
 {
     use HasFactory;
 
+    public const STATUS_ENABLED = 'E';
+
+    public const STATUS_DISABLED = 'D';
+
     protected $fillable = [
         'description',
         'order',

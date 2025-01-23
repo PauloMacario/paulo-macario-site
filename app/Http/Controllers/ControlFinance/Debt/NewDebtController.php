@@ -16,10 +16,12 @@ class NewDebtController extends Controller
 
         $data = [];
         $data['categories'] = Category::where('user_id', $userId)
+            ->where('status', Category::STATUS_ENABLED)
             ->orderBy('order', 'asc')
             ->get();
 
         $data['paymentTypes'] = PaymentType::where('user_id', $userId)
+            ->where('status', PaymentType::STATUS_ENABLED)
             ->orderBy('order', 'asc')
             ->get();
 
