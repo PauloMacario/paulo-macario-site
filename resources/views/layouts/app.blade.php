@@ -14,18 +14,18 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="{{ url('css/login.css') }}" rel="stylesheet">
-
+    
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 
     <div {{-- id="app" --}}>
-        <nav class="navbar navbar-expand-md navbar navbar-dark bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-md navbar navbar-dark {{-- bg-dark --}} shadow-sm" style="background-color:rgb(34, 34, 34);">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+               {{--  <a class="navbar-brand" href="{{ url('/') }}">
                     Site
-                </a>
+                </a> --}}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,7 +49,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                                 </li>
                             @endif
                         @else

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-            <div class="card bg-dark text-white">
+            <div class="card {{-- bg-dark --}} text-white" style="background-color:rgb(34, 34, 34);">
                 <div class="card-header">{{-- {{ __('Login') }} --}}Entrar</div>
 
                 <div class="card-body">
@@ -54,7 +54,7 @@
                             <label for="" class="col-md-4 col-form-label text-md-end">&nbsp;</label>
                             <div class="col-md-6">
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-secondary btn-block">
+                                    <button type="submit" class="btn btn-light btn-block">
                                         {{ __('Login') }}
                                     </button>                                    
                                   </div>
@@ -65,10 +65,12 @@
                             <label for="" class="col-md-4 col-form-label text-md-end">&nbsp;</label>
                             <div class="col-md-6">
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{-- {{ __('Forgot Your Password?') }} --}}
-                                        Esqueceu sua senha?
-                                    </a>
+                                    <div class="d-grid gap-2">
+                                        <a class="btn btn-secondary btn-block btn-sm" href="{{ route('password.request') }}">
+                                            {{-- {{ __('Forgot Your Password?') }} --}}
+                                            Esqueceu sua senha?
+                                        </a>
+                                    </div>
                                 @endif
                             </div>
                         </div>

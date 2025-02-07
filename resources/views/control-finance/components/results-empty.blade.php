@@ -1,8 +1,8 @@
-<div class="row">
-    <div class="col-12 text-center">
-        <img src="{{ asset('./img/yoda_speak.jpg') }}" alt="" style="width:100px; height:100px;">
+    <div>
+        <div class="text-center">
+            <img src="{{ asset('./img/no_results.png') }}" alt="" style="width:100px; height:100px;">
+        </div>
+        <div class="text-center mt-2" style="color:#3d9970;">
+            <h5>Nada encontrado!</h5>
+        </div>
     </div>
-    <div class="col-12 text-center">
-        <h5>Resultado nenhum, você encontrou!</h5>
-    </div>
-</div>

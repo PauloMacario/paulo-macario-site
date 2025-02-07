@@ -13,6 +13,11 @@ class ShowAllPayTypesController extends Controller
     public function __invoke(Request $request)
     {
         $data = [];
+        $data['filter'] = '';
+              
+        if (!empty($request->all())) {
+            $data['filter'] = 'show';
+        }
     
         $request['month'] = ($request->month) ? $request->month : Carbon::now()->format("m");
         $request['year'] = ($request->year) ? $request->year : Carbon::now()->format("Y");

@@ -63,7 +63,7 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse {{ $filter }}" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('debtAllMonth_post') }}" method="GET">
                                             <div class="row">
@@ -151,20 +151,20 @@
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <a href="{{ route('debtAll_get') }}" class="btn bg-warning btn-block btn-sm">
-                                                            Limpar
-                                                            <i class="fas fa-broom"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
-                                                    <div class="form-group">
                                                         <button class="btn bg-olive btn-block btn-sm">
                                                             Filtrar
                                                             <i class="fas fa-search"></i>
                                                         </button>
                                                     </div>
-                                                </div>                                                
+                                                </div>          
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <a href="{{ route('debtAll_get') }}" class="btn bg-warning btn-block btn-sm">
+                                                            Limpar
+                                                            <i class="fas fa-broom"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>                         
                                             </div>
                                         </form>
                                     </div>
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-6">                              
+                            <div class="col-sm-12 col-md-6 col-lg-6">                              
                                 @if ($debts->count() > 0)
                                     <table class="table table-sm table-striped mb-2">
                                         <tr>
@@ -249,12 +249,8 @@
                                             <th><h5>R$ {{ formatMoneyBR($total) }}</h5></th>
                                         </tr>
                                     </table>                                  
-                                @else
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-10 col-lg-8">
-                                            @include('control-finance.components.results-empty')
-                                        </div>
-                                    </div>
+                                @else 
+                                    @include('control-finance.components.results-empty')
                                 @endif                           
                             </div>
                         </div>

@@ -65,7 +65,7 @@
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse {{ $filter }}" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="" method="GET">
                                             <div class="row">
@@ -164,18 +164,18 @@
                                                 </div>                                              
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <a href="{{ route('paymentAllInstallments_get') }}" class="btn bg-warning btn-block btn-sm">
-                                                            Limpar
-                                                            <i class="fas fa-broom"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
-                                                    <div class="form-group">
                                                         <button class="btn bg-olive btn-block btn-sm">
                                                             Filtrar
                                                             <i class="fas fa-search"></i>
                                                         </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <a href="{{ route('paymentAllInstallments_get') }}" class="btn bg-warning btn-block btn-sm">
+                                                            Limpar
+                                                            <i class="fas fa-broom"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,10 +185,9 @@
                             </div>
                         </div>
 
-                        @if($installments->count() > 0)
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6 col-lg-6">
-                                    
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                @if($installments->count() > 0)
                                     <table class="table table-sm  table-bordered table-responsive mb-3"> 
                                         <tr>
                                             <th colspan="3" class="text-center" width="50%">Descrição da Parcela</th>
@@ -241,23 +240,13 @@
                                         @endforeach
                                     </table>
                                     {{ $installments->links() }}
-                                </div>                               
-                            </div>
-                        @else 
-                            <div class="row">
-                                <div class="col-xs-12 col-md-10 col-lg-8">
-                                    @include('control-finance.components.results-empty')
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
-                               
-                            </div>
-                        </div>                                                  
-                    </div>
+                                
+                                @else
+                                    @include('control-finance.components.results-empty')                                       
+                                @endif
+                            </div>                               
+                        </div>
+                    </div>                   
                 </div>
             </div>
         </div>

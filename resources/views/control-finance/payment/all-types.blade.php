@@ -28,14 +28,14 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
+                            <div class="col-xs-12 col-md-6 col-lg-6">
                                 <p class="text-right">
                                     <button class="btn bg-olive btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                       filtros
                                       <i class="fas fa-filter"></i>
                                     </button>
                                 </p>
-                                <div class="collapse" id="collapseExample">
+                                <div class="collapse {{ $filter }}" id="collapseExample">
                                     <div class="card card-body">
                                         <form action="{{ route('paymentAllPaymentTypesSearch_post') }}" method="POST">
                                             @csrf
@@ -163,9 +163,9 @@
                                 </div>
                             </div>
                         </div>
-                        @if (!empty($paymentData))
-                            <div class="row">
-                                <div class="col-xs-12 col-md-8 col-lg-8">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                @if (!empty($paymentData))
                                     <div class="table-responsive">
                                         <table class="table table-sm table-bordered mb-3"> 
 
@@ -202,30 +202,21 @@
                                             </form>
                                         </table>
                                     </div>
-                                </div>   
-                                <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
-                                    <button class="btn bg-olive btn-sm btn-action" id="PM" >
-                                        Pagar selecionados
-                                    </button>
-                                    <button class="btn btn-warning btn-sm btn-action ml-2" id="PP">
-                                        Pagamento pendente
-                                    </button>
-                                </div>                            
-                            </div>
-                        @else
-                            <div class="row">
-                                <div class="col-xs-12 col-md-10 col-lg-8">
-                                    @include('control-finance.components.results-empty')
-                                </div>
-                            </div>
-                        @endif                      
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-10 col-lg-8">
                                
-                            </div>
-                        </div>                                                  
+                                    <div class="col-xs-12 col-md-8 col-lg-8 d-flex justify-content-between">
+                                        <button class="btn bg-olive btn-sm btn-action" id="PM" >
+                                            Pagar selecionados
+                                        </button>
+                                        <button class="btn btn-warning btn-sm btn-action ml-2" id="PP">
+                                            Pagamento pendente
+                                        </button>
+                                    </div>                            
+                                
+                                @else
+                                    @include('control-finance.components.results-empty')
+                                @endif  
+                            </div>                    
+                        </div>
                     </div>
                 </div>
             </div>

@@ -14,11 +14,19 @@ class ShowAllInstallmentsController extends Controller
 {
     public function __invoke(Request $request)
     {
+        $data = [];
+        $data['filter'] = '';
+       
+        if (!empty($request->all())) {
+            $data['filter'] = 'show';
+        }
+
         if (! $request->status) {
             $request['status'] = "PP";
         }
 
-        $data = [];
+        $data['filters'] = false;
+
         $data['categories'] = Category::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();

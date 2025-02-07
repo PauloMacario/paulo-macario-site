@@ -24,11 +24,11 @@
                         <h5 class="card-title">Relatórios</h5>
                     </div>
                     <div class="card-body">
-                        <div class="col-12">
+                        <div class="col-12 col-md-8 col-lg-8">
                             <form action="{{ route('pdfReportShopper_post') }}" method="POST"> 
                                 @csrf
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-4">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <div class="form-group">                                                               
                                             <select class="form-control form-control-sm btn-change" name="shopper_id" id="shopper_id">
                                                 <option value="0">Selecione comprador</option>
@@ -45,7 +45,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-4">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <div class="form-group">                                                                   
                                             <select class="form-control form-control-sm btn-change" name="payment_type_id" id="">
                                                 <option value="0">Selecione Tipo</option>
@@ -64,7 +64,7 @@
                                     </div>                           
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-2">
+                                    <div class="col-12 col-md-3">
                                         <div class="form-group">                                                                      
                                             <select class="form-control form-control-sm btn-change" name="month" id="">
                                                 <option value="01" @if($month == '01' || old('month') == '01') selected @endif>Jan</option>
@@ -82,7 +82,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-2">
+                                    <div class="col-12 col-md-3">
                                         <div class="form-group">                                                                      
                                             <select class="form-control form-control-sm btn-change" name="year" id="">
                                                 <option value="2020" @if($year == '2020' || old('year') == '2020') selected @endif>2020</option>
@@ -99,15 +99,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-2">            
-                                        <div class="form-group">
-                                            <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block btn-sm" >
-                                                Limpar
-                                                <i class="fas fa-broom"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-md-2">            
+                                    <div class="col-12 col-md-3">            
                                         <div class="form-group ">
                                             <button class="btn bg-olive btn-block btn-sm">
                                                 Buscar
@@ -115,12 +107,20 @@
                                             </button>
                                         </div>
                                     </div>
+                                    <div class="col-12 col-md-3">            
+                                        <div class="form-group">
+                                            <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block btn-sm" >
+                                                Limpar
+                                                <i class="fas fa-broom"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                        
-                        @if(count($reports) > 0)
-                            <div class="col-sm-12 col-md-10 col-lg-8 mt-5" id="result-report">
+                        <div class="col-12 col-md-8 col-lg-8" id="result-report">
+                            @if(count($reports) > 0)
                                 <form action="{{ route('pdfReportShopperGenerate_post') }}" method="POST" id="form">
                                     @csrf
                                     <input type="hidden" name="shopper_id" value="{{ $shopperId }}">
@@ -158,14 +158,10 @@
                                         <button class="btn bg-olive btn-sm btn-acao" data-acao="download" type="submit">Baixar PDF</button>
                                     </div>
                                 </form>
-                            </div>
-                        @else
-                            <div class="row">
-                                <div class="col-xs-12 col-md-10 col-lg-8">
-                                    @include('control-finance.components.results-empty')
-                                </div>
-                            </div>
-                        @endif
+                            @else
+                                @include('control-finance.components.results-empty')                            
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

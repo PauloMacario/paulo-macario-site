@@ -15,11 +15,15 @@ class ShowAllDebtController extends Controller
     public function __invoke(Request $request)
     {
         $data = [];
+        $data['filter'] = '';
+              
+        if (!empty($request->all())) {
+            $data['filter'] = 'show';
+        }
     
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");
         
-        $data = [];
         $data['categories'] = Category::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
@@ -64,7 +68,6 @@ class ShowAllDebtController extends Controller
                 $debts->where('status', $status);
             }
         }
-        
 
         $request->session()
             ->put('filters', $request->all());
@@ -77,7 +80,7 @@ class ShowAllDebtController extends Controller
         $data['categoryId'] = $categoryId ?? 0;
         $data['debts'] = $debts->get();
         $data['total'] = $this->getTotalValue($data['debts']);
-        
+                
         return view('control-finance.debt.all', $data);
     }
 

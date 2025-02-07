@@ -12,11 +12,16 @@ use Illuminate\Http\Request;
 class ReportShopperController extends Controller
 {
     public function __invoke(Request $request)
-    {
+    {  
+        $data = [];
+        $data['filter'] = '';
+                     
+        if (!empty($request->all())) {
+            $data['filter'] = 'show';
+        }
+
         $year = Carbon::now()->format("Y");
         $month = Carbon::now()->format("m");
-        
-        $data = [];        
 
         $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
