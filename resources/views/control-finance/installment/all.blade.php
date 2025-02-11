@@ -266,7 +266,10 @@
                                                 </tr>
                                                 @if ($installment->debt->prorated_debt == 1)                                
                                                     <tr>
-                                                        <td colspan='2' class="font-italic text-left font-12
+                                                        <td class="font-italic text-left font-12" >
+                                                            {{ formatDateBR($installment->created_at) }}
+                                                        </td>
+                                                        <td class="font-italic text-left font-12
                                                             @if($installment->status == 'PM') 
                                                                 value-paid
                                                             @endif
@@ -286,7 +289,10 @@
                                                     </tr> 
                                                 @else
                                                     <tr>
-                                                        <td colspan="3" class="font-italic text-left font-12  
+                                                        <td class="font-italic text-left font-12" >
+                                                            {{ formatDateBR($installment->created_at) }}
+                                                        </td>
+                                                        <td class="font-italic text-left font-12  
                                                             @if($installment->status == 'PM') 
                                                                 value-paid 
                                                             @endif"

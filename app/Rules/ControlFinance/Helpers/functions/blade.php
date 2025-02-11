@@ -26,6 +26,10 @@ if ( ! function_exists('formatMoneyBR')) {
 if ( ! function_exists('formatDateBR')) {
     function formatDateBR($date)
     {
+        if (! $date) {
+            return '00/00/0000';
+        }
+
         return Carbon::parse($date)->format('d/m/Y');
     }
 }
