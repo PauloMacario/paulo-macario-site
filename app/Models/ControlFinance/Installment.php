@@ -15,7 +15,8 @@ class Installment extends Model
         'number_installment',
         'due_date',
         'value',
-        'status'
+        'status',
+        'created_at'
     ];
 
     public function debt()

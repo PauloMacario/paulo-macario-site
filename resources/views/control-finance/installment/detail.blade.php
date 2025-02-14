@@ -162,6 +162,20 @@
                                                 >
                                             </div>
                                         </div>
+
+                                        <div class="col-xs-12 col-md-2 col-lg-2">
+                                            <div class="form-group">
+                                                <label for="id">Data criação</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control form-control-sm fields-disabled" 
+                                                    name="created_at" 
+                                                    id="created_at" 
+                                                    value="{{ $installment->created_at }}"
+                                                    disabled
+                                                >
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
