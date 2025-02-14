@@ -77,7 +77,12 @@
                                                     <div >
                                                         <div id="heading{{ $debt->id }}">
                                                             <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
-                                                                {{ $debt->trade_name }}
+                                                                
+                                                                @if ($debt->trade_name)
+                                                                    {{ $debt->trade_name }}
+                                                                @else
+                                                                    {{ $debt->locality }}
+                                                                @endif
                                                                 <span class="ml-2">
                                                                     @if ($debt->number_installments > 1)
                                                                         em {{ $debt->number_installments }} x

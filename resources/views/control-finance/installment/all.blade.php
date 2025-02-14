@@ -244,7 +244,11 @@
                                                                             @endif
                                                                             "
                                                                             >
-                                                                            {{ $installment->debt->trade_name }}
+                                                                            @if ($installment->debt->trade_name)
+                                                                                {{ $installment->debt->trade_name }}                                                                               
+                                                                            @else
+                                                                                {{ $installment->debt->locality }}                                                                            
+                                                                            @endif
                         
                                                                             @if ($installment->debt->number_installments > 1)
                                                                                 <span class="ml-2  

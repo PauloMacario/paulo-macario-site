@@ -197,7 +197,7 @@
                                                     @if(isset($debt->category->style->color))
                                                         style="color:{{ $debt->category->style->color }};"    
                                                     @endif
-                                                >
+                                                    >
                                                     {{ $debt->category->description }}
                                                 </td>
                                                 <td class="font-italic text-center font-12" width="30%">{{ formatDateBR($debt->date) }}</td>
@@ -209,7 +209,11 @@
                                                             <div >
                                                                 <div id="heading{{ $debt->id }}">
                                                                     <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
-                                                                        {{ $debt->trade_name }}
+                                                                        @if ($debt->trade_name)
+                                                                            {{ $debt->trade_name }}
+                                                                        @else
+                                                                            {{ $debt->locality }}
+                                                                        @endif
                                                                         <span class="ml-2">
                                                                             @if ($debt->number_installments > 1)
                                                                                 em {{ $debt->number_installments }} x
