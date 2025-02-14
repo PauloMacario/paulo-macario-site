@@ -20,7 +20,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-xs-12 col-md-9 col-lg-9">
+                                <div class="col-12 col-sm-12 col-md-10 col-lg-10">
                                     <form action="{{ route('deleteInstallment_post') }}" method="POST" id="form-delete" class="text-right">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $installment->id }}">
@@ -40,9 +40,9 @@
                                 <input type="hidden" name="debt_id" value="{{ $installment->debt_id }}">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-xs-12 col-md-4 col-lg-4">
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
                                             <div class="form-group">
-                                                <label for="id">Loja/local</label>
+                                                <label for="locality">Loja/local</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control form-control-sm fields-disabled" 
@@ -53,7 +53,22 @@
                                                 >
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-md-2 col-lg-2">
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                            <div class="form-group">
+                                                <label for="trade_name">Nome comercial</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control form-control-sm fields-disabled" 
+                                                    name="trade_name" 
+                                                    id="trade_name" 
+                                                    value="{{ $installment->debt->trade_name }}" 
+                                                    disabled
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                                             <div class="form-group">
                                                 <label for="status">Status</label>
                                                 <select 
@@ -68,9 +83,9 @@
                                             </div>
                                         </div>
         
-                                        <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                             <div class="form-group">
-                                                <label for="id">Valor</label>
+                                                <label for="value">Valor</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control form-control-sm fields-disabled" 
@@ -81,10 +96,23 @@
                                                 >
                                             </div>
                                         </div>
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                            <div class="form-group">
+                                                <label for="locality_obs">Observação</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control form-control-sm fields-disabled" 
+                                                    name="locality_obs" 
+                                                    id="locality_obs" 
+                                                    value="{{ $installment->debt->locality_obs }}" 
+                                                    disabled
+                                                >
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <div class="row">    
-                                        <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-4">
                                             <div class="form-group">
                                                 <label for="id">Comprador(a)</label>
                                                 <select 
@@ -105,7 +133,7 @@
                                             </div>
                                         </div>
                                     
-                                        <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                             <div class="form-group">
                                                 <label for="id">N° da parcela</label>
                                                 <input 
@@ -121,7 +149,7 @@
                                             </div>
                                         </div>
                                     
-                                        <div class="col-xs-12 col-md-3 col-lg-3">
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                             <div class="form-group">
                                                 <label for="id">Data</label>
                                                 <input 
@@ -138,8 +166,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="row ">
-                                        <div class="col-xs-12 col-md-9 col-lg-9">
-                                            <div class="col-xs-12 col-md-12 col-lg-12 text-left p-0 m-0">
+                                        <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-left p-0 m-0">
                                                 <div class="form-group d-flex justify-content-between">
                                                     <a class="btn bg-warning btn-sm" id="btn-edit" data-edit="disabled">
                                                         Editar

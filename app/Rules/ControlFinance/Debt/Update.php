@@ -17,6 +17,8 @@ class Update
         
         $debt->update([
                     "locality" => $data['locality'],
+                    "locality_obs" =>  $data['locality_obs'],
+                    "trade_name" =>  $data['trade_name'],
                     "category_id" => $data['category_id'],
                     "shopper_id" => $data['shopper_id'],
                     "date" => $data['date'],

@@ -85,6 +85,8 @@ class ReportInstallmentsByShopper
                 ->whereMonth('installments.due_date', $this->dataSearch->month)
                 ->select(
                     'debts.locality',
+                    'debts.locality_obs',
+                    'debts.trade_name',
                     'debts.number_installments', 
                     'debts.date', 
                     'debts.payment_type_id',

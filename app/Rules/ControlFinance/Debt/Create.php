@@ -25,8 +25,8 @@ class Create
             return $createInCurrentMonth->execute($dataDebt);
         }
        
-        $createInCurrentMonth = new CreateWithInstallmentsOtherMonth($dataDebt);
+        $createOtherMonth = new CreateWithInstallmentsOtherMonth($dataDebt);
 
-        return $createInCurrentMonth->execute();;       
+        return $createOtherMonth->execute();;       
     }
 }

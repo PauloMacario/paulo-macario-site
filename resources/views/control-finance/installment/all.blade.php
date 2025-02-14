@@ -233,24 +233,69 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="font-weight-bold text-left font-14">
-                                                        <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
-                                                            @if($installment->status == 'PM') 
-                                                                value-paid decoration
-                                                            @endif
-                                                            "
-                                                            >
-                                                            {{ $installment->debt->locality }}
-        
-                                                            @if ($installment->debt->number_installments > 1)
-                                                                <span class="ml-2  
-                                                                    @if($installment->status == 'PM') 
-                                                                        value-paid decoration
-                                                                    @endif"
-                                                                    > 
-                                                                    ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
-                                                                </span>
-                                                            @endif
-                                                        </a>
+                                                        @if ($installment->debt->trade_name || $installment->debt->locality_obs)
+                                                            <div class="accordion" id="accordionExample">                                                           
+                                                                <div >
+                                                                    <div id="heading{{ $installment->id }}">
+                                                                        
+                                                                        <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
+                                                                            @if($installment->status == 'PM') 
+                                                                                value-paid decoration
+                                                                            @endif
+                                                                            "
+                                                                            >
+                                                                            {{ $installment->debt->trade_name }}
+                        
+                                                                            @if ($installment->debt->number_installments > 1)
+                                                                                <span class="ml-2  
+                                                                                    @if($installment->status == 'PM') 
+                                                                                        value-paid decoration
+                                                                                    @endif"
+                                                                                    > 
+                                                                                    ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                                                </span>
+                                                                            @endif
+                                                                        </a>  
+                                                                        <button class="btn btn-link btn-sm text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $installment->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                                                            <i class="fas fa-caret-square-down" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; cursor: pointer;"></i>
+                                                                        </button>                                                                       
+                                                                    </div>
+                                                                    <div id="collapse{{ $installment->id }}" class="collapse" aria-labelledby="heading{{ $installment->id }}" data-parent="#accordionExample">
+                                                                        @if ($installment->debt->trade_name)
+                                                                            <div class="font-italic">
+                                                                                {{ $installment->debt->locality }}
+                                                                            </div>
+                                                                        @endif
+
+                                                                        @if ($installment->debt->locality_obs)
+                                                                            <div class="font-italic font-9">
+                                                                                <i class="fas fa-info-circle mr-2" style="color:#3d9970;"></i>
+                                                                                {{ $installment->debt->locality_obs }}
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>                                                          
+                                                            </div>
+                                                        @else
+                                                            <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
+                                                                @if($installment->status == 'PM') 
+                                                                    value-paid decoration
+                                                                @endif
+                                                                "
+                                                                >
+                                                                {{ $installment->debt->locality }}
+            
+                                                                @if ($installment->debt->number_installments > 1)
+                                                                    <span class="ml-2  
+                                                                        @if($installment->status == 'PM') 
+                                                                            value-paid decoration
+                                                                        @endif"
+                                                                        > 
+                                                                        ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                                    </span>
+                                                                @endif
+                                                            </a>                                                            
+                                                        @endif                                                        
                                                     </td>
                                                     <td class="font-weight-bold text-right font-14 
                                                         @if($installment->status == 'PM') 
