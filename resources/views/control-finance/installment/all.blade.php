@@ -316,7 +316,7 @@
                                                 @if ($installment->debt->prorated_debt == 1)                                
                                                     <tr>
                                                         <td class="font-italic text-left font-12" >
-                                                            {{ formatDateBR($installment->created_at) }}
+                                                            {{ formatDateBR($installment->debt->date) }}
                                                         </td>
                                                         <td class="font-italic text-left font-12
                                                             @if($installment->status == 'PM') 
@@ -339,7 +339,7 @@
                                                 @else
                                                     <tr>
                                                         <td class="font-italic text-left font-12" >
-                                                            {{ formatDateBR($installment->created_at) }}
+                                                            {{ formatDateBR($installment->debt->date) }}
                                                         </td>
                                                         <td class="font-italic text-left font-12  
                                                             @if($installment->status == 'PM') 
