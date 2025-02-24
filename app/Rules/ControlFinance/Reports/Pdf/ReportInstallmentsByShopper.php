@@ -103,6 +103,7 @@ class ReportInstallmentsByShopper
             
             $data[$key]['paymentTypeId'] = $paymentTypeId;
             $data[$key]['paymentType'] = Str::title($reportData[0]->description);
+            $data[$key]['dueDate'] = carbon::createFromFormat('Y-m-d', $reportData[0]->due_date)->format('d/m/Y');
             $data[$key]['color'] = $paymentType->color;
             $data[$key]['reports'] = $reportData;
             $data[$key]['totalValue'] = $this->getTotalValue($reportData);

@@ -161,21 +161,21 @@
                                                             <option value="PP" @if($status  == 'PP') selected @endif>Pendente pagamento</option>
                                                     </select>                
                                                     </div>
-                                                </div>                                              
-                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
-                                                    <div class="form-group">
-                                                        <button class="btn bg-olive btn-block btn-sm">
-                                                            Filtrar
-                                                            <i class="fas fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                </div>                                               
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
                                                         <a href="{{ route('paymentAllInstallments_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <button class="btn bg-olive btn-block btn-sm">
+                                                            Filtrar
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>

@@ -105,19 +105,19 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-3">            
-                                        <div class="form-group ">
-                                            <button class="btn bg-olive btn-block btn-sm">
-                                                Buscar
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">            
                                         <div class="form-group">
                                             <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block btn-sm" >
                                                 Limpar
                                                 <i class="fas fa-broom"></i>
                                             </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3">            
+                                        <div class="form-group ">
+                                            <button class="btn bg-olive btn-block btn-sm">
+                                                Buscar
+                                                <i class="fas fa-search"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
