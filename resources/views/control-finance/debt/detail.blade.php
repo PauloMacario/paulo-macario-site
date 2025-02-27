@@ -72,14 +72,53 @@
                                     </tr>
                                     <tr >
                                         <td colspan="2" class="font-weight-bold text-left font-14">
-                                            <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
-                                                {{ $debt->locality }}
-                                                <span class="ml-2">
-                                                    @if ($debt->number_installments > 1)
-                                                        em {{ $debt->number_installments }} x
-                                                    @endif
-                                                </span>
-                                            </a>
+                                            @if ($debt->trade_name || $debt->locality_obs)
+                                                <div class="accordion" id="accordionExample">                                                           
+                                                    <div >
+                                                        <div id="heading{{ $debt->id }}">
+                                                            <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
+                                                                
+                                                                @if ($debt->trade_name)
+                                                                    {{ $debt->trade_name }}
+                                                                @else
+                                                                    {{ $debt->locality }}
+                                                                @endif
+                                                                <span class="ml-2">
+                                                                    @if ($debt->number_installments > 1)
+                                                                        em {{ $debt->number_installments }} x
+                                                                    @endif
+                                                                </span>
+                                                            </a>
+                                                            <button class="btn btn-link btn-sm text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $debt->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                                                <i class="fas fa-caret-square-down" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; cursor: pointer;"></i>
+                                                            </button>                                                                       
+                                                        </div>
+                                                        <div id="collapse{{ $debt->id }}" class="collapse" aria-labelledby="heading{{ $debt->id }}" data-parent="#accordionExample">
+                                                            @if ($debt->trade_name)
+                                                                <div class="font-italic">
+                                                                    {{ $debt->locality }}
+                                                                </div>
+                                                            @endif
+
+                                                            @if ($debt->locality_obs)
+                                                                <div class="font-italic font-9">
+                                                                    <i class="fas fa-info-circle mr-2" style="color:#3d9970;"></i>
+                                                                    {{ $debt->locality_obs }}
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>                                                          
+                                                </div>
+                                            @else
+                                                <a href="{{ route('detailDebt_get', ['id' => $debt->id]) }}">
+                                                    {{ $debt->locality }}
+                                                    <span class="ml-2">
+                                                        @if ($debt->number_installments > 1)
+                                                            em {{ $debt->number_installments }} x
+                                                        @endif
+                                                    </span>
+                                                </a>                   
+                                            @endif
                                         </td>
                                         <td class="font-weight-bold text-center font-14 @if($debt->status == 'PM') value-paid @endif">
                                             R$ {{ formatMoneyBR($debt->total_value) }}

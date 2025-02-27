@@ -8,6 +8,21 @@
         .bold {
             font-weight: bold
         }
+        .font-8 {
+            font-size: 8px;
+        }
+        .font-9 {
+            font-size: 9px;
+        }
+        .font-10 {
+            font-size: 10px;
+        }
+        .font-12 {
+            font-size: 12px;
+        }
+        .font-14 {
+            font-size: 14px;
+        }
     </style>
 
 @endpush
@@ -143,18 +158,18 @@
                                                 </div>
                                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
                                                     <div class="form-group">
-                                                        <button class="btn bg-olive btn-block btn-sm">
-                                                            Filtrar
-                                                            <i class="fas fa-search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
-                                                    <div class="form-group">
                                                         <a href="{{ route('paymentAllPaymentTypesSearch_get') }}" class="btn bg-warning btn-block btn-sm">
                                                             Limpar
                                                             <i class="fas fa-broom"></i>
                                                         </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">            
+                                                    <div class="form-group">
+                                                        <button class="btn bg-olive btn-block btn-sm">
+                                                            Filtrar
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,10 +187,10 @@
                                             <form action="{{ route('paymentAllPaymentTypes_post') }}" method="POST" id="form">
                                                 @csrf
                                                 <tr>
-                                                    <th class="text-center" >Tipo de pagamento</th>
-                                                    <th class="text-center" >Total</th>
-                                                    <th class="text-center" >Qtd itens</th>     
-                                                    <th colspan="2" class="text-center" >Selecionar</th>                                                                                        
+                                                    <th class="text-center font-10" >Tipo de pagamento</th>
+                                                    <th class="text-center font-10" >Total</th>
+                                                    <th class="text-center font-10" >Qtd itens</th>     
+                                                    <th colspan="2" class="text-center font-10" >Selecionar</th>                                                                                        
                                                 </tr>
                                                 @foreach ( $paymentData as $payment)
 
@@ -184,19 +199,19 @@
                                                     @endphp
 
                                                     <tr class="bold">
-                                                        <td class="text-center" style="color:{{ $payment['color'] }};">{{ $payment['description'] }}</td>   
-                                                        <td class="text-center" >R$ {{ formatMoneyBR($payment['totalValue']) }}</td>   
-                                                        <td class="text-center">
+                                                        <td class="text-center font-10" style="color:{{ $payment['color'] }};">{{ $payment['description'] }}</td>   
+                                                        <td class="text-center font-10" >R$ {{ formatMoneyBR($payment['totalValue']) }}</td>   
+                                                        <td class="text-center font-10">
                                                             {{ $count }}
                                                         </td>                  
-                                                        <td class="text-center">
+                                                        <td class="text-center font-10">
 
                                                             <input type="checkbox" name="payment-{{ $payment['id'] }}" id="payment-{{ $payment['id'] }}"> 
                                                         </td>                                                        
                                                     </tr>
         
                                                     @foreach($payment['data'] as $installment)                                           
-                                                        <input type="hidden" name="installment" class="installment-{{ $payment['id'] }}" value="{{ $installment->id }}">
+                                                        <input type="hidden" name="installment" class="installment-{{ $payment['id'] }} " value="{{ $installment->id }}">
                                                     @endforeach
                                                 @endforeach
                                             </form>

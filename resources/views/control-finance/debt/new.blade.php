@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
-                                        <label for="shopper_id">Comprador(a)</label>    
+                                        <label for="shopper_id" style="color:#3d9970;">Comprador(a)</label>    
                                        
                                         @if($shoppers->count() > 1)
                                             <select class="form-control form-control-sm" name="shopper_id" id="shopper_id" required>                   
@@ -57,7 +57,7 @@
 
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5">
                                     <div class="form-group">
-                                        <label for="categoryId">Categoria</label>
+                                        <label for="categoryId" style="color:#3d9970;">Categoria</label>
                                         <select class="form-control form-control-sm" name="category_id" id="categoryId" required>
                                             <option value="">Selecione...</option>
                                             @foreach ($categories as $category)
@@ -78,7 +78,7 @@
                                 
                                 <div class="col-7 col-sm-7 col-md-5 col-lg-5">
                                     <div class="form-group">
-                                        <label for="payment_type_id">
+                                        <label for="payment_type_id" style="color:#3d9970;">
                                             Forma de pagamento
                                             <i class="fas fa-info-circle" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; cursor: pointer;"></i>
                                             {{-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
@@ -107,40 +107,45 @@
                                 </div>                                
                             </div>
 
-                            <div class="row">
-                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
+                            <div class="row">                                
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
-                                        <label for="field-number-installments">Status</label>
-                                        <select class="form-control form-control-sm" name="status" id="status" required>                   
-                                            <option value="PP" selected>Pendente Pagamento</option>
-                                            <option value="PM" >Pago</option>  
-                                        </select>              
-                                    </div>
-                                </div>
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
-                                    <div class="form-group">
-                                        <label for="date">Data</label>
+                                        <label for="date" style="color:#3d9970;">Data</label>
                                         <input type="date" class="form-control form-control-sm"  name="date" id="date" required>
                                     </div>
                                 </div>
 
-                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
+                                <div class="col-7 col-sm-7 col-md-4 col-lg-4">
                                     <div class="form-group">
-                                        <label for="locality">Loja/local</label>
+                                        <label for="locality" style="color:#3d9970;">Loja/local</label>
                                         <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required >
                                     </div>
                                 </div>
-
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
+                                
+                                <div class="col-5 col-sm-5 col-md-3 col-lg-3">
                                     <div class="form-group">
-                                        <label for="totalValue">Valor total</label>
+                                        <label for="totalValue" style="color:#3d9970;">Valor total</label>
                                         <input type="text" class="form-control form-control-sm"  name="total_value" id="totalValue" required>
                                     </div>
-                                </div>                              
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                    <div class="form-group">
+                                        <label for="trade_name">Nome comercial</label>
+                                        <input type="text" class="form-control form-control-sm"  name="trade_name" id="trade_name">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                    <div class="form-group">
+                                        <label for="locality_obs">Observações</label>
+                                        <input type="text" class="form-control form-control-sm"  name="locality_obs" id="locality_obs" placeholder="Ajuda para lembrar da dívida.">
+                                      </div>
+                                </div>
                             </div>                    
 
                             <div class="row">
-                                <div class="col-7 col-sm-7 col-md-5 col-lg-5">
+                                <div class="col-12 col-sm-12 col-md-10 col-lg-10">
                                     <div class="form-group">
                                         <label for="compra-rateada">Compra rateada</label>
                                         <select class="form-control form-control-sm" @if($shoppers->count() > 1) id="compra-rateada" @else disabled @endif autocomplete="off">

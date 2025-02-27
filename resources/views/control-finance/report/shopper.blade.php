@@ -7,7 +7,12 @@
     <style>
     .bold {
         font-weight: bold;
-    }        
+    }   
+    
+    table {
+        font-size: 10px
+    }
+    
     </style> 
 @endpush
 
@@ -100,19 +105,19 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-3">            
-                                        <div class="form-group ">
-                                            <button class="btn bg-olive btn-block btn-sm">
-                                                Buscar
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">            
                                         <div class="form-group">
                                             <a href="{{ route('pdfReportShopper_get') }}" class="btn bg-warning btn-block btn-sm" >
                                                 Limpar
                                                 <i class="fas fa-broom"></i>
                                             </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3">            
+                                        <div class="form-group ">
+                                            <button class="btn bg-olive btn-block btn-sm">
+                                                Buscar
+                                                <i class="fas fa-search"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -131,10 +136,10 @@
                                         <tbody>
     
                                             <tr >
-                                                <th rowspan="2" class="text-center">TIPO DE PAGAMENTO</th>
-                                                <th rowspan="2" class="text-center">TOTAL</th>
-                                                <th rowspan="2" class="text-center">QUANTIDADE DE PARCELAS</th>
-                                                <th class="text-center">SELECIONAR P/ GERAR></th>
+                                                <th rowspan="2" class="text-center">Tipo De Pagamento</th>
+                                                <th rowspan="2" class="text-center">Total</th>
+                                                <th rowspan="2" class="text-center">Qtd parcelas</th>
+                                                <th class="text-center">Selecionar</th>
                                             </tr>
 
                                             <tr >                                               
@@ -144,7 +149,7 @@
                                                 <tr style="color:{{ $item['color']}};">
                                                     <td class="text-center bold" >{{ $item['paymentType'] }} </td>
                                                     <td class="text-center bold" >R$ {{ formatMoneyBR($item['totalValue']) }} </td>
-                                                    <td class="text-center">{{ $item['reports']->count() }} parcela(s) encontrada(s)</td>
+                                                    <td class="text-center">{{ $item['reports']->count() }}</td>
                                                     <td class="text-center">
                                                         <input type="checkbox" name="payment_type_id[{{ $item['paymentTypeId'] }}]" id="" class="item-payment-type">
                                                     </td>

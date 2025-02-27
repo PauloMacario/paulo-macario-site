@@ -85,6 +85,8 @@ class ReportInstallmentsByShopper
                 ->whereMonth('installments.due_date', $this->dataSearch->month)
                 ->select(
                     'debts.locality',
+                    'debts.locality_obs',
+                    'debts.trade_name',
                     'debts.number_installments', 
                     'debts.date', 
                     'debts.payment_type_id',
@@ -101,6 +103,7 @@ class ReportInstallmentsByShopper
             
             $data[$key]['paymentTypeId'] = $paymentTypeId;
             $data[$key]['paymentType'] = Str::title($reportData[0]->description);
+            $data[$key]['dueDate'] = carbon::createFromFormat('Y-m-d', $reportData[0]->due_date)->format('d/m/Y');
             $data[$key]['color'] = $paymentType->color;
             $data[$key]['reports'] = $reportData;
             $data[$key]['totalValue'] = $this->getTotalValue($reportData);

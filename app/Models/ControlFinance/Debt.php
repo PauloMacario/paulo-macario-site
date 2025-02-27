@@ -15,6 +15,8 @@ class Debt extends Model
         'shopper_id',
         'date',
         'locality',
+        'locality_obs',
+        'trade_name',
         'total_value',
         'number_installments',
         'prorated_debt',

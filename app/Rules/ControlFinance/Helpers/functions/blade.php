@@ -40,3 +40,11 @@ if ( ! function_exists('getDay')) {
         return Str::substr($date, 8, 2);
     }
 }
+
+if ( ! function_exists('textTruncate')) {
+    function textTruncate(string $text, int $qtd)
+    {
+        return Str::limit($text, $qtd);
+    }
+}
+

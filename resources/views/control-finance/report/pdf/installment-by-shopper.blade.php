@@ -20,9 +20,12 @@
             width: 100%;
             border-collapse: collapse;
         }
+        tbody {
+            color: #5c5c5c;
+        }
 
         .table-header, .table-items, .table-footer {
-            border: 2px solid #6d6d6d;
+            border: 1px solid #6d6d6d;
             background-color: #bdbdbd3f;
         }
 
@@ -98,14 +101,14 @@
         .font-total-item {
             font-size: 12px;
             font-style: italic;
-            color:#3d3d3d;
+            color:#5c5c5c;
             font-weight:bold;
         }
 
         .font-total-footer {
             font-size: 14px;
             font-style: italic;
-            color:#000000;
+            color:#5c5c5c;
             font-weight:bold;
         }
 
@@ -121,6 +124,18 @@
             font-style: italic;
             color:#494949;
             font-weight:bold;
+        }
+
+        .font-6 {
+            font-size: 6px;
+        }
+
+        .font-8 {
+            font-size: 8px;
+        }
+
+        .font-9 {
+            font-size: 9px;
         }
         
 
@@ -151,7 +166,8 @@
 
             <table class="mb-15" style="border: 1px solid {{ $data['color'] }};">                           
                 <tr >
-                    <td colspan="4" class="font-item-title pl-4" style="color:{{ $data['color'] }};">{{ $data['paymentType'] }}</td>
+                    <td colspan="3" class="font-item-title pl-4" style="color:{{ $data['color'] }};">{{ $data['paymentType'] }}</td>
+                    <td colspan="2" class="font-item-title pl-4" style="color:{{ $data['color'] }};">Dia pagamento: {{ $data['dueDate'] }}</td>
                 </tr>
                 @foreach($data['reports'] as $report)    
                 
@@ -160,16 +176,30 @@
                                          
                     @endphp
 
-                    <tr >
-                        <td class="font-item pl-15" width="20%">{{ formatDateBR($report->due_date) }}</td>
-                        <td colspan="2" class="font-item" width="50%"> <span class="">{{ $report->locality }}</span> <span class="">({{ $report->number_installment }}/{{ $report->number_installments }})</td>
-                        <td class="font-item" width="30%">R$ {{ formatMoneyBR($report->value) }}</td>
-                    </tr>
+                    <tr style="border-bottom: 1px solid {{ $data['color'] }}3d;">
+                        <td class="font-item pl-15" width="20%">
+                            {{ formatDateBR($report->date) }}
+                        </td>
+                        <td colspan="3" class="font-item" width="50%">
 
+                            @if($report->trade_name)
+                                <span class="font-8">({{ $report->trade_name }}) </span><br>
+                            @endif
+                            <span class="">{{ $report->locality }}</span>
+                            <span class="">({{ $report->number_installment }}/{{ $report->number_installments }})</span>
+                            
+                            @if($report->locality_obs)
+                                <br><span class="font-8" style="max-width: 15px;">Obs: {{ textTruncate($report->locality_obs, 30) }}</span>
+                            @endif
+                        </td>
+                        <td class="font-item" width="30%">
+                            R$ {{ formatMoneyBR($report->value) }}
+                        </td>
+                    </tr>
                     @if($loop->last)
                         <tr>
                             <td  colspan="3" class="font-total-item text-right pl-10">Total: </td>
-                            <td class="font-total-item text-right pr-15">R$ {{ formatMoneyBR($totalItem) }}</td>                        
+                            <td colspan="2" class="font-total-item text-right pr-15">R$ {{ formatMoneyBR($totalItem) }}</td>                        
                         </tr>
                         @php
                          $total += $totalItem;
@@ -182,7 +212,7 @@
                 <table class="table-footer font-total-footer">
                     <tr>
                         <td colspan="3" class="text-center p-8">Valor Total: </td>
-                        <td class="text-center p-8">R$ {{ formatMoneyBR($total) }}</td>      
+                        <td colspan="2"  class="text-center p-8">R$ {{ formatMoneyBR($total) }}</td>      
                     </tr>
                 </table>
             @endif

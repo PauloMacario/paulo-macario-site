@@ -26,21 +26,23 @@ class Update
             ]
         );
             
-        $this->updateDebtLocality($data['debt_id'], $data['locality']);
+        $this->updateDebt($data);
 
         return ["status" => "success" , "msg" => "Atualizado.", "statusCode" => 200];        
     }
 
-    public function updateDebtLocality($debtId, $locality)
+    public function updateDebt($data)
     {
-        $debt = Debt::find($debtId);
+        $debt = Debt::find($data['debt_id']);
 
         if (!$debt) {
             return;
         }
 
         $debt->update([
-            "locality" => $locality
+            "locality" => $data['locality'],
+            "locality_obs" => $data['locality_obs'],
+            "trade_name" => $data['trade_name'],
             ]
         );
     }
