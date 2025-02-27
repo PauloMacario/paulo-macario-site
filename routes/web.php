@@ -51,3 +51,5 @@ include_once 'routineTasks/market.php';
 include_once 'routineTasks/manageshoppinglists.php';
 include_once 'routineTasks/shoppinglist.php';
 include_once 'routineTasks/category.php';
+include_once 'routineTasks/goal.php';
+include_once 'routineTasks/goaltask.php';

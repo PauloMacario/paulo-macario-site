@@ -470,40 +470,52 @@ return [
             'icon' => 'fas fa-tasks',
             'submenu' => [
                 [
-                    'text' => 'Ínicio',
-                    'url' => 'routinetasks/home',
-                    'icon' => 'fas fa-home ml-4 mr-2',
+                    'text' => 'LISTA COMPRAS',
+                    'icon' => 'fas fa-tasks',
+                    'submenu' => [
+                        [
+                            'text' => 'Ínicio',
+                            'url' => 'routinetasks/home',
+                            'icon' => 'fas fa-home ml-4 mr-2',
+                        ],
+                        [
+                            'text' => 'Listas',
+                            'url' => 'routinetasks/listas',
+                            'icon' => 'fas fa-store ml-4 mr-2',
+                        ],
+                        [
+                            'text' => 'Produtos',
+                            'url' => 'routinetasks/produtos',
+                            'icon' => 'fas fa-store ml-4 mr-2',
+                        ],
+                        [
+                            'text' => 'Lojas',
+                            'url' => 'routinetasks/lojas',
+                            'icon' => 'fas fa-store ml-4 mr-2',
+                        ],
+                        [
+                            'text' => 'Categorias',
+                            'url' => 'routinetasks/categorias',
+                            'icon' => 'fas fa-store ml-4 mr-2',
+                        ],
+                        [
+                            'text' => 'Gerenciar Listas',
+                            'url' => 'routinetasks/gerenciar-listas',
+                            'icon' => 'fas fa-store ml-4 mr-2',
+                        ],
+                    ],
                 ],
                 [
-                    'text' => 'Listas',
-                    'url' => 'routinetasks/listas',
-                    'icon' => 'fas fa-store ml-4 mr-2',
+                    'text' => 'METAS',
+                    'icon' => 'fas fa-tasks',
+                    'submenu' => [
+                        [
+                            'text' => 'Nova meta',
+                            'url' => 'routinetasks/meta',
+                            'icon' => 'fas fa-plus-circle ml-4 mr-2',
+                        ],
+                    ],
                 ],
-                [
-                    'text' => 'Produtos',
-                    'url' => 'routinetasks/produtos',
-                    'icon' => 'fas fa-store ml-4 mr-2',
-                ],
-                [
-                    'text' => 'Lojas',
-                    'url' => 'routinetasks/lojas',
-                    'icon' => 'fas fa-store ml-4 mr-2',
-                ],
-                [
-                    'text' => 'Categorias',
-                    'url' => 'routinetasks/categorias',
-                    'icon' => 'fas fa-store ml-4 mr-2',
-                ],
-                [
-                    'text' => 'Gerenciar Listas',
-                    'url' => 'routinetasks/gerenciar-listas',
-                    'icon' => 'fas fa-store ml-4 mr-2',
-                ],
-              /*   [
-                    'text' => 'Nova negociação',
-                    'url' => 'routinetasks/home',
-                    'icon' => 'fas fa-plus-circle ml-4 mr-2',
-                ],              */ 
             ],
         ],
     ],
