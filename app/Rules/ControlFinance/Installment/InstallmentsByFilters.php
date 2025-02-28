@@ -61,6 +61,6 @@ class InstallmentsByFilters
             }
         }
 
-        return $installments->orderBy('created_at', 'DESC')->get();
+        return $installments->orderBy('order', 'DESC')->get();
     }
 }

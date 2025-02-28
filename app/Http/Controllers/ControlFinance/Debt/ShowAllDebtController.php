@@ -78,7 +78,7 @@ class ShowAllDebtController extends Controller
         $data['shopperId'] = $shopId ?? 0;
         $data['payTypeId'] = $payTypeId ?? 0;
         $data['categoryId'] = $categoryId ?? 0;
-        $data['debts'] = $debts->get();
+        $data['debts'] = $debts->orderBy('order', 'DESC')->get();
         $data['total'] = $this->getTotalValue($data['debts']);
                 
         return view('control-finance.debt.all', $data);

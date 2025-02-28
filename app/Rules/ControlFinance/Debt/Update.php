@@ -23,7 +23,8 @@ class Update
                     "shopper_id" => $data['shopper_id'],
                     "date" => $data['date'],
                     "total_value" => Money::convertValue($data['total_value']),
-                    "status" =>  $data['status']
+                    "status" =>  $data['status'],
+                    "order" =>  $data['order']
                 ]
             );
 

@@ -22,7 +22,8 @@ class Update
                 "shopper_id" => $data['shopper_id'],
                 "value" => Money::convertValue($data['value']),
                 "status" =>  $data['status'],
-                "created_at" =>  $data['created_at']
+                "created_at" =>  $data['created_at'],
+                "order" =>  $data['order']
             ]
         );
             

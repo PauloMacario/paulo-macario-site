@@ -112,7 +112,7 @@
                                     </div>
                                     
                                     <div class="row">    
-                                        <div class="col-12 col-sm-12 col-md-3 col-lg-4">
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                             <div class="form-group">
                                                 <label for="id">Comprador(a)</label>
                                                 <select 
@@ -133,7 +133,7 @@
                                             </div>
                                         </div>
                                     
-                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                                             <div class="form-group">
                                                 <label for="id">N° da parcela</label>
                                                 <input 
@@ -165,13 +165,13 @@
 
                                         <div class="col-xs-12 col-md-2 col-lg-2">
                                             <div class="form-group">
-                                                <label for="id">Data criação</label>
+                                                <label for="id">Ordem</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     class="form-control form-control-sm fields-disabled" 
-                                                    name="created_at" 
-                                                    id="created_at" 
-                                                    value="{{ $installment->created_at }}"
+                                                    name="order" 
+                                                    id="order" 
+                                                    value="{{ $installment->order }}"
                                                     disabled
                                                 >
                                             </div>

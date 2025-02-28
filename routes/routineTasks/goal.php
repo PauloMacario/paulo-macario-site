@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutineTasks\Goal\{
     NewGoalController,
     CreateGoalController,
+    ShowAllGoalsController,
+    ShowGoalController
 };
 
 Route::middleware('auth')
@@ -17,5 +19,14 @@ Route::middleware('auth')
         Route::post('/meta',
             CreateGoalController::class
             )
-            ->name('goal_get');
+            ->name('goal_create');
+
+        Route::get('/metas',
+            ShowAllGoalsController::class
+            )
+            ->name('goal_showAll');
+
+        Route::get('/meta/{id}/detalhes',
+            ShowGoalController::class
+        )->name('goal_show');
     });

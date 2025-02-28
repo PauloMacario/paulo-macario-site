@@ -510,8 +510,8 @@ return [
                     'icon' => 'fas fa-tasks',
                     'submenu' => [
                         [
-                            'text' => 'Nova meta',
-                            'url' => 'routinetasks/meta',
+                            'text' => 'Metas',
+                            'url' => 'routinetasks/metas',
                             'icon' => 'fas fa-plus-circle ml-4 mr-2',
                         ],
                     ],
