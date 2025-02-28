@@ -20,7 +20,8 @@ class Debt extends Model
         'total_value',
         'number_installments',
         'prorated_debt',
-        'status'
+        'status',
+        'order'
     ];
 
     public function installments()
