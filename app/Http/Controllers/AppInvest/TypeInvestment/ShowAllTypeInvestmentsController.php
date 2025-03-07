@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\AppInvest\TypeInvestiment;
+namespace App\Http\Controllers\AppInvest\TypeInvestment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ShowAllTypeInvestimentsController extends Controller
+class ShowAllTypeInvestmentsController extends Controller
 {
     /**
      * Handle the incoming request.

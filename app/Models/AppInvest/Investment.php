@@ -10,14 +10,15 @@ class Investment extends AppInvestModel
     use HasFactory;
 
     protected $fillable = [
-        'type_investment_id',
+        'segment_id',
         'name',
-        'color'
+        'color',
+        'order'
     ];
 
-    public function typeInvestment()
+    public function segment()
     {
-        return $this->belongsTo(TypeInvestment::class);
+        return $this->belongsTo(Segment::class);
     }
 
     public function negotiations()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AppInvest\Investiment;
+namespace App\Http\Controllers\AppInvest\Investment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

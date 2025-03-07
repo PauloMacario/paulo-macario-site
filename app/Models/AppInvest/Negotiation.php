@@ -11,6 +11,7 @@ class Negotiation extends AppInvestModel
 
     protected $fillable = [
         'investment_id',
+        'invoice',
         'date',
         'type_negotiation', 
         'quantity',

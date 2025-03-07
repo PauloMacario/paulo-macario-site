@@ -1,6 +1,6 @@
 <?php
 
-namespace Rules\ControlFinance\Helpers;
+namespace Rules\AppInvest\Helpers;
 
 use Illuminate\Support\Carbon;
 

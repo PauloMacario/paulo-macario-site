@@ -42,6 +42,10 @@ include_once 'controlFinance/report.php';
 /* Rota App Invest */
 include_once 'appInvest/home.php';
 include_once 'appInvest/negotiation.php';
+include_once 'appInvest/settings.php';
+include_once 'appInvest/typeinvestment.php';
+include_once 'appInvest/segment.php';
+include_once 'appInvest/investment.php';
 
 
 /* Rota Routine Tasks */

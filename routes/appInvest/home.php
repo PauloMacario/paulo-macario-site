@@ -12,7 +12,6 @@ Route::middleware('auth', 'appInvest')
             '/home', 
             HomeAppInvestController::class
         )
-        //->middleware(AppInvestModule::class)
-        ->name('appInvestHome');
+        ->name('appInvest_Home');
     }
 );

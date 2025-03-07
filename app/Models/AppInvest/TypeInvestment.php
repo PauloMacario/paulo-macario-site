@@ -16,8 +16,8 @@ class TypeInvestment extends AppInvestModel
         'order'
     ];
 
-    public function investiments()
+    public function segments()
     {
-        return $this->hasMany(Investment::class);
+        return $this->hasMany(Segment::class);
     }
 }

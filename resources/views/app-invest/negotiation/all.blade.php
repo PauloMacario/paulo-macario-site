@@ -61,7 +61,7 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-xs-12 col-md-10 col-lg-8">
+                      {{--   <div class="col-xs-12 col-md-10 col-lg-8">
                             <p class="text-right">
                                 <button class="btn bg-lightblue btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                   filtros
@@ -165,7 +165,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="row">
@@ -180,39 +180,59 @@
                                     <table class="table table-sm table-striped table-responsive-md">
                                         <thead>
                                             <tr class="font-12 text-center">
-                                                <th >Data</th>
-                                                <th >Tipo</th>
-                                                <th >Investimento</th>
-                                                <th >Negóco</th>
-                                                <th >Quant.</th>
-                                                <th >Valor Total</th>
-                                                
+                                                <th class="text-center">Nota fistal</th>
+                                                <th  class="text-center">Data</th>
+                                                <th  class="text-center">Tipo</th>
+                                                <th  class="text-center">Seguimento</th>        
+                                                <th  class="text-center">Investimento</th>   
+                                                <th  class="text-center">Tipo do negócio</th>                                               
+                                                <th  class="text-center">Quant.</th>
+                                                <th  class="text-center">Valor Total</th>
+                                                <th  class="text-center">Detalhes</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($negotiations as $negotiation)
-                                                <tr class="font-12 text-center font-italic">
-                                                    <td>{{ formatDateBR($negotiation->date) }}</td>
-                                                    <td  title="{{ $negotiation->investment->typeInvestment->name }}">{{ $negotiation->investment->typeInvestment->acronym }}</td>                         
-                                                    <td class="bold">
-                                                        <a href="#">
-                                                            {{ $negotiation->investment->name }}                                                       
-                                                        </a>
-                                                    </td>
-                                                    @if($negotiation->type_negotiation == 'C')
-                                                        <td title="Compra" class=" text-center font-12 bold" style="color:#00a531" >{{ $negotiation->type_negotiation }} <i class="fas fa-shopping-basket ml-2"></i>
-                                                    @else 
-                                                        <td title="Venda" class=" text-center font-12 bold" style="color:#ca0404" >{{ $negotiation->type_negotiation }} <i class="fas fa-hand-holding-usd ml-2"></i>
-                                                    @endif              
-                                                    <td>{{ $negotiation->quantity }}</td>                                                    
-                                                    <td class="bold">R$ {{ formatMoneyBR($negotiation->value) }}</td>
+                                         
+                                                    <tr class="font-12 text-center font-italic">
+                                                        <td>
+                                                            {{ $negotiation->invoice }}
+                                                        </td>
+                                                        <td>
+                                                            {{ formatDateBR($negotiation->date) }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $negotiation->investment->segment->typeInvestment->name }} 
+                                                        </td>                         
+                                                        <td class="bold">
+                                                            {{ $negotiation->investment->segment->name }} 
+                                                        </td>
+                                                        <td class="bold">
+                                                            {{ $negotiation->investment->name }}
+                                                        </td>
+                                                        @if($negotiation->type_negotiation == 'C')
+                                                            <td title="Compra" class=" text-center font-12 bold" style="color:#00a531" >Compra <i class="fas fa-shopping-basket ml-2"></i>
+                                                        @else 
+                                                            <td title="Venda" class=" text-center font-12 bold" style="color:#ca0404" >Venda <i class="fas fa-hand-holding-usd ml-2"></i>
+                                                        @endif              
+                                                        <td>
+                                                            {{ $negotiation->quantity }}
+                                                        </td>                                                    
+                                                        <td class="bold">
+                                                            R$ {{ formatMoneyBR($negotiation->value) }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('negotiationShow_get', [ 'id' => $negotiation->id]) }}">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
                                                     
                                                 </tr>
                                             @endforeach
                                         </tbody>
 
                                     </table>
-
+                                    
                                     <table class="table table-sm  mt-2">
                                         <tr>
                                             <td colspan="2" style="background-color:#3c8dbc49;"></td>
