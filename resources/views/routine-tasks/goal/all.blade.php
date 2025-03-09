@@ -1,5 +1,48 @@
 @extends('adminlte::page')
 
+@push('css')
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <style>
+        .font-8 {
+            font-size: 8px;
+        }
+        .font-10 {
+            font-size: 10px;
+        }
+        .font-12 {
+            font-size: 12px;
+        }
+        .font-14 {
+            font-size: 14px;
+        }
+        .font-16 {
+            font-size:16px;
+        }
+        .font-18 {
+            font-size: 18px;
+        }
+        .font-20 {
+            font-size: 20px;
+        }
+        .font-22 {
+            font-size: 22px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+
+        .card-task {
+            width: 75px;
+            height: 75px;
+            padding: 6px;
+        }
+    </style>
+@endpush
+
 @section('title', 'Metas')
 
 @section('content_header')
@@ -26,97 +69,32 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="card-body" style="display: none;">
-                                        <table class="table table-sm">
-                                            <tr>
-                                                <td>Ínicio</td>
-                                                <td>{{ formatDateBR($goal->start) }} </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Final</td>
-                                                <td>{{ formatDateBR($goal->end) }} </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Status
-                                                </td>
-                                                <td>
-                                                    @switch($goal->completed)
-                                                        @case('Y')
-                                                            <span class="text-success">
-                                                                Concluído
-                                                            </span>
-                                                            @break
-                                                        @case('N')
-                                                            <span class="text-danger">
-                                                                Não concluído
-                                                            </span>
-                                                            @break
-                                                        @default
-                                                            <span class="text-info">
-                                                                Aberto
-                                                            </span>
-                                                    @endswitch
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Criado em</td>
-                                                <td>{{ formatDateBR($goal->created_at) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <a href="{{ route('goal_show', ['id' => $goal->id]) }}" class="btn-block btn btn-sm btn-warning">
-                                                        Ver tarefas                                                        
-                                                        <i class="fas fa-eye ml-4"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <div class="card-body" style="display: block;"> 
+                                        <form action="{{ route('goalTaskUpdate_post') }}" method="POST" id="form">
+                                            @csrf
+                                            <div class="row d-flex justify-content-around">
+                                                @foreach( $goal->goalTasks as $id => $task)                                              
+                                                    <div class="card-task border rounded-lg mb-2">
+                                                        <p class="font-10 mb-1 text-center">
+                                                            <i class="@if($task->completed == 'O') fas fa-lock-open @else fas fa-lock @endif open" id="open-{{ $task->id }}"></i>
+                                                        </p>
+                                                        <p class="font-10 mb-1 text-center">{{ formatDateBR($task->date) }}</p>
+                                                        <div class="row d-flex justify-content-around">
+                                                            <div class="col-6">
+                                                                <i class="fas fa-thumbs-up completed @if($task->completed == 'Y') text-success @endif" id="up-{{ $task->id }}"></i>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <i class="fas fa-thumbs-down notcompleted @if($task->completed == 'N') text-danger @endif" id="down-{{ $task->id }}"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                            
+                                                @endforeach                                      
+                                            </div>                                             
+                                        </form>                                       
                                     </div>
                                 </div>
                             @endforeach
-                          </div>
-                        {{-- <table class="table table-striped table-sm table-responsive">
-                            <thead>
-                                <th class="text-center">Objetivo</th>
-                                <th class="text-center">Ínicio - Fim</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Criado em</th>
-                            </thead>
-                            <tbody>
-                                @foreach( $goals as $goal)
-                                    <tr>                                        
-                                        <td class="text-center"  width="40%">
-                                            {{ $goal->objective }}
-                                        </td>
-                                        <td class="text-center">
-                                            {{ formatDateBR($goal->start) }} - {{ formatDateBR($goal->end) }}
-                                        </td>
-                                        <td class="text-center">
-                                            @switch($goal->completed)
-                                                @case('Y')
-                                                    <span class="text-success">
-                                                        Concluído
-                                                    </span>
-                                                    @break
-                                                @case('N')
-                                                    <span class="text-danger">
-                                                        Não concluído
-                                                    </span>
-                                                    @break
-                                                @default
-                                                    <span class="text-info">
-                                                        Aberto
-                                                    </span>
-                                            @endswitch
-                                        </td>
-                                        <td class="text-center">
-                                            {{ formatDateBR($goal->created_at) }}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>  --}}
+                        </div>                     
                     </div>
                 </div>
             </div>
@@ -125,11 +103,135 @@
 
 @stop
 @push('js')
-    <script src="{{ asset('vendor/bs-custom-file-input/dist/bs-custom-file-input.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/yoda.js') }}"></script>
     <script>
 
         $(document).ready(function() {
+            $('.completed').on('click', function(){
+                let id = this.id.replace('up-', '');
+                updateCompleteGoalTask(id, 'Y');
+            })
+
+            $('.notcompleted').on('click', function(){
+                let id = this.id.replace('down-', '');
+                updateCompleteGoalTask(id, 'N')
+            })
+
+            $('.open').on('click', function(){
+                let id = this.id.replace('open-', '');
+                updateCompleteGoalTask(id, 'O')
+            })
+
+            function updateCompleteGoalTask(id, completed) 
+            {
+                var form = $('#form');              
+                var data = {
+                    id: id,
+                    completed: completed
+                };
+
+                console.log(data)
+                  
+                $.ajax({
+                    url : form.attr('action'),
+                    type: form.attr('method'),
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data : data,
+                    beforeSend : function(){
+                       /*  $("#bsi-"+idNumber).css('display', 'none');
+                        $("#spi-"+idNumber).css('display', 'block'); */
+                    }
+                })
+                .done(function(response){
+
+                    if (response.status == 401) {
+                        return
+                    }
+
+                    if (response.status == 200) {
+
+                        if (completed == 'Y') {                     
+                            $('#up-'+id).addClass('text-success');
+                            $('#down-'+id).removeClass('text-danger');
+                            $('#open-'+id).removeClass('fas fa-lock-open');
+                            $('#open-'+id).removeClass('fas fa-lock');
+                            $('#open-'+id).addClass('fas fa-lock');
+                            
+                            let title = "Ok!";
+                            let text = "QUE A FORÇA ESTEJA COM VOCÊ";
+                            let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                            getYodaSwal(linkImg, title, text);
+                        }
+    
+                        if (completed == 'N') {
+                            $('#down-'+id).addClass('text-danger');
+                            $('#up-'+id).removeClass('text-success');
+                            $('#open-'+id).removeClass('fas fa-lock-open');
+                            $('#open-'+id).removeClass('fas fa-lock');
+                            $('#open-'+id).addClass('fas fa-lock');
+
+                            let title = "!";
+                            let text = "Meta não completada";
+                            let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                            getYodaSwal(linkImg, title, text);
+                        }
+                        if (completed == 'O') {
+                            $('#down-'+id).removeClass('text-danger');
+                            $('#up-'+id).removeClass('text-success');
+                            $('#open-'+id).addClass('fas fa-lock-open');
+
+                            let title = "!";
+                            let text = "Meta aberta";
+                            let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                            getYodaSwal(linkImg, title, text);
+                        }
+                    }
+                })
+                .fail(function(jqXHR, textStatus, msg){
+                    console.log('fail')   /*  let title = "";
+                        let text = "## (( ERROOOO !!! )) ##";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                        getYodaSwal(linkImg, title, text) */
+                });
+
+
+            }
+
+            function teste()
+            {
+                $.ajax({
+                    url : form.attr('action'),
+                    type: form.attr('method'),
+                    data : mainArray,
+                    beforeSend : function(){
+                       /*  $("#bsi-"+idNumber).css('display', 'none');
+                        $("#spi-"+idNumber).css('display', 'block'); */
+                    }
+                })
+                .done(function(msg){
+                    console.log('done')
+                   /*  $("#spi-"+idNumber).css('display', 'none');
+                    $("#bsi-"+idNumber).css('display', 'block');
+                        let title = "";
+                        let text = "QUE A FORÇA ESTEJA COM VOCÊ";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                        getYodaSwal(linkImg, title, text) */
+                })
+                .fail(function(jqXHR, textStatus, msg){
+                    console.log('fail')   /*  let title = "";
+                        let text = "## (( ERROOOO !!! )) ##";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                        getYodaSwal(linkImg, title, text) */
+                });
+            }
+
             
         });
 

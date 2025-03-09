@@ -2,12 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutineTasks\GoalTasks\{
-    NewGoalTasksController
+    UpdateGoalTasksController
 };
 
 Route::middleware('auth')
-    ->prefix('routinetasks')
+    ->prefix('metas')
     ->group(function() {
+
+        Route::post('/editar',
+            UpdateGoalTasksController::class
+        )
+        ->name('goalTaskUpdate_post');
+
        /*  Route::get('/meta',
             NewGoalTasksController::class
             )

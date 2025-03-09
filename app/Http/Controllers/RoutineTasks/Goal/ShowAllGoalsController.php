@@ -11,7 +11,7 @@ class ShowAllGoalsController extends Controller
     public function __invoke(Request $request)
     {
         $data = [];
-        $data['goals'] = Goal::all();
+        $data['goals'] = Goal::where('id', '>',0)->with('goalTasks')->get();
 
         return view('routine-tasks.goal.all', $data);
     }
