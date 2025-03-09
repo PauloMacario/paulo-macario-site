@@ -62,7 +62,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;"> 
+                    <div class="card-body"> 
                         <form action="{{ route('goalTaskUpdate_post') }}" method="POST" id="form">
                             @csrf
                             <div class="row d-flex justify-content-around">
