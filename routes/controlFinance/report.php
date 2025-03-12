@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControlFinance\Reports\{
     ReportOptionsController,
-    ReportShopperController,
-    ReportShopperGeneratePdfController
+    ReportMonthController,
+    ReportMonthGeneratePdfController,
+    ReportAllController,
+    ReportAllGeneratePdfController
 };
 
 Route::middleware(['auth', 'shopper.exist'])
@@ -18,20 +20,38 @@ Route::middleware(['auth', 'shopper.exist'])
         ->name('pdfOptions_get');
 
         Route::get(
-            '/relatorio/comprador', 
-            ReportShopperController::class
+            '/relatorio/mes', 
+            ReportMonthController::class
         ) 
-        ->name('pdfReportShopper_get');
+        ->name('pdfReportMonth_get');
 
         Route::post(
-            '/relatorio/comprador', 
-            ReportShopperController::class
+            '/relatorio/mes', 
+            ReportMonthController::class
         )
-        ->name('pdfReportShopper_post');
+        ->name('pdfReportMonth_post');
 
         Route::post(
-            '/relatorio/comprador/gerar', 
-            ReportShopperGeneratePdfController::class
+            '/relatorio/mes/gerar', 
+            ReportMonthGeneratePdfController::class 
         )
-        ->name('pdfReportShopperGenerate_post');
+        ->name('pdfReportMonthGenerate_post');
+
+        Route::get(
+            '/relatorio/todos',
+            ReportAllController::class
+        ) 
+        ->name('pdfReportAll_get');
+
+        Route::post(
+            '/relatorio/todos', 
+            ReportAllController::class
+        )
+        ->name('pdfReportAll_post');
+
+        Route::post(
+            '/relatorio/todos/gerar', 
+            ReportAllGeneratePdfController::class
+        )
+        ->name('pdfReportMonthGenerate_po');
     });

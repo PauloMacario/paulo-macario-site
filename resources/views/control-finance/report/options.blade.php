@@ -33,17 +33,33 @@
                         </div>
                         <div class="row d-flex justify-content-around">
 
-                            <a href="{{ route('pdfReportShopper_get') }}">
+                            <a href="{{ route('pdfReportMonth_get') }}">
                                 <div class="card bg-olive mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
                                     <div class="card-header text-center">
                                         <div class="info-box-icon">
                                             <span>
-                                                <i class="fas fa-user-tag fa-2x"></i>
+                                               <i class="fas fa-calendar fa-2x"></i>
                                             </span>
                                         </div>         
                                     </div>
                                     <div class="card-body">
-                                    <h5 class="text-center p-1"><span class="text-center">Parcelas por comprador</span></h5>
+                                    <h5 class="text-center p-1"><span class="text-center">Parcelas por mês</span></h5>
+                                  
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="{{ route('pdfReportAll_get') }}">
+                                <div class="card bg-lightblue mb-2 ml-2 mr-4 mt-2" style="max-width: 10rem; min-width:10rem; min-height:10rem; max-height:10rem;">
+                                    <div class="card-header text-center">
+                                        <div class="info-box-icon fa-2x">
+                                            <span>
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>         
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="text-center p-1"><span class="text-center">Todas parcelas</span></h5>
                                   
                                     </div>
                                 </div>

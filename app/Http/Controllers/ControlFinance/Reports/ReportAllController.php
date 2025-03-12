@@ -4,16 +4,15 @@ namespace App\Http\Controllers\ControlFinance\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\ControlFinance\PaymentType;
-use App\Models\ControlFinance\Shopper;
-use Rules\ControlFinance\Reports\Pdf\ReportInstallmentsByShopper;
+use Rules\ControlFinance\Reports\Pdf\ReportInstallmentsAll;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
-class ReportShopperController extends Controller
+class ReportAllController extends Controller
 {
     public function __invoke(Request $request)
-    {  
-       /*  $data = [];
+    {
+        $data = [];
         $data['filter'] = '';
                      
         if (!empty($request->all())) {
@@ -26,7 +25,7 @@ class ReportShopperController extends Controller
         $data['paymentTypes'] = PaymentType::where('user_id', auth()->user()->id)
             ->orderBy('order', 'asc')
             ->get();
-            
+           
         $data['shoppers'] = auth()->user()->shoppers;
         $data['yearMonthRef'] = Carbon::now()->format('m/Y');
         $data['reports'] = collect([]);
@@ -39,7 +38,7 @@ class ReportShopperController extends Controller
         }
 
         if ($shopId = $request->shopper_id) {
-            $reportsPdf = new ReportInstallmentsByShopper($request);
+            $reportsPdf = new ReportInstallmentsAll($request);
             $data['reports'] = $reportsPdf->getDataReport(); 
         }
         
@@ -51,6 +50,6 @@ class ReportShopperController extends Controller
         $data['shopperId'] = $shopId ?? 0;
         $data['paymentTypeId'] = $request->payment_type_id ?? 0;    
         
-        return view('control-finance.report.shopper', $data); */
+        return view('control-finance.report.month', $data);
     }
 }

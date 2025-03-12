@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class ReportInstallmentsByShopper
+class ReportInstallmentsByMonth
 {
 
     protected $dataSearch;

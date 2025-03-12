@@ -160,8 +160,7 @@
                                 </table>
 
                                 @php
-                                $total = 0.0;
-                                    //$totalItem = 0.0;
+                                    $total = 0.0;
                                 @endphp
 
                                 @foreach ($reports['data'] as $data)   
@@ -226,7 +225,7 @@
                            
                                 <div class="card-footer mt-3">
             
-                                    <form action="{{ route('pdfReportShopperGenerate_post') }}" method="POST" id="form">
+                                    <form action="{{ route('pdfReportMonthGenerate_post') }}" method="POST" id="form">
                                         @csrf
                                         
                                         <input type="hidden" name="acao" id="btn-acao" value="">
