@@ -36,9 +36,10 @@
         }
 
         .card-task {
-            width: 75px;
-            height: 75px;
+            width: 100px;
+            height: 100px;
             padding: 6px;
+            margin: 10px;
         }
     </style>
 @endpush
@@ -51,53 +52,42 @@
 
 @section('content')
     <div class="row mt-3">
-        <div class="col-12">
-            <div class="card">
-                <div class="card card-lightblue mb-0">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">      
+            @foreach( $goals as $goal)
+                <div class="card card-lightblue collapsed-card">
                     <div class="card-header">
-                        <h5 class="card-title">Metas</h5>
+                        <h3 class="card-title">{{ $goal->objective }}</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="col-12 col-sm-12 col-md-8 col-lg-6">
-
-                            @foreach( $goals as $goal)
-                                <div class="card card-lightblue collapsed-card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">{{ $goal->objective }}</h3>
-                                        <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                                            </button>
+                    <div class="card-body"> 
+                        <form action="{{ route('goalTaskUpdate_post') }}" method="POST" id="form">
+                            @csrf
+                            <div class="row d-flex justify-content-around">
+                                @foreach( $goal->goalTasks as $id => $task)                                              
+                                    <div class="card-task border rounded-lg">
+                                        <p class="font-10 mb-1 text-center">Semana - {{ $task->week }}</p>
+                                        <p class="font-10 mb-1 text-center">
+                                            <i class="@if($task->completed == 'O') fas fa-lock-open @else fas fa-lock @endif open" id="open-{{ $task->id }}"></i>
+                                        </p>
+                                        <p class="font-10 mb-1 text-center">{{ formatDateBR($task->date) }}</p>
+                                        <div class="row d-flex justify-content-around">
+                                            <div class="col-6 text-center mt-2">
+                                                <i class="fas fa-thumbs-up completed @if($task->completed == 'Y') text-success @endif" id="up-{{ $task->id }}"></i>
+                                            </div>
+                                            <div class="col-6 text-center mt-2">
+                                                <i class="fas fa-thumbs-down notcompleted @if($task->completed == 'N') text-danger @endif" id="down-{{ $task->id }}"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body" style="display: block;"> 
-                                        <form action="{{ route('goalTaskUpdate_post') }}" method="POST" id="form">
-                                            @csrf
-                                            <div class="row d-flex justify-content-around">
-                                                @foreach( $goal->goalTasks as $id => $task)                                              
-                                                    <div class="card-task border rounded-lg mb-2">
-                                                        <p class="font-10 mb-1 text-center">
-                                                            <i class="@if($task->completed == 'O') fas fa-lock-open @else fas fa-lock @endif open" id="open-{{ $task->id }}"></i>
-                                                        </p>
-                                                        <p class="font-10 mb-1 text-center">{{ formatDateBR($task->date) }}</p>
-                                                        <div class="row d-flex justify-content-around">
-                                                            <div class="col-6">
-                                                                <i class="fas fa-thumbs-up completed @if($task->completed == 'Y') text-success @endif" id="up-{{ $task->id }}"></i>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <i class="fas fa-thumbs-down notcompleted @if($task->completed == 'N') text-danger @endif" id="down-{{ $task->id }}"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>                                            
-                                                @endforeach                                      
-                                            </div>                                             
-                                        </form>                                       
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>                     
+                                    </div>                                            
+                                @endforeach                                      
+                            </div>                                             
+                        </form>                                       
                     </div>
                 </div>
-            </div>
+            @endforeach       
         </div>
     </div>
 
