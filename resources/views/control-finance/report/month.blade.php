@@ -149,7 +149,7 @@
                                                                 $indexInst++;
                                                             @endphp    
 
-                                                            @if ($loop->first)
+                                                            @if ($loop->first && isset($int->value))
                                                                 <td class="text-center font-10">
                                                                     (
                                                                     {{ $int->number_installment }}
