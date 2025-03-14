@@ -61,19 +61,19 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                       {{--  <div class="row mb-3">
                             <label for="" class="col-md-4 col-form-label text-md-end">&nbsp;</label>
                             <div class="col-md-6">
                                 @if (Route::has('password.request'))
                                     <div class="d-grid gap-2">
                                         <a class="btn btn-secondary btn-block btn-sm" href="{{ route('password.request') }}">
-                                            {{-- {{ __('Forgot Your Password?') }} --}}
+                                            {{-- {{ __('Forgot Your Password?') }} 
                                             Esqueceu sua senha?
                                         </a>
                                     </div>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
