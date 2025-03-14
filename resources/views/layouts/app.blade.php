@@ -21,11 +21,9 @@
 <body>
 
     <div {{-- id="app" --}}>
-        <nav class="navbar navbar-expand-md navbar navbar-dark {{-- bg-dark --}} shadow-sm" style="background-color:rgb(34, 34, 34);">
+     {{--    <nav class="navbar navbar-expand-md navbar navbar-dark  shadow-sm" style="background-color:rgb(34, 34, 34);">
             <div class="container">
-               {{--  <a class="navbar-brand" href="{{ url('/') }}">
-                    Site
-                </a> --}}
+              
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -41,7 +39,7 @@
                         <!-- Authentication Links -->
                         @guest
 
-                            {{-- @if (Route::has('login'))
+                            @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
@@ -51,7 +49,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                                 </li>
-                            @endif --}}
+                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -74,7 +72,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <main class="py-4" style="height: 91.6vh;">
             @yield('content')
