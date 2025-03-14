@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'shopper.exist' => \App\Http\Middleware\ControlFinance\ShopperExist::class,
+        'access' => \App\Http\Middleware\AccessAttempt::class,
     ];
 }
