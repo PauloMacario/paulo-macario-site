@@ -244,6 +244,7 @@
                                                                             @endif
                                                                             "
                                                                             >
+                                                                            <span class="text-olive mr-2">{{ $installment->order }}</span>
                                                                             @if ($installment->debt->trade_name)
                                                                                 {{ $installment->debt->trade_name }}                                                                               
                                                                             @else
@@ -287,6 +288,7 @@
                                                                 @endif
                                                                 "
                                                                 >
+                                                                <span class="text-olive mr-2">{{ $installment->order }}</span>
                                                                 {{ $installment->debt->locality }}
             
                                                                 @if ($installment->debt->number_installments > 1)

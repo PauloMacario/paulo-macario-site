@@ -10,7 +10,8 @@
         }
 
         option {
-            font-weight: bold
+            font-weight: bold;
+            font-size: 12px
         }
     </style>
 
@@ -85,17 +86,19 @@
                                             </button> --}}
                                         </label>
                                         <select class="form-control form-control-sm" name="payment_type_id" id="payment_type_id" autocomplete="off" required>
-                                            <option value="" data-installment-enable="0" selected>Selecione...</option>           
+                                           {{--  <optgroup class="font-"> --}}
+                                                <option value="" data-installment-enable="0" selected>Selecione...</option>           
+                                                @foreach ($paymentTypes as $paymentType)                                                
+                                                    <option 
+                                                        value="{{ $paymentType->id }}" 
+                                                        data-installment-enable="{{ $paymentType->installment_enable }}"
+                                                        style="color:{{ $paymentType->color }};"
+                                                        >
+                                                        {{ $paymentType->description}}
+                                                    </option>                                            
+                                                @endforeach
+                                            {{-- </optgroup> --}}
                                                     
-                                            @foreach ($paymentTypes as $paymentType)                                                
-                                                <option 
-                                                    value="{{ $paymentType->id }}" 
-                                                    data-installment-enable="{{ $paymentType->installment_enable }}"
-                                                    style="color:{{ $paymentType->color }};"
-                                                    >
-                                                    {{ $paymentType->description}}
-                                                </option>                                            
-                                            @endforeach                                                
                                         </select>
                                     </div>
                                 </div>
@@ -118,7 +121,7 @@
                                 <div class="col-7 col-sm-7 col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <label for="locality" style="color:#3d9970;">Loja/local</label>
-                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" required >
+                                        <input type="text" class="form-control form-control-sm"  name="locality" id="locality" placeholder="Nome da loja" required >
                                     </div>
                                 </div>
                                 
@@ -132,7 +135,7 @@
                                 <div class="col-12 col-sm-12 col-md-5 col-lg-5">
                                     <div class="form-group">
                                         <label for="trade_name">Nome comercial</label>
-                                        <input type="text" class="form-control form-control-sm"  name="trade_name" id="trade_name">
+                                        <input type="text" class="form-control form-control-sm"  name="trade_name" id="trade_name" placeholder="Nome na fatura.">
                                     </div>
                                 </div>
                                 
