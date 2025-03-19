@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('control-finance:payment-type-update-upcoming-dates')->dailyAt('00:00');
 
-        $schedule->command('app:teste-command')->everyMinute();
+        //$schedule->command('app:teste-command')->everyMinute();
     }
 
     /**
