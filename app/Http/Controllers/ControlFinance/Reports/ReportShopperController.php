@@ -13,7 +13,7 @@ class ReportShopperController extends Controller
 {
     public function __invoke(Request $request)
     {  
-       /*  $data = [];
+        $data = [];
         $data['filter'] = '';
                      
         if (!empty($request->all())) {
@@ -51,6 +51,6 @@ class ReportShopperController extends Controller
         $data['shopperId'] = $shopId ?? 0;
         $data['paymentTypeId'] = $request->payment_type_id ?? 0;    
         
-        return view('control-finance.report.shopper', $data); */
+        return view('control-finance.report.shopper', $data);
     }
 }
