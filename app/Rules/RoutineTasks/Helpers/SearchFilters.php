@@ -1,6 +1,6 @@
 <?php
 
-namespace Rules\ControlFinance\Helpers;
+namespace Rules\RoutineTasks\Helpers;
 
 use App\Models\ControlFinance\{
     Category,

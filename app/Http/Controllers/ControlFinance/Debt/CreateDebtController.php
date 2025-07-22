@@ -15,6 +15,7 @@ class CreateDebtController extends Controller
         $response = (new Create())->execute($dataDebt);
 
         $request->session()->flash($response['status'], $response['msg']);
+        
         return redirect()->route('debt_get');
     }
 }

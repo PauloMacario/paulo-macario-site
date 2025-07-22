@@ -1,6 +1,6 @@
 <?php
 
-namespace Rules\ControlFinance\Helpers;
+namespace Rules\RoutineTasks\Helpers;
 
 class Money
 {
