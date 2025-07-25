@@ -47,6 +47,15 @@
                                                 name="color"                                               
                                             >
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="id">Img</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control form-control-sm " 
+                                                name="img"                                               
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>

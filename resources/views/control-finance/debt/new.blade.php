@@ -40,10 +40,12 @@
     @csrf
     <div class="row mt-3">
         <div class="col-12">
-            <div class="card card-olive card-tabs">
-                <div class="card-header p-0 pt-1">
+            <div class="card card-olive mb-0"   style="min-height:80vh;">
+                <div class="card-header">
+                    <h5 class="card-title">Nova dívida</h5>
+                </div>
+                <div class="card-body px-0 m-0">
                     <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
-                        <li class="pt-2 px-3 mr-5"><h3 class="card-title">Nova dívida</h3></li>
                         <li class="nav-item">
                             <a class="nav-link active" 
                                 id="custom-tabs-two-home-tab" 
@@ -92,34 +94,27 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div class="card-body">
+                      
                     <div class="tab-content" id="custom-tabs-two-tabContent">
                         <div class="tab-pane fade active show" 
                             id="comprador" 
                             role="tabpanel" 
                             aria-labelledby="custom-tabs-two-home-tab"
                             >
-                        <div class="row d-flex justify-content-around" >
-                            @foreach ($shoppers as $shopper)    
-                                <div class="box-card m-2" style="cursor:pointer;">
+                        <div class="d-flex justify-content-around flex-wrap" >
+                            @foreach ($shoppers as $shopper) 
+
+                                <div class="box-card m-2">
                                     <input type="radio" class="radio" id="shopper-{{ $shopper->id }}" name="shopper_id" value="{{ $shopper->id }}" @if($loop->first) checked @endif style="display:none;"/>
-                                    <div class="card m-0" 
-                                        style="background-color:{{ $shopper->color }};
-                                            color:#fff;
-                                            max-width: 150px; 
-                                            min-width:150px; 
-                                            min-height:75px; 
-                                            max-height:75px;"
-                                            >
-                                        <div class="card-header text-center" style="min-height:75px; max-height:75px;">
-                                            <div class="info-box-icon">
-                                                <span>
-                                                    <span class="text-center">{{ $shopper->name }}</span>
-                                                </span>
-                                            </div>         
+                                    
+                                    <a class="btn btn-app p-1 m-0" style="background-color:{{ $shopper->color }}; color:#fff;">
+                                        <div>
+                                            <img src="{{ asset("/img/shopper/{$shopper->img}") }}" width="30">
                                         </div>
-                                    </div>
+                                        <div>
+                                            {{ $shopper->name }}
+                                        </div>
+                                    </a>
                                 </div>
                             @endforeach
                         </div>
@@ -129,28 +124,20 @@
                         role="tabpanel" 
                         aria-labelledby="custom-tabs-two-profile-tab"
                         >
-                        <div class="row d-flex justify-content-around">
-                            @foreach ($categories as $category)                             
+                        <div class=" d-flex justify-content-around flex-wrap">
+                            @foreach ($categories as $category) 
                                 @if ($category->status == 'E')
                                     <div class="box-card-category m-2" style="cursor:pointer;">
                                         <input type="radio" class="radio-category" id="category-{{ $category->id }}" name="category_id" value="{{ $category->id }}" @if($loop->first) checked @endif style="display:none;"/>
-                                        <div class="card m-0" 
-                                            style="background-color:{{ $category->color }};
-                                                color:#fff;
-                                                max-width: 150px; 
-                                                min-width:150px; 
-                                                min-height:75px;
-                                                max-height:75px;"
-                                                >
-                                            <div class="card-header text-center" style="min-height:75px; max-height:75px;">
-                                                <div class="info-box-icon">
-                                                    <span>
-                                                        <span class="text-center">{{ $category->description }}</span>
-                                                    </span>
-                                                </div>         
+                                        <a class="btn btn-app p-1 m-0" style="background-color:{{ $category->color }}; color:#fff;">
+                                            <div>
+                                                <img src="{{ asset("/img/category/{$category->img}") }}" width="30">
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div>
+                                                {{ $category->description }}
+                                            </div>
+                                        </a>
+                                    </div>                      
                                 @endif                            
                             @endforeach
                         </div>                       
@@ -161,7 +148,7 @@
                         aria-labelledby="forma-pagamento"
                         >
 
-                        <div class="row d-flex justify-content-end">
+                        <div class=" d-flex justify-content-end m-2">
                             <a class="btn bg-olive btn-sm" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; ">
                                 Info
                                 <i class="fas fa-info-circle" ></i>
@@ -169,39 +156,32 @@
                             </label>
                         </div>
 
-                        <div class="row d-flex justify-content-around">
+                        <div class=" d-flex justify-content-around flex-wrap">
                             @foreach ($paymentTypes as $paymentType)   
                                 <div class="box-card-payment m-2" style="cursor:pointer;">
                                     <input type="radio" class="radio-payment" data-installment-enable="{{ $paymentType->installment_enable }}" id="payment-{{ $paymentType->id }}" name="payment_type_id" value="{{ $paymentType->id }}" @if($loop->first)  @endif style="display:none;"/>
-                                    <div class="card m-0" 
-                                        style="background-color:{{ $paymentType->color }};
-                                            color:#fff;
-                                            max-width: 150px; 
-                                            min-width:150px; 
-                                            min-height:75px; 
-                                            max-height:75px;"
-                                            >
-                                        <div class="card-header text-center" style="min-height:75px; max-height:75px;">
-                                            <div class="info-box-icon">
-                                                <span>
-                                                    <span class="text-center">{{ $paymentType->description }}</span>
-                                                </span>
-                                            </div>         
+                                    
+                                    <a class="btn btn-app p-1 m-0" style="background-color:{{ $paymentType->color }}; color:#fff;">
+                                        <div>
+                                            <img src="{{ asset("/img/payment-type/{$paymentType->img}") }}" width="30">
                                         </div>
-                                    </div>
+                                        <div>
+                                            {{ $paymentType->description }}
+                                        </div>
+                                    </a>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                    <div class="tab-pane fade" 
+                    <div class="tab-pane fade p-3" 
                         id="compra" 
                         role="tabpanel" 
                         aria-labelledby="custom-tabs-two-settings-tab"
                         >
-                        <div class="row" id="compra-fields-disabled" style="display:block;">                                
-                           
+                        <div class="" id="compra-fields-disabled" style="display:block;">                                
+                        
                             <h5 style="color:rgb(168, 22, 22);">Selecione a forma de pagamento.</h5>
-                           
+                        
                         </div>
                         
                         <div id="compra-fields" style="display:none;">                            

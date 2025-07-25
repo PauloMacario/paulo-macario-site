@@ -20,6 +20,7 @@ class PaymentType extends Model
         'payment_day',
         'installment_enable',
         'color',
+        'img',
         'status',
         'previous_processing',
         'next_processing',

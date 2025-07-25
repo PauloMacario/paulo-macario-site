@@ -53,6 +53,15 @@
                                                 name="color" value="{{ $category->color }}"                                               
                                             >
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="id">img</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control form-control-sm " 
+                                                name="img" value="{{ $category->img }}"                                               
+                                            >
+                                        </div>
                                         
                                         <div class="form-group">
                                             <label for="id">Status</label>

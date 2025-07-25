@@ -15,6 +15,7 @@ class Shopper extends Model
         'name',
         'order',
         'color',
+        'img',
         'status',
         'user_id'
     ];

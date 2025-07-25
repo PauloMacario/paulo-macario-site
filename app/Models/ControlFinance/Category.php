@@ -17,6 +17,7 @@ class Category extends Model
         'description',
         'order',
         'color',
+        'img',
         'status',
         'user_id'
     ];

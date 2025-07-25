@@ -85,6 +85,15 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="id">Img</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control form-control-sm " 
+                                                name="img" value="{{ $paymentType->img }}"                                               
+                                            >
+                                        </div>
+
+                                        <div class="form-group">
                                             <label for="id">Status</label>
                                             <select 
                                                 class="form-control form-control-sm" 
