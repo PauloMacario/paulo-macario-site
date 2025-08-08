@@ -39,19 +39,23 @@
                                             <label for="" class="col-4 col-form-label mb-2 text-center">
                                                 <strong style="font-size:15px; color:{{ $beer->color }};">{{ $beer->name }}</strong>
                                                 <img src="{{ asset('/img/cheap-beer/'.$beer->img.'') }}" style="width:70px; height:70px;">
-                                            </label>
+                                            </label>                                            
                                             <div class="col-6">
-                                                <input type="text" class="form-control price mb-2" name="price" 
-                                                    @if($priceToday = Rules\CheapBeer\Helpers\BeerPlaceHelper::getPriceToday($beer->id, $place->id))  
+                                                <input type="text" class="form-control form-control-sm price mb-2" name="price_G" 
+                                                    @if($priceToday = Rules\CheapBeer\Helpers\BeerPlaceHelper::getPriceToday($beer->id, $place->id, 'G'))  
                                                         value="{{ $priceToday->price }}"                                                        
                                                     @endif 
-                                                required>
-                                            {{-- </div>
-                                            <div class="col-4"> --}}
-                                                <button type="submit" class="form-control btn btn-warning mb-2">Salvar</button>
+                                                required placeholder="350 ml">
+                                                <input type="text" class="form-control form-control-sm price mb-2" name="price_P" 
+                                                    @if($priceToday = Rules\CheapBeer\Helpers\BeerPlaceHelper::getPriceToday($beer->id, $place->id, 'P'))  
+                                                        value="{{ $priceToday->price }}"                                                        
+                                                    @endif 
+                                                required  placeholder="269 ml">                                               
+                                           
+                                                <button type="submit" class="form-control form-control-sm btn btn-warning mb-2">Salvar</button>
                                             </div>
                                             <div class="col-2 text-center" id="icon"> 
-                                                @if($priceToday = Rules\CheapBeer\Helpers\BeerPlaceHelper::getPriceToday($beer->id, $place->id))  
+                                                @if($priceToday)  
                                                     <i class="fa fa-check text-success" aria-hidden="true"></i>  
                                                 @else  
                                                     <i class="fa fa-minus" aria-hidden="true"></i>                                                    
@@ -88,7 +92,8 @@
 
                 var beerId = form.find('input[name="beer_id"]').val();
                 var placeId = form.find('input[name="place_id"]').val();
-                var price = form.find('input[name="price"]').val();
+                var priceP = form.find('input[name="price_P"]').val();
+                var priceG = form.find('input[name="price_G"]').val();
 
                 $.ajaxSetup({
                     headers: {
@@ -102,7 +107,8 @@
                     data: {
                         beer_id: beerId,
                         place_id: placeId,
-                        price: price
+                        priceP: priceP,
+                        priceG: priceG
                     },
                     success: function(resposta) {
                         icone.removeClass().addClass('fa fa-check text-success');

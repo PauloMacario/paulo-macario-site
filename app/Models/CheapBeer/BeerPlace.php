@@ -15,6 +15,7 @@ class BeerPlace extends Model
             'beer_id',
             'place_id',
             'price',
+            'type',
             'collected_at'
     ];
 

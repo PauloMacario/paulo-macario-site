@@ -10,13 +10,18 @@ Route::middleware('auth'/* , 'appInvest' */)
     ->group(function() {
 
         Route::get('/beerprice',
-        [BeerPriceController::class, 'getFormBeearPrice']
+            [BeerPriceController::class, 'getFormBeearPrice']
         )
         ->name('getFormBeearPrice_get');
 
         Route::post('/beerprice',
-        [BeerPriceController::class, 'postFormBeearPrice']
+            [BeerPriceController::class, 'postFormBeearPrice']
         )
         ->name('postFormBeearPrice_get');
+
+        Route::get('/ranking',
+            [BeerPriceController::class, 'getRanking']
+        )
+        ->name('getRanking_get');
 
     });

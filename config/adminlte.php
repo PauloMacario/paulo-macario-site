@@ -479,6 +479,11 @@ return [
                     'url' => 'cheapbeer/beerprice',
                     'icon' => 'fas fa-home ml-4 mr-2',
                 ],
+                [
+                    'text' => 'Ranking',
+                    'url' => 'cheapbeer/ranking',
+                    'icon' => 'fas fa-file-invoice-dollar ml-4 mr-2',
+                ],
             ],
         ],
     ],

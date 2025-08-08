@@ -7,10 +7,11 @@ use Illuminate\Support\Carbon;
 
 class BeerPlaceHelper
 {
-    public static function getPriceToday($beerId, $placeId)
+    public static function getPriceToday($beerId, $placeId, $type)
     {
         return BeerPlace::where('beer_id', $beerId)
             ->where('place_id', $placeId)
+            ->where('type', $type)
             ->where('collected_at', now()->format('Y-m-d'))
             ->first();
     }
