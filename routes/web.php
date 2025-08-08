@@ -47,13 +47,5 @@ include_once 'appInvest/typeinvestment.php';
 include_once 'appInvest/segment.php';
 include_once 'appInvest/investment.php';
 
-
-/* Rota Routine Tasks */
-include_once 'routineTasks/home.php';
-include_once 'routineTasks/product.php';
-include_once 'routineTasks/market.php';
-include_once 'routineTasks/manageshoppinglists.php';
-include_once 'routineTasks/shoppinglist.php';
-include_once 'routineTasks/category.php';
-include_once 'routineTasks/goal.php';
-include_once 'routineTasks/goaltask.php';
+/* Rota Cheap Beer */
+include_once 'cheapBeer/beerprice.php';
