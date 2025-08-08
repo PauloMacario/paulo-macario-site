@@ -70,7 +70,8 @@ class BeerPriceController extends Controller
     {
         $dataView['beersPricers'] = BeerPlace::where('collected_at', now()->format('Y-m-d'))
             ->join('beers','beers.id','=','beer_places.beer_id')
-            ->join('places','places.id','=','beer_places.beer_id')
+            ->join('places','places.id','=','beer_places.place_id')
+            ->where('beer_places.price', '>', 0)
             ->select(
                 'beer_places.price',
                 'beer_places.type',
@@ -83,7 +84,7 @@ class BeerPriceController extends Controller
                 'places.color AS place_color',
 
             )
-            ->orderBy('type')
+    	    ->orderBy('type')
             ->orderBy('price')
             ->get();
 
