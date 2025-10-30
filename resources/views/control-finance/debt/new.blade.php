@@ -31,7 +31,7 @@
 @section('title', 'Divida')
 
 @section('content_header')
-
+    @include('control-finance.components.alerts')
 @stop
 
 @section('content')
@@ -47,39 +47,15 @@
                 <div class="card-body px-0 m-0">
                     <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" 
-                                id="custom-tabs-two-home-tab" 
-                                data-toggle="pill" 
-                                href="#comprador" 
-                                role="tab" 
-                                aria-controls="comprador" 
-                                aria-selected="true"
-                                >
-                                comprador
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" 
-                                id="custom-tabs-two-profile-tab" 
-                                data-toggle="pill" 
-                                href="#categoria" 
-                                role="tab" 
-                                aria-controls="categoria" 
-                                aria-selected="false"
-                                >
-                                Categoria
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" 
                                 id="custom-tabs-two-messages-tab" 
                                 data-toggle="pill" 
-                                href="#forma-pagamento" 
+                                href="#tipo" 
                                 role="tab" 
-                                aria-controls="forma-pagamento" 
-                                aria-selected="false"
+                                aria-controls="tipo" 
+                                aria-selected="true"
                                 >
-                                Forma Pagamento
+                                TIPO
                             </a>
                         </li>
                         <li class="nav-item">
@@ -90,197 +66,179 @@
                                 role="tab" 
                                 aria-controls="compra" 
                                 aria-selected="false">
-                                Compra
+                                COMPRA
                             </a>
                         </li>
                     </ul>
                       
                     <div class="tab-content" id="custom-tabs-two-tabContent">
-                        <div class="tab-pane fade active show" 
-                            id="comprador" 
-                            role="tabpanel" 
-                            aria-labelledby="custom-tabs-two-home-tab"
-                            >
-                        <div class="d-flex justify-content-around flex-wrap" >
-                            @foreach ($shoppers as $shopper) 
-
-                                <div class="box-card m-2">
-                                    <input type="radio" class="radio" id="shopper-{{ $shopper->id }}" name="shopper_id" value="{{ $shopper->id }}" @if($loop->first) checked @endif style="display:none;"/>
-                                    
-                                    <a class="btn btn-app p-1 m-0" style="background-color:{{ $shopper->color }}; color:#fff;">
-                                        <div>
-                                            <img src="{{ asset("/img/shopper/{$shopper->img}") }}" width="30">
-                                        </div>
-                                        <div>
-                                            {{ $shopper->name }}
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" 
-                        id="categoria"
-                        role="tabpanel" 
-                        aria-labelledby="custom-tabs-two-profile-tab"
-                        >
-                        <div class=" d-flex justify-content-around flex-wrap">
-                            @foreach ($categories as $category) 
-                                @if ($category->status == 'E')
-                                    <div class="box-card-category m-2" style="cursor:pointer;">
-                                        <input type="radio" class="radio-category" id="category-{{ $category->id }}" name="category_id" value="{{ $category->id }}" @if($loop->first) checked @endif style="display:none;"/>
-                                        <a class="btn btn-app p-1 m-0" style="background-color:{{ $category->color }}; color:#fff;">
-                                            <div>
-                                                <img src="{{ asset("/img/category/{$category->img}") }}" width="30">
-                                            </div>
-                                            <div>
-                                                {{ $category->description }}
-                                            </div>
-                                        </a>
-                                    </div>                      
-                                @endif                            
-                            @endforeach
-                        </div>                       
-                    </div>
-                    <div class="tab-pane fade" 
-                        id="forma-pagamento" 
-                        role="tabpanel" 
-                        aria-labelledby="forma-pagamento"
-                        >
-
-                        <div class=" d-flex justify-content-end m-2">
-                            <a class="btn bg-olive btn-sm" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; ">
-                                Info
-                                <i class="fas fa-info-circle" ></i>
-                            </a>
-                            </label>
-                        </div>
-
-                        <div class=" d-flex justify-content-around flex-wrap">
-                            @foreach ($paymentTypes as $paymentType)   
-                                <div class="box-card-payment m-2" style="cursor:pointer;">
-                                    <input type="radio" class="radio-payment" data-installment-enable="{{ $paymentType->installment_enable }}" id="payment-{{ $paymentType->id }}" name="payment_type_id" value="{{ $paymentType->id }}" @if($loop->first)  @endif style="display:none;"/>
-                                    
-                                    <a class="btn btn-app p-1 m-0" style="background-color:{{ $paymentType->color }}; color:#fff;">
-                                        <div>
-                                            <img src="{{ asset("/img/payment-type/{$paymentType->img}") }}" width="30">
-                                        </div>
-                                        <div>
-                                            {{ $paymentType->description }}
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="tab-pane fade p-3" 
-                        id="compra" 
-                        role="tabpanel" 
-                        aria-labelledby="custom-tabs-two-settings-tab"
-                        >
-                        <div class="" id="compra-fields-disabled" style="display:block;">                                
-                        
-                            <h5 style="color:rgb(168, 22, 22);">Selecione a forma de pagamento.</h5>
-                        
-                        </div>
-                        
-                        <div id="compra-fields" style="display:none;">                            
-                            <div class="row" >
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="date" style="color:#3d9970;">Data</label>
-                                        <input type="date" class="form-control "  name="date" id="date" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="locality" style="color:#3d9970;">Loja/local</label>
-                                        <input type="text" class="form-control "  name="locality" id="locality" placeholder="Nome da loja" required >
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="totalValue" style="color:#3d9970;">Valor total</label>
-                                        <input type="text" class="form-control "  name="total_value" id="totalValue" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="field-number-installments">Parcelas</label>
-                                        <input type="number" class="form-control "  name="number_installments" id="field-number-installments" autocomplete="off" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
+                        <div class="tab-pane fade  active show p-3" id="tipo" role="tabpanel" aria-labelledby="tipo" >
+                            <div id=""> 
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <label for="trade_name">Nome comercial</label>
-                                            <input type="text" class="form-control "  name="trade_name" id="trade_name" placeholder="Nome na fatura.">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="locality_obs">Observações</label>
-                                            <input type="text" class="form-control "  name="locality_obs" id="locality_obs" placeholder="Ajuda para lembrar da dívida.">        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="compra-rateada">Compra rateada</label>
-                                            <select class="form-control " @if($shoppers->count() > 1) id="compra-rateada" @else disabled @endif autocomplete="off">
-                                                <option value="">Não</option>                                                                             
-                                                <option value="Y">Sim</option>
+                                            <label for="categoryId" style="color:#3d9970;">Categoria</label>
+                                            <select class="form-control " name="category_id" id="categoryId" required>
+                                                <option value="">Selecione...</option>
+                                                @foreach ($categories as $category)
+                                                    @if ($category->status == 'E')
+                                                        <option value="{{ $category->id }}"
+                                                            style="color:{{ $category->color }};"
+                                                        >
+                                                            {{ $category->description }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group" id="row-rateio" style="display:none;">
-                                            <label for="id">Rateada por:</label>
-                                            @foreach ($shoppers as $shopper)
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input custom-control-input-danger" name="checkrateio[{{ $shopper->id }}]" type="checkbox" id="check-rateio-{{ $shopper->id }}" autocomplete="off">
-                                                    <label for="check-rateio-{{ $shopper->id }}" class="custom-control-label"><span>{{ $shopper->name }}</span></label>
-                                                </div>                  
-                                            @endforeach
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="categoryId" style="color:#3d9970;">Forma PGTO</label>                                        
+                                            <select class="form-control " name="payment_type_id" id="payment_type_id" autocomplete="off" required>
+                                                <option value="" data-installment-enable="0" selected>Selecione...</option>           
+                                                @foreach ($paymentTypes as $paymentType)                                                
+                                                    <option 
+                                                        value="{{ $paymentType->id }}" 
+                                                        data-installment-enable="{{ $paymentType->installment_enable }}"
+                                                        style="color:{{ $paymentType->color }};"
+                                                        >
+                                                        {{ $paymentType->description}}
+                                                    </option>                                            
+                                                @endforeach                                          
+                                                        
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 col-sm-5 col-md-3 col-lg-3">
+                                        <label for="categoryId" style="color:#3d9970;">Info PGTO <i class="fas fa-info-circle" ></i></label>  
+                                        <a class="btn bg-olive btn-block" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; ">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label for="shopper_id" style="color:#3d9970;">Comprador(a)</label>    
+                                            
+                                            @if($shoppers->count() > 1)
+                                                <select class="form-control " name="shopper_id" id="shopper_id" required>                   
+                                                    <option value="" >Selecione...</option>                                       
+                                                    @foreach ($shoppers as $shopper)                    
+                                                        <option value="{{ $shopper->id }}" style="color:{{ $shopper->color }};">
+                                                        {{ $shopper->name }}
+                                                        </option>
+                                                    @endforeach                                            
+                                                </select>  
+                                            @else
+                                                <input type="text" class="form-control form-control-sm"  name="" id="" value="{{ $shoppers[0]->name }}" readonly>
+                                                <input type="hidden" class="form-control form-control-sm"  name="shopper_id" id="shopper_id" value="{{ $shoppers[0]->id }}">
+                                            @endif                                        
                                         </div>
                                     </div>
                                 </div>                                
-                            </div> 
-                            <div class="row ">
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-between">
-                                    <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade p-3"  id="compra" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
+                            <div id="compra-fields">                            
+                                <div class="row" >
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                         <div class="form-group">
-                                            <a href="{{ route('debt_get') }}" class="btn bg-warning btn-sm">
-                                                Limpar
-                                                <i class="fas fa-broom"></i>
-                                            </a>
+                                            <label for="date" style="color:#3d9970;">Data</label>
+                                            <input type="date" class="form-control" name="date" id="date" value="{{ $dateNow }}" required>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                         <div class="form-group">
-                                            <button type="submit" class="btn bg-olive btn-sm">
-                                                Salvar
-                                                <i class="fas fa-save"></i>
-                                            </button>
+                                            <label for="locality" style="color:#3d9970;">Loja/local</label>
+                                            <input type="text" class="form-control "  name="locality" id="locality" placeholder="Nome da loja" required >
+                                        </div>
+                                    </div>
+                                </div>                            
+                                <div class="row">
+                                    <div class="col-8 col-sm-8 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="totalValue" style="color:#3d9970;">Valor total</label>
+                                            <input type="text" class="form-control "  name="total_value" id="totalValue" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="field-number-installments">Parcelas</label>
+                                            <input type="number" class="form-control "  name="number_installments" id="field-number-installments" autocomplete="off" required>
                                         </div>
                                     </div>
                                 </div>
-                            </div>                        
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="trade_name">Nome comercial</label>
+                                                <input type="text" class="form-control "  name="trade_name" id="trade_name" placeholder="Nome na fatura.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="locality_obs">Observações</label>
+                                                <input type="text" class="form-control "  name="locality_obs" id="locality_obs" placeholder="Ajuda para lembrar da dívida.">        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="compra-rateada">Compra rateada</label>
+                                                <select class="form-control " @if($shoppers->count() > 1) id="compra-rateada" @else disabled @endif autocomplete="off">
+                                                    <option value="">Não</option>                                                                             
+                                                    <option value="Y">Sim</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group" id="row-rateio" style="display:none;">
+                                                <label for="id">Rateada por:</label>
+                                                @foreach ($shoppers as $shopper)
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input class="custom-control-input custom-control-input-danger" name="checkrateio[{{ $shopper->id }}]" type="checkbox" id="check-rateio-{{ $shopper->id }}" autocomplete="off">
+                                                        <label for="check-rateio-{{ $shopper->id }}" class="custom-control-label"><span>{{ $shopper->name }}</span></label>
+                                                    </div>                  
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                </div> 
+                                <div class="row ">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-between">
+                                        <div class="col-xs-12 col-md-4 col-lg-2 text-left p-0 m-0">
+                                            <div class="form-group">
+                                                <a href="{{ route('debt_get') }}" class="btn bg-warning btn-sm">
+                                                    Limpar
+                                                    <i class="fas fa-broom"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-4 col-lg-2 text-right p-0 m-0">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn bg-olive btn-sm">
+                                                    Salvar
+                                                    <i class="fas fa-save"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                        
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>                
-    </div>
-</form>
+            </div>                
+        </div>
+    </form>
 
 {{-- <div class="row mt-3">
     <div class="col-12">
@@ -569,7 +527,6 @@
                     $('#field-number-installments')
                         .attr('disabled', true)
                         .attr('required', false)
-                        .val('')
                         .attr('placeholder','');
 
                     $('#compra-rateada')
@@ -586,6 +543,7 @@
                     $('#field-number-installments')
                         .attr('disabled', false)
                         .attr('required', true)
+                        .val('1')
                         .attr('placeholder','Selecione o n° de parcelas');
 
                     $('#compra-rateada')

@@ -7,6 +7,7 @@ use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\PaymentType;
 use App\Models\ControlFinance\Shopper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewDebtController extends Controller
 {
@@ -29,6 +30,8 @@ class NewDebtController extends Controller
             ->user()
             ->shoppers;
         
+        $data['dateNow'] = now()->format('Y-m-d');
+
         return view('control-finance.debt.new', $data);
     }
 }
