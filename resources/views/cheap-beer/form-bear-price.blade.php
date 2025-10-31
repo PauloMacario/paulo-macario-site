@@ -13,7 +13,14 @@
 @stop
 
 @section('content')
-    <div class="row mt-3">
+
+    <div class="row mt-3 mb-3">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-6">
+            <a href="{{ route('getRanking_get') }}" class="btn btn-block bg-olive">Ranking geral</a>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-12">
             @foreach ($places as $place)
                 <div class="row">
