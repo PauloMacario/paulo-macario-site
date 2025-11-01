@@ -86,7 +86,7 @@ class InstallmentsByFilters
             }
 
             
-        $payTypes = $query->distinct()->pluck('payment_type_id')->toArray();
+        $payTypes = $query->orderBy('installments.order', 'desc')->distinct()->pluck('payment_type_id')->toArray();
         
         $data = [];
 
