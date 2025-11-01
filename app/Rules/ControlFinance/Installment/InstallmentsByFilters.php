@@ -3,6 +3,7 @@
 namespace Rules\ControlFinance\Installment;
 
 use App\Models\ControlFinance\Installment;
+use App\Models\ControlFinance\PaymentType;
 use Illuminate\Database\Eloquent\Builder;
 
 class InstallmentsByFilters
@@ -62,5 +63,58 @@ class InstallmentsByFilters
         }
 
         return $installments->orderBy('order', 'DESC')->get();
+    }
+
+    public function getPaymentTypesOnMonth()
+    {   
+        $query = Installment::select('debts.payment_type_id')
+            ->join('debts', 'installments.debt_id', '=', 'debts.id')
+            ->join('payment_types', 'debts.payment_type_id', '=', 'payment_types.id')
+            ->whereYear('due_date', $this->filters->year)
+            ->whereMonth('due_date', $this->filters->month);
+
+            if (isset($this->filters->shopper_id)) {
+                $query->where('installments.shopper_id', $this->filters->shopper_id);
+            } else {
+                $shoppersUser = auth()
+                    ->user()
+                    ->shoppers
+                    ->pluck('id')
+                    ->toArray();
+                    
+                    $query->whereIn('installments.shopper_id', $shoppersUser);
+            }
+
+            
+        $payTypes = $query->distinct()->pluck('payment_type_id')->toArray();
+        
+        $data = [];
+
+        foreach ($payTypes as $key => $payType) {
+
+            $itens = PaymentType::where('id', $payType)->first();
+
+            $this->filters->payment_type_id = $payType;
+
+            $data[$itens->description]['installments'] = $this->search()->toArray();
+
+            $data[$itens->description]['total_installments'] = $this->totalCalculate($data[$itens->description]['installments']);
+            
+            $data[$itens->description]['color'] = $itens->color;
+
+        }
+
+        return $data;
+    }
+
+    public function totalCalculate($data)
+    {
+        $total = 0;
+
+        foreach ($data as $key => $value) {
+            $total += $value['value'];
+        }
+
+        return $total;
     }
 }

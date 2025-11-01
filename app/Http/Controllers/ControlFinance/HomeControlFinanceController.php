@@ -7,12 +7,81 @@ use App\Models\ControlFinance\Category;
 use App\Models\ControlFinance\Debt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Rules\ControlFinance\Installment\InstallmentsByFilters;
 
 class HomeControlFinanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('control-finance.home');
+        $data = [];
+        $data['filter'] = '';
+       
+        if (!empty($request->all())) {
+            $data['filter'] = 'show';
+        }
+
+        $data['filters'] = false;
+            
+        $data['shoppers'] = auth()->user()->shoppers;
+        
+        $year = now()->format("Y");
+        $month = now()->format("m");
+        $yearMonthRef = '';
+
+        if ($request->year) {
+            $year = $request->year;
+            $yearMonthRef = "/{$year}";
+        }
+
+        if ($request->year && !$request->month) {
+            $month = null;
+        }
+
+        if ($request->year && $request->month) {
+            $year = $request->year;
+            $month = $request->month;
+
+            $yearMonthRef = '/'.$month . $yearMonthRef;
+        }
+
+        if (!$request->year && !$request->month) {
+            $request['year'] = $year;
+            $request['month'] = $month;
+        }
+
+        $installmentsByFilters = new InstallmentsByFilters($request->all());
+        $installments = $installmentsByFilters->getPaymentTypesOnMonth();
+              
+        $request->session()
+            ->put('filters', $request->all());
+
+        $data['year'] = $year;
+        $data['month'] = $month;
+        $data['yearMonthRef'] = $yearMonthRef;       
+        $data['shopperId'] = $request['shopper_id'];       
+        $data['installments'] = $installments;
+       
+        $data['total'] = $this->getTotalValue($installments, $request->status);
+        $data['renda'] = 5100.00;
+        
+        return view('control-finance.home', $data);
+    }
+
+    public function getTotalValue($installments, $status)
+    {
+        $total = 0.0;
+
+        if (count($installments) == 0) {
+            $totalValue['total'] = $total;
+            $totalValue['calculation'] = [];
+            return $totalValue;
+        }
+        
+        foreach ($installments as $installment) {
+            $total += $installment['total_installments'];
+        }
+
+        return $total;
     }
 
     public function graphicPerCategories()
