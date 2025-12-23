@@ -5,7 +5,8 @@ use App\Http\Controllers\ControlFinance\Installment\{
     ShowAllInstallmentsController,
     ShowInstallmentController,
     UpdateInstallmentController,
-    DeleteInstallmentController
+    DeleteInstallmentController,
+    OrderInstallmentController
 };
 
 Route::middleware(['auth', 'shopper.exist'])
@@ -36,6 +37,11 @@ Route::middleware(['auth', 'shopper.exist'])
             DeleteInstallmentController::class,
         )
         ->name('deleteInstallment_post'); 
+
+        Route::post('/parcela/order',
+            OrderInstallmentController::class,
+        )
+        ->name('orderInstallment_post'); 
     
     }
 );

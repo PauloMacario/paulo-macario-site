@@ -232,38 +232,41 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" class="font-weight-bold text-left font-14">
+                                                    <td colspan="2" class="font-weight-bold text-left font-12">
                                                         @if ($installment->debt->trade_name || $installment->debt->locality_obs)
                                                             <div class="accordion" id="accordionExample">                                                           
                                                                 <div >
                                                                     <div id="heading{{ $installment->id }}">
-                                                                        
-                                                                        <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
-                                                                            @if($installment->status == 'PM') 
-                                                                                value-paid decoration
-                                                                            @endif
-                                                                            "
-                                                                            >
-                                                                            <span class="text-olive mr-2">{{ $installment->order }}</span>
-                                                                            @if ($installment->debt->trade_name)
-                                                                                {{ $installment->debt->trade_name }}                                                                               
-                                                                            @else
-                                                                                {{ $installment->debt->locality }}                                                                            
-                                                                            @endif
-                        
-                                                                            @if ($installment->debt->number_installments > 1)
-                                                                                <span class="ml-2  
-                                                                                    @if($installment->status == 'PM') 
-                                                                                        value-paid decoration
-                                                                                    @endif"
-                                                                                    > 
-                                                                                    ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
-                                                                                </span>
-                                                                            @endif
-                                                                        </a>  
-                                                                        <button class="btn btn-link btn-sm text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $installment->id }}" aria-expanded="false" aria-controls="collapseTwo">
-                                                                            <i class="fas fa-caret-square-down" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; cursor: pointer;"></i>
-                                                                        </button>                                                                       
+                                                                         <div class="d-flex">
+                                                                            <input type="text" class="form-control form-control-sm order mr-1"  name="order[{{ $installment->id }}]" id="order-{{ $installment->id  }}" value="{{ $installment->order }}" style="width:32px;height:20px;font-size:9px;display:none;">
+                                                                       
+                                                                            <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
+                                                                                @if($installment->status == 'PM') 
+                                                                                    value-paid decoration
+                                                                                @endif
+                                                                                "
+                                                                                >
+                                                                                {{-- <span class="text-olive mr-2">{{ $installment->order }}</span> --}}
+                                                                                @if ($installment->debt->trade_name)
+                                                                                    {{ $installment->debt->trade_name }}                                                                               
+                                                                                @else
+                                                                                    {{ $installment->debt->locality }}                                                                            
+                                                                                @endif
+                            
+                                                                                @if ($installment->debt->number_installments > 1)
+                                                                                    <span class="ml-2  
+                                                                                        @if($installment->status == 'PM') 
+                                                                                            value-paid decoration
+                                                                                        @endif"
+                                                                                        > 
+                                                                                        ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                                                    </span>
+                                                                                @endif
+                                                                            </a>  
+                                                                            <button class="btn btn-link btn-sm text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $installment->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                                                                <i class="fas fa-caret-square-down" data-toggle="modal" data-target="#modal-default" style="color:#3d9970; cursor: pointer;"></i>
+                                                                            </button>   
+                                                                         </div>                                                                    
                                                                     </div>
                                                                     <div id="collapse{{ $installment->id }}" class="collapse" aria-labelledby="heading{{ $installment->id }}" data-parent="#accordionExample">
                                                                         @if ($installment->debt->trade_name)
@@ -282,25 +285,29 @@
                                                                 </div>                                                          
                                                             </div>
                                                         @else
-                                                            <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
-                                                                @if($installment->status == 'PM') 
-                                                                    value-paid decoration
-                                                                @endif
-                                                                "
-                                                                >
-                                                                <span class="text-olive mr-2">{{ $installment->order }}</span>
-                                                                {{ $installment->debt->locality }}
-            
-                                                                @if ($installment->debt->number_installments > 1)
-                                                                    <span class="ml-2  
-                                                                        @if($installment->status == 'PM') 
-                                                                            value-paid decoration
-                                                                        @endif"
-                                                                        > 
-                                                                        ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
-                                                                    </span>
-                                                                @endif
-                                                            </a>                                                            
+
+                                                            <div class="d-flex">
+                                                                <input type="text" class="form-control form-control-sm order mr-1"  name="order[{{ $installment->id }}]" id="order-{{ $installment->id  }}" value="{{ $installment->order }}" style="width:32px; height:20px;font-size:9px;display:none;">
+
+                                                                <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
+                                                                    @if($installment->status == 'PM') 
+                                                                        value-paid decoration
+                                                                    @endif
+                                                                    "
+                                                                    >                                                                   
+                                                                    {{ $installment->debt->locality }}                
+                                                                    @if ($installment->debt->number_installments > 1)
+                                                                        <span class="ml-2  
+                                                                            @if($installment->status == 'PM') 
+                                                                                value-paid decoration
+                                                                            @endif"
+                                                                            > 
+                                                                            ({{ $installment->number_installment }}/{{ $installment->debt->number_installments }})
+                                                                        </span>
+                                                                    @endif
+                                                                </a>                                                            
+                                                            </div>
+
                                                         @endif                                                        
                                                     </td>
                                                     <td class="font-weight-bold text-right font-14 
@@ -360,8 +367,26 @@
                                         </table>                                   
                                         <table class="table table-sm mt-2" style="background-color:rgba(0, 0, 0, .05);">
                                             <tr>
-                                                <td colspan=2 class="text-center">
-                                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#calculoModal">Cálculo</button>
+                                                <td colspan="2" class="text-center">
+                                                    <button type="button" class="btn btn-sm btn-warning btn-order" id="btn-order-check" style="display:block; width:120px;">
+                                                        Ordenar <i class="fas fa-check-circle"></i></i>                                                        
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger btn-order" id="btn-order-close" style="display:none; width:120px;">
+                                                        Ordenar <i class="fas fa-times-circle"></i>                                                       
+                                                    </button>
+                                                    
+                                                </td>                                                
+                                                <td colspan="2" class="text-right">
+                                                    <button type="button" class="btn btn-sm btn-success" id="btn-order-save" style="opacity:0; width:120px;">Salvar ordenação</button>
+                                                </td>                                                
+                                              
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-left">                                                   
+                                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#calculoModal" style="width:120px;">
+                                                        Cálculo
+                                                        <i class="fas fa-calculator"></i>
+                                                    </button>
                                                 </td>                                                
                                                 <td class="text-center">
                                                     {{ $installments->count() }} parcelas
@@ -371,10 +396,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan=2>
+                                                <td colspan="2">
                                                     <input type="text" class="form-control form-control-sm text-center" name="income" id="income" placeholder="Renda">
                                                 </td>
-                                                <td colspan=2>
+                                                <td colspan="2">
                                                     <input type="text" class="form-control form-control-sm text-center" name="balance" id="balance" placeholder="Sobra" disabled>
                                                 </td>                                                                                              
                                             </tr>
@@ -431,8 +456,13 @@
 
 @push('js')
     <script src="{{ asset('vendor/jquery/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/yoda.js') }}"></script>
     <script>
         $(document).ready(function() {
+
+            $('.order').css('display', 'none')
+
             $('#income').mask('000.000,00', {reverse: true}); 
             $('#balance').mask('000.000,00', {reverse: true}); 
 
@@ -465,6 +495,72 @@
                         $('#balance').css("color", 'blue').css("font-weight", 'bold')
                     }
                 }
+            });
+
+            $('.btn-order').on('click', function(){
+                
+                let action = '';
+                
+                if ($(this).prop('id') == 'btn-order-check') {
+                    $(this).css('display', 'none')
+                    $('#btn-order-close').css('display', 'block')
+                    $('#btn-order-save').css('opacity', '1')
+                    action = 'block'
+                } 
+
+                if ($(this).prop('id') == 'btn-order-close') {
+                    $(this).css('display', 'none')
+                    $('#btn-order-check').css('display', 'block')
+                    $('#btn-order-save').css('opacity', '0')
+                    action = 'none'
+                }
+
+                $('.order').each(function () {                 
+                    $(this).css('display', action)                     
+                })
+            })
+
+            $('#btn-order-save').on('click', function(){
+
+                let csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                let orders = {};
+
+                $('input.order').each(function () {
+                    let name = $(this).attr('name');
+                    let index = name.match(/\[(\d+)\]/)[1]; // 1
+                    orders[index] = $(this).val();
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '/controlfinance/parcela/order',
+                    data: orders,
+                    success: function (data) {
+
+                        let title = "Dizer, eu vou!";
+                        let text = "QUE A FORÇA ESTEJA COM VOCÊ";
+                        let linkImg = '{{ asset('img/yoda_speak.jpg') }}' 
+
+                        getYodaSwal(linkImg, title, text)
+                    },
+                    error: function (data) {
+
+                        var title = data.responseJSON.title;
+                        var icon = data.responseJSON.icon;
+                        var msg = data.responseJSON.msg;
+
+                        Swal.fire({
+                            title: title,
+                            text: msg,
+                            icon: icon,
+                            confirmButtonText: 'Fechar'
+                            }) 
+                    },
+                });
             })
         });
     </script>
