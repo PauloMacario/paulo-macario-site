@@ -273,7 +273,7 @@
                                             </tr>
                                             @foreach ($debt->installments as $installment)
                                                 <tr>
-                                                    <td colspan="2" class="text-left font-italic font-10 @if($installment->status == 'PM') value-paid @endif" width="80%">
+                                                    <td colspan="3" class="text-left font-italic font-10 @if($installment->status == 'PM') value-paid @endif" width="80%">
                                                         <span class="pl-5">{{ formatDateBR($installment->due_date) }}</span>  
                                                         <span class="pl-5">({{ $installment->number_installment }}/{{ $debt->number_installments }})</span>
                                                         <span class="pl-5">R$ {{ formatMoneyBR($installment->value) }}</span> 

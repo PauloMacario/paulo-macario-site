@@ -238,7 +238,7 @@
                                                                 <div >
                                                                     <div id="heading{{ $installment->id }}">
                                                                          <div class="d-flex">
-                                                                            <input type="text" class="form-control form-control-sm order mr-1"  name="order[{{ $installment->id }}]" id="order-{{ $installment->id  }}" value="{{ $installment->order }}" style="width:32px;height:20px;font-size:9px;display:none;">
+                                                                            <input type="text" class="form-control form-control-sm order mr-1"  name="order[{{ $installment->id }}]" id="order-{{ $installment->id  }}" value="{{ $installment->order }}" style="width:32px;height:20px;font-size:9px;" readonly>
                                                                        
                                                                             <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
                                                                                 @if($installment->status == 'PM') 
@@ -287,7 +287,7 @@
                                                         @else
 
                                                             <div class="d-flex">
-                                                                <input type="text" class="form-control form-control-sm order mr-1"  name="order[{{ $installment->id }}]" id="order-{{ $installment->id  }}" value="{{ $installment->order }}" style="width:32px; height:20px;font-size:9px;display:none;">
+                                                                <input type="text" class="form-control form-control-sm order mr-1"  name="order[{{ $installment->id }}]" id="order-{{ $installment->id  }}" value="{{ $installment->order }}" style="width:32px; height:20px;font-size:9px;" readonly>
 
                                                                 <a href="{{ route('detailInstallment_get', ['id' => $installment->id]) }}" class=" 
                                                                     @if($installment->status == 'PM') 
@@ -461,7 +461,7 @@
     <script>
         $(document).ready(function() {
 
-            $('.order').css('display', 'none')
+            $('.order').attr('readonly', true)
 
             $('#income').mask('000.000,00', {reverse: true}); 
             $('#balance').mask('000.000,00', {reverse: true}); 
@@ -499,24 +499,24 @@
 
             $('.btn-order').on('click', function(){
                 
-                let action = '';
+                let readonly = false;
                 
                 if ($(this).prop('id') == 'btn-order-check') {
                     $(this).css('display', 'none')
                     $('#btn-order-close').css('display', 'block')
                     $('#btn-order-save').css('opacity', '1')
-                    action = 'block'
+                    readonly = false
                 } 
 
                 if ($(this).prop('id') == 'btn-order-close') {
                     $(this).css('display', 'none')
                     $('#btn-order-check').css('display', 'block')
                     $('#btn-order-save').css('opacity', '0')
-                    action = 'none'
+                    readonly = true
                 }
 
                 $('.order').each(function () {                 
-                    $(this).css('display', action)                     
+                    $(this).attr('readonly', readonly)                     
                 })
             })
 
