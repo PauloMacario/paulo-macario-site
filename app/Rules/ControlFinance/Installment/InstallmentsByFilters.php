@@ -67,7 +67,10 @@ class InstallmentsByFilters
 
     public function getPaymentTypesOnMonth()
     {   
-        $query = Installment::select('debts.payment_type_id')
+        $query = Installment::select(
+                'debts.payment_type_id',
+                'installments.order'
+                )
             ->join('debts', 'installments.debt_id', '=', 'debts.id')
             ->join('payment_types', 'debts.payment_type_id', '=', 'payment_types.id')
             ->whereYear('due_date', $this->filters->year)

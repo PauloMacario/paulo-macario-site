@@ -26,9 +26,7 @@
     },
     "autoload": {
         "files": [
-            "app/Rules/ControlFinance/Helpers/load_functions.php",
-            "app/Rules/AppInvest/Helpers/load_functions.php",
-            "app/Rules/CheapBeer/Helpers/load_functions.php"
+            "app/Rules/ControlFinance/Helpers/load_functions.php"
         ],
         "psr-4": {
             "App\\": "app/",

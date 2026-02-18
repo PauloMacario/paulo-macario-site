@@ -443,46 +443,20 @@ return [
                     'icon' => 'fas fa-sliders-h ml-4 mr-2',
                 ],               
             ],
-        ],
+        ],     
         [
-            'text' => 'APP INVEST',
-            'icon' => 'fas fa-piggy-bank',
+            'text' => 'LISTA DE COMPRAS',
+            'icon' => 'fas fa-list',
             'submenu' => [
                 [
-                    'text' => 'Ínicio',
-                    'url' => 'appinvest/home',
-                    'icon' => 'fas fa-home ml-4 mr-2',
+                    'text' => 'Listas',
+                    'url' => 'listas/',
+                    'icon' => 'fa fa-list-ol ml-4 mr-2',
                 ],
                 [
-                    'text' => 'Negociações',
-                    'url' => 'appinvest/negociacoes',
-                    'icon' => 'fas fa-file-invoice-dollar ml-4 mr-2',
-                ], 
-                [
-                    'text' => 'Nova negociação',
-                    'url' => 'appinvest/negociacao',
-                    'icon' => 'fas fa-plus-circle ml-4 mr-2',
-                ],
-                [
-                    'text' => 'Configurações',
-                    'url' => 'appinvest/config',
-                    'icon' => 'fas fa-sliders-h ml-4 mr-2',
-                ],     
-            ],
-        ],
-        [
-            'text' => 'CERVEJA BARATA',
-            'icon' => 'fas fa-tasks',
-            'submenu' => [
-                [
-                    'text' => 'Precificar',
-                    'url' => 'cheapbeer/beerprice',
-                    'icon' => 'fas fa-home ml-4 mr-2',
-                ],
-                [
-                    'text' => 'Ranking',
-                    'url' => 'cheapbeer/ranking',
-                    'icon' => 'fas fa-file-invoice-dollar ml-4 mr-2',
+                    'text' => 'Produtos',
+                    'url' => 'produtos/',
+                    'icon' => 'fa fa-th ml-4 mr-2',
                 ],
             ],
         ],
