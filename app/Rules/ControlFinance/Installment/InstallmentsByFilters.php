@@ -61,8 +61,8 @@ class InstallmentsByFilters
                 $installments->where('status', $this->filters->status);        
             }
         }
-
-        return $installments->orderBy('order', 'DESC')->get();
+        
+        return $installments->orderBy('order', 'DESC')->orderBy('debt_id', 'ASC')->get();
     }
 
     public function getPaymentTypesOnMonth()
